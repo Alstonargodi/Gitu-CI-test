@@ -1,4 +1,4 @@
-package com.example.githubuser
+package com.example.githubuser.View
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.core.content.ContextCompat
+import com.example.githubuser.MainActivity
+import com.example.githubuser.R
 
 class Splashscreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +19,7 @@ class Splashscreen : AppCompatActivity() {
         },3000)
 
 
-        window.statusBarColor = ContextCompat.getColor(this,R.color.maincolor)
-        window.navigationBarColor = ContextCompat.getColor(this,R.color.subcolor)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.maincolor)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.maincolor)
     }
 }
