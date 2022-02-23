@@ -3,6 +3,7 @@ package com.example.githubuser
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     fun Inituser(){
         val nama = resources.getStringArray(R.array.name)
-        val image = resources.obtainTypedArray(R.array.location)
+        val image = resources.obtainTypedArray(R.array.avatar)
         for (i in nama.indices){
             val datauser = User(
                 resources.getStringArray(R.array.name)[i],
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 resources.getStringArray(R.array.company)[i],
                 resources.getStringArray(R.array.followers)[i],
                 resources.getStringArray(R.array.following)[i],
-                image.getResourceId(i,1)
+                image.getResourceId(i,-1)
             )
 
             data.add(datauser)
