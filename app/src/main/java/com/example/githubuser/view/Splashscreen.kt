@@ -1,4 +1,4 @@
-package com.example.githubuser.View
+package com.example.githubuser.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,13 +10,17 @@ import com.example.githubuser.MainActivity
 import com.example.githubuser.R
 
 class Splashscreen : AppCompatActivity() {
+
+    companion object{
+        const val TIME = 3000L
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splashscreen)
 
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
-        },3000)
+        }, TIME)
 
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.maincolor)

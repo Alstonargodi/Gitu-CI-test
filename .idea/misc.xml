@@ -4,10 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/font/font.xml" value="0.19907407407407407" />
-        <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/activity_detail.xml" value="0.33" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/activity_splashscreen.xml" value="0.22" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/userhom_cv.xml" value="0.9" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/userhom_cv.xml" value="0.67" />
       </map>
     </option>
   </component>
