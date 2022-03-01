@@ -5,14 +5,14 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#F4F2F2</color>
     <color name="white">#FFFFFFFF</color>
 
 
 
     <!--warnabaru-->
     <color name="maincolor">#3F3E3E</color>
-    <color name="subcolor">#FFFFFF</color>
+    <color name="subcolor">#3EFFFFFF</color>
 
 
     <color name="title">#F7F7F7</color>
