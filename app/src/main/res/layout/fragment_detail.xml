@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:background="@color/maincolor"
+    tools:context=".view.detail.Detailactivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/Detailtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/maincolor"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:titleMargin="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="86dp">
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/ic_baseline_favorite_border_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_baseline_share_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/Username_tvitem"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/apexsans"
+                    android:foregroundTint="#BA5656"
+                    android:gravity="center"
+                    android:text="@string/username"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button2"
+                    app:layout_constraintStart_toEndOf="@+id/btn_backhome"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_backhome"
+                    android:layout_width="36dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/ic_back"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:theme="@style/Theme.Githubuser"
+                    app:iconTint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/MainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="1500dp">
+
+            <ImageView
+                android:id="@+id/Img_tvdetail"
+                android:layout_width="167dp"
+                android:layout_height="170dp"
+                android:contentDescription="@string/avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="16dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/Followviewpager"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/maincolor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Loc_tvitem"
+                app:tabIndicatorColor="#FFFFFF"
+                app:tabIndicatorFullWidth="false"
+                app:tabTextColor="#FFFFFF">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Followers" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tuesday" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <TextView
+                android:id="@+id/Loc_tvitem"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poplight"
+                android:gravity="center|left"
+                android:text="Location"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Company_tvitem" />
+
+            <TextView
+                android:id="@+id/Company_tvitem"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:drawableLeft="@drawable/ic_baseline_business_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poplight"
+                android:gravity="center|left"
+                android:text="Company"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Usertwo_tvitem" />
+
+            <TextView
+                android:id="@+id/Usertwo_tvitem"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/poplight"
+                android:gravity="center|left"
+                android:text="Nama user"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Bio_tvitem" />
+
+            <TextView
+                android:id="@+id/Bio_tvitem"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/poplight"
+                android:gravity="center"
+                android:text="Bio"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <TextView
+                android:id="@+id/Follower_tvitem"
+                android:layout_width="120dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#FFFDFD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.074"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Img_tvdetail" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="120dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Follower"
+                android:textColor="#FFFDFD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.073"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Follower_tvitem" />
+
+            <TextView
+                android:id="@+id/Following_tvitem"
+                android:layout_width="120dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#FFFDFD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.512"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Img_tvdetail" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="120dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Following"
+                android:textColor="#FFFDFD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.512"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Following_tvitem" />
+
+            <TextView
+                android:id="@+id/Repository_tvitem"
+                android:layout_width="120dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#FFFDFD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.955"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Img_tvdetail" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="120dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Repository"
+                android:textColor="#FFFDFD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.959"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Repository_tvitem" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+</ScrollView>

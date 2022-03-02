@@ -124,6 +124,7 @@
     <string name="username">Username</string>
     <string name="title">Alston List</string>
 
-    <string name="tabsatu">Followers</string>
-    <string name="tabdua">Following</string>
+    <string name="tabsatu">Repository</string>
+    <string name="tabdua">Followers</string>
+    <string name="tabtiga">Following</string>
 </resources>
