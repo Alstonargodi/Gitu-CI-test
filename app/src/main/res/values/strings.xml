@@ -122,4 +122,8 @@
     <string name="followers">Followers</string>
     <string name="avatar">avatar</string>
     <string name="username">Username</string>
+    <string name="title">Alston List</string>
+
+    <string name="tabsatu">Followers</string>
+    <string name="tabdua">Following</string>
 </resources>

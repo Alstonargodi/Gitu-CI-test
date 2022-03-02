@@ -1,22 +1,15 @@
 package com.example.githubuser
 
-import android.annotation.SuppressLint
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.model.xmlresponse.User
-import com.example.githubuser.view.home.Userhomerecadapter
 import com.example.githubuser.databinding.ActivityMainBinding
 
 
 @Suppress("UNREACHABLE_CODE")
 class MainActivity : AppCompatActivity() {
-//    private lateinit var adapter : Userhomerecadapter
+//    private lateinit var adapter : UserListRecAdapter
     private lateinit var binding : ActivityMainBinding
 
     private var data = ArrayList<User>()
@@ -25,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        adapter = Userhomerecadapter()
+//        adapter = UserListRecAdapter()
 //        val recView = binding.recviewUser
 //        recView.adapter = adapter
 //
