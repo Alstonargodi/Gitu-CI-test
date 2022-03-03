@@ -17,15 +17,18 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel: ViewModel() {
+    private val _isloading = MutableLiveData<Boolean>()
+    val isLoading : LiveData<Boolean> = _isloading
+
 
     private val _listresponse = MutableLiveData<List<ItemsItem>>()
     val listresponse : LiveData<List<ItemsItem>> = _listresponse
     fun getListUser(name : String){
-        _isloading.value = false
+        _isloading.value = true
         ApiConfig.getApiService().getUserList(name).enqueue(object : Callback<ListResponse>{
             override fun onResponse(call: Call<ListResponse>, response: Response<ListResponse>) {
+                _isloading.value = false
                 if (response.isSuccessful){
-                    _isloading.value = false
                     _listresponse.value = response.body()?.items
                 }else{
                     Log.d("tag", response.message())
@@ -47,6 +50,7 @@ class MainViewModel: ViewModel() {
                 call: Call<DetailResponse>,
                 response: Response<DetailResponse>
             ) {
+                _isloading.value = false
                 if (response.isSuccessful){
                     _detailResponse.value = response.body()
                 }else{
@@ -122,19 +126,6 @@ class MainViewModel: ViewModel() {
             }
         })
     }
-
-
-
-    private val _isloading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean> = _isloading
-
-
-
-
-
-
-
-
 
 
 

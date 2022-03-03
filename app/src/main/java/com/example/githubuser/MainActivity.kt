@@ -3,7 +3,6 @@ package com.example.githubuser
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import com.example.githubuser.model.xmlresponse.User
 import com.example.githubuser.databinding.ActivityMainBinding
 
 
@@ -12,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 //    private lateinit var adapter : UserListRecAdapter
     private lateinit var binding : ActivityMainBinding
 
-    private var data = ArrayList<User>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

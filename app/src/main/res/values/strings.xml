@@ -115,7 +115,7 @@
     <string name="subtitle">User\'s</string>
     <string name="maintitle">Github</string>
     <string name="find_user">find user</string>
-    <string name="actionbartitle">Github user\'s</string>
+    <string name="actionbartitle">Gitu</string>
     <string name="zero">0</string>
     <string name="following">Following</string>
     <string name="repository">Repository</string>
@@ -127,4 +127,5 @@
     <string name="tabsatu">Repository</string>
     <string name="tabdua">Followers</string>
     <string name="tabtiga">Following</string>
+    <string name="usernamecv">Username</string>
 </resources>

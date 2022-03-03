@@ -47,14 +47,15 @@ class DetailFragment : Fragment() {
 
         binding.apply {
             data.apply {
-                UsernameTvitem.text = login
-                UsertwoTvitem.text = name
+                UsernameTvdetailpage.text = login
+                surnameDetailopage.text = name
                 BioTvitem.text = bio
-                CompanyTvitem.text = company
-                LocTvitem.text = location
+                ComapnyTvitem.text = company
+                locTvitem.text = location
                 FollowerTvitem.text = followers.toString()
                 FollowingTvitem.text = following.toString()
                 RepositoryTvitem.text = publicRepos.toString()
+                webTvitem.text = blog
 
                 setViewPager(login!!)
             }

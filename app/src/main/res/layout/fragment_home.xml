@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6D6D6D"
+    android:background="@color/maincolor"
     tools:context=".view.home.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/maincolor"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/Theme.Githubuser"
+        app:theme="@style/Theme.Githubuser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/Actionbarstyle"
         app:titleTextColor="@color/white" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecviewUser"
@@ -42,7 +44,7 @@
         android:fontFamily="@font/apexsans"
         android:text="@string/title"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="normal|bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -73,4 +75,5 @@
         app:layout_constraintEnd_toEndOf="@+id/RecviewUser"
         app:layout_constraintStart_toStartOf="@+id/RecviewUser"
         app:layout_constraintTop_toTopOf="@+id/RecviewUser" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
@@ -54,8 +55,10 @@ class HomeFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.barmenu, menu)
 
+
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
+
 
         searchView.apply {
             setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
@@ -63,18 +66,20 @@ class HomeFragment : Fragment() {
 
             setOnSearchClickListener {
                 data.clear()
-                binding.tvtextsearch.visibility = View.VISIBLE
+//                binding.tvtextsearch.visibility = View.VISIBLE
             }
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    binding.textView.text = query
+                    binding.textView.text = "Search result for $query"
                     findUser(query!!)
+                    data.clear()
                     clearFocus()
                     return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+
                     return false
                 }
             })
