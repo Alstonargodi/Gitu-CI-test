@@ -8,11 +8,13 @@
         android:title="@string/find_user"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom"
+        app:iconifiedByDefault="true"
+        android:configChanges="keyboardHidden|orientation|screenSize"
         />
 
     <item
         android:id="@+id/favorite_list"
-        android:icon="@drawable/bookmark"
+        android:icon="@drawable/ic_user_cicrle_light"
         android:title="@string/find_user"
         app:showAsAction="collapseActionView|ifRoom"
         />

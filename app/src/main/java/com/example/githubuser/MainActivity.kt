@@ -17,15 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        adapter = UserListRecAdapter()
-//        val recView = binding.recviewUser
-//        recView.adapter = adapter
-//
-//        if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-//            recView.layoutManager = GridLayoutManager(this,2)
-//        }else{
-//            recView.layoutManager = LinearLayoutManager(this)
-//        }
+
 
         window.statusBarColor = ContextCompat.getColor(this,R.color.maincolor)
     }

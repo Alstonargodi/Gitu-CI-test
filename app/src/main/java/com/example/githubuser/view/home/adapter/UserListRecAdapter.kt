@@ -10,9 +10,7 @@ import com.example.githubuser.databinding.UserhomCvBinding
 import com.example.githubuser.model.githubresponse.DetailResponse
 import com.example.githubuser.view.home.HomeFragmentDirections
 
-class UserListRecAdapter: RecyclerView.Adapter<UserListRecAdapter.ViewHolder>() {
-
-    var dataList = emptyList<DetailResponse>()
+class UserListRecAdapter(var dataList : List<DetailResponse>): RecyclerView.Adapter<UserListRecAdapter.ViewHolder>() {
 
     class ViewHolder(var binding : UserhomCvBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -49,8 +47,5 @@ class UserListRecAdapter: RecyclerView.Adapter<UserListRecAdapter.ViewHolder>() 
         return dataList.size
     }
 
-    fun setdata(list: List<DetailResponse>){
-        dataList = list.distinct()
-        notifyDataSetChanged()
-    }
+
 }

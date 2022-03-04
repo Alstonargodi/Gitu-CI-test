@@ -45,7 +45,7 @@
                     android:layout_width="25dp"
                     android:layout_height="0dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/ic_baseline_favorite_border_24"
+                    android:background="@drawable/ic_user_add_alt_light"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +55,9 @@
                     android:id="@+id/button2"
                     android:layout_width="25dp"
                     android:layout_height="0dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="2dp"
                     android:background="@drawable/ic_baseline_share_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/button3"
@@ -66,7 +68,7 @@
 
                 <Button
                     android:id="@+id/btn_backhome"
-                    android:layout_width="36dp"
+                    android:layout_width="30dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="16dp"
                     android:background="@drawable/ic_back"

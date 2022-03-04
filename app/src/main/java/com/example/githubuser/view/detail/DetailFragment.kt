@@ -1,5 +1,7 @@
 package com.example.githubuser.view.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +17,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailFragment : Fragment() {
     companion object{
-        private var tab_titles = intArrayOf(
+        var tab_titles = intArrayOf(
             R.string.tabsatu,
             R.string.tabdua,
             R.string.tabtiga
@@ -30,6 +32,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(layoutInflater)
+
         setDetailUser()
         return binding.root
     }
@@ -57,6 +60,11 @@ class DetailFragment : Fragment() {
                 RepositoryTvitem.text = publicRepos.toString()
                 webTvitem.text = blog
 
+                webTvitem.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(blog)
+                    startActivity(intent)
+                }
 
                 setViewPager(login!!)
             }
@@ -78,6 +86,9 @@ class DetailFragment : Fragment() {
             tab.text = getString(tab_titles[position])
         }.attach()
     }
+
+
+
 
 
     override fun onDestroy() {

@@ -18,11 +18,17 @@ import retrofit2.Response
 
 class MainViewModel: ViewModel() {
     companion object{
+        const val Message = "Failed Fetching :("
         const val TAG = "MainViewModel"
     }
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
 
+    private val _errorResponseText = MutableLiveData<String>()
+    val errorResponseText: LiveData<String> = _errorResponseText
+
+    private val _isError = MutableLiveData<Boolean>()
+    val isError : LiveData<Boolean> = _isError
 
     private val _listresponse = MutableLiveData<List<ItemsItem>>()
     val listresponse : LiveData<List<ItemsItem>> = _listresponse
@@ -34,12 +40,14 @@ class MainViewModel: ViewModel() {
                 if (response.isSuccessful){
                     _listresponse.value = response.body()?.items
                 }else{
-                    Log.d(TAG, response.message())
+                    Log.d(TAG, response.message().toString())
+                    _errorResponseText.value = Message + response.message()
                 }
             }
             override fun onFailure(call: Call<ListResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
+                _errorResponseText.value = Message + t.message.toString()
             }
         })
     }
@@ -57,12 +65,14 @@ class MainViewModel: ViewModel() {
                 if (response.isSuccessful){
                     _detailResponse.value = response.body()
                 }else{
-                    Log.d(TAG, response.message())
+                    Log.d(TAG, response.message().toString())
+                    _errorResponseText.value = Message + response.message()
                 }
             }
             override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
+                _errorResponseText.value = Message + t.message.toString()
             }
         })
     }
@@ -80,12 +90,16 @@ class MainViewModel: ViewModel() {
                 if (response.isSuccessful){
                     _followersResponse.value = response.body()
                 }else{
-                    Log.d(TAG, response.message())
+                    Log.d(TAG, response.message().toString())
+                    _isError.value = true
+                    _errorResponseText.value = Message + response.message()
                 }
             }
             override fun onFailure(call: Call<FollowerResponse>, t: Throwable) {
                 _isLoading.value = false
+                _isError.value = true
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
+                _errorResponseText.value = Message + t.message.toString()
             }
         })
     }
@@ -105,11 +119,13 @@ class MainViewModel: ViewModel() {
                     _followingResponse.value = response.body()
                 }else{
                     Log.d(TAG, response.message())
+                    _errorResponseText.value = Message + response.body()
                 }
             }
             override fun onFailure(call: Call<FollowingResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
+                _errorResponseText.value = Message + t.message.toString()
             }
         })
 
@@ -126,16 +142,16 @@ class MainViewModel: ViewModel() {
                     _repoResponse.value = response.body()
                 }else{
                     Log.d(TAG, response.message())
+                    _errorResponseText.value = Message + response.message()
                 }
             }
 
             override fun onFailure(call: Call<RepoResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
+                _errorResponseText.value = Message + t.message.toString()
             }
         })
     }
-
-
 
 }

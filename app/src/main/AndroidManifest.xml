@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Githubuser">
         <activity
-            android:name=".view.detail.Detailactivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

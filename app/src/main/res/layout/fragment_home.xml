@@ -76,4 +76,34 @@
         app:layout_constraintStart_toStartOf="@+id/RecviewUser"
         app:layout_constraintTop_toTopOf="@+id/RecviewUser" />
 
+    <TextView
+        android:id="@+id/Errortext_tv"
+        android:layout_width="192dp"
+        android:layout_height="62dp"
+        android:gravity="center"
+        android:text="Error response"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/RecviewUser"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/RecviewUser"
+        app:layout_constraintTop_toTopOf="@+id/RecviewUser"
+        app:layout_constraintVertical_bias="0.22" />
+
+    <Button
+        android:id="@+id/Tryagain_home"
+        android:layout_width="131dp"
+        android:layout_height="38dp"
+        android:text="Tryagain"
+        android:textColor="#343131"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/RecviewUser"
+        app:layout_constraintEnd_toEndOf="@+id/RecviewUser"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/RecviewUser"
+        app:layout_constraintTop_toBottomOf="@+id/Errortext_tv"
+        app:layout_constraintVertical_bias="0.032" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,19 +13,21 @@ import com.example.githubuser.view.detail.adapter.FollowingReviewAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 
 
-class FollowingFragment(var name : String) : Fragment() {
+class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter : FollowingReviewAdapter
     private val viewModel by viewModels<MainViewModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFollowingBinding.inflate(layoutInflater)
-
-        setFollowingList(name)
+        viewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
+        val name = arguments?.getString("value","")
+        setFollowingList(name!!)
         return binding.root
     }
 
@@ -43,6 +45,16 @@ class FollowingFragment(var name : String) : Fragment() {
         val recview = binding.followingRecview
         recview.adapter = adapter
         recview.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun isLoading(isLoading:Boolean){
+        binding.Followingprogress.apply {
+            visibility = if (isLoading) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
     }
 
     override fun onDestroy() {
