@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentRepoBinding
-import com.example.githubuser.view.detail.adapter.FollowingRecviewAdapter
+import com.example.githubuser.model.githubresponse.repository.RepoResponseItem
 import com.example.githubuser.view.detail.adapter.ReposRecviewAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 
 
-class RepoFragment(var name : String) : Fragment() {
+class RepositoryFragment(var name : String) : Fragment() {
     private var _binding: FragmentRepoBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter : ReposRecviewAdapter
@@ -25,12 +24,6 @@ class RepoFragment(var name : String) : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRepoBinding.inflate(layoutInflater)
-
-        adapter = ReposRecviewAdapter()
-        val recview = binding.Reporecview
-        recview.adapter = adapter
-        recview.layoutManager = LinearLayoutManager(requireContext())
-
         setUserRepo(name)
         return binding.root
     }
@@ -38,10 +31,22 @@ class RepoFragment(var name : String) : Fragment() {
     private fun setUserRepo(name : String){
         viewModel.apply {
             getUserRepo(name)
-            repoResponse.observe(viewLifecycleOwner){
-                adapter.setData(it)
+            repoResponse.observe(viewLifecycleOwner){ responData ->
+                showRepositoryList(responData)
             }
         }
+    }
+
+    private fun showRepositoryList(list: List<RepoResponseItem>){
+        adapter = ReposRecviewAdapter(list)
+        val recview = binding.Reporecview
+        recview.adapter = adapter
+        recview.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 

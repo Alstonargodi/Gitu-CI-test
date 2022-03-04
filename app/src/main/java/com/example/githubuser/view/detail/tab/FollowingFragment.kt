@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowingBinding
-import com.example.githubuser.view.detail.adapter.FollowingRecviewAdapter
+import com.example.githubuser.model.githubresponse.following.FollowingResponseItem
+import com.example.githubuser.view.detail.adapter.FollowingReviewAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 
 
 class FollowingFragment(var name : String) : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter : FollowingRecviewAdapter
+    private lateinit var adapter : FollowingReviewAdapter
     private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreateView(
@@ -24,11 +25,6 @@ class FollowingFragment(var name : String) : Fragment() {
     ): View {
         _binding = FragmentFollowingBinding.inflate(layoutInflater)
 
-        adapter = FollowingRecviewAdapter()
-        val recview = binding.followingRecview
-        recview.adapter = adapter
-        recview.layoutManager = LinearLayoutManager(requireContext())
-
         setFollowingList(name)
         return binding.root
     }
@@ -36,10 +32,22 @@ class FollowingFragment(var name : String) : Fragment() {
     private fun setFollowingList(name : String){
         viewModel.apply {
             getListFollowing(name)
-            followingResponse.observe(viewLifecycleOwner){
-                adapter.setData(it)
+            followingResponse.observe(viewLifecycleOwner){ responData->
+                showFollowingList(responData)
             }
         }
+    }
+
+    private fun showFollowingList(list: List<FollowingResponseItem>){
+        adapter = FollowingReviewAdapter(list)
+        val recview = binding.followingRecview
+        recview.adapter = adapter
+        recview.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

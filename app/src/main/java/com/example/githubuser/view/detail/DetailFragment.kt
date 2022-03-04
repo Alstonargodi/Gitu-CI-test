@@ -57,6 +57,7 @@ class DetailFragment : Fragment() {
                 RepositoryTvitem.text = publicRepos.toString()
                 webTvitem.text = blog
 
+
                 setViewPager(login!!)
             }
         }

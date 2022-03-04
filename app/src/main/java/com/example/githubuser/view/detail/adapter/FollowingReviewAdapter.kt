@@ -1,15 +1,15 @@
 package com.example.githubuser.view.detail.adapter
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.FollowerItemcvBinding
-import com.example.githubuser.model.githubresponse.follower.FollowerResponseItem
 import com.example.githubuser.model.githubresponse.following.FollowingResponseItem
 
-class FollowingRecviewAdapter:RecyclerView.Adapter<FollowingRecviewAdapter.ViewHolder>() {
-    var datalist = emptyList<FollowingResponseItem>()
+class FollowingReviewAdapter(private var dataList : List<FollowingResponseItem>):RecyclerView.Adapter<FollowingReviewAdapter.ViewHolder>() {
+
 
     class ViewHolder(var binding : FollowerItemcvBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -18,7 +18,7 @@ class FollowingRecviewAdapter:RecyclerView.Adapter<FollowingRecviewAdapter.ViewH
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = datalist[position]
+        val item = dataList[position]
         holder.binding.apply {
             NamefollowerTv.text = item.login
 
@@ -31,11 +31,8 @@ class FollowingRecviewAdapter:RecyclerView.Adapter<FollowingRecviewAdapter.ViewH
     }
 
     override fun getItemCount(): Int {
-        return datalist.size
+        return dataList.size
     }
 
-    fun setData(list: List<FollowingResponseItem>){
-        datalist = list
-        notifyDataSetChanged()
-    }
+
 }

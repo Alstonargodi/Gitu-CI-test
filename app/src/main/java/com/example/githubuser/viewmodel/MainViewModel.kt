@@ -17,70 +17,75 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel: ViewModel() {
-    private val _isloading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean> = _isloading
+    companion object{
+        const val TAG = "MainViewModel"
+    }
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading : LiveData<Boolean> = _isLoading
 
 
     private val _listresponse = MutableLiveData<List<ItemsItem>>()
     val listresponse : LiveData<List<ItemsItem>> = _listresponse
     fun getListUser(name : String){
-        _isloading.value = true
+        _isLoading.value = true
         ApiConfig.getApiService().getUserList(name).enqueue(object : Callback<ListResponse>{
             override fun onResponse(call: Call<ListResponse>, response: Response<ListResponse>) {
-                _isloading.value = false
+                _isLoading.value = false
                 if (response.isSuccessful){
                     _listresponse.value = response.body()?.items
                 }else{
-                    Log.d("tag", response.message())
+                    Log.d(TAG, response.message())
                 }
             }
             override fun onFailure(call: Call<ListResponse>, t: Throwable) {
-
+                _isLoading.value = false
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
     }
 
-
     private val _detailResponse = MutableLiveData<DetailResponse>()
     val detailResponse : LiveData<DetailResponse> = _detailResponse
     fun getUserDetail(name : String){
-        _isloading.value = true
+        _isLoading.value = true
         ApiConfig.getApiService().getUserDetail(name).enqueue(object : Callback<DetailResponse>{
             override fun onResponse(
                 call: Call<DetailResponse>,
                 response: Response<DetailResponse>
             ) {
-                _isloading.value = false
+                _isLoading.value = false
                 if (response.isSuccessful){
                     _detailResponse.value = response.body()
                 }else{
-                    Log.d("tag", response.message())
+                    Log.d(TAG, response.message())
                 }
             }
             override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-
+                _isLoading.value = false
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
     }
 
-
     private val _followersResponse = MutableLiveData<List<FollowerResponseItem>>()
     val followerResponse : LiveData<List<FollowerResponseItem>> = _followersResponse
     fun getListFollowers(name: String){
-        _isloading.value = true
+        _isLoading.value = true
         ApiConfig.getApiService().getUserFollowers(name).enqueue(object : Callback<FollowerResponse>{
             override fun onResponse(
                 call: Call<FollowerResponse>,
                 response: Response<FollowerResponse>
             ) {
+                _isLoading.value = false
                 if (response.isSuccessful){
                     _followersResponse.value = response.body()
                 }else{
-                    Log.d("tag", "Noresponse")
+                    Log.d(TAG, response.message())
                 }
             }
             override fun onFailure(call: Call<FollowerResponse>, t: Throwable) {
-
+                _isLoading.value = false
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
     }
@@ -88,21 +93,23 @@ class MainViewModel: ViewModel() {
     private val _followingResponse = MutableLiveData<List<FollowingResponseItem>>()
     val followingResponse : LiveData<List<FollowingResponseItem>> = _followingResponse
     fun getListFollowing(name : String){
-        _isloading.value = true
+        _isLoading.value = true
         ApiConfig.getApiService().getUserFollowing(name).enqueue(object : Callback<FollowingResponse>{
             override fun onResponse(
                 call: Call<FollowingResponse>,
                 response: Response<FollowingResponse>
             ) {
+                _isLoading.value = false
                 if (response.isSuccessful){
-                    _isloading.value = false
+                    _isLoading.value = false
                     _followingResponse.value = response.body()
                 }else{
-                    Log.d("tag", "Noresponse")
+                    Log.d(TAG, response.message())
                 }
             }
             override fun onFailure(call: Call<FollowingResponse>, t: Throwable) {
-
+                _isLoading.value = false
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
 
@@ -111,18 +118,20 @@ class MainViewModel: ViewModel() {
     private val _repoResponse = MutableLiveData<List<RepoResponseItem>>()
     val repoResponse : LiveData<List<RepoResponseItem>> = _repoResponse
     fun getUserRepo(name: String){
-        _isloading.value = true
+        _isLoading.value = true
         ApiConfig.getApiService().getUserRepo(name).enqueue(object :Callback<RepoResponse>{
             override fun onResponse(call: Call<RepoResponse>, response: Response<RepoResponse>) {
+                _isLoading.value = false
                 if (response.isSuccessful){
                     _repoResponse.value = response.body()
                 }else{
-                    Log.d("tag", "Noresponse")
+                    Log.d(TAG, response.message())
                 }
             }
 
             override fun onFailure(call: Call<RepoResponse>, t: Throwable) {
-
+                _isLoading.value = false
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
     }
