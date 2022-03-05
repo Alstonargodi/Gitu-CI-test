@@ -38,7 +38,8 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="86dp">
+                tools:layout_editor_absoluteY="86dp"
+                >
 
                 <Button
                     android:id="@+id/button3"

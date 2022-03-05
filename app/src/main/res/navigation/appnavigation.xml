@@ -20,6 +20,9 @@
             app:destination="@id/detailFragment"
             app:enterAnim="@anim/slidein_right"
             app:exitAnim="@anim/slidedown_y" />
+        <action
+            android:id="@+id/action_homeFragment_to_authorFragment"
+            app:destination="@id/authorFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -30,13 +33,17 @@
             android:name="DataDetail"
             app:argType="com.example.githubuser.model.githubresponse.DetailResponse" />
         <action
-            android:id="@+id/action_detailFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/slidedown_y"
-            app:exitAnim="@anim/slidein_right" />
-        <action
             android:id="@+id/action_detailFragment_to_followerFragment"
             app:destination="@id/followerFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_followingFragment"
+            app:destination="@id/followingFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_repositoryFragment"
+            app:destination="@id/repositoryFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/followerFragment"
@@ -45,5 +52,32 @@
         tools:layout="@layout/fragment_follower" >
         <argument
             android:name="currUser" />
+    </fragment>
+    <fragment
+        android:id="@+id/followingFragment"
+        android:name="com.example.githubuser.view.detail.tab.FollowingFragment"
+        android:label="fragment_following"
+        tools:layout="@layout/fragment_following" />
+    <fragment
+        android:id="@+id/repositoryFragment"
+        android:name="com.example.githubuser.view.detail.tab.RepositoryFragment"
+        android:label="fragment_repo"
+        tools:layout="@layout/fragment_repo" />
+    <activity
+        android:id="@+id/splashscreen"
+        android:name="com.example.githubuser.view.Splashscreen"
+        android:label="activity_splashscreen"
+        tools:layout="@layout/activity_splashscreen" />
+    <fragment
+        android:id="@+id/authorFragment"
+        android:name="com.example.githubuser.view.author.AuthorFragment"
+        android:label="fragment_author"
+        tools:layout="@layout/fragment_author" >
+        <action
+            android:id="@+id/action_authorFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_authorFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

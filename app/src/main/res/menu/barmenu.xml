@@ -13,7 +13,7 @@
         />
 
     <item
-        android:id="@+id/favorite_list"
+        android:id="@+id/author"
         android:icon="@drawable/ic_user_cicrle_light"
         android:title="@string/find_user"
         app:showAsAction="collapseActionView|ifRoom"

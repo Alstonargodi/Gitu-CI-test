@@ -78,12 +78,12 @@
 
     <TextView
         android:id="@+id/Errortext_tv"
-        android:layout_width="192dp"
-        android:layout_height="62dp"
-        android:gravity="center"
+        android:layout_width="321dp"
+        android:layout_height="83dp"
+        android:gravity="center|top"
         android:text="Error response"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textSize="14sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/RecviewUser"

@@ -35,6 +35,7 @@
             android:fontFamily="@font/popmed"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Avatar_cvuser"
             app:layout_constraintTop_toTopOf="parent"

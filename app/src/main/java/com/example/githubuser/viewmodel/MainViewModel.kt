@@ -27,8 +27,7 @@ class MainViewModel: ViewModel() {
     private val _errorResponseText = MutableLiveData<String>()
     val errorResponseText: LiveData<String> = _errorResponseText
 
-    private val _isError = MutableLiveData<Boolean>()
-    val isError : LiveData<Boolean> = _isError
+
 
     private val _listresponse = MutableLiveData<List<ItemsItem>>()
     val listresponse : LiveData<List<ItemsItem>> = _listresponse
@@ -36,12 +35,13 @@ class MainViewModel: ViewModel() {
         _isLoading.value = true
         ApiConfig.getApiService().getUserList(name).enqueue(object : Callback<ListResponse>{
             override fun onResponse(call: Call<ListResponse>, response: Response<ListResponse>) {
-                _isLoading.value = false
                 if (response.isSuccessful){
-                    _listresponse.value = response.body()?.items
+                    _listresponse.postValue(response.body()?.items)
+                    _isLoading.value = false
                 }else{
                     Log.d(TAG, response.message().toString())
                     _errorResponseText.value = Message + response.message()
+                    _isLoading.value = false
                 }
             }
             override fun onFailure(call: Call<ListResponse>, t: Throwable) {
@@ -52,8 +52,15 @@ class MainViewModel: ViewModel() {
         })
     }
 
+
+
+
+
+
+
     private val _detailResponse = MutableLiveData<DetailResponse>()
     val detailResponse : LiveData<DetailResponse> = _detailResponse
+
     fun getUserDetail(name : String){
         _isLoading.value = true
         ApiConfig.getApiService().getUserDetail(name).enqueue(object : Callback<DetailResponse>{
@@ -61,9 +68,9 @@ class MainViewModel: ViewModel() {
                 call: Call<DetailResponse>,
                 response: Response<DetailResponse>
             ) {
-                _isLoading.value = false
                 if (response.isSuccessful){
                     _detailResponse.value = response.body()
+                    _isLoading.value = false
                 }else{
                     Log.d(TAG, response.message().toString())
                     _errorResponseText.value = Message + response.message()
@@ -91,13 +98,11 @@ class MainViewModel: ViewModel() {
                     _followersResponse.value = response.body()
                 }else{
                     Log.d(TAG, response.message().toString())
-                    _isError.value = true
                     _errorResponseText.value = Message + response.message()
                 }
             }
             override fun onFailure(call: Call<FollowerResponse>, t: Throwable) {
                 _isLoading.value = false
-                _isError.value = true
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
                 _errorResponseText.value = Message + t.message.toString()
             }

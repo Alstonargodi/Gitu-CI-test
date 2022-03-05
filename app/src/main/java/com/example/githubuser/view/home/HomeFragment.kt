@@ -11,11 +11,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentHomeBinding
 import com.example.githubuser.model.githubresponse.DetailResponse
+import com.example.githubuser.model.githubresponse.ItemsItem
+import com.example.githubuser.model.githubresponse.ListResponse
 import com.example.githubuser.view.home.adapter.UserListRecAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -28,7 +31,7 @@ class HomeFragment : Fragment() {
     private val viewModel by viewModels<MainViewModel>()
 
 
-    private var data = ArrayList<DetailResponse>()
+    private var data  = mutableListOf<DetailResponse>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,9 +45,16 @@ class HomeFragment : Fragment() {
         binding.toolbar2.inflateMenu(R.menu.barmenu)
 
         viewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-        viewModel.isError.observe(viewLifecycleOwner){showErrorText(it)}
-        getUserList()
 
+
+        viewModel.apply {
+            listresponse.observe(viewLifecycleOwner){ listrespon ->
+                showUserList(listrespon)
+            }
+
+        }
+
+        showErrorText()
         return binding.root
     }
 
@@ -53,15 +63,23 @@ class HomeFragment : Fragment() {
 
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
+        val authorView = menu.findItem(R.id.author)
+
+
+        authorView.apply {
+            setOnMenuItemClickListener {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthorFragment())
+                true
+            }
+        }
 
         searchView.apply {
             setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-            queryHint = "Input Username"
-            setQuery("username",true)
+            queryHint = "input username"
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    data.clear()
+
                     viewModel.getListUser(query!!)
                     return true
                 }
@@ -76,25 +94,14 @@ class HomeFragment : Fragment() {
 
 
     private fun getUserList(){
-        viewModel.apply {
-            listresponse.observe(viewLifecycleOwner){ listrespon ->
-                for (i in listrespon.indices){
-                    getUserDetail(listrespon[i].login)
-                    detailResponse.observe(viewLifecycleOwner){ detailrespon ->
-                        data.add(detailrespon)
-                        showUserList(data.distinct())
-                        "search result".also { binding.textView.text = it }
-                    }
-                }
-            }
-        }
     }
 
 
-    private fun showUserList(list: List<DetailResponse>){
+    private fun showUserList(list: List<ItemsItem>){
         adapter = UserListRecAdapter(list)
         val recView = binding.RecviewUser
         recView.adapter = adapter
+
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recView.layoutManager = GridLayoutManager(requireContext(),2)
@@ -105,20 +112,20 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun showErrorText(isError : Boolean){
+    private fun showErrorText(){
         binding.apply {
             viewModel.errorResponseText.observe(viewLifecycleOwner){ errorResponse ->
                 Snackbar.make(root, errorResponse.toString(), Snackbar.LENGTH_SHORT)
                     .setTextColor(Color.WHITE)
                     .setBackgroundTint(Color.rgb(255, 100, 100))
                     .show()
-                ErrortextTv.visibility = if (isError) View.VISIBLE else View.GONE
-                TryagainHome.visibility = if (isError) View.VISIBLE else View.GONE
+                ErrortextTv.visibility = View.VISIBLE
+                TryagainHome.visibility = View.VISIBLE
                 ErrortextTv.text = errorResponse.toString()
-
-                if (errorResponse.isEmpty()){
-                    ErrortextTv.visibility = View.VISIBLE
-                    TryagainHome.visibility = View.VISIBLE
+                TryagainHome.setOnClickListener {
+                    getUserList()
+                    ErrortextTv.visibility = View.GONE
+                    TryagainHome.visibility = View.GONE
                 }
             }
         }
@@ -127,7 +134,6 @@ class HomeFragment : Fragment() {
     private fun isLoading(isLoading:Boolean){
         binding.apply {
             Homeprogress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
-
         }
     }
 }

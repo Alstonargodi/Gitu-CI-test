@@ -10,7 +10,6 @@ import com.example.githubuser.model.githubresponse.repository.RepoResponseItem
 
 class ReposRecviewAdapter(private var dataList : List<RepoResponseItem>):  RecyclerView.Adapter<ReposRecviewAdapter.ViewHolder>() {
 
-
     class ViewHolder(var binding : RepositoryItemcvBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

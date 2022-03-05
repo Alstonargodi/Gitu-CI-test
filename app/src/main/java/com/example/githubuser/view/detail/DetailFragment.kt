@@ -39,7 +39,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.btnBackhome.setOnClickListener {
-            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
+            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToMainActivity())
         }
 
         super.onViewCreated(view, savedInstanceState)

@@ -2,15 +2,18 @@ package com.example.githubuser.view.home.adapter
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.UserhomCvBinding
 import com.example.githubuser.model.githubresponse.DetailResponse
+import com.example.githubuser.model.githubresponse.ItemsItem
+import com.example.githubuser.model.githubresponse.ListResponse
 import com.example.githubuser.view.home.HomeFragmentDirections
 
-class UserListRecAdapter(var dataList : List<DetailResponse>): RecyclerView.Adapter<UserListRecAdapter.ViewHolder>() {
+class UserListRecAdapter(private var dataList : List<ItemsItem>): RecyclerView.Adapter<UserListRecAdapter.ViewHolder>() {
 
     class ViewHolder(var binding : UserhomCvBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -22,10 +25,13 @@ class UserListRecAdapter(var dataList : List<DetailResponse>): RecyclerView.Adap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = dataList[position]
         holder.binding.apply {
-            NamaTvcard.text = data.name.toString()
-            LokasiTvcard.text = data.location.toString()
+            NamaTvcard.text = data.login.toString()
+            LokasiTvcard.text = data.login.toString()
             UsernameTvcard.text = data.login.toString()
 
+
+            LokasiTvcard.visibility = if (data.login == null) View.INVISIBLE else View.VISIBLE
+            NamaTvcard.visibility = if (data.login == null) View.INVISIBLE else View.VISIBLE
 
             Glide.with(holder.itemView.context)
                 .asDrawable()
@@ -33,13 +39,9 @@ class UserListRecAdapter(var dataList : List<DetailResponse>): RecyclerView.Adap
                 .circleCrop()
                 .into(AvatarCvuser)
 
-            AvatarCvuser.setOnClickListener {
-                holder.itemView.findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-                        data
-                    )
-                )
-            }
+//            AvatarCvuser.setOnClickListener {
+//                holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(data))
+//            }
         }
     }
 
