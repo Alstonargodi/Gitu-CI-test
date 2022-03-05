@@ -30,18 +30,16 @@ class RepositoryFragment: Fragment() {
         viewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
         val name = arguments?.getString("value","")
 
-        viewModel.getUserRepo(name!!)
-        setUserRepo()
-        return binding.root
-    }
-
-    private fun setUserRepo(){
         viewModel.apply {
+            getUserRepo(name!!)
             repoResponse.observe(viewLifecycleOwner){ responData ->
                 showRepositoryList(responData)
             }
         }
+        return binding.root
     }
+
+
 
     private fun showRepositoryList(list: List<RepoResponseItem>){
         adapter = ReposRecviewAdapter(list)

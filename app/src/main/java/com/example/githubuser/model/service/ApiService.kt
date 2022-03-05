@@ -22,16 +22,19 @@ interface ApiService {
     ): Call<DetailResponse>
 
     @GET("users/{username}/followers")
+    @Headers("Authorization: token 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")
     fun getUserFollowers(
         @Path("username") username : String,
     ): Call<FollowerResponse>
 
     @GET("users/{username}/following")
+    @Headers("Authorization: token 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")
     fun getUserFollowing(
         @Path("username") username : String,
     ): Call<FollowingResponse>
 
     @GET("users/{username}/repos")
+    @Headers("Authorization: token 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")
     fun getUserRepo(
         @Path("username") username : String,
     ): Call<RepoResponse>

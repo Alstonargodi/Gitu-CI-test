@@ -16,9 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentHomeBinding
-import com.example.githubuser.model.githubresponse.DetailResponse
 import com.example.githubuser.model.githubresponse.ItemsItem
-import com.example.githubuser.model.githubresponse.ListResponse
 import com.example.githubuser.view.home.adapter.UserListRecAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -28,10 +26,8 @@ class HomeFragment : Fragment() {
     private lateinit var adapter : UserListRecAdapter
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel by viewModels<MainViewModel>()
+    private val mainViewModel by viewModels<MainViewModel>()
 
-
-    private var data  = mutableListOf<DetailResponse>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,19 +36,21 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
 
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.maincolor)
-
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)
 
-        viewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
+        mainViewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
 
 
-        viewModel.apply {
-            listresponse.observe(viewLifecycleOwner){ listrespon ->
-                showUserList(listrespon)
+        mainViewModel.apply {
+            listresponse.observe(viewLifecycleOwner){ listRespon ->
+                showUserList(listRespon)
             }
-
+            searchQuery.observe(viewLifecycleOwner){ text ->
+                binding.CurrsearchTv.text = "search result for $text"
+            }
         }
+
 
         showErrorText()
         return binding.root
@@ -79,8 +77,13 @@ class HomeFragment : Fragment() {
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
+                    mainViewModel.apply {
+                        getListUser(query!!)
+                        saveSearch(query)
+                    }
 
-                    viewModel.getListUser(query!!)
+                    binding.CurrsearchTv.text = "search result for $query"
+
                     return true
                 }
 
@@ -93,15 +96,11 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun getUserList(){
-    }
-
 
     private fun showUserList(list: List<ItemsItem>){
         adapter = UserListRecAdapter(list)
         val recView = binding.RecviewUser
         recView.adapter = adapter
-
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recView.layoutManager = GridLayoutManager(requireContext(),2)
@@ -114,7 +113,7 @@ class HomeFragment : Fragment() {
 
     private fun showErrorText(){
         binding.apply {
-            viewModel.errorResponseText.observe(viewLifecycleOwner){ errorResponse ->
+            mainViewModel.errorResponseText.observe(viewLifecycleOwner){ errorResponse ->
                 Snackbar.make(root, errorResponse.toString(), Snackbar.LENGTH_SHORT)
                     .setTextColor(Color.WHITE)
                     .setBackgroundTint(Color.rgb(255, 100, 100))
@@ -123,9 +122,14 @@ class HomeFragment : Fragment() {
                 TryagainHome.visibility = View.VISIBLE
                 ErrortextTv.text = errorResponse.toString()
                 TryagainHome.setOnClickListener {
-                    getUserList()
-                    ErrortextTv.visibility = View.GONE
-                    TryagainHome.visibility = View.GONE
+                    mainViewModel.apply {
+                        searchQuery.observe(viewLifecycleOwner){  text ->
+                            mainViewModel.getListUser(text)
+                            binding.CurrsearchTv.text = "search result for $text"
+                        }
+                        ErrortextTv.visibility = View.GONE
+                        TryagainHome.visibility = View.GONE
+                    }
                 }
             }
         }

@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="10dp">
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="20dp"
+    app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/maincolor">
+        android:background="#D1D1D1">
 
         <ImageView
             android:id="@+id/Avatar_cvuser"
@@ -31,51 +33,16 @@
             android:layout_width="0dp"
             android:layout_height="26dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:fontFamily="@font/popmed"
-            android:textColor="@color/white"
+            android:textColor="@color/maincolor"
             android:textSize="14sp"
             android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/Avatar_cvuser"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Nama" />
-
-        <TextView
-            android:id="@+id/Lokasi_tvcard"
-            android:layout_width="0dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:drawableStart="@drawable/ic_baseline_location_on_24"
-            android:fontFamily="@font/popmed"
-            android:gravity="center|left"
-            android:text="lokasi"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.888"
-            app:layout_constraintStart_toEndOf="@+id/Avatar_cvuser"
-            app:layout_constraintTop_toBottomOf="@+id/Nama_tvcard"
-            app:layout_constraintVertical_bias="0.8" />
-
-        <TextView
-            android:id="@+id/Username_tvcard"
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:gravity="start|end"
-            android:text="Username"
-            android:textColor="#DFDFDF"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/Lokasi_tvcard"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.303"
-            app:layout_constraintStart_toEndOf="@+id/Avatar_cvuser"
-            app:layout_constraintTop_toBottomOf="@+id/Nama_tvcard"
-            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

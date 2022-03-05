@@ -1,5 +1,6 @@
 package com.example.githubuser.view.detail.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -9,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FollowerItemcvBinding
 import com.example.githubuser.model.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.view.detail.DetailFragmentDirections
+import com.example.githubuser.view.detail.tab.FollowerFragmentDirections
 
 import com.example.githubuser.viewmodel.MainViewModel
 
@@ -31,6 +34,11 @@ class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>): 
                 .load(item.avatarUrl)
                 .circleCrop()
                 .into(ImgFollower)
+
+            ImgFollower.setOnClickListener {
+                holder.itemView.findNavController().navigate(FollowerFragmentDirections.actionFollowerFragmentToDetailFragment(item.login))
+
+            }
         }
 
 

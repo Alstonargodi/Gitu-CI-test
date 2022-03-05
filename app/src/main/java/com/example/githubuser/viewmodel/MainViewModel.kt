@@ -29,6 +29,9 @@ class MainViewModel: ViewModel() {
 
 
 
+    /*
+    main viewmodel
+    */
     private val _listresponse = MutableLiveData<List<ItemsItem>>()
     val listresponse : LiveData<List<ItemsItem>> = _listresponse
     fun getListUser(name : String){
@@ -53,14 +56,8 @@ class MainViewModel: ViewModel() {
     }
 
 
-
-
-
-
-
     private val _detailResponse = MutableLiveData<DetailResponse>()
     val detailResponse : LiveData<DetailResponse> = _detailResponse
-
     fun getUserDetail(name : String){
         _isLoading.value = true
         ApiConfig.getApiService().getUserDetail(name).enqueue(object : Callback<DetailResponse>{
@@ -84,6 +81,61 @@ class MainViewModel: ViewModel() {
         })
     }
 
+
+    private val _repoResponse = MutableLiveData<List<RepoResponseItem>>()
+    val repoResponse : LiveData<List<RepoResponseItem>> = _repoResponse
+    fun getUserRepo(name: String){
+        _isLoading.value = true
+        ApiConfig.getApiService().getUserRepo(name).enqueue(object :Callback<RepoResponse>{
+            override fun onResponse(call: Call<RepoResponse>, response: Response<RepoResponse>) {
+                if (response.isSuccessful){
+                    _repoResponse.value = response.body()
+                    _isLoading.value = false
+                }else{
+                    Log.d(TAG, response.message())
+                    _errorResponseText.value = Message + response.message()
+                    _isLoading.value = false
+                }
+            }
+
+            override fun onFailure(call: Call<RepoResponse>, t: Throwable) {
+                _isLoading.value = false
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+                _errorResponseText.value = Message + t.message.toString()
+            }
+        })
+    }
+
+
+
+
+
+    /*
+    utils viewmodel
+    */
+    private val _searchQuery = MutableLiveData<String>()
+    val searchQuery : LiveData<String> = _searchQuery
+    fun saveSearch(name: String){
+        _searchQuery.value = name
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private val _followersResponse = MutableLiveData<List<FollowerResponseItem>>()
     val followerResponse : LiveData<List<FollowerResponseItem>> = _followersResponse
     fun getListFollowers(name: String){
@@ -93,9 +145,9 @@ class MainViewModel: ViewModel() {
                 call: Call<FollowerResponse>,
                 response: Response<FollowerResponse>
             ) {
-                _isLoading.value = false
                 if (response.isSuccessful){
                     _followersResponse.value = response.body()
+                    _isLoading.value = false
                 }else{
                     Log.d(TAG, response.message().toString())
                     _errorResponseText.value = Message + response.message()
@@ -136,27 +188,6 @@ class MainViewModel: ViewModel() {
 
     }
 
-    private val _repoResponse = MutableLiveData<List<RepoResponseItem>>()
-    val repoResponse : LiveData<List<RepoResponseItem>> = _repoResponse
-    fun getUserRepo(name: String){
-        _isLoading.value = true
-        ApiConfig.getApiService().getUserRepo(name).enqueue(object :Callback<RepoResponse>{
-            override fun onResponse(call: Call<RepoResponse>, response: Response<RepoResponse>) {
-                _isLoading.value = false
-                if (response.isSuccessful){
-                    _repoResponse.value = response.body()
-                }else{
-                    Log.d(TAG, response.message())
-                    _errorResponseText.value = Message + response.message()
-                }
-            }
 
-            override fun onFailure(call: Call<RepoResponse>, t: Throwable) {
-                _isLoading.value = false
-                Log.e(TAG, "onFailure: ${t.message.toString()}")
-                _errorResponseText.value = Message + t.message.toString()
-            }
-        })
-    }
 
 }

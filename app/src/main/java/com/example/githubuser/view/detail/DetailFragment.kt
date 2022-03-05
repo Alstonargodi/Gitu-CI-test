@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
 import com.example.githubuser.view.detail.adapter.SectionPagerAdapter
+import com.example.githubuser.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -22,10 +25,13 @@ class DetailFragment : Fragment() {
             R.string.tabdua,
             R.string.tabtiga
         )
+        var userNameKey = "username"
     }
 
+    private lateinit var pagerAdapter : SectionPagerAdapter
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,39 +52,45 @@ class DetailFragment : Fragment() {
     }
 
     private fun setDetailUser(){
-        val data = DetailFragmentArgs.fromBundle(arguments as Bundle).dataDetail
+        val userName = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
+        viewModel.apply {
+            getUserRepo(userName)
+            getUserDetail(userName)
+            detailResponse.observe(viewLifecycleOwner){ responData ->
+                binding.apply {
+                    responData.apply {
+                        UsernameTvdetailpage.text = login
+                        surnameDetailopage.text = name
+                        BioTvitem.text = bio
+                        ComapnyTvitem.text = company
+                        locTvitem.text = location
+                        FollowerTvitem.text = followers.toString()
+                        FollowingTvitem.text = following.toString()
+                        RepositoryTvitem.text = publicRepos.toString()
+                        webTvitem.text = blog
 
-        binding.apply {
-            data.apply {
-                UsernameTvdetailpage.text = login
-                surnameDetailopage.text = name
-                BioTvitem.text = bio
-                ComapnyTvitem.text = company
-                locTvitem.text = location
-                FollowerTvitem.text = followers.toString()
-                FollowingTvitem.text = following.toString()
-                RepositoryTvitem.text = publicRepos.toString()
-                webTvitem.text = blog
+                        webTvitem.setOnClickListener {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse(blog)
+                            startActivity(intent)
+                        }
 
-                webTvitem.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(blog)
-                    startActivity(intent)
+                        Glide.with(requireContext())
+                            .asDrawable()
+                            .load(avatarUrl)
+                            .circleCrop()
+                            .into(binding.ImgTvdetail)
+
+                        setViewPager(login!!)
+                    }
                 }
-
-                setViewPager(login!!)
             }
         }
 
-        Glide.with(requireContext())
-            .asDrawable()
-            .load(data.avatarUrl)
-            .circleCrop()
-            .into(binding.ImgTvdetail)
     }
 
     private fun setViewPager(name : String){
-        val pagerAdapter = SectionPagerAdapter(requireActivity(),name,tab_titles.size)
+        pagerAdapter = SectionPagerAdapter(requireActivity(),name,tab_titles.size)
         val viewpager = binding.Followviewpager
         val tabs = binding.tabLayout
         viewpager.adapter = pagerAdapter
@@ -86,8 +98,6 @@ class DetailFragment : Fragment() {
             tab.text = getString(tab_titles[position])
         }.attach()
     }
-
-
 
 
 

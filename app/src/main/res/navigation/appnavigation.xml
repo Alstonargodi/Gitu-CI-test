@@ -30,8 +30,8 @@
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="DataDetail"
-            app:argType="com.example.githubuser.model.githubresponse.DetailResponse" />
+            android:name="userName"
+            app:argType="string" />
         <action
             android:id="@+id/action_detailFragment_to_followerFragment"
             app:destination="@id/followerFragment" />
@@ -52,6 +52,9 @@
         tools:layout="@layout/fragment_follower" >
         <argument
             android:name="currUser" />
+        <action
+            android:id="@+id/action_followerFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/followingFragment"

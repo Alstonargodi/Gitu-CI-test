@@ -26,12 +26,6 @@ class UserListRecAdapter(private var dataList : List<ItemsItem>): RecyclerView.A
         val data = dataList[position]
         holder.binding.apply {
             NamaTvcard.text = data.login.toString()
-            LokasiTvcard.text = data.login.toString()
-            UsernameTvcard.text = data.login.toString()
-
-
-            LokasiTvcard.visibility = if (data.login == null) View.INVISIBLE else View.VISIBLE
-            NamaTvcard.visibility = if (data.login == null) View.INVISIBLE else View.VISIBLE
 
             Glide.with(holder.itemView.context)
                 .asDrawable()
@@ -39,9 +33,9 @@ class UserListRecAdapter(private var dataList : List<ItemsItem>): RecyclerView.A
                 .circleCrop()
                 .into(AvatarCvuser)
 
-//            AvatarCvuser.setOnClickListener {
-//                holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(data))
-//            }
+            AvatarCvuser.setOnClickListener {
+                holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(data.login))
+            }
         }
     }
 
