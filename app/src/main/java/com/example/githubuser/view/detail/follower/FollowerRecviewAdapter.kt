@@ -1,19 +1,12 @@
-package com.example.githubuser.view.detail.adapter
+package com.example.githubuser.view.detail.follower
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.githubuser.R
 import com.example.githubuser.databinding.FollowerItemcvBinding
 import com.example.githubuser.model.githubresponse.follower.FollowerResponseItem
-import com.example.githubuser.view.detail.DetailFragmentDirections
-import com.example.githubuser.view.detail.tab.FollowerFragmentDirections
-
-import com.example.githubuser.viewmodel.MainViewModel
 
 class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>): RecyclerView.Adapter<FollowerRecviewAdapter.ViewHolder>() {
 

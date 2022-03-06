@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/followerFragment"
-        android:name="com.example.githubuser.view.detail.tab.FollowerFragment"
+        android:name="com.example.githubuser.view.detail.follower.FollowerFragment"
         android:label="fragment_follower"
         tools:layout="@layout/fragment_follower" >
         <argument
@@ -58,12 +58,12 @@
     </fragment>
     <fragment
         android:id="@+id/followingFragment"
-        android:name="com.example.githubuser.view.detail.tab.FollowingFragment"
+        android:name="com.example.githubuser.view.detail.following.FollowingFragment"
         android:label="fragment_following"
         tools:layout="@layout/fragment_following" />
     <fragment
         android:id="@+id/repositoryFragment"
-        android:name="com.example.githubuser.view.detail.tab.RepositoryFragment"
+        android:name="com.example.githubuser.view.detail.repository.RepositoryFragment"
         android:label="fragment_repo"
         tools:layout="@layout/fragment_repo" />
     <activity

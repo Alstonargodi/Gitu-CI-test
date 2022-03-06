@@ -1,4 +1,4 @@
-package com.example.githubuser.view.detail.tab
+package com.example.githubuser.view.detail.following
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.model.githubresponse.following.FollowingResponseItem
-import com.example.githubuser.view.detail.adapter.FollowingReviewAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 
 

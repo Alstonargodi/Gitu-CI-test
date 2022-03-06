@@ -1,4 +1,4 @@
-package com.example.githubuser.view.detail.tab
+package com.example.githubuser.view.detail.repository
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
 import com.example.githubuser.model.githubresponse.repository.RepoResponseItem
-import com.example.githubuser.view.detail.adapter.ReposRecviewAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 
 

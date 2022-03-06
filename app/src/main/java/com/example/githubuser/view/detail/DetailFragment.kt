@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
-import com.example.githubuser.view.detail.adapter.SectionPagerAdapter
+import com.example.githubuser.view.detail.tab.SectionPagerAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 

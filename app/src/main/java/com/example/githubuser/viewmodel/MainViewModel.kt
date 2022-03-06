@@ -21,12 +21,13 @@ class MainViewModel: ViewModel() {
         const val Message = "Failed Fetching :("
         const val TAG = "MainViewModel"
     }
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
 
+
     private val _errorResponseText = MutableLiveData<String>()
     val errorResponseText: LiveData<String> = _errorResponseText
-
 
 
     /*
@@ -41,6 +42,7 @@ class MainViewModel: ViewModel() {
                 if (response.isSuccessful){
                     _listresponse.postValue(response.body()?.items)
                     _isLoading.value = false
+                    _errorResponseText.value = ""
                 }else{
                     Log.d(TAG, response.message().toString())
                     _errorResponseText.value = Message + response.message()
@@ -106,36 +108,6 @@ class MainViewModel: ViewModel() {
         })
     }
 
-
-
-
-
-    /*
-    utils viewmodel
-    */
-    private val _searchQuery = MutableLiveData<String>()
-    val searchQuery : LiveData<String> = _searchQuery
-    fun saveSearch(name: String){
-        _searchQuery.value = name
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private val _followersResponse = MutableLiveData<List<FollowerResponseItem>>()
     val followerResponse : LiveData<List<FollowerResponseItem>> = _followersResponse
     fun getListFollowers(name: String){
@@ -185,9 +157,6 @@ class MainViewModel: ViewModel() {
                 _errorResponseText.value = Message + t.message.toString()
             }
         })
-
     }
-
-
 
 }

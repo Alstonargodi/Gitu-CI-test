@@ -1,16 +1,12 @@
-package com.example.githubuser.view.detail.adapter
+package com.example.githubuser.view.detail.tab
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.githubuser.R
-import com.example.githubuser.view.detail.DetailFragment
-import com.example.githubuser.view.detail.tab.FollowerFragment
-import com.example.githubuser.view.detail.tab.FollowerFragmentArgs
-import com.example.githubuser.view.detail.tab.FollowingFragment
-import com.example.githubuser.view.detail.tab.RepositoryFragment
+import com.example.githubuser.view.detail.follower.FollowerFragment
+import com.example.githubuser.view.detail.following.FollowingFragment
+import com.example.githubuser.view.detail.repository.RepositoryFragment
 
 class SectionPagerAdapter(activity : FragmentActivity, private var value : String, private var tab : Int): FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {

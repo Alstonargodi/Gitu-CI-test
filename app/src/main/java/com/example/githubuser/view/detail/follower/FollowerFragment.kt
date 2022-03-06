@@ -1,4 +1,4 @@
-package com.example.githubuser.view.detail.tab
+package com.example.githubuser.view.detail.follower
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.model.githubresponse.follower.FollowerResponseItem
-import com.example.githubuser.view.detail.DetailFragmentArgs
-import com.example.githubuser.view.detail.adapter.FollowerRecviewAdapter
 import com.example.githubuser.viewmodel.MainViewModel
 
 
