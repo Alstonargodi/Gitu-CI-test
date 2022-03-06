@@ -1,6 +1,7 @@
 package com.example.githubuser.view.detail
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +14,9 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
 import com.example.githubuser.view.detail.tab.SectionPagerAdapter
-import com.example.githubuser.viewmodel.MainViewModel
+import com.example.githubuser.viewmodel.DetailViewModel
+import com.example.githubuser.viewmodel.UtilViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -24,37 +27,41 @@ class DetailFragment : Fragment() {
             R.string.tabdua,
             R.string.tabtiga
         )
-        var userNameKey = "username"
     }
 
     private lateinit var pagerAdapter : SectionPagerAdapter
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by viewModels<MainViewModel>()
+    private val detailViewModel by viewModels<DetailViewModel>()
+    private val utilViewModel by viewModels<UtilViewModel>()
 
+
+    private var saveText = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(layoutInflater)
 
-        setDetailUser()
+        utilViewModel.textQuery.observe(viewLifecycleOwner){ saveText = it }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.btnBackhome.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToMainActivity())
         }
-
-        super.onViewCreated(view, savedInstanceState)
+        setDetailUser()
     }
 
     private fun setDetailUser(){
         val userName = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
-        viewModel.apply {
-            getUserRepo(userName)
+        utilViewModel.saveText(userName)
+        detailViewModel.apply {
             getUserDetail(userName)
+            isLoading.observe(viewLifecycleOwner){ isLoading(it) }
             detailResponse.observe(viewLifecycleOwner){ responData ->
                 binding.apply {
                     responData.apply {
@@ -67,6 +74,14 @@ class DetailFragment : Fragment() {
                         FollowingTvitem.text = following.toString()
                         RepositoryTvitem.text = publicRepos.toString()
                         webTvitem.text = blog
+
+
+
+                        if(bio.isNullOrEmpty()) BioTvitem.visibility = View.GONE
+                        if(company.isNullOrEmpty()) ComapnyTvitem.visibility = View.GONE
+                        if(location.isNullOrEmpty()) locTvitem.visibility = View.GONE
+                        if(blog.isNullOrEmpty()) webTvitem.visibility = View.GONE
+
 
                         webTvitem.setOnClickListener {
                             val intent = Intent(Intent.ACTION_VIEW)
@@ -84,6 +99,7 @@ class DetailFragment : Fragment() {
                     }
                 }
             }
+            showErrorText()
         }
 
     }
@@ -99,12 +115,31 @@ class DetailFragment : Fragment() {
     }
 
 
+    private fun showErrorText(){
+        binding.apply {
+            detailViewModel.errorResponse.observe(viewLifecycleOwner){ response->
+                if (response.isNotEmpty()){
+                    Snackbar.make(root, response.toString(), Snackbar.LENGTH_SHORT)
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundTint(Color.rgb(255, 100, 100))
+                        .show()
+                    ErrorresponseDetailTv.visibility = View.VISIBLE
+                    ("$response\n \n Try Again").also { ErrorresponseDetailTv.text = it }
+                    ErrorresponseDetailTv.setOnClickListener {
+                        detailViewModel.getUserDetail(saveText)
+                        ErrorresponseDetailTv.visibility = View.GONE
+                    }
+                }
+            }
+        }
+    }
+    private fun isLoading(isLoading:Boolean){
+        binding.DetailProgress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
-
-
-}
+    }

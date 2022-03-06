@@ -11,26 +11,29 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
 import com.example.githubuser.model.githubresponse.repository.RepoResponseItem
-import com.example.githubuser.viewmodel.MainViewModel
+import com.example.githubuser.viewmodel.RepositorViewModel
+import com.example.githubuser.viewmodel.UtilViewModel
 
 
 class RepositoryFragment: Fragment() {
     private var _binding: FragmentRepoBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter : ReposRecviewAdapter
-    private val viewModel by viewModels<MainViewModel>()
+    private val repoViewModel by viewModels<RepositorViewModel>()
+    private val utilViewModel by viewModels<UtilViewModel>()
 
 
+    private var userName = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRepoBinding.inflate(layoutInflater)
-        viewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-        val name = arguments?.getString("value","")
+        repoViewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
+        userName = arguments?.getString("value","").toString()
 
-        viewModel.apply {
-            getUserRepo(name!!)
+        repoViewModel.apply {
+            getUserRepo(userName)
             repoResponse.observe(viewLifecycleOwner){ responData ->
                 showRepositoryList(responData)
             }
@@ -45,6 +48,8 @@ class RepositoryFragment: Fragment() {
         val recView = binding.Reporecview
         recView.adapter = adapter
         recView.layoutManager = LinearLayoutManager(requireContext())
+        utilViewModel.setEmptys(adapter.itemCount)
+        emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recView.layoutManager = GridLayoutManager(requireContext(),2)
@@ -60,6 +65,17 @@ class RepositoryFragment: Fragment() {
                 View.VISIBLE
             } else {
                 View.GONE
+            }
+        }
+    }
+
+    private fun emptyChecker(){
+        binding.apply {
+            utilViewModel.isEmpty.observe(viewLifecycleOwner){ value ->
+                if (value == 0){
+                    emptyStatmentRepo.visibility = View.VISIBLE
+                    emptyStatmentRepo.text = "$userName never make a repo"
+                }
             }
         }
     }

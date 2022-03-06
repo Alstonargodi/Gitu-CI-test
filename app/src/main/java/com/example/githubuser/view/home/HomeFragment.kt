@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -36,6 +35,7 @@ class HomeFragment : Fragment() {
     private val mainViewModel by viewModels<MainViewModel>()
     private val utilViewModel by viewModels<UtilViewModel>()
 
+    private var saveText = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,22 +50,22 @@ class HomeFragment : Fragment() {
 
         mainViewModel.apply {
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-
-            listresponse.observe(viewLifecycleOwner){ listRespon ->
-                showUserList(listRespon)
-            }
+            listresponse.observe(viewLifecycleOwner){ showUserList(it) }
         }
+
         utilViewModel.apply {
-            searchQuery.observe(viewLifecycleOwner){ text ->
-                binding.CurrsearchTv.text = "search result for $text"
+            textQuery.observe(viewLifecycleOwner){ text ->
+                "search result for $text".also { binding.CurrsearchTv.text = it }
+                saveText = text
             }
         }
-
-
-        showErrorText()
-        setEmpty()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        showErrorText()
+        setDefaultList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -90,7 +90,7 @@ class HomeFragment : Fragment() {
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    setSearch(query!!)
+                    setSearchResult(query!!)
                     return true
                 }
 
@@ -102,16 +102,16 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setSearch(search : String){
+    private fun setSearchResult(search : String){
         mainViewModel.apply {
             getListUser(search)
             binding.tvEmptyview.visibility = View.GONE
         }
-        utilViewModel.saveSearch(search)
-        binding.CurrsearchTv.text = "search result for $search"
+        utilViewModel.saveText(search)
+        "search result for $search".also { binding.CurrsearchTv.text = it }
 
         when(search){
-            default_user->binding.CurrsearchTv.text = "Top Users"
+            default_user->binding.CurrsearchTv.text = getString(R.string.Topuser)
         }
     }
 
@@ -122,7 +122,6 @@ class HomeFragment : Fragment() {
         val recView = binding.RecviewUser
         recView.adapter = adapter
         utilViewModel.setEmptys(adapter.itemCount)
-        Log.d("item",adapter.itemCount.toString())
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recView.layoutManager = GridLayoutManager(requireContext(),2)
@@ -135,7 +134,7 @@ class HomeFragment : Fragment() {
 
     private fun showErrorText(){
         binding.apply {
-            mainViewModel.errorResponseText.observe(viewLifecycleOwner){ errorResponse ->
+            mainViewModel.errorResponse.observe(viewLifecycleOwner){ errorResponse ->
                 if (errorResponse.isNotEmpty()){
                     Snackbar.make(root, errorResponse.toString(), Snackbar.LENGTH_SHORT)
                             .setTextColor(Color.WHITE)
@@ -147,10 +146,9 @@ class HomeFragment : Fragment() {
                         RecviewUser.visibility = View.GONE
                         ErrortextTv.text = errorResponse.toString()
                         TryagainHome.setOnClickListener {
-                            utilViewModel.searchQuery.observe(viewLifecycleOwner){  text ->
-                                mainViewModel.getListUser(text)
-                                binding.CurrsearchTv.text = "search result for $text"
-                            }
+                             mainViewModel.getListUser(saveText)
+                            "search result for $saveText".also { binding.CurrsearchTv.text = it }
+
                             ErrortextTv.visibility = View.GONE
                             TryagainHome.visibility = View.GONE
                             tvEmptyview.visibility = View.GONE
@@ -165,10 +163,10 @@ class HomeFragment : Fragment() {
         binding.Homeprogress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
     }
 
-    private fun setEmpty(){
+    private fun setDefaultList(){
         utilViewModel.isEmpty.observe(viewLifecycleOwner){
             if (it == 0){
-                setSearch(default_user) // Top User when search empty
+                setSearchResult(default_user) // Top User when search empty
                 binding.tvEmptyview.visibility = View.GONE
             }else if (it != 0){
                 binding.tvEmptyview.visibility = View.GONE

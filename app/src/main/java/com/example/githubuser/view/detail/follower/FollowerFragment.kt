@@ -11,31 +11,42 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.model.githubresponse.follower.FollowerResponseItem
-import com.example.githubuser.viewmodel.MainViewModel
+import com.example.githubuser.viewmodel.FollowerViewModel
+import com.example.githubuser.viewmodel.UtilViewModel
 
 
 class FollowerFragment: Fragment() {
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter : FollowerRecviewAdapter
-    private val viewModel by viewModels<MainViewModel>()
+    private val followerViewModel by viewModels<FollowerViewModel>()
+    private val utilViewModel by viewModels<UtilViewModel>()
 
+    private var userName = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFollowerBinding.inflate(layoutInflater)
-        viewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-        val name = arguments?.getString("value","")
 
-        viewModel.getListFollowers(name!!)
-        setFollowersList()
+        userName = arguments?.getString("value","").toString()
+
+
+        followerViewModel.apply {
+            isLoading.observe(viewLifecycleOwner){ isLoading(it) }
+            getListFollowers(userName)
+        }
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setFollowersList()
+    }
+
     private fun setFollowersList(){
-        viewModel.apply {
+        followerViewModel.apply {
             followerResponse.observe(viewLifecycleOwner){ responData ->
                 showFollowerList(responData)
             }
@@ -47,6 +58,8 @@ class FollowerFragment: Fragment() {
         val recycView = binding.followerrecview
         recycView.adapter = adapter
         recycView.layoutManager = LinearLayoutManager(requireContext())
+        utilViewModel.setEmptys(adapter.itemCount)
+        emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recycView.layoutManager = GridLayoutManager(requireContext(),2)
@@ -65,6 +78,16 @@ class FollowerFragment: Fragment() {
         }
     }
 
+    private fun emptyChecker(){
+        binding.apply {
+            utilViewModel.isEmpty.observe(viewLifecycleOwner){ value ->
+                if (value == 0){
+                    EmptyStatment.visibility = View.VISIBLE
+                    EmptyStatment.text = "$userName doesn't have any followers yet"
+                }
+            }
+        }
+    }
 
 
     override fun onDestroy() {

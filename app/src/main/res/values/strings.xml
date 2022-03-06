@@ -128,4 +128,12 @@
     <string name="tabdua">Followers</string>
     <string name="tabtiga">Following</string>
     <string name="usernamecv">Username</string>
+    <string name="website">Website</string>
+    <string name="location">Location</string>
+    <string name="company">Company</string>
+    <string name="bio_user">Bio User</string>
+    <string name="defaultcount">0</string>
+    <string name="follower">Follower</string>
+    <string name="surname">surname</string>
+    <string name="Topuser">search result for Top User</string>
 </resources>
