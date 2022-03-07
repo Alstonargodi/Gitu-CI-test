@@ -16,7 +16,6 @@ interface ApiService {
     ): Call<ListResponse>
 
     @GET("users/{nama}")
-    @Headers("Authorization: token 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")
     fun getUserDetail(
         @Path("nama") nama : String,
     ): Call<DetailResponse>

@@ -11,6 +11,7 @@ import com.example.githubuser.model.githubresponse.following.FollowingResponse
 import com.example.githubuser.model.githubresponse.following.FollowingResponseItem
 import com.example.githubuser.model.githubresponse.repository.RepoResponse
 import com.example.githubuser.model.githubresponse.repository.RepoResponseItem
+import com.example.githubuser.model.service.Key
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback

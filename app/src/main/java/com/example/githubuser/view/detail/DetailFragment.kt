@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +44,13 @@ class DetailFragment : Fragment() {
     ): View {
         _binding = FragmentDetailBinding.inflate(layoutInflater)
 
-        utilViewModel.textQuery.observe(viewLifecycleOwner){ saveText = it }
+
+        utilViewModel.apply {
+            textQuery.observe(viewLifecycleOwner){
+                saveText = it
+            }
+        }
+
 
         return binding.root
     }
@@ -53,12 +60,13 @@ class DetailFragment : Fragment() {
         binding.btnBackhome.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToMainActivity())
         }
+        showErrorText()
         setDetailUser()
+
     }
 
     private fun setDetailUser(){
         val userName = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
-        utilViewModel.saveText(userName)
         detailViewModel.apply {
             getUserDetail(userName)
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
@@ -99,7 +107,10 @@ class DetailFragment : Fragment() {
                     }
                 }
             }
-            showErrorText()
+            utilViewModel.apply {
+                saveText(userName)
+                setEmptys(1)
+            }
         }
 
     }
@@ -118,6 +129,7 @@ class DetailFragment : Fragment() {
     private fun showErrorText(){
         binding.apply {
             detailViewModel.errorResponse.observe(viewLifecycleOwner){ response->
+                Log.d("error response",response)
                 if (response.isNotEmpty()){
                     Snackbar.make(root, response.toString(), Snackbar.LENGTH_SHORT)
                         .setTextColor(Color.WHITE)
@@ -140,6 +152,8 @@ class DetailFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        utilViewModel.setEmptys(0)
+
     }
 
     }
