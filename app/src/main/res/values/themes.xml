@@ -41,4 +41,6 @@
     <style name="Huruf">
         <item name="title">@color/white</item>
     </style>
+
+    <style name="TitleBarTextAppearance" />
 </resources>

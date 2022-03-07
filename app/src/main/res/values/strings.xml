@@ -36,7 +36,8 @@
     <string name="people">people</string>
     <string name="authorphoto">authorphoto</string>
     <string name="favorite">Favorite</string>
-    <string name="warning">Coming soon \n after learning Room DB</string>
+    <string name="warning">Coming soon
+ after learning Room DB</string>
     <string name="userlist">userlist</string>
     <string name="find_use">Find user</string>
     <string name="error_response">Error response</string>

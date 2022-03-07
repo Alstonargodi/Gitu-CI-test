@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.githubuser.model.config.ApiConfig
 import com.example.githubuser.model.githubresponse.*
+import com.example.githubuser.view.utils.EventText.errorTitle
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,7 +15,6 @@ import retrofit2.Response
 
 class MainViewModel: ViewModel() {
     companion object{
-        const val Message = "Failed Fetching :( \n" + " \n"
         const val TAG = "MainViewModel"
     }
 
@@ -42,14 +42,14 @@ class MainViewModel: ViewModel() {
                         _errorResponse.value = ""
                     }else{
                         Log.d(TAG, response.message().toString())
-                        _errorResponse.value = Message + response.message()
+                        _errorResponse.value = errorTitle + response.message()
                         _isLoading.value = false
                     }
                 }
                 override fun onFailure(call: Call<ListResponse>, t: Throwable) {
                     _isLoading.value = false
                     Log.e(TAG, "onFailure: ${t.message.toString()}")
-                    _errorResponse.value = Message + t.message.toString()
+                    _errorResponse.value = errorTitle + t.message.toString()
                 }
             })
         }

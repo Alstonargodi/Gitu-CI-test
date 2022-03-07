@@ -1,10 +1,8 @@
 package com.example.githubuser.view.detail
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,6 @@ import com.example.githubuser.databinding.FragmentDetailBinding
 import com.example.githubuser.view.detail.tab.SectionPagerAdapter
 import com.example.githubuser.viewmodel.DetailViewModel
 import com.example.githubuser.viewmodel.UtilViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -43,7 +40,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(layoutInflater)
-
+        saveText = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
 
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){
@@ -51,27 +48,21 @@ class DetailFragment : Fragment() {
             }
         }
 
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnBackhome.setOnClickListener {
-            findNavController()
-                .navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
-
-
+            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
         }
-        showErrorText()
         setDetailUser()
-
+        userChecker()
     }
 
     private fun setDetailUser(){
-        val userName = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
         detailViewModel.apply {
-            getUserDetail(userName)
+            getUserDetail(saveText)
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
             detailResponse.observe(viewLifecycleOwner){ responData ->
                 binding.apply {
@@ -86,13 +77,10 @@ class DetailFragment : Fragment() {
                         RepositoryTvitem.text = publicRepos.toString()
                         webTvitem.text = blog
 
-
-
                         if(bio.isNullOrEmpty()) BioTvitem.visibility = View.GONE
                         if(company.isNullOrEmpty()) ComapnyTvitem.visibility = View.GONE
                         if(location.isNullOrEmpty()) locTvitem.visibility = View.GONE
                         if(blog.isNullOrEmpty()) webTvitem.visibility = View.GONE
-
 
                         webTvitem.setOnClickListener {
                             val intent = Intent(Intent.ACTION_VIEW)
@@ -109,13 +97,12 @@ class DetailFragment : Fragment() {
                         setViewPager(login!!)
                     }
                 }
-            }
-            utilViewModel.apply {
-                saveText(userName)
-                setEmptys(1)
+                utilViewModel.apply {
+                    saveText(saveText)
+                    setEmptys(1)
+                }
             }
         }
-
     }
 
     private fun setViewPager(name : String){
@@ -128,16 +115,19 @@ class DetailFragment : Fragment() {
         }.attach()
     }
 
+    private fun userChecker(){
+        utilViewModel.isEmpty.observe(viewLifecycleOwner) { isUserExist ->
+            if (isUserExist == 0) {
+                setErrorView()
+            }
+        }
+    }
 
-    private fun showErrorText(){
+
+    private fun setErrorView(){
         binding.apply {
             detailViewModel.errorResponse.observe(viewLifecycleOwner){ response->
-                Log.d("error response",response)
                 if (response.isNotEmpty()){
-                    Snackbar.make(root, response.toString(), Snackbar.LENGTH_SHORT)
-                        .setTextColor(Color.WHITE)
-                        .setBackgroundTint(Color.rgb(255, 100, 100))
-                        .show()
                     ErrorresponseDetailTv.visibility = View.VISIBLE
                     ("$response\n \n Try Again").also { ErrorresponseDetailTv.text = it }
                     ErrorresponseDetailTv.setOnClickListener {
@@ -148,6 +138,7 @@ class DetailFragment : Fragment() {
             }
         }
     }
+
     private fun isLoading(isLoading:Boolean){
         binding.DetailProgress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
     }
@@ -158,4 +149,4 @@ class DetailFragment : Fragment() {
 
     }
 
-    }
+}

@@ -136,10 +136,6 @@ class HomeFragment : Fragment() {
         binding.apply {
             mainViewModel.errorResponse.observe(viewLifecycleOwner){ errorResponse ->
                 if (errorResponse.isNotEmpty()){
-                    Snackbar.make(root, errorResponse.toString(), Snackbar.LENGTH_SHORT)
-                            .setTextColor(Color.WHITE)
-                            .setBackgroundTint(Color.rgb(255, 100, 100))
-                            .show()
                         ErrortextTv.visibility = View.VISIBLE
                         TryagainHome.visibility = View.VISIBLE
                         tvEmptyview.visibility = View.GONE
@@ -158,6 +154,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
 
     private fun isLoading(isLoading:Boolean){
         binding.Homeprogress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE

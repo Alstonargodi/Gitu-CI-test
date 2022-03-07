@@ -74,7 +74,7 @@ class RepositoryFragment: Fragment() {
             utilViewModel.isEmpty.observe(viewLifecycleOwner){ value ->
                 if (value == 0){
                     emptyStatmentRepo.visibility = View.VISIBLE
-                    emptyStatmentRepo.text = "$userName never make a repo"
+                    "$userName never make a repo".also { emptyStatmentRepo.text = it }
                 }
             }
         }

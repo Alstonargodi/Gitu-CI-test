@@ -2,6 +2,7 @@ package com.example.githubuser.view.detail.following
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,6 @@ class FollowingFragment : Fragment() {
     private lateinit var adapter : FollowingReviewAdapter
     private val followingViewModel by viewModels<FollowingViewModel>()
     private val utilViewModel by viewModels<UtilViewModel>()
-
 
     private var userName = ""
     override fun onCreateView(
@@ -43,6 +43,7 @@ class FollowingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFollowingList()
+        errorChecker()
     }
 
     private fun setFollowingList(){
@@ -83,7 +84,23 @@ class FollowingFragment : Fragment() {
             utilViewModel.isEmpty.observe(viewLifecycleOwner){ value ->
                 if (value == 0){
                     emptyStatmentFollowing.visibility = View.VISIBLE
-                    emptyStatmentFollowing.text = "$userName never follow someone"
+                    "$userName never follow someone".also { emptyStatmentFollowing.text = it }
+                }
+            }
+        }
+    }
+
+    private fun errorChecker(){
+        binding.apply {
+            followingViewModel.errorResponse.observe(viewLifecycleOwner){ response ->
+                Log.d("error response",response)
+                if (response.isNotEmpty()){
+                    emptyStatmentFollowing.visibility = View.VISIBLE
+                    ("$response\n \n Try Again").also { emptyStatmentFollowing.text = it }
+                    emptyStatmentFollowing.setOnClickListener {
+                        followingViewModel.getListFollowing(userName)
+                        emptyStatmentFollowing.visibility = View.GONE
+                    }
                 }
             }
         }

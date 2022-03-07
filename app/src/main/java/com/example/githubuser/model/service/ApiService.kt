@@ -15,9 +15,9 @@ interface ApiService {
         @Query("q") id : String,
     ): Call<ListResponse>
 
-    @GET("users/{nama}")
+    @GET("users/{username}")
     fun getUserDetail(
-        @Path("nama") nama : String,
+        @Path("username") username : String,
     ): Call<DetailResponse>
 
     @GET("users/{username}/followers")
