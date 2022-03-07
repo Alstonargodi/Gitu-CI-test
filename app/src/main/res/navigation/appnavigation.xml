@@ -19,7 +19,8 @@
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment"
             app:enterAnim="@anim/slidein_right"
-            app:exitAnim="@anim/slidedown_y" />
+            app:exitAnim="@anim/slidedown_y"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_authorFragment"
             app:destination="@id/authorFragment" />
@@ -42,8 +43,10 @@
             android:id="@+id/action_detailFragment_to_repositoryFragment"
             app:destination="@id/repositoryFragment" />
         <action
-            android:id="@+id/action_detailFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_detailFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/followerFragment"
@@ -68,7 +71,7 @@
         tools:layout="@layout/fragment_repo" />
     <activity
         android:id="@+id/splashscreen"
-        android:name="com.example.githubuser.view.Splashscreen"
+        android:name="com.example.githubuser.view.SplashScreen"
         android:label="activity_splashscreen"
         tools:layout="@layout/activity_splashscreen" />
     <fragment

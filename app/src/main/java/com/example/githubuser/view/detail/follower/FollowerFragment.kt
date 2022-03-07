@@ -1,7 +1,9 @@
 package com.example.githubuser.view.detail.follower
 
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.model.githubresponse.follower.FollowerResponseItem
 import com.example.githubuser.viewmodel.FollowerViewModel
 import com.example.githubuser.viewmodel.UtilViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class FollowerFragment: Fragment() {
@@ -43,6 +46,7 @@ class FollowerFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFollowersList()
+        emptyChecker()
     }
 
     private fun setFollowersList(){
@@ -83,7 +87,22 @@ class FollowerFragment: Fragment() {
             utilViewModel.isEmpty.observe(viewLifecycleOwner){ value ->
                 if (value == 0){
                     EmptyStatment.visibility = View.VISIBLE
-                    EmptyStatment.text = "$userName doesn't have any followers yet"
+                    "$userName doesn't have any followers yet".also { EmptyStatment.text = it }
+                }
+            }
+            followerViewModel.errorResponse.observe(viewLifecycleOwner){ response ->
+                Log.d("error response",response)
+                if (response.isNotEmpty()){
+                    Snackbar.make(root, response.toString(), Snackbar.LENGTH_SHORT)
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundTint(Color.rgb(255, 100, 100))
+                        .show()
+                    EmptyStatment.visibility = View.VISIBLE
+                    ("$response\n \n Try Again").also { EmptyStatment.text = it }
+                    EmptyStatment.setOnClickListener {
+                        followerViewModel.getListFollowers(userName)
+                        EmptyStatment.visibility = View.GONE
+                    }
                 }
             }
         }

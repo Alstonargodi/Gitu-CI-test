@@ -58,7 +58,10 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnBackhome.setOnClickListener {
-            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToMainActivity())
+            findNavController()
+                .navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
+
+
         }
         showErrorText()
         setDetailUser()
@@ -152,7 +155,6 @@ class DetailFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        utilViewModel.setEmptys(0)
 
     }
 

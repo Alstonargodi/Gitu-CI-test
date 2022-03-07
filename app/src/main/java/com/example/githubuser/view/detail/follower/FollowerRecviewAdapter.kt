@@ -1,12 +1,15 @@
 package com.example.githubuser.view.detail.follower
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.githubuser.R
 import com.example.githubuser.databinding.FollowerItemcvBinding
 import com.example.githubuser.model.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.view.detail.DetailFragment
 
 class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>): RecyclerView.Adapter<FollowerRecviewAdapter.ViewHolder>() {
 
@@ -29,8 +32,18 @@ class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>): 
                 .into(ImgFollower)
 
             ImgFollower.setOnClickListener {
-                holder.itemView.findNavController().navigate(FollowerFragmentDirections.actionFollowerFragmentToDetailFragment(item.login))
+                val fmanager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
+                val testfragment = DetailFragment()
+                val mbundle = Bundle()
+                mbundle.putString("userName",item.login)
 
+                testfragment.arguments = mbundle
+
+                fmanager
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainerView,testfragment,DetailFragment::class.java.simpleName)
+                    .addToBackStack(null)
+                    .commit()
             }
         }
 

@@ -21,12 +21,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:contentDescription="Avatar"
+            android:contentDescription="@string/avatar_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            tools:srcCompat="@drawable/user1" />
+            tools:srcCompat="@drawable/octocat" />
 
         <TextView
             android:id="@+id/Nama_tvcard"

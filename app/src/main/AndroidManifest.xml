@@ -15,7 +15,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.Splashscreen"
+            android:name=".view.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

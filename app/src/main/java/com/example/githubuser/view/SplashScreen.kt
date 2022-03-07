@@ -1,5 +1,7 @@
 package com.example.githubuser.view
 
+
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +11,9 @@ import androidx.core.content.ContextCompat
 import com.example.githubuser.MainActivity
 import com.example.githubuser.R
 
-class Splashscreen : AppCompatActivity() {
+
+@SuppressLint("CustomSplashScreen")
+class SplashScreen : AppCompatActivity() {
 
     companion object{
         const val TIME = 3000L

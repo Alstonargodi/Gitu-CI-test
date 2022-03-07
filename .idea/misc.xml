@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/drawable/ic_back.xml" value="0.2925" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/drawable/ic_wave.xml" value="0.1" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/font/font.xml" value="0.19907407407407407" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/activity_detail.xml" value="0.33" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/activity_main.xml" value="0.33" />
@@ -18,7 +19,7 @@
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/fragment_repo.xml" value="0.33" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/repository_itemcv.xml" value="0.67" />
-        <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/userhom_cv.xml" value="0.67" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/layout/userhom_cv.xml" value="0.375886524822695" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/menu/barmenu.xml" value="0.31197916666666664" />
       </map>
     </option>

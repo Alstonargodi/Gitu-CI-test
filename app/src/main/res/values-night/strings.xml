@@ -16,4 +16,17 @@
     <string name="follower">Follower</string>
     <string name="surname">surname</string>
     <string name="Topuser">search result for Top User</string>
+    <string name="author">author</string>
+    <string name="people">people</string>
+    <string name="authorphoto">authorphoto</string>
+    <string name="favorite">Favorite</string>
+    <string name="warning">Coming soon \n after learning Room DB</string>
+    <string name="find_use">Find user</string>
+    <string name="error_response">Error response</string>
+    <string name="tryagain">Tryagain</string>
+    <string name="no_user_appears">No User appears</string>
+    <string name="titl">Title</string>
+    <string name="github">Github</string>
+    <string name="user">user</string>
+    <string name="avatar_icon">Avatar</string>
 </resources>

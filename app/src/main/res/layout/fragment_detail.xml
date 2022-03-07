@@ -331,7 +331,6 @@
                 android:layout_height="123dp"
                 android:layout_marginTop="32dp"
                 android:gravity="center|top"
-                android:text="ErrorResponse \n try again"
                 android:textColor="#FFFFFF"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
