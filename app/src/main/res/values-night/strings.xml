@@ -29,4 +29,6 @@
     <string name="github">Github</string>
     <string name="user">user</string>
     <string name="avatar_icon">Avatar</string>
+    <string name="bactohome" />
+    <string name="octocat">octocat</string>
 </resources>

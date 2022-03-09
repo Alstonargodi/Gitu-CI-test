@@ -19,7 +19,6 @@ class SplashScreen : AppCompatActivity() {
         const val TIME = 3000L
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splashscreen)

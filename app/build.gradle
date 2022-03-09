@@ -17,7 +17,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        buildConfigField "String", "api_key", '"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"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -55,8 +55,7 @@ dependencies {
     //recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-    //glide
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
+
 
     //network
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -64,10 +63,10 @@ dependencies {
 
     
     //logging
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
     //image
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
 
     //viewmodel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"

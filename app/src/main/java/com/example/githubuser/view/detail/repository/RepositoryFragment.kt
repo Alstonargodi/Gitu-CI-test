@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
-import com.example.githubuser.model.githubresponse.repository.RepoResponseItem
+import com.example.githubuser.remote.githubresponse.repository.RepoResponseItem
 import com.example.githubuser.viewmodel.RepositorViewModel
 import com.example.githubuser.viewmodel.UtilViewModel
 
@@ -48,7 +48,7 @@ class RepositoryFragment: Fragment() {
         val recView = binding.Reporecview
         recView.adapter = adapter
         recView.layoutManager = LinearLayoutManager(requireContext())
-        utilViewModel.setEmptys(adapter.itemCount)
+        utilViewModel.setEmptys(false)
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -71,8 +71,8 @@ class RepositoryFragment: Fragment() {
 
     private fun emptyChecker(){
         binding.apply {
-            utilViewModel.isEmpty.observe(viewLifecycleOwner){ value ->
-                if (value == 0){
+            utilViewModel.isEmpty.observe(viewLifecycleOwner){ isDataNotExist ->
+                if (isDataNotExist == true){
                     emptyStatmentRepo.visibility = View.VISIBLE
                     "$userName never make a repo".also { emptyStatmentRepo.text = it }
                 }

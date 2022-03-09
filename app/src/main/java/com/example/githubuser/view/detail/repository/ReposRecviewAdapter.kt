@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.databinding.RepositoryItemcvBinding
-import com.example.githubuser.model.githubresponse.repository.RepoResponseItem
+import com.example.githubuser.remote.githubresponse.repository.RepoResponseItem
 
 class ReposRecviewAdapter(private var dataList : List<RepoResponseItem>):  RecyclerView.Adapter<ReposRecviewAdapter.ViewHolder>() {
 

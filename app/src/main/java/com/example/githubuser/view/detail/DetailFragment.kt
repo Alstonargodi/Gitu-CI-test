@@ -19,17 +19,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class DetailFragment : Fragment() {
-    companion object{
-        var tab_titles = intArrayOf(
-            R.string.tabsatu,
-            R.string.tabdua,
-            R.string.tabtiga
-        )
-    }
+
 
     private lateinit var pagerAdapter : SectionPagerAdapter
-    private var _binding: FragmentDetailBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
     private val utilViewModel by viewModels<UtilViewModel>()
 
@@ -39,7 +32,7 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailBinding.inflate(layoutInflater)
+        binding = FragmentDetailBinding.inflate(layoutInflater)
         saveText = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
 
         utilViewModel.apply {
@@ -56,6 +49,14 @@ class DetailFragment : Fragment() {
         binding.btnBackhome.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
         }
+       binding.btnShare.setOnClickListener {
+           val share= Intent()
+           share.action = Intent.ACTION_SEND
+           share.type = "text/plain"
+           share.putExtra(Intent.EXTRA_TEXT,"Visit $saveText on github")
+
+           startActivity(Intent.createChooser(share,"Share to"))
+       }
         setDetailUser()
         userChecker()
     }
@@ -99,7 +100,7 @@ class DetailFragment : Fragment() {
                 }
                 utilViewModel.apply {
                     saveText(saveText)
-                    setEmptys(1)
+                    setEmptys(false)
                 }
             }
         }
@@ -116,8 +117,8 @@ class DetailFragment : Fragment() {
     }
 
     private fun userChecker(){
-        utilViewModel.isEmpty.observe(viewLifecycleOwner) { isUserExist ->
-            if (isUserExist == 0) {
+        utilViewModel.isEmpty.observe(viewLifecycleOwner) { isUserNotExist ->
+            if (isUserNotExist == true) {
                 setErrorView()
             }
         }
@@ -143,10 +144,14 @@ class DetailFragment : Fragment() {
         binding.DetailProgress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
 
+    companion object{
+        var tab_titles = intArrayOf(
+            R.string.tabsatu,
+            R.string.tabdua,
+            R.string.tabtiga
+        )
     }
+
 
 }

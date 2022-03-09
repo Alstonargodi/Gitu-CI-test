@@ -9,9 +9,7 @@ import com.example.githubuser.view.detail.following.FollowingFragment
 import com.example.githubuser.view.detail.repository.RepositoryFragment
 
 class SectionPagerAdapter(activity : FragmentActivity, private var value : String, private var tab : Int): FragmentStateAdapter(activity) {
-    override fun getItemCount(): Int {
-        return tab
-    }
+    override fun getItemCount() = tab
 
     override fun createFragment(position: Int): Fragment {
         return when(position){

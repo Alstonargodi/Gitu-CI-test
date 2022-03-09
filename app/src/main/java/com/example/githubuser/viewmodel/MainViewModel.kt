@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.githubuser.model.config.ApiConfig
-import com.example.githubuser.model.githubresponse.*
+import com.example.githubuser.remote.config.ApiConfig
+import com.example.githubuser.remote.githubresponse.*
 import com.example.githubuser.view.utils.EventText.errorTitle
 import kotlinx.coroutines.launch
 import retrofit2.Call

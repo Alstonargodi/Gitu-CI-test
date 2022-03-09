@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowingBinding
-import com.example.githubuser.model.githubresponse.following.FollowingResponseItem
+import com.example.githubuser.remote.githubresponse.following.FollowingResponseItem
 import com.example.githubuser.viewmodel.FollowingViewModel
 import com.example.githubuser.viewmodel.UtilViewModel
 
@@ -32,9 +32,11 @@ class FollowingFragment : Fragment() {
         userName = arguments?.getString("value","").toString()
 
 
-        followingViewModel.apply {
-            isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-            getListFollowing(userName)
+
+        utilViewModel.apply {
+            textQuery.observe(viewLifecycleOwner){
+                userName = it
+            }
         }
 
         return binding.root
@@ -43,13 +45,26 @@ class FollowingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFollowingList()
-        errorChecker()
+        userChecker()
     }
 
     private fun setFollowingList(){
         followingViewModel.apply {
+            getListFollowing(userName)
             followingResponse.observe(viewLifecycleOwner){ responData->
+                isLoading.observe(viewLifecycleOwner){ isLoading(it) }
                 showFollowingList(responData)
+                utilViewModel.apply {
+                    saveText(userName)
+                }
+            }
+        }
+    }
+
+    private fun userChecker(){
+        utilViewModel.isEmpty.observe(viewLifecycleOwner) { isDataNotExist ->
+            if (isDataNotExist == true) {
+                setErrorView()
             }
         }
     }
@@ -59,7 +74,9 @@ class FollowingFragment : Fragment() {
         val recview = binding.followingRecview
         recview.adapter = adapter
         recview.layoutManager = LinearLayoutManager(requireContext())
-        utilViewModel.setEmptys(adapter.itemCount)
+        utilViewModel.apply {
+            if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false)
+        }
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -81,8 +98,8 @@ class FollowingFragment : Fragment() {
 
     private fun emptyChecker(){
         binding.apply {
-            utilViewModel.isEmpty.observe(viewLifecycleOwner){ value ->
-                if (value == 0){
+            utilViewModel.isEmpty.observe(viewLifecycleOwner){ isUserNotExist ->
+                if (isUserNotExist == true){
                     emptyStatmentFollowing.visibility = View.VISIBLE
                     "$userName never follow someone".also { emptyStatmentFollowing.text = it }
                 }
@@ -90,7 +107,7 @@ class FollowingFragment : Fragment() {
         }
     }
 
-    private fun errorChecker(){
+    private fun setErrorView(){
         binding.apply {
             followingViewModel.errorResponse.observe(viewLifecycleOwner){ response ->
                 Log.d("error response",response)

@@ -2,7 +2,6 @@ package com.example.githubuser.view.detail.follower
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
-import com.example.githubuser.model.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.remote.githubresponse.follower.FollowerResponseItem
 import com.example.githubuser.viewmodel.FollowerViewModel
 import com.example.githubuser.viewmodel.UtilViewModel
 
@@ -60,8 +59,8 @@ class FollowerFragment: Fragment() {
     }
 
     private fun userChecker(){
-        utilViewModel.isEmpty.observe(viewLifecycleOwner) { isUserExist ->
-            if (isUserExist == 0) {
+        utilViewModel.isEmpty.observe(viewLifecycleOwner) { isDataNotExist ->
+            if (isDataNotExist == true) {
                 setErrorView()
             }
         }
@@ -72,7 +71,9 @@ class FollowerFragment: Fragment() {
         val recycView = binding.followerrecview
         recycView.adapter = adapter
         recycView.layoutManager = LinearLayoutManager(requireContext())
-        utilViewModel.setEmptys(adapter.itemCount)
+        utilViewModel.apply {
+            if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false)
+        }
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -95,8 +96,8 @@ class FollowerFragment: Fragment() {
 
     private fun emptyChecker(){
         binding.apply {
-            utilViewModel.isEmpty.observe(viewLifecycleOwner){ value ->
-                if (value == 0){
+            utilViewModel.isEmpty.observe(viewLifecycleOwner){ isDataNotExist ->
+                if (isDataNotExist == true){
                     EmptyStatment.visibility = View.VISIBLE
                     "$userName doesn't have any followers yet".also { EmptyStatment.text = it }
                 }
