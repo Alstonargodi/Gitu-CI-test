@@ -10,15 +10,7 @@ import com.example.githubuser.remote.githubresponse.follower.FollowerResponseIte
 import com.example.githubuser.view.detail.DetailFragmentDirections
 
 class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>): RecyclerView.Adapter<FollowerRecviewAdapter.ViewHolder>() {
-    private lateinit var onItemCallback : OnItemClickCallback
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemCallback = onItemClickCallback
-    }
-
-    interface OnItemClickCallback {
-        fun onItemClicked(data : FollowerResponseItem)
-    }
 
     class ViewHolder(var binding : FollowerItemcvBinding): RecyclerView.ViewHolder(binding.root)
 

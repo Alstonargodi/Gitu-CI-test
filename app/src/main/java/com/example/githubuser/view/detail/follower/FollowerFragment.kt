@@ -7,17 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.remote.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.view.detail.DetailFragmentDirections
 import com.example.githubuser.viewmodel.FollowerViewModel
 import com.example.githubuser.viewmodel.UtilViewModel
 
 
 class FollowerFragment: Fragment() {
-    private var _binding: FragmentFollowerBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentFollowerBinding
+
     private lateinit var adapter : FollowerRecviewAdapter
     private val followerViewModel by viewModels<FollowerViewModel>()
     private val utilViewModel by viewModels<UtilViewModel>()
@@ -27,7 +30,7 @@ class FollowerFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFollowerBinding.inflate(layoutInflater)
+        binding = FragmentFollowerBinding.inflate(layoutInflater)
         userName = arguments?.getString("value","").toString()
 
         utilViewModel.apply {
@@ -81,6 +84,8 @@ class FollowerFragment: Fragment() {
         }else{
             recycView.layoutManager = LinearLayoutManager(requireContext())
         }
+
+
     }
 
     private fun isLoading(isLoading:Boolean){
@@ -121,8 +126,5 @@ class FollowerFragment: Fragment() {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+
 }

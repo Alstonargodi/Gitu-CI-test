@@ -37,11 +37,9 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         setHasOptionsMenu(true)
 
-
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.maincolor)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)
-
 
         mainViewModel.apply {
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
@@ -111,7 +109,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     private fun showUserList(list: List<ItemsItem>){
         adapter = UserListRecAdapter(list)
         val recView = binding.RecviewUser
@@ -123,9 +120,7 @@ class HomeFragment : Fragment() {
         }else{
             recView.layoutManager = LinearLayoutManager(requireContext())
         }
-
     }
-
 
     private fun showErrorText(){
         binding.apply {
