@@ -7,15 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.remote.githubresponse.follower.FollowerResponseItem
-import com.example.githubuser.view.detail.DetailFragmentDirections
 import com.example.githubuser.viewmodel.FollowerViewModel
-import com.example.githubuser.viewmodel.UtilViewModel
+import com.example.githubuser.viewmodel.util.UtilViewModel
 
 
 class FollowerFragment: Fragment() {
@@ -26,6 +23,7 @@ class FollowerFragment: Fragment() {
     private val utilViewModel by viewModels<UtilViewModel>()
 
     private var userName = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

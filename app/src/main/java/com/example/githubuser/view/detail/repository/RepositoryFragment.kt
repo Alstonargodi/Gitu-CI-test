@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
 import com.example.githubuser.remote.githubresponse.repository.RepoResponseItem
 import com.example.githubuser.viewmodel.RepositorViewModel
-import com.example.githubuser.viewmodel.UtilViewModel
+import com.example.githubuser.viewmodel.util.UtilViewModel
 
 
 class RepositoryFragment: Fragment() {

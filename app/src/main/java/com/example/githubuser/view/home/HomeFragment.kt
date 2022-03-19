@@ -19,7 +19,7 @@ import com.example.githubuser.databinding.FragmentHomeBinding
 import com.example.githubuser.remote.githubresponse.ItemsItem
 import com.example.githubuser.view.home.adapter.UserListRecAdapter
 import com.example.githubuser.viewmodel.MainViewModel
-import com.example.githubuser.viewmodel.UtilViewModel
+import com.example.githubuser.viewmodel.util.UtilViewModel
 
 
 class HomeFragment : Fragment() {

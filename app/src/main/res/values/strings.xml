@@ -23,6 +23,10 @@
     <string name="tabsatu">Repository</string>
     <string name="tabdua">Followers</string>
     <string name="tabtiga">Following</string>
+
+    <string name="tabfavsatu">Repository</string>
+    <string name="tabfavdua">People</string>
+
     <string name="usernamecv">Username</string>
     <string name="website">Website</string>
     <string name="location">Location</string>
@@ -36,8 +40,7 @@
     <string name="people">people</string>
     <string name="authorphoto">authorphoto</string>
     <string name="favorite">Favorite</string>
-    <string name="warning">Coming soon
- after learning Room DB</string>
+    <string name="warning">Coming soon after learning Room DB</string>
     <string name="userlist">userlist</string>
     <string name="find_use">Find user</string>
     <string name="error_response">Error response</string>

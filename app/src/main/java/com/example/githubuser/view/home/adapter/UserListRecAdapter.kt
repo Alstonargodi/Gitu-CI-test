@@ -36,9 +36,6 @@ class UserListRecAdapter(private var dataList : List<ItemsItem>): RecyclerView.A
         }
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
-
+    override fun getItemCount(): Int = dataList.size
 
 }

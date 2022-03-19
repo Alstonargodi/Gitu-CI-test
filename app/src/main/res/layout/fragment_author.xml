@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/maincolor"
     tools:context=".view.author.AuthorFragment">
 
 
@@ -12,7 +11,6 @@
         android:id="@+id/Detailtoolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/maincolor"
         android:contentInsetStart="0dp"
         android:contentInsetLeft="0dp"
         android:contentInsetEnd="0dp"
@@ -45,7 +43,6 @@
                 android:contentDescription="@string/Topuser"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:theme="@style/Theme.Githubuser"
-                app:iconTint="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +56,6 @@
                 android:fontFamily="@font/popmed"
                 android:gravity="center|start"
                 android:text="@string/author"
-                android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +72,6 @@
         android:layout_width="0dp"
         android:layout_height="39dp"
         android:layout_marginTop="4dp"
-        android:background="@color/maincolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,10 +95,10 @@
         android:layout_height="94dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
+        android:contentDescription="@string/authorphoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Detailtoolbar"
-        tools:src="@tools:sample/avatars"
-        android:contentDescription="@string/authorphoto" />
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/Username_author_tv"
@@ -114,7 +109,6 @@
         android:layout_marginEnd="16sp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/username"
-        android:textColor="#ECEAEA"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -153,19 +147,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_author" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="301dp"
-        android:layout_height="95dp"
-        android:gravity="center"
-        android:textColor="#F2EFEF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Tablayout_author"
-        app:layout_constraintVertical_bias="0.451" />
-
     <ProgressBar
         android:id="@+id/progressBar_author"
         style="?android:attr/progressBarStyle"
@@ -177,6 +158,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.196" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/Author_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Tablayout_author" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,34 +6,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
+import com.example.githubuser.local.entity.FavoritePeople
 import com.example.githubuser.view.detail.tab.SectionPagerAdapter
 import com.example.githubuser.viewmodel.DetailViewModel
-import com.example.githubuser.viewmodel.UtilViewModel
+import com.example.githubuser.viewmodel.FavoriteViewModel
+import com.example.githubuser.viewmodel.util.UtilViewModel
+import com.example.githubuser.viewmodel.util.obtainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class DetailFragment : Fragment() {
-
+    private val detailViewModel by viewModels<DetailViewModel>()
+    private val utilViewModel by viewModels<UtilViewModel>()
+    private lateinit var favoriteViewModel : FavoriteViewModel
 
     private lateinit var pagerAdapter : SectionPagerAdapter
     private lateinit var binding: FragmentDetailBinding
-    private val detailViewModel by viewModels<DetailViewModel>()
-    private val utilViewModel by viewModels<UtilViewModel>()
-
-
     private var saveText = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailBinding.inflate(layoutInflater)
         saveText = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
+
+        favoriteViewModel = obtainViewModel(requireActivity())
 
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){
@@ -46,17 +51,26 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnBackhome.setOnClickListener {
-            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
-        }
-       binding.btnShare.setOnClickListener {
-           val share= Intent()
-           share.action = Intent.ACTION_SEND
-           share.type = "text/plain"
-           share.putExtra(Intent.EXTRA_TEXT,"Visit $saveText on github")
 
-           startActivity(Intent.createChooser(share,"Share to"))
-       }
+        binding.apply {
+            btnBackhome.setOnClickListener {
+                findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
+            }
+
+            btnShare.setOnClickListener {
+                val share= Intent()
+                share.action = Intent.ACTION_SEND
+                share.type = "text/plain"
+                share.putExtra(Intent.EXTRA_TEXT,"Visit $saveText on github")
+
+                startActivity(Intent.createChooser(share,"Share to"))
+            }
+
+            btnFavorite.setOnClickListener {
+                setAsFavorite()
+            }
+        }
+
         setDetailUser()
         userChecker()
     }
@@ -106,12 +120,35 @@ class DetailFragment : Fragment() {
         }
     }
 
+    private fun setAsFavorite(){
+        detailViewModel.detailResponse.observe(viewLifecycleOwner){ respon->
+            respon?.apply {
+                login?.let {
+                    val favTemp = FavoritePeople(
+                        login,
+                        name,
+                        avatarUrl,
+                        publicRepos,
+                        followers,
+                        following,
+                        bio,
+                        company,
+                        location,
+                        blog,
+                        true
+                    )
+                    favoriteViewModel.inserFavoritePeople(favTemp)
+                    Toast.makeText(context,"favoritbaru",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
     private fun setViewPager(name : String){
         pagerAdapter = SectionPagerAdapter(requireActivity(),name,tab_titles.size)
-        val viewpager = binding.Followviewpager
+        val viewPager = binding.Followviewpager
         val tabs = binding.tabLayout
-        viewpager.adapter = pagerAdapter
-        TabLayoutMediator(tabs,viewpager){ tab, position ->
+        viewPager.adapter = pagerAdapter
+        TabLayoutMediator(tabs,viewPager){ tab, position ->
             tab.text = getString(tab_titles[position])
         }.attach()
     }
