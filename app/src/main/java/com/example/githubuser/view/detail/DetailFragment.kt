@@ -21,7 +21,6 @@ import com.example.githubuser.viewmodel.util.UtilViewModel
 import com.example.githubuser.viewmodel.util.obtainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
-
 class DetailFragment : Fragment() {
     private val detailViewModel by viewModels<DetailViewModel>()
     private val utilViewModel by viewModels<UtilViewModel>()
@@ -128,13 +127,7 @@ class DetailFragment : Fragment() {
                         login,
                         name,
                         avatarUrl,
-                        publicRepos,
-                        followers,
-                        following,
-                        bio,
-                        company,
                         location,
-                        blog,
                         true
                     )
                     favoriteViewModel.inserFavoritePeople(favTemp)

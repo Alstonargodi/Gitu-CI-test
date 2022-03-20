@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,28 +26,43 @@
 
         <TextView
             android:id="@+id/Name_Favpeoplecv"
-            android:layout_width="162dp"
+            style="@style/TvTitleStyle"
+            android:layout_width="0dp"
             android:layout_height="23dp"
-            android:text="TextView"
+            android:text="username"
             android:textAlignment="center"
-            android:textColor="#DED7D7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnfav"
-            app:layout_constraintHorizontal_bias="0.69"
+            app:layout_constraintHorizontal_bias="0.617"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.14" />
+            app:layout_constraintVertical_bias="0.145" />
+
+        <TextView
+            android:id="@+id/location_Favpeoplecv"
+            style="@style/TvTitleStyle"
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="30dp"
+            android:text="location"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/Name_Favpeoplecv"
+            app:layout_constraintVertical_bias="0.719" />
 
         <ImageView
             android:id="@+id/btnfav"
-            android:layout_width="25dp"
-            android:layout_height="23dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="17dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/ic_baseline_favorite_border_24"
             android:backgroundTint="#F9F6F6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.14" />
+            app:layout_constraintVertical_bias="0.126" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

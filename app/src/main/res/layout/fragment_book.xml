@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.author.AuthorFragment">
+    tools:context=".view.book.BookFragment">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -42,7 +42,7 @@
                 android:background="@drawable/ic_back"
                 android:contentDescription="@string/Topuser"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:theme="@style/Theme.Githubuser"
+                android:theme="@style/Theme.Githubuser.Dark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +55,7 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/popmed"
                 android:gravity="center|start"
-                android:text="@string/author"
+                android:text="Favorite"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

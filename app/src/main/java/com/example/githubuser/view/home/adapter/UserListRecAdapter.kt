@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.githubuser.databinding.UserhomCvBinding
+import com.example.githubuser.databinding.ItemcvUserlisthomeBinding
 import com.example.githubuser.remote.githubresponse.ItemsItem
 import com.example.githubuser.view.home.HomeFragmentDirections
 
 class UserListRecAdapter(private var dataList : List<ItemsItem>): RecyclerView.Adapter<UserListRecAdapter.ViewHolder>() {
 
-    class ViewHolder(var binding : UserhomCvBinding): RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(var binding : ItemcvUserlisthomeBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(UserhomCvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(ItemcvUserlisthomeBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
 

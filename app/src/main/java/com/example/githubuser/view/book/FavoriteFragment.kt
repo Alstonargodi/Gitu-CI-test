@@ -1,16 +1,16 @@
-package com.example.githubuser.view.author.favoritetab
+package com.example.githubuser.view.book
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentFavoriteBinding
 import com.example.githubuser.local.entity.FavoritePeople
-import com.example.githubuser.view.author.adapter.FavPeopleRecviewAdapter
+import com.example.githubuser.view.book.adapter.FavPeopleRecviewAdapter
+import com.example.githubuser.view.book.adapter.FavRepoRecviewAdapter
 import com.example.githubuser.viewmodel.FavoriteViewModel
 import com.example.githubuser.viewmodel.util.obtainViewModel
 
@@ -18,6 +18,8 @@ import com.example.githubuser.viewmodel.util.obtainViewModel
 class FavoriteFragment : Fragment() {
     private lateinit var binding : FragmentFavoriteBinding
     private lateinit var peopleRecviewAdapter : FavPeopleRecviewAdapter
+    private lateinit var repoRecviewAdapter : FavRepoRecviewAdapter
+
     private lateinit var favViewModel : FavoriteViewModel
 
     override fun onCreateView(
@@ -36,9 +38,8 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setRecyclerView(){
-        val index = arguments?.getInt("number")
-        when(index){
-            1 -> binding.tvPage.text = "index satu"
+        when(arguments?.getInt("number")){
+            1 -> showFavRepository()
             2 -> showFavPeople()
         }
     }
@@ -49,16 +50,34 @@ class FavoriteFragment : Fragment() {
             binding.RecyclerVFavorite.adapter = peopleRecviewAdapter
             binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
 
-            peopleRecviewAdapter.setOnItemCallBack(object : FavPeopleRecviewAdapter.OnItemCallBack{
-                override fun onItemClick(data: FavoritePeople) {
-                    testshow(data)
-                }
-            })
+            peopleRecviewAdapter.apply {
+                setOnItemCallBack(object : FavPeopleRecviewAdapter.OnItemClickDetail{
+                    override fun onItemClick(data: FavoritePeople) {
+                        findNavController().navigate(
+                            BookFragmentDirections.actionAuthorFragmentToDetailFragment(data.name)
+                        )
+                    }
+                })
+                setOnitemDelete(object : FavPeopleRecviewAdapter.OnItemDelete{
+                    override fun onItemClickDelete(data: FavoritePeople) {
+                        deleteFav(data)
+                    }
+                })
+            }
         }
     }
 
-    private fun testshow(favoritePeople: FavoritePeople){
-        Log.d("test",favoritePeople.name)
+    private fun showFavRepository(){
+            favViewModel.readFavoriteProject().observe(viewLifecycleOwner){respon ->
+                repoRecviewAdapter = FavRepoRecviewAdapter(respon)
+                binding.RecyclerVFavorite.adapter = repoRecviewAdapter
+                binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
+
+            }
+    }
+
+    private fun deleteFav(favoritePeople: FavoritePeople){
+        favViewModel.deleteFavoritePeople(favoritePeople)
     }
 
 }

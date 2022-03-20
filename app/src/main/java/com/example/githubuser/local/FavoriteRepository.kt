@@ -22,9 +22,6 @@ class FavoriteRepository(application: Application) {
     fun insertFavoriteProject(favoriteProject: FavoriteProject){
         executorService.execute { mFavDao.insertFavoriteProject(favoriteProject) }
     }
-    fun updateFavoriteProject(favoriteProject: FavoriteProject){
-        executorService.execute { mFavDao.updateFavoriteProject(favoriteProject) }
-    }
     fun deleteFavoriteProject(favoriteProject: FavoriteProject){
         executorService.execute { mFavDao.deleteFavoriteProject(favoriteProject) }
     }
@@ -33,9 +30,6 @@ class FavoriteRepository(application: Application) {
 
     fun insertFavoritePeople(favoritePeople: FavoritePeople){
         executorService.execute { mFavDao.insertFavoritePeople(favoritePeople) }
-    }
-    fun updateFavoritePeople(favoritePeople: FavoritePeople){
-        executorService.execute { mFavDao.updateFavoritePeople(favoritePeople) }
     }
     fun deleteFavoritePeople(favoritePeople: FavoritePeople){
         executorService.execute { mFavDao.deleteFavoritePeople(favoritePeople) }

@@ -1,63 +1,63 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Githubuser.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Githubuser.Light" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FFFFFF</item>
-        <item name="colorPrimaryVariant">#FAF4F4</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/maincolor</item>
+
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/white</item>
-        <item name="colorSecondaryVariant">@color/white</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- Customize your theme here. -->
+        <item name="titleTextAppearance">@style/ToolBarStyleLight</item>
+        <item name="android:strokeColor">@color/white</item>
 
 
-<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/white</item>-->
-<!--        <item name="colorPrimaryVariant">#FAF8F8</item>-->
-<!--        <item name="colorOnPrimary">@color/white</item>-->
-<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-<!--        <item name="colorSecondary">@color/white</item>-->
-<!--        <item name="colorSecondaryVariant">@color/white</item>-->
-<!--        <item name="colorOnSecondary">@color/white</item>-->
-<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
-<!--        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>-->
-<!--        <item name="android:titleTextStyle">@color/white</item>-->
-<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-<!--        <item name="titleTextColor">@color/white</item>-->
-<!--        <item name="windowActionBar">false</item>-->
-<!--        <item name="windowNoTitle">true</item>-->
-<!--        <item name="android:textColorHint">@android:color/white</item>-->
-<!--        <item name="android:iconTint">@android:color/white</item>-->
-<!--        <item name="android:textColorPrimary">@android:color/white</item>-->
-<!--        &lt;!&ndash;This line changes the color of icons in toolbar (back, overflow menu icons)&ndash;&gt;-->
-<!--        <item name="android:textColorSecondary">@android:color/white</item>-->
-
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!-- Status bar color. -->
 
 
     </style>
-
 
 
     <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="Actionbarstyle" parent="android:TextAppearance">
+    <style name="ToolBarStyleLight" parent="android:Widget.Toolbar">
         <item name="android:fontFamily">@font/apexsans</item>
         <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="tint">@color/white</item>
+        <item name="android:titleTextColor">@color/maincolor</item>
     </style>
 
 
-    <style name="Huruf">
-        <item name="title">@color/white</item>
+    <style name="TvResultStyle"  parent="Theme.Githubuser.Light">
+        <item name="android:fontFamily">@font/apexsans</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:titleTextColor">@color/maincolor</item>
     </style>
 
-    <style name="TitleBarTextAppearance" />
+    <style name="TvTitleStyle"  parent="Theme.Githubuser.Light" >
+        <item name="android:fontFamily">@font/apexsans</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:titleTextColor">@color/maincolor</item>
+    </style>
+
+    <style name="IconStyle" parent="Theme.Githubuser.Light" >
+        <item name="iconTint">@color/white</item>
+        <item name="android:strokeColor">@color/white</item>
+    </style>
+
+
+
+
 </resources>

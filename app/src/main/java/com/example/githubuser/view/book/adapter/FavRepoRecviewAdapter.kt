@@ -1,0 +1,41 @@
+package com.example.githubuser.view.book.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.example.githubuser.R
+import com.example.githubuser.databinding.ItemcvRepositoryBinding
+import com.example.githubuser.local.FavoriteRepository
+import com.example.githubuser.local.entity.FavoriteProject
+
+class FavRepoRecviewAdapter(private val favList : List<FavoriteProject>):
+    RecyclerView.Adapter<FavRepoRecviewAdapter.ViewHolder>(){
+    class ViewHolder(var binding : ItemcvRepositoryBinding): RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(ItemcvRepositoryBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = favList[position]
+
+        holder.binding.apply {
+            TitleTvrepo.text = item.name
+            LangTvrepo.text = item.language
+            AboutTvrepo.text = item.description
+
+
+            View.INVISIBLE.apply {
+                StarTvrepo.visibility = this
+                ForkTvrepo.visibility = this
+            }
+
+            if(item.isSaved) FavrepoBtn.setImageDrawable(
+                ContextCompat.getDrawable(FavrepoBtn.context,R.drawable.ic_baseline_star_full)
+            )
+        }
+    }
+
+    override fun getItemCount(): Int  = favList.size
+}

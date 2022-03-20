@@ -14,8 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/Theme.Githubuser"
-        app:titleTextAppearance="@style/Actionbarstyle" />
+        app:theme="@style/Theme.Githubuser.Dark"
+        app:titleTextAppearance="@style/ToolBarStyleLight" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,10 +27,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Currsearch_tv"
-        tools:listitem="@layout/userhom_cv" />
+        tools:listitem="@layout/itemcv_userlisthome" />
 
     <TextView
         android:id="@+id/Currsearch_tv"
+        style="@style/TvTitleStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

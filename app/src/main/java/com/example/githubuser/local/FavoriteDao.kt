@@ -18,10 +18,6 @@ interface FavoriteDao {
     fun readFavoritePeople():LiveData<List<FavoritePeople>>
 
 
-    @Update
-    fun updateFavoriteProject(favoriteProject: FavoriteProject)
-    @Update
-    fun updateFavoritePeople(favoritePeople: FavoritePeople)
 
     @Delete
     fun deleteFavoriteProject(favoriteProject: FavoriteProject)

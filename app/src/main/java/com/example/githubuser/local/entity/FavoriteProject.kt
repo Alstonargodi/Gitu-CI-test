@@ -9,13 +9,13 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class FavoriteProject(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    val id : Int,
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "name")
-    val name : String,
+    val name : String = "",
     @ColumnInfo(name = "description")
-    val description : String,
-    @ColumnInfo(name = "star")
-    val star : Int,
+    val description : String? = "",
+    @ColumnInfo(name = "language")
+    val language : String? = "",
+    @ColumnInfo(name = "isSaved")
+    val isSaved : Boolean
 ) : Parcelable

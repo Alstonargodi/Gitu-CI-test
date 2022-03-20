@@ -12,7 +12,7 @@ import com.example.githubuser.local.entity.FavoriteProject
         FavoritePeople::class,
         FavoriteProject::class
     ],
-    version = 1
+    version = 3
 )
 abstract class FavoriteDatabase : RoomDatabase() {
     abstract fun favoritedao() : FavoriteDao
@@ -29,7 +29,7 @@ abstract class FavoriteDatabase : RoomDatabase() {
                         context.applicationContext,
                         FavoriteDatabase::class.java,
                         "FavoriteDatabase"
-                    ).build()
+                    ).fallbackToDestructiveMigration().build()
                 }
             }
             return INSTANCE as FavoriteDatabase

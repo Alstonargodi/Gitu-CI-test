@@ -1,4 +1,4 @@
-package com.example.githubuser.view.author
+package com.example.githubuser.view.book
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,14 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
-import com.example.githubuser.databinding.FragmentAuthorBinding
-import com.example.githubuser.view.author.adapter.SectionFavoritePagerAdapter
+import com.example.githubuser.databinding.FragmentBookBinding
+import com.example.githubuser.view.book.adapter.SectionFavoritePagerAdapter
 import com.example.githubuser.viewmodel.DetailViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class AuthorFragment : Fragment() {
-    private lateinit var binding : FragmentAuthorBinding
+class BookFragment : Fragment() {
+    private lateinit var binding : FragmentBookBinding
     private val viewModel by viewModels<DetailViewModel>()
     private lateinit var pagerAdapter : SectionFavoritePagerAdapter
 
@@ -24,7 +24,7 @@ class AuthorFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAuthorBinding.inflate(layoutInflater)
+        binding = FragmentBookBinding.inflate(layoutInflater)
         viewModel.getUserDetail(author_name)
         setViewPager()
         setAuthorDetail()
@@ -55,7 +55,7 @@ class AuthorFragment : Fragment() {
                         .into(imgAuthor)
 
                     imgAuthor.setOnClickListener {
-                        findNavController().navigate(AuthorFragmentDirections.actionAuthorFragmentToDetailFragment(responData.login!!))
+                        findNavController().navigate(BookFragmentDirections.actionAuthorFragmentToDetailFragment(responData.login!!))
                     }
                 }
             }

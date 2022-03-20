@@ -8,31 +8,23 @@ import com.example.githubuser.local.entity.FavoritePeople
 import com.example.githubuser.local.entity.FavoriteProject
 
 class FavoriteViewModel(application: Application): ViewModel() {
-    private val mNoteRepo : FavoriteRepository = FavoriteRepository(application)
+    private val mFavRepo : FavoriteRepository = FavoriteRepository(application)
 
-    fun readFavoritePeople() : LiveData<List<FavoritePeople>> = mNoteRepo.readFavoritePeople()
-
+    fun readFavoritePeople() : LiveData<List<FavoritePeople>> = mFavRepo.readFavoritePeople()
+    fun readFavoriteProject() :  LiveData<List<FavoriteProject>> = mFavRepo.readFavoriteProject()
     fun inserFavoritePeople(favoritePeople: FavoritePeople){
-        mNoteRepo.insertFavoritePeople(favoritePeople)
-    }
-    fun updateFavoritePeople(favoritePeople: FavoritePeople){
-        mNoteRepo.updateFavoritePeople(favoritePeople)
+        mFavRepo.insertFavoritePeople(favoritePeople)
     }
     fun deleteFavoritePeople(favoritePeople: FavoritePeople){
-        mNoteRepo.deleteFavoritePeople(favoritePeople)
+        mFavRepo.deleteFavoritePeople(favoritePeople)
     }
 
 
     fun insertFavoriteRepo(favoriteProject: FavoriteProject){
-        mNoteRepo.insertFavoriteProject(favoriteProject)
+        mFavRepo.insertFavoriteProject(favoriteProject)
     }
-
-    fun updateFavoriteRepo(favoriteProject: FavoriteProject){
-        mNoteRepo.updateFavoriteProject(favoriteProject)
-    }
-
     fun deleteFavoriteRepo(favoriteProject: FavoriteProject){
-        mNoteRepo.deleteFavoriteProject(favoriteProject)
+        mFavRepo.deleteFavoriteProject(favoriteProject)
     }
 
 

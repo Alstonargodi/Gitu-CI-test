@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    android:background="@color/maincolor"
     tools:context=".view.detail.DetailFragment">
 
 
@@ -20,7 +19,6 @@
             android:id="@+id/Detailtoolbar"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:background="@color/maincolor"
             android:contentInsetStart="0dp"
             android:contentInsetLeft="0dp"
             android:contentInsetEnd="0dp"
@@ -76,7 +74,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@drawable/ic_baseline_arrow_back_ios_24"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:theme="@style/Theme.Githubuser"
                     app:iconTint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -117,20 +114,19 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
+                style="@style/TvTitleStyle"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/maincolor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/web_tvitem"
-                app:tabIndicatorColor="#FFFFFF"
-                app:tabTextColor="#FFFFFF"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/web_tvitem"
+                style="@style/TvTitleStyle"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
@@ -139,7 +135,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poplight"
                 android:gravity="center|start"
-                android:textColor="#FFFFFF"
+                android:text="@string/website"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:drawableLeftCompat="@drawable/ic_baseline_home_24"
@@ -150,6 +146,7 @@
 
             <TextView
                 android:id="@+id/loc_tvitem"
+                style="@style/TvTitleStyle"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="20dp"
@@ -158,7 +155,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poplight"
                 android:gravity="center|start"
-                android:textColor="#FFFFFF"
+                android:text="@string/location"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:drawableLeftCompat="@drawable/ic_baseline_location_on_24"
@@ -169,6 +166,7 @@
 
             <TextView
                 android:id="@+id/Comapny_tvitem"
+                style="@style/TvResultStyle"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="20dp"
@@ -177,7 +175,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poplight"
                 android:gravity="center|start"
-                android:textColor="#FFFFFF"
+                android:text="@string/company"
                 android:textStyle="bold"
                 app:drawableLeftCompat="@drawable/ic_baseline_business_24"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -187,6 +185,7 @@
 
             <TextView
                 android:id="@+id/Bio_tvitem"
+                style="@style/TvResultStyle"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
@@ -194,6 +193,7 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/poplight"
                 android:gravity="start"
+                android:text="@string/bio_user"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -204,13 +204,13 @@
 
             <TextView
                 android:id="@+id/Follower_tvitem"
+                style="@style/TvResultStyle"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="5dp"
                 android:gravity="center"
                 android:text="@string/defaultcount"
-                android:textColor="#FFFDFD"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.074"
                 app:layout_constraintStart_toStartOf="parent"
@@ -218,13 +218,12 @@
 
             <TextView
                 android:id="@+id/textView9"
+                style="@style/TvTitleStyle"
                 android:layout_width="120dp"
-                android:layout_height="20dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="@string/follower"
-                android:textColor="#FFFDFD"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.073"
                 app:layout_constraintStart_toStartOf="parent"
@@ -232,12 +231,12 @@
 
             <TextView
                 android:id="@+id/Following_tvitem"
+                style="@style/TvResultStyle"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/defaultcount"
-                android:textColor="#FFFDFD"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.512"
                 app:layout_constraintStart_toStartOf="parent"
@@ -245,13 +244,12 @@
 
             <TextView
                 android:id="@+id/textView10"
+                style="@style/TvTitleStyle"
                 android:layout_width="120dp"
-                android:layout_height="20dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="@string/following"
-                android:textColor="#FFFDFD"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.512"
                 app:layout_constraintStart_toStartOf="parent"
@@ -259,13 +257,13 @@
 
             <TextView
                 android:id="@+id/Repository_tvitem"
+                style="@style/TvResultStyle"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/defaultcount"
-                android:textColor="#FFFDFD"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.923"
                 app:layout_constraintStart_toStartOf="parent"
@@ -273,28 +271,28 @@
 
             <TextView
                 android:id="@+id/textView12"
+                style="@style/TvTitleStyle"
                 android:layout_width="120dp"
-                android:layout_height="20dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:text="@string/repository"
-                android:textColor="#FFFDFD"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.992"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Repository_tvitem"
-                android:textSize="16sp" />
+                app:layout_constraintTop_toBottomOf="@+id/Repository_tvitem" />
 
             <TextView
                 android:id="@+id/Username_tvdetailpage"
+                style="@style/TvTitleStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/apexsans"
-                android:textColor="#FFFFFF"
+                android:text="@string/username"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -304,13 +302,14 @@
 
             <TextView
                 android:id="@+id/surname_detailopage"
+                style="@style/TvResultStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/apexsans"
-                android:textColor="#EFEDED"
+                android:text="@string/username"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_marginStart="10dp"
@@ -21,12 +22,10 @@
 
         <TextView
             android:id="@+id/Title_tvrepo"
+            style="@style/TvResultStyle"
             android:layout_width="320dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/apexsans"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,14 +36,12 @@
 
         <TextView
             android:id="@+id/About_tvrepo"
+            style="@style/TvResultStyle"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:fontFamily="@font/poplight"
             android:gravity="center|start|top"
-            android:textColor="#E8E8E8"
-            android:textSize="12sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,14 +51,13 @@
 
         <TextView
             android:id="@+id/Lang_tvrepo"
+            style="@style/TvResultStyle"
             android:layout_width="150dp"
             android:layout_height="32dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/popmed"
             android:gravity="center|start"
-            android:textColor="#E8E8E8"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.014"
@@ -71,13 +67,12 @@
 
         <TextView
             android:id="@+id/Star_tvrepo"
+            style="@style/TvResultStyle"
             android:layout_width="100dp"
             android:layout_height="32dp"
             android:drawablePadding="5dp"
             android:fontFamily="@font/popmed"
             android:gravity="bottom|center|start"
-            android:textColor="#E8E8E8"
-            android:textSize="16sp"
             app:drawableLeftCompat="@drawable/ic_baseline_star_outline_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,13 +83,11 @@
 
         <TextView
             android:id="@+id/Fork_tvrepo"
+            style="@style/TvResultStyle"
             android:layout_width="100dp"
             android:layout_height="32dp"
             android:drawablePadding="5dp"
-            android:fontFamily="@font/popmed"
             android:gravity="bottom|center|start"
-            android:textColor="#E8E8E8"
-            android:textSize="16sp"
             app:drawableLeftCompat="@drawable/ic_subttasks_alt_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -103,10 +96,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.941" />
 
-        <Button
-            android:id="@+id/Btnstart_title"
-            android:layout_width="36dp"
-            android:layout_height="35dp"
+        <ImageView
+            android:id="@+id/Favrepo_btn"
+            android:layout_width="31dp"
+            android:layout_height="30dp"
             android:background="@drawable/ic_baseline_star_outline_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
