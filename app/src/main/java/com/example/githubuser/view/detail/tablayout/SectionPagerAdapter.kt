@@ -1,4 +1,4 @@
-package com.example.githubuser.view.detail.tab
+package com.example.githubuser.view.detail.tablayout
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

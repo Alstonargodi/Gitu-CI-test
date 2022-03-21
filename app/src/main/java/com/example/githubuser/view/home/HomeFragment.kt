@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         setHasOptionsMenu(true)
 
-        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.night)
+
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)

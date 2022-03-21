@@ -17,9 +17,12 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.githubuser.view.home.adapter.UserListRecAdapter
+import com.example.githubuser.viewmodel.HomeViewModel
+import com.example.githubuser.viewmodel.util.obtainViewModel
 import kotlinx.coroutines.android.awaitFrame
 import kotlinx.coroutines.delay
 import okhttp3.internal.wait
+import kotlin.coroutines.coroutineContext
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MainTest {
@@ -44,9 +47,7 @@ class MainTest {
         onView(withId(androidx.appcompat.R.id.search_src_text))
             .perform(typeText(dummyUser))
             .perform(pressKey(KeyEvent.KEYCODE_ENTER))
-
         onView(withId(R.id.RecviewUser))
             .check(matches(isDisplayed()))
-
     }
 }

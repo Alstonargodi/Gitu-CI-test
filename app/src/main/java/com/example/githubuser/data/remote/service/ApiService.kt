@@ -1,4 +1,5 @@
 package com.example.githubuser.data.remote.service
+import com.example.githubuser.BuildConfig
 import com.example.githubuser.data.remote.githubresponse.DetailResponse
 import com.example.githubuser.data.remote.githubresponse.ListResponse
 import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponse
@@ -9,31 +10,31 @@ import retrofit2.http.*
 
 interface ApiService {
     @GET("search/users")
-
+    @Headers("Authorization: token ${BuildConfig.api_key}")
     fun getUserList(
         @Query("q") id : String
     ): Call<ListResponse>
 
     @GET("users/{username}")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token ${BuildConfig.api_key}")
     fun getUserDetail(
         @Path("username") username : String,
     ): Call<DetailResponse>
 
     @GET("users/{username}/followers")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token ${BuildConfig.api_key}")
     fun getUserFollowers(
         @Path("username") username : String,
     ): Call<FollowerResponse>
 
     @GET("users/{username}/following")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token ${BuildConfig.api_key}")
     fun getUserFollowing(
         @Path("username") username : String,
     ): Call<FollowingResponse>
 
     @GET("users/{username}/repos")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token ${BuildConfig.api_key}")
     fun getUserRepo(
         @Path("username") username : String,
     ): Call<RepoResponse>

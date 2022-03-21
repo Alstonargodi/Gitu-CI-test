@@ -13,6 +13,7 @@ import com.example.githubuser.data.local.entity.FavoriteProject
 import com.example.githubuser.view.book.adapter.FavPeopleRecviewAdapter
 import com.example.githubuser.view.book.adapter.FavRepoRecviewAdapter
 import com.example.githubuser.viewmodel.FavoriteViewModel
+import com.example.githubuser.viewmodel.FavoriteViewModel.Companion.EXTRA_MESSAGE
 import com.example.githubuser.viewmodel.util.obtainViewModel
 
 
@@ -69,16 +70,24 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showFavRepository(){
-        favViewModel.readFavoriteProject().observe(viewLifecycleOwner){respon ->
-            repoRecviewAdapter = FavRepoRecviewAdapter(respon)
-            binding.RecyclerVFavorite.adapter = repoRecviewAdapter
-            binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
+        favViewModel.apply {
+            readFavoriteProject()
+            responFavoriteRepo.observe(viewLifecycleOwner){respon ->
+                repoRecviewAdapter = FavRepoRecviewAdapter(respon)
+                binding.RecyclerVFavorite.adapter = repoRecviewAdapter
+                binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
 
-            repoRecviewAdapter.setOnitemDelete(object : FavRepoRecviewAdapter.OnItemClickDelete{
-                override fun onItemClickDelete(data: FavoriteProject) {
-                    favViewModel.deleteFavoriteRepo(data)
+                if (respon.isNullOrEmpty()){
+                    binding.tverrorFav.text = EXTRA_MESSAGE
+                    binding.tverrorFav.visibility = View.VISIBLE
                 }
-            })
+                repoRecviewAdapter.setOnitemDelete(object : FavRepoRecviewAdapter.OnItemClickDelete{
+                    override fun onItemClickDelete(data: FavoriteProject) {
+                        favViewModel.deleteFavoriteRepo(data)
+                    }
+                })
+            }
+
         }
     }
 

@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
 import com.example.githubuser.data.local.entity.FavoritePeople
-import com.example.githubuser.view.detail.tab.SectionPagerAdapter
+import com.example.githubuser.view.detail.tablayout.SectionPagerAdapter
 import com.example.githubuser.viewmodel.DetailViewModel
 import com.example.githubuser.viewmodel.FavoriteViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
@@ -136,6 +136,7 @@ class DetailFragment : Fragment() {
             }
         }
     }
+
     private fun setViewPager(name : String){
         pagerAdapter = SectionPagerAdapter(requireActivity(),name,tab_titles.size)
         val viewPager = binding.Followviewpager
