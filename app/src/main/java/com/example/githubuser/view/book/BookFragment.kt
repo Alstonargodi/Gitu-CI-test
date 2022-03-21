@@ -27,10 +27,15 @@ class BookFragment : Fragment() {
         binding = FragmentBookBinding.inflate(layoutInflater)
         viewModel.getUserDetail(author_name)
         setViewPager()
-        setAuthorDetail()
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnAuthor.setOnClickListener {
+            findNavController().navigate(BookFragmentDirections.actionAuthorFragmentToDetailFragment(author_name))
+        }
+    }
     private fun setViewPager(){
         pagerAdapter = SectionFavoritePagerAdapter(requireActivity(), tab_titles.size)
         val viewPager = binding.AuthorPager
@@ -40,27 +45,7 @@ class BookFragment : Fragment() {
             tab.text = getString(tab_titles[position])
         }.attach()
     }
-    private fun setAuthorDetail(){
-        binding.apply {
-            viewModel.apply {
-                isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-                detailResponse.observe(viewLifecycleOwner){ responData ->
-                    UsernameAuthorTv.text = responData.login
-                    SurnameAuthorTv.text = responData.name
 
-                    Glide.with(requireContext())
-                        .asBitmap()
-                        .circleCrop()
-                        .load(responData.avatarUrl)
-                        .into(imgAuthor)
-
-                    imgAuthor.setOnClickListener {
-                        findNavController().navigate(BookFragmentDirections.actionAuthorFragmentToDetailFragment(responData.login!!))
-                    }
-                }
-            }
-        }
-    }
 
     private fun isLoading(isLoading:Boolean){
         binding.progressBarAuthor.apply {

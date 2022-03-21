@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFavoriteBinding
 import com.example.githubuser.local.entity.FavoritePeople
+import com.example.githubuser.local.entity.FavoriteProject
 import com.example.githubuser.view.book.adapter.FavPeopleRecviewAdapter
 import com.example.githubuser.view.book.adapter.FavRepoRecviewAdapter
 import com.example.githubuser.viewmodel.FavoriteViewModel
@@ -68,12 +69,17 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showFavRepository(){
-            favViewModel.readFavoriteProject().observe(viewLifecycleOwner){respon ->
-                repoRecviewAdapter = FavRepoRecviewAdapter(respon)
-                binding.RecyclerVFavorite.adapter = repoRecviewAdapter
-                binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
+        favViewModel.readFavoriteProject().observe(viewLifecycleOwner){respon ->
+            repoRecviewAdapter = FavRepoRecviewAdapter(respon)
+            binding.RecyclerVFavorite.adapter = repoRecviewAdapter
+            binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
 
-            }
+            repoRecviewAdapter.setOnitemDelete(object : FavRepoRecviewAdapter.OnItemClickDelete{
+                override fun onItemClickDelete(data: FavoriteProject) {
+                    favViewModel.deleteFavoriteRepo(data)
+                }
+            })
+        }
     }
 
     private fun deleteFav(favoritePeople: FavoritePeople){

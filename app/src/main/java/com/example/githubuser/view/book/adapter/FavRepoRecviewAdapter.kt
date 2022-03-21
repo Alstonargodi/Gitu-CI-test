@@ -7,12 +7,17 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ItemcvRepositoryBinding
-import com.example.githubuser.local.FavoriteRepository
 import com.example.githubuser.local.entity.FavoriteProject
 
 class FavRepoRecviewAdapter(private val favList : List<FavoriteProject>):
     RecyclerView.Adapter<FavRepoRecviewAdapter.ViewHolder>(){
+    private lateinit var onItemClickDelete : OnItemClickDelete
+
     class ViewHolder(var binding : ItemcvRepositoryBinding): RecyclerView.ViewHolder(binding.root)
+
+    fun setOnitemDelete(onItemDelete : OnItemClickDelete){
+        this.onItemClickDelete = onItemDelete
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(ItemcvRepositoryBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -34,8 +39,22 @@ class FavRepoRecviewAdapter(private val favList : List<FavoriteProject>):
             if(item.isSaved) FavrepoBtn.setImageDrawable(
                 ContextCompat.getDrawable(FavrepoBtn.context,R.drawable.ic_baseline_star_full)
             )
+
+            FavrepoBtn.setOnClickListener {
+                FavrepoBtn.setImageDrawable(
+                    ContextCompat.getDrawable(FavrepoBtn.context,
+                        R.drawable.ic_baseline_star_outline_24
+                    )
+                )
+                onItemClickDelete.onItemClickDelete(item)
+            }
         }
     }
 
     override fun getItemCount(): Int  = favList.size
+
+
+    interface OnItemClickDelete{
+        fun onItemClickDelete(data : FavoriteProject)
+    }
 }

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/bookfragment"
     tools:context=".view.book.BookFragment">
 
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Detailtoolbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="35dp"
         android:contentInsetStart="0dp"
         android:contentInsetLeft="0dp"
         android:contentInsetEnd="0dp"
@@ -29,20 +30,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="35dp"
             android:layout_gravity="center"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="86dp">
 
             <Button
                 android:id="@+id/btn_backhome_author"
-                android:layout_width="48dp"
+                android:layout_width="35dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/ic_back"
+                android:background="@drawable/ic_baseline_arrow_back_ios_24"
                 android:contentDescription="@string/Topuser"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:theme="@style/Theme.Githubuser.Dark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -58,11 +57,20 @@
                 android:text="Favorite"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toStartOf="@+id/btn_author"
                 app:layout_constraintStart_toEndOf="@+id/btn_backhome_author"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/btn_author"
+                android:layout_width="035dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/ic_baseline_person_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -71,11 +79,10 @@
         android:id="@+id/Tablayout_author"
         android:layout_width="0dp"
         android:layout_height="39dp"
-        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7">
+        app:layout_constraintTop_toBottomOf="@+id/Detailtoolbar">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -88,64 +95,6 @@
             android:text="@string/people" />
 
     </com.google.android.material.tabs.TabLayout>
-
-    <ImageView
-        android:id="@+id/img_author"
-        android:layout_width="86dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:contentDescription="@string/authorphoto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Detailtoolbar"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/Username_author_tv"
-        android:layout_width="0dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="16sp"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/username"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/img_author"
-        app:layout_constraintTop_toBottomOf="@+id/Detailtoolbar" />
-
-    <TextView
-        android:id="@+id/Surname_author_tv"
-        android:layout_width="0dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16sp"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/surname"
-        android:textColor="#ECEAEA"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/img_author"
-        app:layout_constraintTop_toBottomOf="@+id/Username_author_tv" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/popmed"
-        android:text="@string/favorite"
-        android:textColor="#EEEDED"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_author" />
 
     <ProgressBar
         android:id="@+id/progressBar_author"

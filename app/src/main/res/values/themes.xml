@@ -42,14 +42,14 @@
     <style name="TvResultStyle"  parent="Theme.Githubuser.Light">
         <item name="android:fontFamily">@font/apexsans</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:titleTextColor">@color/maincolor</item>
+        <item name="android:titleTextColor">@color/white</item>
     </style>
 
     <style name="TvTitleStyle"  parent="Theme.Githubuser.Light" >
         <item name="android:fontFamily">@font/apexsans</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:titleTextColor">@color/maincolor</item>
+        <item name="android:titleTextColor">@color/white</item>
     </style>
 
     <style name="IconStyle" parent="Theme.Githubuser.Light" >

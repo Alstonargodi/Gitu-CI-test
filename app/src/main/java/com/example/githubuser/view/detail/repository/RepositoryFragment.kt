@@ -67,7 +67,6 @@ class RepositoryFragment: Fragment() {
             override fun onItemClickFavorite(data: RepoResponseItem) {
                setFavoriteRepo(data)
             }
-
         })
     }
 

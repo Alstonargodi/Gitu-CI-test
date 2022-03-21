@@ -5,6 +5,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -39,8 +40,6 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
 
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.night)
-
-
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)
@@ -80,7 +79,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-
         searchView.apply {
             setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
             queryHint = "input username"
@@ -88,6 +86,7 @@ class HomeFragment : Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     setSearchResult(query?:"")
+                    Log.d("test",query.toString())
                     return true
                 }
 
