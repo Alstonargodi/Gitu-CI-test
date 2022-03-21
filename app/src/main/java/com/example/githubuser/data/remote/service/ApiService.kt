@@ -1,9 +1,9 @@
-package com.example.githubuser.remote.service
-import com.example.githubuser.remote.githubresponse.DetailResponse
-import com.example.githubuser.remote.githubresponse.ListResponse
-import com.example.githubuser.remote.githubresponse.follower.FollowerResponse
-import com.example.githubuser.remote.githubresponse.following.FollowingResponse
-import com.example.githubuser.remote.githubresponse.repository.RepoResponse
+package com.example.githubuser.data.remote.service
+import com.example.githubuser.data.remote.githubresponse.DetailResponse
+import com.example.githubuser.data.remote.githubresponse.ListResponse
+import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponse
+import com.example.githubuser.data.remote.githubresponse.following.FollowingResponse
+import com.example.githubuser.data.remote.githubresponse.repository.RepoResponse
 import retrofit2.Call
 import retrofit2.http.*
 

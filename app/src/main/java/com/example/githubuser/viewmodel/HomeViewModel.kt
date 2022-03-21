@@ -5,17 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.githubuser.remote.config.ApiConfig
-import com.example.githubuser.remote.githubresponse.*
+import com.example.githubuser.data.remote.config.ApiConfig
+import com.example.githubuser.data.remote.githubresponse.*
 import com.example.githubuser.view.utils.EventText.errorTitle
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel: ViewModel() {
+class HomeViewModel: ViewModel() {
     companion object{
-        const val TAG = "MainViewModel"
+        const val TAG = "HomeViewModel"
     }
 
     private val _isLoading = MutableLiveData<Boolean>()

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,9 +17,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentHomeBinding
-import com.example.githubuser.remote.githubresponse.ItemsItem
+import com.example.githubuser.data.remote.githubresponse.ItemsItem
 import com.example.githubuser.view.home.adapter.UserListRecAdapter
-import com.example.githubuser.viewmodel.MainViewModel
+import com.example.githubuser.viewmodel.HomeViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
 
 
@@ -28,7 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var adapter : UserListRecAdapter
     private lateinit var binding: FragmentHomeBinding
 
-    private val mainViewModel by viewModels<MainViewModel>()
+    private val mainViewModel by viewModels<HomeViewModel>()
     private val utilViewModel by viewModels<UtilViewModel>()
 
     private var saveText = ""
@@ -70,11 +69,19 @@ class HomeFragment : Fragment() {
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
         val authorView = menu.findItem(R.id.author)
+        val settingPage = menu.findItem(R.id.setting)
 
 
         authorView.apply {
             setOnMenuItemClickListener {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthorFragment())
+                true
+            }
+        }
+
+        settingPage.apply {
+            setOnMenuItemClickListener {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingFragment())
                 true
             }
         }
@@ -94,7 +101,6 @@ class HomeFragment : Fragment() {
                     return false
                 }
             })
-
         }
     }
 

@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFavoriteBinding
-import com.example.githubuser.local.entity.FavoritePeople
-import com.example.githubuser.local.entity.FavoriteProject
+import com.example.githubuser.data.local.entity.FavoritePeople
+import com.example.githubuser.data.local.entity.FavoriteProject
 import com.example.githubuser.view.book.adapter.FavPeopleRecviewAdapter
 import com.example.githubuser.view.book.adapter.FavRepoRecviewAdapter
 import com.example.githubuser.viewmodel.FavoriteViewModel

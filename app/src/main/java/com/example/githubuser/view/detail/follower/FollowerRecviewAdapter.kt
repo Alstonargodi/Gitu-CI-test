@@ -6,7 +6,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.ItemcvFollowerBinding
-import com.example.githubuser.remote.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponseItem
 import com.example.githubuser.view.detail.DetailFragmentDirections
 
 class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>): RecyclerView.Adapter<FollowerRecviewAdapter.ViewHolder>() {

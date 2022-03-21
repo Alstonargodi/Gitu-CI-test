@@ -10,9 +10,9 @@
     app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/CardStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#D1D1D1">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/Avatar_cvuser"
@@ -36,7 +36,6 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/popmed"
             android:gravity="center"
-            android:textColor="@color/maincolor"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

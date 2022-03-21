@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
-import com.example.githubuser.remote.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponseItem
 import com.example.githubuser.viewmodel.FollowerViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
 

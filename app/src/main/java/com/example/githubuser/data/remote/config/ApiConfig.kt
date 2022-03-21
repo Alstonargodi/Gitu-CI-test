@@ -1,7 +1,7 @@
-package com.example.githubuser.remote.config
+package com.example.githubuser.data.remote.config
 
 import com.example.githubuser.BuildConfig
-import com.example.githubuser.remote.service.ApiService
+import com.example.githubuser.data.remote.service.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

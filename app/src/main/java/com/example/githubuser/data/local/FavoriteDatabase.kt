@@ -1,11 +1,11 @@
-package com.example.githubuser.local
+package com.example.githubuser.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.githubuser.local.entity.FavoritePeople
-import com.example.githubuser.local.entity.FavoriteProject
+import com.example.githubuser.data.local.entity.FavoritePeople
+import com.example.githubuser.data.local.entity.FavoriteProject
 
 @Database(
     entities = [

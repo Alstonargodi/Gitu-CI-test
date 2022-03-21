@@ -1,9 +1,9 @@
-package com.example.githubuser.remote.githubresponse.repository
+package com.example.githubuser.data.remote.githubresponse.follower
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Owner(
+data class FollowerResponseItem(
     @SerializedName("avatar_url")
     val avatarUrl: String,
     @SerializedName("events_url")

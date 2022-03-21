@@ -22,7 +22,7 @@ import kotlinx.coroutines.delay
 import okhttp3.internal.wait
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class SearchTest {
+class MainTest {
     private val dummyUser = "budi"
 
     @Before

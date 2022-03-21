@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ItemcvRepositoryBinding
-import com.example.githubuser.local.entity.FavoriteProject
+import com.example.githubuser.data.local.entity.FavoriteProject
 
 class FavRepoRecviewAdapter(private val favList : List<FavoriteProject>):
     RecyclerView.Adapter<FavRepoRecviewAdapter.ViewHolder>(){

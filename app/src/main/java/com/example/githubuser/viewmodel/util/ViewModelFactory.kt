@@ -1,10 +1,8 @@
 package com.example.githubuser.viewmodel.util
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.local.FavoriteRepository
 import com.example.githubuser.viewmodel.FavoriteViewModel
 
 

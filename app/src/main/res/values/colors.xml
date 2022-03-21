@@ -10,11 +10,10 @@
     <color name="white">#FFFFFFFF</color>
 
 
-
     <!--warnabaru-->
     <color name="maincolor">#3F3E3E</color>
     <color name="subcolor">#3EFFFFFF</color>
-
+    <color name="cardview">#D1D1D1</color>
 
     <color name="title">#F7F7F7</color>
     <color name="subtitle">#BDBDBD</color>

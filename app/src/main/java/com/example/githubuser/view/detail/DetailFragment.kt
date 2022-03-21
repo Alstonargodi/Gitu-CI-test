@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
-import com.example.githubuser.local.entity.FavoritePeople
+import com.example.githubuser.data.local.entity.FavoritePeople
 import com.example.githubuser.view.detail.tab.SectionPagerAdapter
 import com.example.githubuser.viewmodel.DetailViewModel
 import com.example.githubuser.viewmodel.FavoriteViewModel
