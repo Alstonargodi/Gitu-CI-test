@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.view.detail.DetailFragmentDirections
 import com.example.githubuser.viewmodel.FollowerViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
 
@@ -72,9 +75,7 @@ class FollowerFragment: Fragment() {
         val recycView = binding.followerrecview
         recycView.adapter = adapter
         recycView.layoutManager = LinearLayoutManager(requireContext())
-        utilViewModel.apply {
-            if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false)
-        }
+        utilViewModel.apply { if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false) }
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -83,6 +84,11 @@ class FollowerFragment: Fragment() {
             recycView.layoutManager = LinearLayoutManager(requireContext())
         }
 
+        adapter.onItemClickDetail(object : FollowerRecviewAdapter.onItemCallDetail{
+            override fun onItemCallDetail(username: String) {
+                findNavController().navigate(DetailFragmentDirections.actionDetailFragmentSelf(username))
+            }
+        })
 
     }
 

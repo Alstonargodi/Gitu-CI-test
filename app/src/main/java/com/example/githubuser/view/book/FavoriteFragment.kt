@@ -51,7 +51,7 @@ class FavoriteFragment : Fragment() {
 
     private fun showFavPeople(){
         favViewModel.readFavoritePeople().observe(viewLifecycleOwner){ respon ->
-            if (respon.isNullOrEmpty()) isEmpty(true)
+            if (respon.isNullOrEmpty()) true.isEmpty()
             peopleRecviewAdapter = FavPeopleRecviewAdapter(respon)
             binding.RecyclerVFavorite.adapter = peopleRecviewAdapter
             binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
@@ -77,7 +77,7 @@ class FavoriteFragment : Fragment() {
         favViewModel.apply {
             readFavoriteProject()
             responFavoriteRepo.observe(viewLifecycleOwner){respon ->
-                if (respon.isNullOrEmpty()) isEmpty(true)
+                if (respon.isNullOrEmpty()) true.isEmpty()
                 repoRecviewAdapter = FavRepoRecviewAdapter(respon)
                 binding.RecyclerVFavorite.adapter = repoRecviewAdapter
                 binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
@@ -111,8 +111,8 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    private fun isEmpty(isEmpty:Boolean){
-        if (isEmpty){
+    private fun Boolean.isEmpty() {
+        if (this){
             binding.emptyviewfav.apply {
                 layoutemptyview.visibility = View.VISIBLE
                 tvResultempty.text = getString(R.string.emptyviewfav)

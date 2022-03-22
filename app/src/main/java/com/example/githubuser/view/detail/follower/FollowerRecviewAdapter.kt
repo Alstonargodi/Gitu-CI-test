@@ -9,11 +9,16 @@ import com.example.githubuser.databinding.ItemcvFollowerBinding
 import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponseItem
 import com.example.githubuser.view.detail.DetailFragmentDirections
 
-class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>): RecyclerView.Adapter<FollowerRecviewAdapter.ViewHolder>() {
+class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>)
+    : RecyclerView.Adapter<FollowerRecviewAdapter.ViewHolder>() {
 
+    private lateinit var onItemClickDetail : onItemCallDetail
 
     class ViewHolder(var binding : ItemcvFollowerBinding): RecyclerView.ViewHolder(binding.root)
 
+    fun onItemClickDetail(onItemClickDetail : onItemCallDetail){
+        this.onItemClickDetail = onItemClickDetail
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemcvFollowerBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -30,15 +35,16 @@ class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>): 
                 .into(ImgFollower)
 
             ImgFollower.setOnClickListener {
-                holder.itemView.findNavController()
-                    .navigate(DetailFragmentDirections.actionDetailFragmentSelf(item.login))
+                onItemClickDetail.onItemCallDetail(item.login)
             }
         }
     }
 
+    override fun getItemCount(): Int = dataList.size
 
-    override fun getItemCount(): Int {
-        return dataList.size
+    interface onItemCallDetail{
+        fun onItemCallDetail(username: String)
     }
+
 
 }

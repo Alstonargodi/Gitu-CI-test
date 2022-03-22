@@ -318,15 +318,13 @@
 
             <ProgressBar
                 android:id="@+id/Detail_progress"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="70dp"
-                android:layout_height="59dp"
+                android:layout_width="135dp"
+                android:layout_height="115dp"
                 app:layout_constraintBottom_toTopOf="@+id/tabLayout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.526"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.553" />
+                app:layout_constraintVertical_bias="0.371" />
 
             <TextView
                 android:id="@+id/Errorresponse_detail_tv"

@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.data.remote.githubresponse.following.FollowingResponseItem
+import com.example.githubuser.view.detail.DetailFragmentDirections
 import com.example.githubuser.viewmodel.FollowingViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
 
@@ -84,6 +87,12 @@ class FollowingFragment : Fragment() {
         }else{
             recview.layoutManager = LinearLayoutManager(requireContext())
         }
+
+        adapter.onItemCLickDetail(object : FollowingReviewAdapter.onItemClickDetil{
+            override fun onItemClickDetail(userName: String) {
+                findNavController().navigate(DetailFragmentDirections.actionDetailFragmentSelf(userName))
+            }
+        })
     }
 
     private fun isLoading(isLoading:Boolean){

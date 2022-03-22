@@ -4,7 +4,9 @@ package com.example.githubuser.view.detail.repository
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.githubuser.R
 import com.example.githubuser.databinding.ItemcvRepositoryBinding
 import com.example.githubuser.data.remote.githubresponse.repository.RepoResponseItem
 
@@ -34,7 +36,12 @@ class ReposRecviewAdapter(private var dataList : List<RepoResponseItem>):
                 if (stargazersCount == 0 ){ StarTvrepo.visibility = View.INVISIBLE }
                 if (forksCount == 0){ ForkTvrepo.visibility = View.INVISIBLE }
 
-                FavrepoBtn.setOnClickListener { onItemClickFav.onItemClickFavorite(item) }
+                FavrepoBtn.setOnClickListener {
+                    FavrepoBtn.setImageDrawable(
+                        ContextCompat.getDrawable(FavrepoBtn.context,R.drawable.ic_baseline_star_full)
+                    )
+                    onItemClickFav.onItemClickFavorite(item)
+                }
             }
         }
     }
