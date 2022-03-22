@@ -21,16 +21,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/itemcv_favoritepeople" />
 
-    <TextView
-        android:id="@+id/tverror_fav"
-        android:layout_width="237dp"
-        android:layout_height="112dp"
-        android:gravity="center"
-        android:text="TextView"
+    <include
+        android:id="@+id/emptyviewfav"
+        layout="@layout/emptyview_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/RecyclerV_Favorite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/RecyclerV_Favorite" />
+
+    <ProgressBar
+        android:id="@+id/pgbar_favorite"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="97dp"
+        android:layout_height="76dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/RecyclerV_Favorite"
         app:layout_constraintStart_toStartOf="@+id/RecyclerV_Favorite"
-        app:layout_constraintTop_toTopOf="@+id/RecyclerV_Favorite"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.349" />
 </androidx.constraintlayout.widget.ConstraintLayout>

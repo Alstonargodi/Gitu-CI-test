@@ -1,6 +1,7 @@
 package com.example.githubuser.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +12,8 @@ import com.example.githubuser.data.local.entity.FavoriteProject
 class FavoriteViewModel(application: Application): ViewModel() {
     private val mFavRepo : FavoriteRepository = FavoriteRepository(application)
 
-    private var _responseStatus = MutableLiveData<String>()
-    val responseStatus: LiveData<String> = _responseStatus
+    private var _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private var _responFavoriteRepo = MutableLiveData<List<FavoriteProject>>()
     var responFavoriteRepo : LiveData<List<FavoriteProject>> = _responFavoriteRepo
@@ -20,16 +21,13 @@ class FavoriteViewModel(application: Application): ViewModel() {
     fun readFavoritePeople() : LiveData<List<FavoritePeople>> = mFavRepo.readFavoritePeople()
 
     fun readFavoriteProject(){
+        _isLoading.value = true
         try {
-            val respon = mFavRepo.readFavoriteProject()
-            if (respon.value?.isNullOrEmpty() == true){
-                _responseStatus.value = EXTRA_MESSAGE
-            }else{
-                _responseStatus.value = respon.value.toString()
-                responFavoriteRepo = mFavRepo.readFavoriteProject()
-            }
+            responFavoriteRepo = mFavRepo.readFavoriteProject()
+            _isLoading.value = false
         }catch (e : java.lang.Exception){
-            _responseStatus.value = e.message.toString()
+            _isLoading.value = false
+            Log.d(EXTRA_TAG,e.message.toString())
         }
     }
 
@@ -51,7 +49,7 @@ class FavoriteViewModel(application: Application): ViewModel() {
 
 
     companion object{
-        const val EXTRA_MESSAGE =  "No Favorite People"
+        const val EXTRA_TAG = "favoriteviewmodel"
     }
 
 }

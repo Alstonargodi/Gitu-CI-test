@@ -47,15 +47,6 @@ class BookFragment : Fragment() {
     }
 
 
-    private fun isLoading(isLoading:Boolean){
-        binding.progressBarAuthor.apply {
-            visibility = if (isLoading) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-        }
-    }
 
     companion object{
         private const val author_name = "Alstonargodi"
