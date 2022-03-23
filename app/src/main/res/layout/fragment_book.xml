@@ -10,14 +10,13 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Detailtoolbar"
+        style="@style/Theme.Githubuser.Light"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:contentInsetStart="0dp"
         android:contentInsetLeft="0dp"
         android:contentInsetEnd="0dp"
         android:contentInsetRight="0dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
         app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetRight="0dp"
@@ -49,12 +48,12 @@
 
             <TextView
                 android:id="@+id/textView2"
+                style="@style/TvTitleStyle"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/popmed"
                 android:gravity="center|start"
-                android:text="Favorite"
+                android:text="@string/favorite"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_author"
@@ -77,6 +76,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/Tablayout_author"
+        style="@style/TvTitleStyle"
         android:layout_width="0dp"
         android:layout_height="39dp"
         app:layout_constraintEnd_toEndOf="parent"

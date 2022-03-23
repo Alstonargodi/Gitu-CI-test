@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -88,7 +87,7 @@ class FollowingFragment : Fragment() {
             recview.layoutManager = LinearLayoutManager(requireContext())
         }
 
-        adapter.onItemCLickDetail(object : FollowingReviewAdapter.onItemClickDetil{
+        adapter.onItemCLickDetail(object : FollowingReviewAdapter.OnItemClickDetil{
             override fun onItemClickDetail(userName: String) {
                 findNavController().navigate(DetailFragmentDirections.actionDetailFragmentSelf(userName))
             }

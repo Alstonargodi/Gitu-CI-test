@@ -35,6 +35,7 @@
 
     <TextView
         android:id="@+id/emptyStatment_following"
+        style="@style/TvTitleStyle"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:gravity="center|top"

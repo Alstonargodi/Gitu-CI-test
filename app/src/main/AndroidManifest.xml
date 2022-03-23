@@ -13,12 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Githubuser.Light">
         <activity
-            android:name=".view.setting.ConfigActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity android:name=".view.setting.SettingFragment"></activity>
+        <activity
+            android:name=".view.setting.SettingFragment">
+        </activity>
+
         <activity
             android:name=".view.SplashScreen"
             android:exported="true">

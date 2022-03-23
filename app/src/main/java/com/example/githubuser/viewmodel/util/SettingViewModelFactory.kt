@@ -1,10 +1,11 @@
 package com.example.githubuser.viewmodel.util
 
-import android.view.View
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.data.SettingPreferences
 
+@Suppress("UNCHECKED_CAST")
 class SettingViewModelFactory(private val pref : SettingPreferences)
     : ViewModelProvider.NewInstanceFactory() {
 

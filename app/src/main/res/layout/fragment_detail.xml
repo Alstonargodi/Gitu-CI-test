@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
+    android:id="@+id/detailFragment"
     tools:context=".view.detail.DetailFragment">
 
 
@@ -100,6 +101,18 @@
                 tools:ignore="MissingConstraints,ImageContrastCheck"
                 tools:srcCompat="@tools:sample/avatars" />
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/web_tvitem"
+                app:tabTextAppearance="@style/TitleStyleTwo"
+                tools:ignore="SpeakableTextPresentCheck" />
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/Followviewpager"
                 android:layout_width="0dp"
@@ -111,18 +124,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tabLayout"
                 app:layout_constraintVertical_bias="1.0" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                style="@style/TvTitleStyle"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/web_tvitem"
-                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/web_tvitem"

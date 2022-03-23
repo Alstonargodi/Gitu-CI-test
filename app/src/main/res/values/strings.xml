@@ -54,6 +54,11 @@
     <string name="bactohome" />
     <string name="octocat">octocat</string>
 
+    <string-array name="theme">
+        <item>Choose Mode…</item>
+        <item>Dark</item>
+        <item>Light</item>
+    </string-array>
 
     <string name="emptyviewfav">looks like you never added it</string>
     <!-- Preference Titles -->
@@ -69,4 +74,11 @@
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="setting" />
+    <string name="settingdua">Setting</string>
+    <string name="spinnermode">TODO</string>
+    <string name="profilepicture">TODO</string>
+    <string name="locationopeople">location</string>
+    <string name="empticon">empticon</string>
+    <string name="result_empty_view">Result empty view</string>
 </resources>

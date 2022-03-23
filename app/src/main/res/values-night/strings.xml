@@ -19,7 +19,6 @@
     <string name="author">author</string>
     <string name="people">people</string>
     <string name="authorphoto">authorphoto</string>
-    <string name="favorite">Favorite</string>
     <string name="warning">Coming soon \n after learning Room DB</string>
     <string name="find_use">Find user</string>
     <string name="error_response">Error response</string>
@@ -31,4 +30,8 @@
     <string name="avatar_icon">Avatar</string>
     <string name="bactohome" />
     <string name="octocat">octocat</string>
+    <string name="favorite">Favorite</string>
+    <string name="settingdua">Setting</string>
+    <string name="empticon">empticon</string>
+    <string name="result_empty_view">Result empty view</string>
 </resources>

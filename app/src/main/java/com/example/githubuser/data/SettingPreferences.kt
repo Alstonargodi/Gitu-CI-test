@@ -1,21 +1,24 @@
 package com.example.githubuser.data
 
+import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.preferencesDataStore
 
-class SettingPreferences private constructor(
-    private val dataStore: DataStore<Preferences>
-) {
+val Context.datastore : DataStore<Preferences> by preferencesDataStore("theme_setting")
+
+class SettingPreferences private constructor
+    (private val dataStore: DataStore<Preferences>) {
+
     private val themeKey = booleanPreferencesKey("theme_setting")
-
 
     fun getThemesSetting(): Flow<Boolean>{
         return dataStore.data.map { prefrences ->
-            prefrences[themeKey] ?: false
+            prefrences[themeKey] ?: true
         }
     }
 
@@ -24,6 +27,8 @@ class SettingPreferences private constructor(
             refrences[themeKey] = isDarkMode
         }
     }
+
+
 
     companion object{
         @Volatile

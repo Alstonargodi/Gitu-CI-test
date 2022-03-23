@@ -1,14 +1,13 @@
 package com.example.githubuser.view
 
 
-import android.annotation.SuppressLint
+
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
@@ -18,11 +17,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.MainActivity
 import com.example.githubuser.R
 import com.example.githubuser.data.SettingPreferences
+import com.example.githubuser.data.datastore
 import com.example.githubuser.viewmodel.util.SettingViewModel
 import com.example.githubuser.viewmodel.util.SettingViewModelFactory
 
-
-private val Context.datastore : DataStore<Preferences> by preferencesDataStore("settings")
 
 class SplashScreen : AppCompatActivity() {
     private lateinit var setViewModel : SettingViewModel
@@ -51,6 +49,8 @@ class SplashScreen : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
+
+
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.maincolor)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.maincolor)

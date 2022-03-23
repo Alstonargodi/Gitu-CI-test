@@ -30,7 +30,7 @@ class UserListRecAdapter(private var dataList : List<ItemsItem>): RecyclerView.A
                 .circleCrop()
                 .into(AvatarCvuser)
 
-            AvatarCvuser.setOnClickListener {
+            holder.itemView.setOnClickListener {
                 holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(data.login))
             }
         }

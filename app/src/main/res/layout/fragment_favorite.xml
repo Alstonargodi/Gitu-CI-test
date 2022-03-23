@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/emptyviewfav"
-        layout="@layout/viewempty_favorite"
+        layout="@layout/viewempty_nodata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

@@ -72,34 +72,6 @@
         app:layout_constraintTop_toTopOf="@+id/RecviewUser" />
 
     <TextView
-        android:id="@+id/Errortext_tv"
-        android:layout_width="321dp"
-        android:layout_height="83dp"
-        android:gravity="center|top"
-        android:text="@string/error_response"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/RecviewUser"
-        app:layout_constraintStart_toStartOf="@+id/RecviewUser"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.276" />
-
-    <Button
-        android:id="@+id/Tryagain_home"
-        android:layout_width="131dp"
-        android:layout_height="38dp"
-        android:text="@string/tryagain"
-        android:textColor="#343131"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/RecviewUser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Errortext_tv"
-        app:layout_constraintVertical_bias="0.09" />
-
-    <TextView
         android:id="@+id/tv_emptyview"
         android:layout_width="231dp"
         android:layout_height="59dp"
@@ -115,5 +87,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/RecviewUser"
         app:layout_constraintTop_toTopOf="@+id/RecviewUser" />
+
+    <include
+        android:id="@+id/includeerror"
+        layout="@layout/viewempty_errorconnection"
+        android:layout_width="0dp"
+        android:layout_height="521dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.463" />
+
+    <include
+        android:id="@+id/includeempty"
+        layout="@layout/viewempty_nodata"
+        android:layout_width="360dp"
+        android:layout_height="410dp"
+        android:layout_marginTop="44dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

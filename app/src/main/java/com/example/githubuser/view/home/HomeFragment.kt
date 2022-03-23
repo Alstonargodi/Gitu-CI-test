@@ -39,13 +39,16 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
 
 
-
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)
 
         mainViewModel.apply {
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-            listresponse.observe(viewLifecycleOwner){ showUserList(it) }
+            listresponse.observe(viewLifecycleOwner){
+                showUserList(it)
+                if (it.isEmpty()) showEmptyView(true) else showEmptyView(false)
+            }
+
         }
 
         utilViewModel.apply {
@@ -93,7 +96,7 @@ class HomeFragment : Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     setSearchResult(query?:"")
-                    Log.d("test",query.toString())
+
                     return true
                 }
 
@@ -108,6 +111,7 @@ class HomeFragment : Fragment() {
         mainViewModel.apply {
             getListUser(search)
             binding.tvEmptyview.visibility = View.GONE
+            showEmptyView(false)
         }
         utilViewModel.saveText(search)
         "search result for $search".also { binding.CurrsearchTv.text = it }
@@ -135,24 +139,36 @@ class HomeFragment : Fragment() {
         binding.apply {
             mainViewModel.errorResponse.observe(viewLifecycleOwner){ errorResponse ->
                 if (errorResponse.isNotEmpty()){
-                        ErrortextTv.visibility = View.VISIBLE
-                        TryagainHome.visibility = View.VISIBLE
                         tvEmptyview.visibility = View.GONE
                         RecviewUser.visibility = View.GONE
-                        ErrortextTv.text = errorResponse.toString()
-                        TryagainHome.setOnClickListener {
-                             mainViewModel.getListUser(saveText)
-                            "search result for $saveText".also { binding.CurrsearchTv.text = it }
+                        includeerror.layoutError.visibility = View.VISIBLE
+                        includeerror.TvEmptyconnect.text = errorResponse.toString()
+                        includeerror.BtnTryEmptyconnect.setOnClickListener {
+                            mainViewModel.getListUser(saveText)
+                            "search result for $saveText".also { includeerror.TvEmptyconnect.text = it }
 
-                            ErrortextTv.visibility = View.GONE
-                            TryagainHome.visibility = View.GONE
+                            includeerror.layoutError.visibility = View.GONE
                             tvEmptyview.visibility = View.GONE
                             RecviewUser.visibility = View.VISIBLE
+                            includeerror.layoutError.visibility = View.GONE
                         }
                     }
                 }
             }
+    }
+
+    private fun showEmptyView(isEmpty : Boolean){
+
+        binding.includeempty.apply {
+            if (isEmpty){
+                layoutemptyview.visibility = View.VISIBLE
+                tvResultempty.text = "No data for $saveText"
+            }else{
+                layoutemptyview.visibility = View.GONE
+                tvResultempty.text = "No data for $saveText"
+            }
         }
+    }
 
 
     private fun isLoading(isLoading:Boolean){
