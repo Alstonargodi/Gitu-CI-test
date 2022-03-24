@@ -1,13 +1,11 @@
 package com.example.githubuser
 
 import android.view.KeyEvent
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import org.junit.Before
 import org.junit.Test
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import org.junit.runner.RunWith
 import androidx.test.espresso.action.ViewActions.*
@@ -15,7 +13,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.githubuser.view.home.adapter.UserListRecAdapter
-import kotlin.concurrent.thread
 
 
 @RunWith(AndroidJUnit4ClassRunner::class)
@@ -32,7 +29,7 @@ class MainUiTest {
         onView(withId(R.id.RecviewUser)).check(matches(isDisplayed()))
         Thread.sleep(1000)
         onView(withId(R.id.RecviewUser))
-            .perform(RecyclerViewActions.actionOnItemAtPosition<UserListRecAdapter.ViewHolder>(0, ViewActions.click()))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<UserListRecAdapter.ViewHolder>(0, click()))
         Thread.sleep(1000)
         onView(withId(R.id.detailFragment)).check(matches(isDisplayed()))
     }
@@ -67,7 +64,7 @@ class MainUiTest {
         Thread.sleep(2000)
         onView(withId(R.id.RecviewUser))
             .check(matches(isDisplayed()))
-            .perform(RecyclerViewActions.actionOnItemAtPosition<UserListRecAdapter.ViewHolder>(0, ViewActions.click()))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<UserListRecAdapter.ViewHolder>(0, click()))
         Thread.sleep(1000)
         onView(withId(R.id.detailFragment)).check(matches(isDisplayed()))
         onView(withId(R.id.Followviewpager)).check(matches(isDisplayed()))

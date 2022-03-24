@@ -1,12 +1,14 @@
 package com.example.githubuser.view.detail
 
+
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,7 @@ import com.example.githubuser.viewmodel.DetailViewModel
 import com.example.githubuser.viewmodel.FavoriteViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
 import com.example.githubuser.viewmodel.util.obtainViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailFragment : Fragment() {
@@ -44,6 +47,9 @@ class DetailFragment : Fragment() {
                 saveText = it
             }
         }
+
+        favoriteChecker()
+
 
         return binding.root
     }
@@ -102,6 +108,7 @@ class DetailFragment : Fragment() {
                             startActivity(intent)
                         }
 
+
                         Glide.with(requireContext())
                             .asDrawable()
                             .load(avatarUrl)
@@ -131,10 +138,24 @@ class DetailFragment : Fragment() {
                         true
                     )
                     favoriteViewModel.inserFavoritePeople(favTemp)
-                    Toast.makeText(context,"favoritbaru",Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root,"add $login as Favorite People",
+                            Snackbar.LENGTH_LONG)
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundTint(Color.rgb(0, 200, 151))
+                        .show()
                 }
             }
         }
+    }
+
+
+    private fun removeFromFavorite(){
+        favoriteViewModel.deletePersonFavoritePeople(saveText)
+        Snackbar.make(binding.root,"Remove $saveText ",
+            Snackbar.LENGTH_LONG)
+            .setTextColor(Color.WHITE)
+            .setBackgroundTint(Color.rgb(137, 15, 13))
+            .show()
     }
 
     private fun setViewPager(name : String){
@@ -156,6 +177,27 @@ class DetailFragment : Fragment() {
     }
 
 
+    private fun favoriteChecker(){
+        favoriteViewModel.searchFavoritePeople(saveText).observe(viewLifecycleOwner){
+            try {
+                if (saveText == it[0].name){
+                    binding.btnFavorite.apply {
+                        setImageDrawable(
+                            ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_favorite_full)
+                        )
+                        setOnClickListener {
+                            removeFromFavorite()
+                        }
+                    }
+                }
+            }catch (e : Exception){
+                binding.btnFavorite.setImageDrawable(
+                    ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_favorite_border_24)
+                )
+            }
+        }
+    }
+
     private fun setErrorView(){
         binding.apply {
             detailViewModel.errorResponse.observe(viewLifecycleOwner){ response->
@@ -170,6 +212,7 @@ class DetailFragment : Fragment() {
             }
         }
     }
+
 
     private fun isLoading(isLoading:Boolean){
         binding.DetailProgress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE

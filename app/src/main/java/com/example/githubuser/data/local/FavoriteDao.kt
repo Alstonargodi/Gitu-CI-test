@@ -17,12 +17,14 @@ interface FavoriteDao {
     @Query("select*from favoritepeople")
     fun readFavoritePeople():LiveData<List<FavoritePeople>>
 
-
+    @Query("select*from favoritepeople where name like :name")
+    fun searchFavoritePeople(name : String):LiveData<List<FavoritePeople>>
 
     @Delete
     fun deleteFavoriteProject(favoriteProject: FavoriteProject)
-    @Delete
-    fun deleteFavoritePeople(favoritePeople: FavoritePeople)
+
+    @Query("Delete from favoritepeople where name like :name")
+    fun deletePersonFavoritePeople(name: String)
 
 
 }

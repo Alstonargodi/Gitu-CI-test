@@ -1,5 +1,6 @@
 package com.example.githubuser.view.book
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.example.githubuser.view.book.adapter.FavPeopleRecviewAdapter
 import com.example.githubuser.view.book.adapter.FavRepoRecviewAdapter
 import com.example.githubuser.viewmodel.FavoriteViewModel
 import com.example.githubuser.viewmodel.util.obtainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class FavoriteFragment : Fragment() {
@@ -94,11 +96,21 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun deleteFavPeople(favoritePeople: FavoritePeople){
-        favViewModel.deleteFavoritePeople(favoritePeople)
+        showSnackbar(favoritePeople.name)
+        favViewModel.deletePersonFavoritePeople(favoritePeople.name)
     }
 
     private fun deleteFavProject(favoriteProject: FavoriteProject){
+        showSnackbar(favoriteProject.name)
         favViewModel.deleteFavoriteRepo(favoriteProject)
+    }
+
+    private fun showSnackbar(name : String){
+        Snackbar.make(binding.root,"Remove $name ",
+            Snackbar.LENGTH_LONG)
+            .setTextColor(Color.WHITE)
+            .setBackgroundTint(Color.rgb(137, 15, 13))
+            .show()
     }
 
     private fun isLoading(isLoading:Boolean){

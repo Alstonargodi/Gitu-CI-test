@@ -81,4 +81,7 @@
     <string name="locationopeople">location</string>
     <string name="empticon">empticon</string>
     <string name="result_empty_view">Result empty view</string>
+    <string name="favoritebutton">favoritebutton</string>
+    <string name="favoriterepobturron">favoriterepobturron</string>
+    <string name="iconerror">iconerror</string>
 </resources>

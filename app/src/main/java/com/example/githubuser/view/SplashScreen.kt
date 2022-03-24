@@ -1,8 +1,6 @@
 package com.example.githubuser.view
 
 
-
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,9 +8,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.MainActivity
 import com.example.githubuser.R

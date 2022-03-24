@@ -20,11 +20,12 @@
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="16dp">
 
-            <Button
+            <ImageView
                 android:id="@+id/button"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/ic_baseline_arrow_back_ios_24" />
+                android:background="@drawable/ic_baseline_arrow_back_ios_24"
+                android:contentDescription="@string/backtohome" />
 
             <TextView
                 android:id="@+id/textView"

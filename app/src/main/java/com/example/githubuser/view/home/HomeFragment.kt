@@ -5,11 +5,9 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -162,10 +160,10 @@ class HomeFragment : Fragment() {
         binding.includeempty.apply {
             if (isEmpty){
                 layoutemptyview.visibility = View.VISIBLE
-                tvResultempty.text = "No data for $saveText"
+                "No data for $saveText".also { tvResultempty.text = it }
             }else{
                 layoutemptyview.visibility = View.GONE
-                tvResultempty.text = "No data for $saveText"
+                "No data for $saveText".also { tvResultempty.text = it }
             }
         }
     }
@@ -178,7 +176,7 @@ class HomeFragment : Fragment() {
     private fun setDefaultList(){
         utilViewModel.isEmpty.observe(viewLifecycleOwner){ isUserNotExist ->
             if (isUserNotExist == true){
-                setSearchResult(default_user) // Top User when search empty
+                setSearchResult(default_user)
                 binding.tvEmptyview.visibility = View.GONE
             }else if (isUserNotExist == false){
                 binding.tvEmptyview.visibility = View.GONE

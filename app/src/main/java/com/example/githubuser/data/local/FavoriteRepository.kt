@@ -17,8 +17,6 @@ class FavoriteRepository(application: Application) {
     }
 
     fun readFavoriteProject(): LiveData<List<FavoriteProject>> = mFavDao.readFavoriteProject()
-    fun readFavoritePeople() : LiveData<List<FavoritePeople>> = mFavDao.readFavoritePeople()
-
     fun insertFavoriteProject(favoriteProject: FavoriteProject){
         executorService.execute { mFavDao.insertFavoriteProject(favoriteProject) }
     }
@@ -27,12 +25,13 @@ class FavoriteRepository(application: Application) {
     }
 
 
-
+    fun readFavoritePeople() : LiveData<List<FavoritePeople>> = mFavDao.readFavoritePeople()
+    fun searchFavoritePeople(name : String):LiveData<List<FavoritePeople>> = mFavDao.searchFavoritePeople(name)
     fun insertFavoritePeople(favoritePeople: FavoritePeople){
         executorService.execute { mFavDao.insertFavoritePeople(favoritePeople) }
     }
-    fun deleteFavoritePeople(favoritePeople: FavoritePeople){
-        executorService.execute { mFavDao.deleteFavoritePeople(favoritePeople) }
+    fun deletePersonFavoritePeople(name : String){
+        executorService.execute { mFavDao.deletePersonFavoritePeople(name) }
     }
 
 

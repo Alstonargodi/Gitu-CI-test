@@ -20,6 +20,15 @@ class FavoriteViewModel(application: Application): ViewModel() {
 
     fun readFavoritePeople() : LiveData<List<FavoritePeople>> = mFavRepo.readFavoritePeople()
 
+    fun searchFavoritePeople(name : String) : LiveData<List<FavoritePeople>> = mFavRepo.searchFavoritePeople(name)
+    fun inserFavoritePeople(favoritePeople: FavoritePeople){
+        mFavRepo.insertFavoritePeople(favoritePeople)
+    }
+    fun deletePersonFavoritePeople(name: String){
+        mFavRepo.deletePersonFavoritePeople(name)
+    }
+
+
     fun readFavoriteProject(){
         _isLoading.value = true
         try {
@@ -30,16 +39,6 @@ class FavoriteViewModel(application: Application): ViewModel() {
             Log.d(EXTRA_TAG,e.message.toString())
         }
     }
-
-
-    fun inserFavoritePeople(favoritePeople: FavoritePeople){
-        mFavRepo.insertFavoritePeople(favoritePeople)
-    }
-    fun deleteFavoritePeople(favoritePeople: FavoritePeople){
-        mFavRepo.deleteFavoritePeople(favoritePeople)
-    }
-
-
     fun insertFavoriteRepo(favoriteProject: FavoriteProject){
         mFavRepo.insertFavoriteProject(favoriteProject)
     }

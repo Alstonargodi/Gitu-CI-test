@@ -1,12 +1,12 @@
 package com.example.githubuser.view.detail.repository
 
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,11 +17,12 @@ import com.example.githubuser.viewmodel.FavoriteViewModel
 import com.example.githubuser.viewmodel.RepositorViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
 import com.example.githubuser.viewmodel.util.obtainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class RepositoryFragment: Fragment() {
-    private var _binding: FragmentRepoBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var repoBinding: FragmentRepoBinding
+
     private lateinit var adapter : ReposRecviewAdapter
     private val repoViewModel by viewModels<RepositorViewModel>()
     private val utilViewModel by viewModels<UtilViewModel>()
@@ -33,7 +34,7 @@ class RepositoryFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRepoBinding.inflate(layoutInflater)
+        repoBinding = FragmentRepoBinding.inflate(layoutInflater)
         repoViewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
         userName = arguments?.getString("value","").toString()
 
@@ -45,15 +46,16 @@ class RepositoryFragment: Fragment() {
                 showRepositoryList(responData)
             }
         }
-        return binding.root
+        return repoBinding.root
     }
 
     private fun showRepositoryList(list: List<RepoResponseItem>){
+
         adapter = ReposRecviewAdapter(list)
-        val recView = binding.Reporecview
+        val recView = repoBinding.Reporecview
         recView.adapter = adapter
         recView.layoutManager = LinearLayoutManager(requireContext())
-        utilViewModel.setEmptys(false)
+        utilViewModel.apply { if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false) }
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -61,7 +63,6 @@ class RepositoryFragment: Fragment() {
         }else{
             recView.layoutManager = LinearLayoutManager(requireContext())
         }
-
 
         adapter.onItemClickFav(object : ReposRecviewAdapter.OnItemClickFavorite{
             override fun onItemClickFavorite(data: RepoResponseItem) {
@@ -77,12 +78,17 @@ class RepositoryFragment: Fragment() {
             data.language,
             true
         )
+
         favViewModel.insertFavoriteRepo(favTemp)
-        Toast.makeText(context,"favoritbaru", Toast.LENGTH_SHORT).show()
+        Snackbar.make(repoBinding.root,"add ${data.name} as Favorite Repo",
+            Snackbar.LENGTH_LONG)
+            .setTextColor(Color.WHITE)
+            .setBackgroundTint(Color.rgb(0, 200, 151))
+            .show()
     }
 
     private fun isLoading(isLoading:Boolean){
-        binding.Repoprogress.apply {
+        repoBinding.Repoprogress.apply {
             visibility = if (isLoading) {
                 View.VISIBLE
             } else {
@@ -92,7 +98,7 @@ class RepositoryFragment: Fragment() {
     }
 
     private fun emptyChecker(){
-        binding.apply {
+        repoBinding.apply {
             utilViewModel.isEmpty.observe(viewLifecycleOwner){ isDataNotExist ->
                 if (isDataNotExist == true){
                     emptyStatmentRepo.visibility = View.VISIBLE
@@ -101,12 +107,5 @@ class RepositoryFragment: Fragment() {
             }
         }
     }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
 
 }

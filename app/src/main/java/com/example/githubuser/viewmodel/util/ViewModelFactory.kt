@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.viewmodel.FavoriteViewModel
 
 
+@Suppress("UNCHECKED_CAST")
 class ViewModelFactory private constructor(private val application: Application)
     : ViewModelProvider.NewInstanceFactory()
     {
