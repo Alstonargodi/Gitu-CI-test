@@ -52,25 +52,28 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showFavPeople(){
-        favViewModel.readFavoritePeople().observe(viewLifecycleOwner){ respon ->
-            if (respon.isNullOrEmpty()) true.isEmpty()
-            peopleRecviewAdapter = FavPeopleRecviewAdapter(respon)
-            binding.RecyclerVFavorite.adapter = peopleRecviewAdapter
-            binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
+        favViewModel.apply {
+            readFavoritePeople()
+            responFavoritePeople.observe(viewLifecycleOwner){ respon ->
+                if (respon.isNullOrEmpty()) true.isEmpty()
+                peopleRecviewAdapter = FavPeopleRecviewAdapter(respon)
+                binding.RecyclerVFavorite.adapter = peopleRecviewAdapter
+                binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
 
-            peopleRecviewAdapter.apply {
-                setOnItemCallBack(object : FavPeopleRecviewAdapter.OnItemClickDetail{
-                    override fun onItemClick(data: FavoritePeople) {
-                        findNavController().navigate(
-                            BookFragmentDirections.actionAuthorFragmentToDetailFragment(data.name)
-                        )
-                    }
-                })
-                setOnitemDelete(object : FavPeopleRecviewAdapter.OnItemDelete{
-                    override fun onItemClickDelete(data: FavoritePeople) {
-                        deleteFavPeople(data)
-                    }
-                })
+                peopleRecviewAdapter.apply {
+                    setOnItemCallBack(object : FavPeopleRecviewAdapter.OnItemClickDetail{
+                        override fun onItemClick(data: FavoritePeople) {
+                            findNavController().navigate(
+                                BookFragmentDirections.actionAuthorFragmentToDetailFragment(data.name)
+                            )
+                        }
+                    })
+                    setOnitemDelete(object : FavPeopleRecviewAdapter.OnItemDelete{
+                        override fun onItemClickDelete(data: FavoritePeople) {
+                            deleteFavPeople(data)
+                        }
+                    })
+                }
             }
         }
     }

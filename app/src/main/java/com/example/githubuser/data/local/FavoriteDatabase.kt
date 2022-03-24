@@ -12,7 +12,7 @@ import com.example.githubuser.data.local.entity.FavoriteProject
         FavoritePeople::class,
         FavoriteProject::class
     ],
-    version = 3
+    version = 4
 )
 abstract class FavoriteDatabase : RoomDatabase() {
     abstract fun favoritedao() : FavoriteDao

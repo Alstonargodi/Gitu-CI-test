@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.githubuser.data.remote.githubresponse.follow.FollowResponseItem
 import com.example.githubuser.databinding.ItemcvFollowerBinding
-import com.example.githubuser.data.remote.githubresponse.following.FollowingResponseItem
 
-class FollowingReviewAdapter(private var dataList : List<FollowingResponseItem>)
+class FollowingReviewAdapter(private var dataList : List<FollowResponseItem>)
     : RecyclerView.Adapter<FollowingReviewAdapter.ViewHolder>() {
     private lateinit var onItemClickDetail : OnItemClickDetil
 

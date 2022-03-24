@@ -135,6 +135,7 @@ class DetailFragment : Fragment() {
                         name,
                         avatarUrl,
                         location,
+                        company,
                         true
                     )
                     favoriteViewModel.inserFavoritePeople(favTemp)

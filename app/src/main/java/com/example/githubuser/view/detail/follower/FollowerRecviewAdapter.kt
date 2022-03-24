@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.ItemcvFollowerBinding
-import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.data.remote.githubresponse.follow.FollowResponseItem
 
-class FollowerRecviewAdapter(private var dataList :List<FollowerResponseItem>)
+class FollowerRecviewAdapter(private var dataList :List<FollowResponseItem>)
     : RecyclerView.Adapter<FollowerRecviewAdapter.ViewHolder>() {
 
     private lateinit var onItemClickDetail : OnItemCallDetail

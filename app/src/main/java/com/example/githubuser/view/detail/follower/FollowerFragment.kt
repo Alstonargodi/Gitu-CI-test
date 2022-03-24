@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
-import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.data.remote.githubresponse.follow.FollowResponseItem
 import com.example.githubuser.view.detail.DetailFragmentDirections
 import com.example.githubuser.viewmodel.FollowerViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
@@ -51,7 +51,7 @@ class FollowerFragment: Fragment() {
     private fun setFollowersList(){
         followerViewModel.apply {
             getListFollowers(userName)
-            followerResponse.observe(viewLifecycleOwner){ responData ->
+            followResponse.observe(viewLifecycleOwner){ responData ->
                 isLoading.observe(viewLifecycleOwner){ isLoading(it) }
                 showFollowerList(responData)
                 utilViewModel.apply {
@@ -69,7 +69,7 @@ class FollowerFragment: Fragment() {
         }
     }
 
-    private fun showFollowerList(list: List<FollowerResponseItem>){
+    private fun showFollowerList(list: List<FollowResponseItem>){
         adapter = FollowerRecviewAdapter(list)
         val recycView = binding.followerrecview
         recycView.adapter = adapter

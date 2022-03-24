@@ -2,8 +2,7 @@ package com.example.githubuser.data.remote.service
 import com.example.githubuser.BuildConfig
 import com.example.githubuser.data.remote.githubresponse.DetailResponse
 import com.example.githubuser.data.remote.githubresponse.ListResponse
-import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponse
-import com.example.githubuser.data.remote.githubresponse.following.FollowingResponse
+import com.example.githubuser.data.remote.githubresponse.follow.FollowResponse
 import com.example.githubuser.data.remote.githubresponse.repository.RepoResponse
 import retrofit2.Call
 import retrofit2.http.*
@@ -25,13 +24,13 @@ interface ApiService {
     @Headers("Authorization: token ${BuildConfig.api_key}")
     fun getUserFollowers(
         @Path("username") username : String,
-    ): Call<FollowerResponse>
+    ): Call<FollowResponse>
 
     @GET("users/{username}/following")
     @Headers("Authorization: token ${BuildConfig.api_key}")
     fun getUserFollowing(
         @Path("username") username : String,
-    ): Call<FollowingResponse>
+    ): Call<FollowResponse>
 
     @GET("users/{username}/repos")
     @Headers("Authorization: token ${BuildConfig.api_key}")

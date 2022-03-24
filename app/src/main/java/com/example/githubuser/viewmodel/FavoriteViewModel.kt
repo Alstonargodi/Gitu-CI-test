@@ -18,7 +18,21 @@ class FavoriteViewModel(application: Application): ViewModel() {
     private var _responFavoriteRepo = MutableLiveData<List<FavoriteProject>>()
     var responFavoriteRepo : LiveData<List<FavoriteProject>> = _responFavoriteRepo
 
-    fun readFavoritePeople() : LiveData<List<FavoritePeople>> = mFavRepo.readFavoritePeople()
+    private var _responFavoritePeople = MutableLiveData<List<FavoritePeople>>()
+    var responFavoritePeople : LiveData<List<FavoritePeople>> = _responFavoritePeople
+
+
+
+    fun readFavoritePeople(){
+        _isLoading.value = true
+        try {
+            responFavoritePeople = mFavRepo.readFavoritePeople()
+            _isLoading.value = false
+        }catch (e : java.lang.Exception){
+            _isLoading.value = false
+            Log.d(EXTRA_TAG,e.message.toString())
+        }
+    }
 
     fun searchFavoritePeople(name : String) : LiveData<List<FavoritePeople>> = mFavRepo.searchFavoritePeople(name)
     fun inserFavoritePeople(favoritePeople: FavoritePeople){
@@ -26,6 +40,7 @@ class FavoriteViewModel(application: Application): ViewModel() {
     }
     fun deletePersonFavoritePeople(name: String){
         mFavRepo.deletePersonFavoritePeople(name)
+
     }
 
 

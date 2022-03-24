@@ -19,6 +19,8 @@ data class FavoritePeople(
     val imageLink : String? ="",
     @ColumnInfo(name = "location")
     val location: String? =null,
+    @ColumnInfo(name = "company")
+    val company: String? =null,
     @ColumnInfo(name = "isSaved")
     val isSaved : Boolean,
 ): Parcelable

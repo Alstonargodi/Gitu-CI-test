@@ -34,10 +34,12 @@ class FavPeopleRecviewAdapter(private val favList : List<FavoritePeople>):
         holder.binding.apply {
             NameFavpeoplecv.text = item.name
             locationFavpeoplecv.text = item.location
+            companFavpeoplecv.text = item.company
 
             imageView.setOnClickListener { onItemClickDetail.onItemClick(item)}
 
             btnfav.setOnClickListener { onItemClickDelete.onItemClickDelete(item) }
+
 
             Glide.with(holder.itemView.context)
                 .load(item.imageLink)

@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubuser.data.remote.githubresponse.follow.FollowResponseItem
 import com.example.githubuser.databinding.FragmentFollowingBinding
-import com.example.githubuser.data.remote.githubresponse.following.FollowingResponseItem
 import com.example.githubuser.view.detail.DetailFragmentDirections
 import com.example.githubuser.viewmodel.FollowingViewModel
 import com.example.githubuser.viewmodel.util.UtilViewModel
@@ -71,7 +71,7 @@ class FollowingFragment : Fragment() {
         }
     }
 
-    private fun showFollowingList(list: List<FollowingResponseItem>){
+    private fun showFollowingList(list: List<FollowResponseItem>){
         adapter = FollowingReviewAdapter(list)
         val recview = binding.followingRecview
         recview.adapter = adapter

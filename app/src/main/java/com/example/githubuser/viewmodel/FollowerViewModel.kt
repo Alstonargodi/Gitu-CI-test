@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.githubuser.data.remote.config.ApiConfig
-import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponse
-import com.example.githubuser.data.remote.githubresponse.follower.FollowerResponseItem
+import com.example.githubuser.data.remote.githubresponse.follow.FollowResponse
+import com.example.githubuser.data.remote.githubresponse.follow.FollowResponseItem
 import com.example.githubuser.view.utils.EventText.errorTitle
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,13 +24,13 @@ class FollowerViewModel: ViewModel() {
     private val _errorResponse = MutableLiveData<String>()
     val errorResponse: LiveData<String> = _errorResponse
 
-    private val _followersResponse = MutableLiveData<List<FollowerResponseItem>>()
-    val followerResponse : LiveData<List<FollowerResponseItem>> = _followersResponse
+    private val _followersResponse = MutableLiveData<List<FollowResponseItem>>()
+    val followResponse : LiveData<List<FollowResponseItem>> = _followersResponse
     fun getListFollowers(name: String){
         _isLoading.value = true
         ApiConfig.getApiService().getUserFollowers(name).enqueue(object :
-            Callback<FollowerResponse> {
-            override fun onResponse(call: Call<FollowerResponse>, response: Response<FollowerResponse>) {
+            Callback<FollowResponse> {
+            override fun onResponse(call: Call<FollowResponse>, response: Response<FollowResponse>) {
                 if (response.isSuccessful){
                     _followersResponse.value = response.body()
                     _isLoading.value = false
@@ -40,7 +40,7 @@ class FollowerViewModel: ViewModel() {
                     _errorResponse.value = errorTitle + response.message()
                 }
             }
-            override fun onFailure(call: Call<FollowerResponse>, t: Throwable) {
+            override fun onFailure(call: Call<FollowResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
                 _errorResponse.value = errorTitle + t.message.toString()
