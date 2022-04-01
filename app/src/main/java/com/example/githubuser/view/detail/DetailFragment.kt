@@ -68,6 +68,7 @@ class DetailFragment : Fragment() {
                 share.type = "text/plain"
                 share.putExtra(Intent.EXTRA_TEXT,"Visit $saveText on github")
 
+
                 startActivity(Intent.createChooser(share,"Share to"))
             }
 
@@ -164,6 +165,7 @@ class DetailFragment : Fragment() {
         val viewPager = binding.Followviewpager
         val tabs = binding.tabLayout
         viewPager.adapter = pagerAdapter
+
         TabLayoutMediator(tabs,viewPager){ tab, position ->
             tab.text = getString(tab_titles[position])
         }.attach()
