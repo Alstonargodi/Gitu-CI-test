@@ -35,8 +35,6 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         setHasOptionsMenu(true)
-
-
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)
 
@@ -46,7 +44,6 @@ class HomeFragment : Fragment() {
                 showUserList(it)
                 if (it.isEmpty()) showEmptyView(true) else showEmptyView(false)
             }
-
         }
 
         utilViewModel.apply {

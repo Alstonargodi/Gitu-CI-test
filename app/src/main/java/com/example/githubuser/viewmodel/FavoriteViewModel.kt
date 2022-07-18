@@ -22,7 +22,6 @@ class FavoriteViewModel(application: Application): ViewModel() {
     var responFavoritePeople : LiveData<List<FavoritePeople>> = _responFavoritePeople
 
 
-
     fun readFavoritePeople(){
         _isLoading.value = true
         try {

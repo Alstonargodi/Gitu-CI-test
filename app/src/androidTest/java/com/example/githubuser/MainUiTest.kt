@@ -43,6 +43,7 @@ class MainUiTest {
             .check(matches(isDisplayed()))
         onView(withId(R.id.RecyclerV_Favorite))
             .check(matches(isDisplayed()))
+
         Thread.sleep(1000)
         onView(withId(R.id.Author_pager))
             .perform(swipeLeft())

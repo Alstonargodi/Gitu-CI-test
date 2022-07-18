@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/Theme.Githubuser.Dark"
-        app:titleTextAppearance="@style/ToolBarStyleLight" />
+        app:titleTextAppearance="@style/ToolBarStyleLight"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView

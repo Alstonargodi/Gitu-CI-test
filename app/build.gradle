@@ -18,7 +18,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "api_key", '"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"'
+        buildConfigField "String", "api_key", '"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"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -80,8 +80,8 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.4.1"
 
     //navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
     //room
     implementation 'androidx.room:room-runtime:2.4.2'
