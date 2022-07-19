@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Githubuser.Light">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.setting.SettingFragment">
+            android:name="com.example.githubuser.presentation.fragment.setting.SettingFragment">
         </activity>
 
         <activity
-            android:name=".view.SplashScreen"
+            android:name=".presentation.activity.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

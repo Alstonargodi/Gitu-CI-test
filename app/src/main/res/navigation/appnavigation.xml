@@ -7,12 +7,12 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.githubuser.MainActivity"
+        android:name="com.example.githubuser.presentation.activity.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.githubuser.view.home.HomeFragment"
+        android:name="com.example.githubuser.presentation.fragment.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.githubuser.view.detail.DetailFragment"
+        android:name="com.example.githubuser.presentation.fragment.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/followerFragment"
-        android:name="com.example.githubuser.view.detail.follower.FollowerFragment"
+        android:name="com.example.githubuser.presentation.fragment.follower.FollowerFragment"
         android:label="fragment_follower"
         tools:layout="@layout/fragment_follower" >
         <argument
@@ -67,22 +67,22 @@
     </fragment>
     <fragment
         android:id="@+id/followingFragment"
-        android:name="com.example.githubuser.view.detail.following.FollowingFragment"
+        android:name="com.example.githubuser.presentation.fragment.following.FollowingFragment"
         android:label="fragment_following"
         tools:layout="@layout/fragment_following" />
     <fragment
         android:id="@+id/repositoryFragment"
-        android:name="com.example.githubuser.view.detail.repository.RepositoryFragment"
+        android:name="com.example.githubuser.presentation.fragment.githubrepository.RepositoryFragment"
         android:label="fragment_repo"
         tools:layout="@layout/fragment_repo" />
     <activity
         android:id="@+id/splashscreen"
-        android:name="com.example.githubuser.view.SplashScreen"
+        android:name="com.example.githubuser.presentation.activity.SplashScreen"
         android:label="activity_splashscreen"
         tools:layout="@layout/activity_splashscreen" />
     <fragment
         android:id="@+id/authorFragment"
-        android:name="com.example.githubuser.view.book.BookFragment"
+        android:name="com.example.githubuser.presentation.fragment.book.BookFragment"
         android:label="fragment_author"
         tools:layout="@layout/fragment_book" >
         <action
@@ -94,7 +94,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.githubuser.view.book.FavoriteFragment"
+        android:name="com.example.githubuser.presentation.fragment.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
@@ -103,7 +103,7 @@
     </fragment>
     <activity
         android:id="@+id/settingFragment"
-        android:name="com.example.githubuser.view.setting.SettingFragment"
+        android:name="com.example.githubuser.presentation.fragment.setting.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
 </navigation>

@@ -4,10 +4,10 @@ import android.util.Log
 
 import com.example.githubuser.ViewModelTest.ValidationResult.tag
 import com.example.githubuser.ViewModelTest.ValidationResult.validateData
-import com.example.githubuser.data.remote.githubresponse.ItemsItem
-import com.example.githubuser.data.remote.githubresponse.ListResponse
-import com.example.githubuser.data.remote.service.ApiService
-import com.example.githubuser.viewmodel.HomeViewModel
+import com.example.githubuser.data.remote.apiresponse.ListUserResponseItem
+import com.example.githubuser.data.remote.apiresponse.ListUserResponse
+import com.example.githubuser.data.remote.apiservice.ApiService
+import com.example.githubuser.presentation.fragment.home.HomeViewModel
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.*
@@ -22,7 +22,7 @@ class ViewModelTest {
     private val dummyName = "budi"
 
     object ValidationResult{
-        fun validateData(item:List<ItemsItem>):Boolean{
+        fun validateData(item:List<ListUserResponseItem>):Boolean{
             if (item[0].login.isNotEmpty()) return true
             return false
         }
@@ -39,11 +39,11 @@ class ViewModelTest {
 
     @Test
     fun apiServiceTest(){
-        apiService.getUserList(dummyName).enqueue(object : Callback<ListResponse>{
-            override fun onResponse(call: Call<ListResponse>, response: Response<ListResponse>) {
+        apiService.getUserList(dummyName).enqueue(object : Callback<ListUserResponse>{
+            override fun onResponse(call: Call<ListUserResponse>, response: Response<ListUserResponse>) {
                 assertEquals(true, response.body()?.items?.let { validateData(it) })
             }
-            override fun onFailure(call: Call<ListResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ListUserResponse>, t: Throwable) {
                 Log.d(tag,t.message.toString())
             }
         })

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:scrollbars="none"
     android:id="@+id/detailFragment"
-    tools:context=".view.detail.DetailFragment">
+    tools:context=".presentation.fragment.detail.DetailFragment">
 
 
     <LinearLayout
