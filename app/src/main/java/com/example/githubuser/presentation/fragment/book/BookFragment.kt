@@ -22,7 +22,6 @@ class BookFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
-
     private lateinit var pagerAdapter : SectionFavoritePagerAdapter
 
     override fun onCreateView(

@@ -1,18 +1,16 @@
 package com.example.githubuser.presentation.fragment.favorite
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuser.data.repository.FavoriteRepository
 import com.example.githubuser.data.local.entity.favoritepeople.FavoritePeople
 import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
+import com.example.githubuser.domain.FavoriteUseCase
 
 class FavoriteViewModel(
-    favoriteRepository: FavoriteRepository
+    private val favoriteUseCase : FavoriteUseCase
 ): ViewModel() {
-    private val mFavRepo = favoriteRepository
 
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -27,7 +25,7 @@ class FavoriteViewModel(
     fun readFavoritePeople(){
         _isLoading.value = true
         try {
-            responFavoritePeople = mFavRepo.readFavoritePeople()
+            responFavoritePeople = favoriteUseCase.readFavoritePeople()
             _isLoading.value = false
         }catch (e : java.lang.Exception){
             _isLoading.value = false
@@ -35,12 +33,12 @@ class FavoriteViewModel(
         }
     }
 
-    fun searchFavoritePeople(name : String) : LiveData<List<FavoritePeople>> = mFavRepo.searchFavoritePeople(name)
+    fun searchFavoritePeople(name : String) : LiveData<List<FavoritePeople>> = favoriteUseCase.searchFavoritePeople(name)
     fun inserFavoritePeople(favoritePeople: FavoritePeople){
-        mFavRepo.insertFavoritePeople(favoritePeople)
+        favoriteUseCase.insertFavoritePeople(favoritePeople)
     }
     fun deletePersonFavoritePeople(name: String){
-        mFavRepo.deletePersonFavoritePeople(name)
+        favoriteUseCase.deletePersonFavoritePeople(name)
 
     }
 
@@ -48,7 +46,7 @@ class FavoriteViewModel(
     fun readFavoriteProject(){
         _isLoading.value = true
         try {
-            responFavoriteRepo = mFavRepo.readFavoriteProject()
+            responFavoriteRepo = favoriteUseCase.readFavoriteProject()
             _isLoading.value = false
         }catch (e : java.lang.Exception){
             _isLoading.value = false
@@ -56,10 +54,10 @@ class FavoriteViewModel(
         }
     }
     fun insertFavoriteRepo(favoriteProject: FavoriteProject){
-        mFavRepo.insertFavoriteProject(favoriteProject)
+        favoriteUseCase.insertFavoriteProject(favoriteProject)
     }
     fun deleteFavoriteRepo(favoriteProject: FavoriteProject){
-        mFavRepo.deleteFavoriteProject(favoriteProject)
+        favoriteUseCase.deleteFavoriteProject(favoriteProject)
     }
 
 

@@ -37,14 +37,11 @@ class FollowingFragment : Fragment() {
         _binding = FragmentFollowingBinding.inflate(layoutInflater)
         userName = arguments?.getString("value","").toString()
 
-
-
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){
                 userName = it
             }
         }
-
         return binding.root
     }
 

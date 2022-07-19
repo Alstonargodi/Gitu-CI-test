@@ -1,11 +1,11 @@
 package com.example.githubuser.presentation.utils.viewmodelfactory
 
-import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.data.repository.FavoriteRepository
 import com.example.githubuser.data.repository.RemoteRepository
+import com.example.githubuser.domain.FavoriteUseCase
 import com.example.githubuser.injection.Injection
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
@@ -17,8 +17,8 @@ import com.example.githubuser.presentation.fragment.home.HomeViewModel
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory private constructor(
-        private val favoriteRepository : FavoriteRepository,
-        private val remoteRepository: RemoteRepository
+    private val favoriteUseCase : FavoriteUseCase,
+    private val remoteRepository: RemoteRepository
 ):ViewModelProvider.NewInstanceFactory() {
         companion object{
             @Volatile
@@ -27,7 +27,7 @@ class ViewModelFactory private constructor(
                 if (instance == null){
                     synchronized(ViewModelFactory::class.java){
                         instance = ViewModelFactory(
-                            Injection.provideLocalRepository(context),
+                            Injection.provideUseCase(context),
                             Injection.provideRemoteRepository()
                         )
                     }
@@ -38,7 +38,7 @@ class ViewModelFactory private constructor(
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)){
-                return FavoriteViewModel(favoriteRepository) as T
+                return FavoriteViewModel(favoriteUseCase) as T
             }else if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
                 return HomeViewModel(remoteRepository) as T
             }else if(modelClass.isAssignableFrom(DetailViewModel::class.java)) {
