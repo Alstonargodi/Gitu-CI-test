@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.githubuser.data.remote.apiconfig.ApiConfig
 import com.example.githubuser.data.remote.apiresponse.*
 import com.example.githubuser.data.repository.RemoteRepository
+import com.example.githubuser.domain.remote.RemoteUseCase
 import com.example.githubuser.presentation.utils.EventText.errorTitle
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -15,7 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel(
-    val repository: RemoteRepository
+    val repository: RemoteUseCase
 ) :ViewModel() {
     companion object{
         const val TAG = "HomeViewModel"

@@ -3,9 +3,8 @@ package com.example.githubuser.presentation.utils.viewmodelfactory
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.data.repository.FavoriteRepository
-import com.example.githubuser.data.repository.RemoteRepository
-import com.example.githubuser.domain.FavoriteUseCase
+import com.example.githubuser.domain.local.FavoriteUseCase
+import com.example.githubuser.domain.remote.RemoteUseCase
 import com.example.githubuser.injection.Injection
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
@@ -18,7 +17,7 @@ import com.example.githubuser.presentation.fragment.home.HomeViewModel
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory private constructor(
     private val favoriteUseCase : FavoriteUseCase,
-    private val remoteRepository: RemoteRepository
+    private val remoteUseCase: RemoteUseCase
 ):ViewModelProvider.NewInstanceFactory() {
         companion object{
             @Volatile
@@ -27,7 +26,7 @@ class ViewModelFactory private constructor(
                 if (instance == null){
                     synchronized(ViewModelFactory::class.java){
                         instance = ViewModelFactory(
-                            Injection.provideUseCase(context),
+                            Injection.provideLocalUseCase(context),
                             Injection.provideRemoteRepository()
                         )
                     }
@@ -40,15 +39,15 @@ class ViewModelFactory private constructor(
             if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)){
                 return FavoriteViewModel(favoriteUseCase) as T
             }else if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
-                return HomeViewModel(remoteRepository) as T
+                return HomeViewModel(remoteUseCase) as T
             }else if(modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-                return DetailViewModel(remoteRepository) as T
+                return DetailViewModel(remoteUseCase) as T
             }else if(modelClass.isAssignableFrom(FollowerViewModel::class.java)) {
-                return FollowerViewModel(remoteRepository) as T
+                return FollowerViewModel(remoteUseCase) as T
             }else if(modelClass.isAssignableFrom(FollowingViewModel::class.java)) {
-                return FollowingViewModel(remoteRepository) as T
+                return FollowingViewModel(remoteUseCase) as T
             }else if(modelClass.isAssignableFrom(GithubRepositoryViewModel::class.java)) {
-                return GithubRepositoryViewModel(remoteRepository) as T
+                return GithubRepositoryViewModel(remoteUseCase) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

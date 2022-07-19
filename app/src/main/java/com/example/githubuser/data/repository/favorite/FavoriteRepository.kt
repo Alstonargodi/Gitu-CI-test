@@ -6,7 +6,7 @@ import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
 import com.example.githubuser.data.local.source.FavoriteDataSource
 import com.example.githubuser.data.local.source.IFavoriteDataSource
 
-class mFavoriteRepository(
+class FavoriteRepository(
     private val dataSource: IFavoriteDataSource
 ): IFavoriteRepository {
     override fun insertFavoriteProject(favoriteProject: FavoriteProject) {

@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuser.data.remote.apiconfig.ApiConfig
 import com.example.githubuser.data.remote.apiresponse.detail.DetailUserResponse
-import com.example.githubuser.data.repository.FavoriteRepository
 import com.example.githubuser.data.repository.RemoteRepository
 import com.example.githubuser.presentation.utils.EventText.errorTitle
 import retrofit2.Call

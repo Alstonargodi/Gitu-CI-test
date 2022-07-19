@@ -1,11 +1,11 @@
-package com.example.githubuser.domain
+package com.example.githubuser.domain.local
 
 import androidx.lifecycle.LiveData
 import com.example.githubuser.data.local.entity.favoritepeople.FavoritePeople
 import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
 import com.example.githubuser.data.repository.favorite.IFavoriteRepository
 
-class FavoriteInteractor(private val repository: IFavoriteRepository): FavoriteUseCase{
+class FavoriteInteractor(private val repository: IFavoriteRepository): FavoriteUseCase {
     override fun insertFavoriteProject(favoriteProject: FavoriteProject) {
         repository.insertFavoriteProject(favoriteProject)
     }

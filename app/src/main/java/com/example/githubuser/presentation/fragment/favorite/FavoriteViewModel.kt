@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.githubuser.data.local.entity.favoritepeople.FavoritePeople
 import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
-import com.example.githubuser.domain.FavoriteUseCase
+import com.example.githubuser.domain.local.FavoriteUseCase
 
 class FavoriteViewModel(
     private val favoriteUseCase : FavoriteUseCase
