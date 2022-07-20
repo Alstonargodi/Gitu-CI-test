@@ -87,9 +87,8 @@ class DetailFragment : Fragment() {
 
     private fun setDetailUser(){
         detailViewModel.apply {
-            getUserDetail(saveText)
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-            detailUserResponse.observe(viewLifecycleOwner){ responData ->
+            getUserDetail(saveText).observe(viewLifecycleOwner){ responData ->
                 binding.apply {
                     responData.apply {
                         UsernameTvdetailpage.text = login

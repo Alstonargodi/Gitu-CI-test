@@ -53,8 +53,7 @@ class FollowingFragment : Fragment() {
 
     private fun setFollowingList(){
         followingViewModel.apply {
-            getListFollowing(userName)
-            followingResponse.observe(viewLifecycleOwner){ responData->
+            getListFollowing(userName).observe(viewLifecycleOwner){ responData->
                 isLoading.observe(viewLifecycleOwner){ isLoading(it) }
                 showFollowingList(responData)
                 utilViewModel.apply {

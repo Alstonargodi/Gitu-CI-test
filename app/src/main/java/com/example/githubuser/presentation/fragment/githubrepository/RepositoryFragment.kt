@@ -17,7 +17,6 @@ import com.example.githubuser.presentation.fragment.githubrepository.adapter.Rep
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
-import com.example.githubuser.viewmodel.util.obtainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -49,8 +48,7 @@ class RepositoryFragment: Fragment() {
 
 
         repoViewModel.apply {
-            getUserRepo(userName)
-            repoResponse.observe(viewLifecycleOwner){ responData ->
+            getUserRepository(userName).observe(viewLifecycleOwner){ responData ->
                 showRepositoryList(responData)
             }
         }

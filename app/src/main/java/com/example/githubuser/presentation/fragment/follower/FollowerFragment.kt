@@ -53,8 +53,7 @@ class FollowerFragment: Fragment() {
 
     private fun setFollowersList(){
         followerViewModel.apply {
-            getListFollowers(userName)
-            followResponse.observe(viewLifecycleOwner){ responData ->
+            getListFollowers(userName).observe(viewLifecycleOwner){ responData ->
                 isLoading.observe(viewLifecycleOwner){ isLoading(it) }
                 showFollowerList(responData)
                 utilViewModel.apply {
@@ -74,16 +73,16 @@ class FollowerFragment: Fragment() {
 
     private fun showFollowerList(list: List<FollowerUserResponseItem>){
         adapter = FollowerRecyclerViewAdapter(list)
-        val recycView = binding.followerrecview
-        recycView.adapter = adapter
-        recycView.layoutManager = LinearLayoutManager(requireContext())
+        val recyclerView = binding.followerrecview
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         utilViewModel.apply { if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false) }
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            recycView.layoutManager = GridLayoutManager(requireContext(),2)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         }else{
-            recycView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
 
         adapter.onItemClickDetail(object : FollowerRecyclerViewAdapter.OnItemCallDetail{

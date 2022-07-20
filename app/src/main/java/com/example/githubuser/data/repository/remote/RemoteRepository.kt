@@ -8,7 +8,7 @@ import com.example.githubuser.data.remote.source.IRemoteDataSource
 import com.example.githubuser.data.remote.source.RemoteDataSource
 import retrofit2.Call
 
-class mRemoteRepository(
+class RemoteRepository(
     private val dataSource: IRemoteDataSource
 ): IRemoteRepository {
     override fun getListUser(userName: String): Call<ListUserResponse> =
