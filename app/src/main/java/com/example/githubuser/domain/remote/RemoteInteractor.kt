@@ -1,6 +1,7 @@
 package com.example.githubuser.domain.remote
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.githubuser.data.remote.apiresponse.ListUserResponse
 import com.example.githubuser.data.remote.apiresponse.ListUserResponseItem
@@ -16,9 +17,9 @@ import retrofit2.Response
 
 class RemoteInteractor(private val remoteRepository: IRemoteRepository): RemoteUseCase {
 
-    val userListResponse = MutableLiveData<List<ListUserResponseItem>>()
+    override fun getListUser(userName: String):LiveData<List<ListUserResponseItem>>{
+        val userListResponse = MutableLiveData<List<ListUserResponseItem>>()
 
-    override fun getListUser(userName: String){
         remoteRepository.getListUser(userName).enqueue(object : Callback<ListUserResponse>{
             override fun onResponse(
                 call: Call<ListUserResponse>,
@@ -30,11 +31,12 @@ class RemoteInteractor(private val remoteRepository: IRemoteRepository): RemoteU
                     Log.d(HomeViewModel.TAG, response.message().toString())
                 }
             }
-
             override fun onFailure(call: Call<ListUserResponse>, t: Throwable) {
                 TODO("Not yet implemented")
             }
         })
+
+        return userListResponse
     }
 
     override fun getUserDetail(name: String): Call<DetailUserResponse> {

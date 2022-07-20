@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
                 showUserList(it)
                 if (it.isEmpty()) showEmptyView(true) else showEmptyView(false)
             }
+
         }
 
         utilViewModel.apply {
@@ -106,7 +107,9 @@ class HomeFragment : Fragment() {
 
     private fun setSearchResult(search : String){
         viewModel.apply {
-            getListUser(search)
+            getListUser(search).observe(viewLifecycleOwner){
+                showUserList(it)
+            }
             binding.tvEmptyview.visibility = View.GONE
             showEmptyView(false)
         }

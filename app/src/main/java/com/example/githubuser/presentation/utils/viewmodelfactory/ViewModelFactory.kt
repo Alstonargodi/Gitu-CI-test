@@ -27,7 +27,7 @@ class ViewModelFactory private constructor(
                     synchronized(ViewModelFactory::class.java){
                         instance = ViewModelFactory(
                             Injection.provideLocalUseCase(context),
-                            Injection.provideRemoteRepository()
+                            Injection.provideRemoteUseCase()
                         )
                     }
                 }
@@ -40,14 +40,6 @@ class ViewModelFactory private constructor(
                 return FavoriteViewModel(favoriteUseCase) as T
             }else if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
                 return HomeViewModel(remoteUseCase) as T
-            }else if(modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-                return DetailViewModel(remoteUseCase) as T
-            }else if(modelClass.isAssignableFrom(FollowerViewModel::class.java)) {
-                return FollowerViewModel(remoteUseCase) as T
-            }else if(modelClass.isAssignableFrom(FollowingViewModel::class.java)) {
-                return FollowingViewModel(remoteUseCase) as T
-            }else if(modelClass.isAssignableFrom(GithubRepositoryViewModel::class.java)) {
-                return GithubRepositoryViewModel(remoteUseCase) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

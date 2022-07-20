@@ -36,29 +36,8 @@ class HomeViewModel(
     val listresponse : LiveData<List<ListUserResponseItem>> = _listresponse
 
 
-    fun getListUser(name : String){
-        _isLoading.value = true
-        viewModelScope.launch {
-            repository.getListUser(name).enqueue(object : Callback<ListUserResponse>{
-                override fun onResponse(call: Call<ListUserResponse>, response: Response<ListUserResponse>) {
-                    if (response.isSuccessful){
-                        _listresponse.postValue(response.body()?.items)
-                        _isLoading.value = false
-                        _errorResponse.value = ""
-                    }else{
-                        Log.d(TAG, response.message().toString())
-                        _errorResponse.value = errorTitle + response.message()
-                        _isLoading.value = false
-                    }
-                }
-                override fun onFailure(call: Call<ListUserResponse>, t: Throwable) {
-                    _isLoading.value = false
-                    Log.e(TAG, "onFailure: ${t.message.toString()}")
-                    _errorResponse.value = errorTitle + t.message.toString()
-                }
-            })
-        }
-
+    fun getListUser(name : String):LiveData<List<ListUserResponseItem>>{
+       return repository.getListUser(name)
     }
 
 
