@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
-import com.example.githubuser.data.local.entity.favoritepeople.FavoritePeople
+import com.example.githubuser.data.local.entity.userlist.GithubListUser
 import com.example.githubuser.presentation.fragment.detail.tabadapter.SectionPagerAdapter
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
@@ -134,7 +134,7 @@ class DetailFragment : Fragment() {
         detailViewModel.detailUserResponse.observe(viewLifecycleOwner){ respon->
             respon?.apply {
                 login?.let {
-                    val favTemp = FavoritePeople(
+                    val favTemp = GithubListUser(
                         login,
                         name,
                         avatarUrl,

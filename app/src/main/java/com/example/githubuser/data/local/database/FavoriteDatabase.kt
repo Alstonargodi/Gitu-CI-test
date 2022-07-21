@@ -5,18 +5,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.githubuser.data.local.dao.FavoriteDao
-import com.example.githubuser.data.local.entity.favoritepeople.FavoritePeople
+import com.example.githubuser.data.local.dao.ListUserDao
+import com.example.githubuser.data.local.entity.userlist.GithubListUser
 import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
 
 @Database(
     entities = [
-        FavoritePeople::class,
+        GithubListUser::class,
         FavoriteProject::class
     ],
     version = 4
 )
 abstract class FavoriteDatabase : RoomDatabase() {
-    abstract fun favoritedao() : FavoriteDao
+    abstract fun favoriteDao() : FavoriteDao
+    abstract fun listUserDao() : ListUserDao
 
     companion object{
         @Volatile

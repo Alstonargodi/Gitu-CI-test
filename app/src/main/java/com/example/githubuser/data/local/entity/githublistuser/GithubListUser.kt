@@ -1,4 +1,4 @@
-package com.example.githubuser.data.local.entity.favoritepeople
+package com.example.githubuser.data.local.entity.userlist
 
 
 import android.os.Parcelable
@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
-data class FavoritePeople(
+data class GithubListUser(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "name")
     val name : String = "",

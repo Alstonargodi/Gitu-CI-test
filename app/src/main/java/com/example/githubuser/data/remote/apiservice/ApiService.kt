@@ -11,9 +11,9 @@ interface ApiService {
 
     @GET("search/users")
     @Headers("Authorization:${BuildConfig.api_key}")
-    fun getUserList(
+    suspend fun getUserList(
         @Query("q") id : String
-    ): Call<ListUserResponse>
+    ): ListUserResponse
 
 
     @GET("users/{username}")

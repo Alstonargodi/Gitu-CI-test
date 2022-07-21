@@ -1,8 +1,11 @@
 package com.example.githubuser.injection
 
 import android.content.Context
+import com.example.githubuser.data.local.database.FavoriteDatabase
 import com.example.githubuser.data.local.source.FavoriteDataSource
 import com.example.githubuser.data.local.source.IFavoriteDataSource
+import com.example.githubuser.data.local.source.ILocalDataSource
+import com.example.githubuser.data.local.source.LocalDataSource
 import com.example.githubuser.data.remote.source.IRemoteDataSource
 import com.example.githubuser.data.remote.source.RemoteDataSource
 import com.example.githubuser.data.repository.favorite.IFavoriteRepository
@@ -28,15 +31,23 @@ object Injection {
         return FavoriteDataSource(context)
     }
 
-    fun provideRemoteUseCase(): RemoteUseCase{
-        return RemoteInteractor(provideRemoteRepository())
+    fun provideRemoteUseCase(context: Context): RemoteUseCase{
+        return RemoteInteractor(
+            provideRemoteRepository(context)
+        )
     }
 
-    private fun provideRemoteRepository(): IRemoteRepository{
-        return RemoteRepository(provideRemoteSource())
+    private fun provideRemoteRepository(context: Context): IRemoteRepository{
+        val database = FavoriteDatabase.setDatabase(context)
+        return RemoteRepository(
+            provideRemoteSource(),
+            LocalDataSource.getInstance(database.listUserDao())
+        )
     }
 
     private fun provideRemoteSource(): IRemoteDataSource{
         return RemoteDataSource()
     }
+
+
 }

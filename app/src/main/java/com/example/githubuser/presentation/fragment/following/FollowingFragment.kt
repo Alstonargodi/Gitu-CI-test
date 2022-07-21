@@ -73,18 +73,18 @@ class FollowingFragment : Fragment() {
 
     private fun showFollowingList(list: List<FollowerUserResponseItem>){
         adapter = FollowingRecyclerViewAdapter(list)
-        val recview = binding.followingRecview
-        recview.adapter = adapter
-        recview.layoutManager = LinearLayoutManager(requireContext())
+        val recyclerView = binding.followingRecview
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         utilViewModel.apply {
             if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false)
         }
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            recview.layoutManager = GridLayoutManager(requireContext(),2)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         }else{
-            recview.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
 
         adapter.onItemCLickDetail(object : FollowingRecyclerViewAdapter.OnItemClickDetil{

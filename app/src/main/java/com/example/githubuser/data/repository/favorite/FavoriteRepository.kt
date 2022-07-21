@@ -1,9 +1,8 @@
 package com.example.githubuser.data.repository.favorite
 
 import androidx.lifecycle.LiveData
-import com.example.githubuser.data.local.entity.favoritepeople.FavoritePeople
+import com.example.githubuser.data.local.entity.userlist.GithubListUser
 import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
-import com.example.githubuser.data.local.source.FavoriteDataSource
 import com.example.githubuser.data.local.source.IFavoriteDataSource
 
 class FavoriteRepository(
@@ -13,17 +12,17 @@ class FavoriteRepository(
         dataSource.insertFavoriteProject(favoriteProject)
     }
 
-    override fun insertFavoritePeople(favoritePeople: FavoritePeople) {
-        dataSource.insertFavoritePeople(favoritePeople)
+    override fun insertFavoritePeople(githubListUser: GithubListUser) {
+        dataSource.insertFavoritePeople(githubListUser)
     }
 
     override fun readFavoriteProject(): LiveData<List<FavoriteProject>> =
         dataSource.readFavoriteProject()
 
-    override fun readFavoritePeople(): LiveData<List<FavoritePeople>> =
+    override fun readFavoritePeople(): LiveData<List<GithubListUser>> =
         dataSource.readFavoritePeople()
 
-    override fun searchFavoritePeople(name: String): LiveData<List<FavoritePeople>> =
+    override fun searchFavoritePeople(name: String): LiveData<List<GithubListUser>> =
         dataSource.searchFavoritePeople(name)
 
     override fun deleteFavoriteProject(favoriteProject: FavoriteProject) {

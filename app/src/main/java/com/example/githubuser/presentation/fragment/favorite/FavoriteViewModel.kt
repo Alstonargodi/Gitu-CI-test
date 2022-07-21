@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuser.data.local.entity.favoritepeople.FavoritePeople
+import com.example.githubuser.data.local.entity.userlist.GithubListUser
 import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
 import com.example.githubuser.domain.local.FavoriteUseCase
 
@@ -18,14 +18,14 @@ class FavoriteViewModel(
     private var _responFavoriteRepo = MutableLiveData<List<FavoriteProject>>()
     var responFavoriteRepo : LiveData<List<FavoriteProject>> = _responFavoriteRepo
 
-    private var _responFavoritePeople = MutableLiveData<List<FavoritePeople>>()
-    var responFavoritePeople : LiveData<List<FavoritePeople>> = _responFavoritePeople
+    private var _responGithubListUser = MutableLiveData<List<GithubListUser>>()
+    var responGithubListUser : LiveData<List<GithubListUser>> = _responGithubListUser
 
 
     fun readFavoritePeople(){
         _isLoading.value = true
         try {
-            responFavoritePeople = favoriteUseCase.readFavoritePeople()
+            responGithubListUser = favoriteUseCase.readFavoritePeople()
             _isLoading.value = false
         }catch (e : java.lang.Exception){
             _isLoading.value = false
@@ -33,9 +33,9 @@ class FavoriteViewModel(
         }
     }
 
-    fun searchFavoritePeople(name : String) : LiveData<List<FavoritePeople>> = favoriteUseCase.searchFavoritePeople(name)
-    fun inserFavoritePeople(favoritePeople: FavoritePeople){
-        favoriteUseCase.insertFavoritePeople(favoritePeople)
+    fun searchFavoritePeople(name : String) : LiveData<List<GithubListUser>> = favoriteUseCase.searchFavoritePeople(name)
+    fun inserFavoritePeople(githubListUser: GithubListUser){
+        favoriteUseCase.insertFavoritePeople(githubListUser)
     }
     fun deletePersonFavoritePeople(name: String){
         favoriteUseCase.deletePersonFavoritePeople(name)
