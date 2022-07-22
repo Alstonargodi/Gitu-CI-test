@@ -14,7 +14,7 @@ import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
         GithubListUser::class,
         FavoriteProject::class
     ],
-    version = 4
+    version = 1
 )
 abstract class FavoriteDatabase : RoomDatabase() {
     abstract fun favoriteDao() : FavoriteDao
@@ -31,7 +31,7 @@ abstract class FavoriteDatabase : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         FavoriteDatabase::class.java,
-                        "FavoriteDatabase"
+                        "LocalDB"
                     ).fallbackToDestructiveMigration().build()
                 }
             }

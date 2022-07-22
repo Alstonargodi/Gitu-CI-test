@@ -1,6 +1,6 @@
 package com.example.githubuser.data.repository.remote
 
-import com.example.githubuser.data.local.entity.userlist.GithubListUser
+import android.util.Log
 import com.example.githubuser.data.local.source.LocalDataSource
 import com.example.githubuser.data.remote.NetworkBoundResources
 import com.example.githubuser.data.remote.apiresponse.ListUserResponse
@@ -8,49 +8,53 @@ import com.example.githubuser.data.remote.apiresponse.coderepository.RepositoryU
 import com.example.githubuser.data.remote.apiresponse.detail.DetailUserResponse
 import com.example.githubuser.data.remote.apiresponse.follower.FollowerUserResponse
 import com.example.githubuser.data.remote.source.IRemoteDataSource
-import com.example.githubuser.data.remote.source.RemoteDataSource
 import com.example.githubuser.data.remote.utils.FetchResults
 import com.example.githubuser.data.remote.utils.Resource
+import com.example.githubuser.domain.model.ListUser
+import com.example.githubuser.presentation.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import retrofit2.Call
 
 class RemoteRepository(
-    private val dataSource: IRemoteDataSource,
+    private val remoteDataSource: IRemoteDataSource,
     private val localDataSource: LocalDataSource
 ): IRemoteRepository {
 
-    override fun getListUser(userName: String): Flow<Resource<List<GithubListUser>>> =
-        object : NetworkBoundResources<List<GithubListUser>, List<ListUserResponse>>(){
-            override fun loadFromDB(): Flow<List<GithubListUser>> {
-                TODO("Not yet implemented")
+    override fun getListUser(userName: String): Flow<Resource<List<ListUser>>> =
+        object : NetworkBoundResources<List<ListUser>, ListUserResponse>(){
+            override fun loadFromDB(): Flow<List<ListUser>> {
+               return localDataSource.readListUser().map {
+                   Log.d("remoteRepository repository",it[0].name)
+                   DataMapper.entitesToDomain(it)
+               }
             }
 
-            override fun shouldFetch(data: List<GithubListUser>?): Boolean {
-                TODO("Not yet implemented")
-            }
+            override fun shouldFetch(data: List<ListUser>?): Boolean = true
 
-            override suspend fun createCall(): Flow<FetchResults<List<ListUserResponse>>> {
-                TODO("Not yet implemented")
-            }
+            override suspend fun createCall(): Flow<FetchResults<ListUserResponse>> =
+                remoteDataSource.getListUser(userName)
 
-            override suspend fun saveCallResult(data: List<ListUserResponse>) {
-                TODO("Not yet implemented")
+
+            override suspend fun saveCallResult(data: ListUserResponse) {
+                val userList = DataMapper.remoteResponseToLocalEntites(data)
+                localDataSource.insertListUser(userList)
             }
 
         }.asFlow()
 
 
     override fun getUserDetail(name: String): Call<DetailUserResponse> =
-        dataSource.getUserDetail(name)
+        remoteDataSource.getUserDetail(name)
 
     override fun getUserRepository(name: String): Call<RepositoryUserResponse> =
-        dataSource.getUserRepository(name)
+        remoteDataSource.getUserRepository(name)
 
     override fun getUserFollowing(name: String): Call<FollowerUserResponse> =
-        dataSource.getUserFollowing(name)
+        remoteDataSource.getUserFollowing(name)
 
     override fun getUserFollower(name: String): Call<FollowerUserResponse> =
-        dataSource.getUserFollower(name)
+        remoteDataSource.getUserFollower(name)
 
 
 }

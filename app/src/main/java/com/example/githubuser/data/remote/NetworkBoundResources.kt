@@ -18,6 +18,7 @@ abstract class NetworkBoundResources<ResultType,RequestType> {
                 }
                 is FetchResults.Success ->{
                     saveCallResult(apiResponse.data)
+                    emitAll(loadFromDB().map { Resource.Success(it) })
                 }
                 is FetchResults.Error ->{
                     onFetchFailed()

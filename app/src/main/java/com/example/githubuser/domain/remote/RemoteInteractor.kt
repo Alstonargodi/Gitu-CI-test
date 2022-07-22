@@ -10,37 +10,22 @@ import com.example.githubuser.data.remote.apiresponse.coderepository.RepositoryU
 import com.example.githubuser.data.remote.apiresponse.detail.DetailUserResponse
 import com.example.githubuser.data.remote.apiresponse.follower.FollowerUserResponse
 import com.example.githubuser.data.remote.apiresponse.follower.FollowerUserResponseItem
+import com.example.githubuser.data.remote.utils.Resource
 import com.example.githubuser.data.repository.remote.IRemoteRepository
+import com.example.githubuser.domain.model.ListUser
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.fragment.following.FollowingViewModel
 import com.example.githubuser.presentation.fragment.githubrepository.GithubRepositoryViewModel
 import com.example.githubuser.presentation.fragment.home.HomeViewModel
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RemoteInteractor(private val remoteRepository: IRemoteRepository): RemoteUseCase {
 
-    override fun getListUser(userName: String):LiveData<List<ListUserResponseItem>>{
-        val userListResponse = MutableLiveData<List<ListUserResponseItem>>()
-
-        remoteRepository.getListUser(userName).enqueue(object : Callback<ListUserResponse>{
-            override fun onResponse(
-                call: Call<ListUserResponse>,
-                response: Response<ListUserResponse>
-            ) {
-                if (response.isSuccessful){
-                    userListResponse.postValue(response.body()?.items)
-                }else{
-                    Log.d(HomeViewModel.TAG, response.message().toString())
-                }
-            }
-            override fun onFailure(call: Call<ListUserResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-        return userListResponse
-    }
+    override fun getListUser(userName: String): Flow<Resource<List<ListUser>>> =
+        remoteRepository.getListUser(userName)
 
     override fun getUserDetail(name: String): LiveData<DetailUserResponse> {
         val detail = MutableLiveData<DetailUserResponse>()

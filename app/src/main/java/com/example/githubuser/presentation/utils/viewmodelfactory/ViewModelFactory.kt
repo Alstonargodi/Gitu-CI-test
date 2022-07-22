@@ -27,7 +27,7 @@ class ViewModelFactory private constructor(
                     synchronized(ViewModelFactory::class.java){
                         instance = ViewModelFactory(
                             Injection.provideLocalUseCase(context),
-                            Injection.provideRemoteUseCase()
+                            Injection.provideRemoteUseCase(context)
                         )
                     }
                 }

@@ -5,6 +5,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentHomeBinding
 import com.example.githubuser.data.remote.apiresponse.ListUserResponseItem
+import com.example.githubuser.data.remote.utils.Resource
+import com.example.githubuser.domain.model.ListUser
 import com.example.githubuser.presentation.fragment.home.adapter.UserListRecAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
@@ -31,6 +34,7 @@ class HomeFragment : Fragment() {
     private val utilViewModel by viewModels<UtilViewModel>()
 
     private var saveText = ""
+    private var searchText = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,10 +46,6 @@ class HomeFragment : Fragment() {
 
         viewModel.apply {
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-            listresponse.observe(viewLifecycleOwner){
-                showUserList(it)
-                if (it.isEmpty()) showEmptyView(true) else showEmptyView(false)
-            }
 
         }
 
@@ -55,6 +55,8 @@ class HomeFragment : Fragment() {
                 saveText = text
             }
         }
+
+        setSearchResult(default_user)
         return binding.root
     }
 
@@ -94,7 +96,6 @@ class HomeFragment : Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     setSearchResult(query?:"")
-
                     return true
                 }
 
@@ -108,7 +109,19 @@ class HomeFragment : Fragment() {
     private fun setSearchResult(search : String){
         viewModel.apply {
             getListUser(search).observe(viewLifecycleOwner){
-                showUserList(it)
+                when(it){
+                    is Resource.Loading ->{
+
+                    }
+                    is Resource.Success ->{
+                        Log.d("remoteRepository home", it.data?.get(0)!!.name)
+                        it.data?.let { it1 -> showUserList(it1) }
+                    }
+                    is Resource.Error ->{
+                        Log.d("remoteRepository home", it.message.toString())
+                    }
+                    else -> {}
+                }
             }
             binding.tvEmptyview.visibility = View.GONE
             showEmptyView(false)
@@ -121,12 +134,13 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-    private fun showUserList(list: List<ListUserResponseItem>){
+    private fun showUserList(list: List<ListUser>){
         adapter = UserListRecAdapter(list)
+        Log.d("testUserList",list[0].name)
         val recView = binding.RecviewUser
         recView.adapter = adapter
         utilViewModel.setEmptys(false)
+        recView.layoutManager = LinearLayoutManager(requireContext())
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recView.layoutManager = GridLayoutManager(requireContext(),2)

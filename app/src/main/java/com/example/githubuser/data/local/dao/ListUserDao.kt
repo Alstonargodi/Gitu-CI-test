@@ -6,12 +6,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.githubuser.data.local.entity.userlist.GithubListUser
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ListUserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertListUser(user: GithubListUser)
+    fun insertListUser(user: List<GithubListUser>)
 
     @Query("select*from githublistuser")
-    fun readListUser(): LiveData<List<GithubListUser>>
+    fun readListUser(): Flow<List<GithubListUser>>
 }
