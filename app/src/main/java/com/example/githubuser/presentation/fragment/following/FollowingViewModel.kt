@@ -3,8 +3,8 @@ package com.example.githubuser.presentation.fragment.following
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuser.data.remote.apiresponse.follower.FollowerUserResponseItem
-import com.example.githubuser.domain.remote.RemoteUseCase
+import com.example.githubuser.core.data.remote.apiresponse.follower.FollowerUserResponseItem
+import com.example.githubuser.core.domain.remote.RemoteUseCase
 
 class FollowingViewModel(
     val repository: RemoteUseCase

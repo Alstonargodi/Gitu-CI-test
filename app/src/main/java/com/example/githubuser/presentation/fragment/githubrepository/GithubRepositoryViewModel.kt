@@ -3,8 +3,8 @@ package com.example.githubuser.presentation.fragment.githubrepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuser.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
-import com.example.githubuser.domain.remote.RemoteUseCase
+import com.example.githubuser.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
+import com.example.githubuser.core.domain.remote.RemoteUseCase
 
 class GithubRepositoryViewModel(
     val repository: RemoteUseCase

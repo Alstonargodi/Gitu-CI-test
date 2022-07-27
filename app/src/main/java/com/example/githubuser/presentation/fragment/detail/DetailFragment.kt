@@ -1,6 +1,7 @@
 package com.example.githubuser.presentation.fragment.detail
 
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -15,19 +16,23 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
-import com.example.githubuser.data.local.entity.userlist.GithubListUser
+import com.example.githubuser.core.data.local.entity.userlist.GithubListUser
+import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.detail.tabadapter.SectionPagerAdapter
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
-import com.example.githubuser.viewmodel.util.obtainViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
+import javax.inject.Inject
 
 class DetailFragment : Fragment() {
 
+    @Inject
+    lateinit var factory : ViewModelFactory
+
     private val detailViewModel : DetailViewModel by viewModels{
-        ViewModelFactory.getInstance(requireContext())
+        factory
     }
 
     private val utilViewModel by viewModels<UtilViewModel>()
@@ -37,14 +42,17 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private var saveText = ""
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailBinding.inflate(layoutInflater)
         saveText = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
-
-        favoriteViewModel = obtainViewModel(requireActivity())
 
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){

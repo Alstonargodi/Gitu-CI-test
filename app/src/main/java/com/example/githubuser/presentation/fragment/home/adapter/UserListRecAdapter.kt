@@ -7,8 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.ItemcvUserlisthomeBinding
-import com.example.githubuser.data.remote.apiresponse.ListUserResponseItem
-import com.example.githubuser.domain.model.ListUser
+import com.example.githubuser.core.domain.model.ListUser
 import com.example.githubuser.presentation.fragment.home.HomeFragmentDirections
 
 class UserListRecAdapter(private var dataList : List<ListUser>): RecyclerView.Adapter<UserListRecAdapter.ViewHolder>() {

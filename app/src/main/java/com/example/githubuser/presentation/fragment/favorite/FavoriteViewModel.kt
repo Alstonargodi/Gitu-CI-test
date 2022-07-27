@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuser.data.local.entity.userlist.GithubListUser
-import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
-import com.example.githubuser.domain.local.FavoriteUseCase
+import com.example.githubuser.core.data.local.entity.userlist.GithubListUser
+import com.example.githubuser.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.githubuser.core.domain.local.FavoriteUseCase
 
 class FavoriteViewModel(
     private val favoriteUseCase : FavoriteUseCase

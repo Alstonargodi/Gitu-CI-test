@@ -3,37 +3,41 @@ package com.example.githubuser.presentation.utils.viewmodelfactory
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.domain.local.FavoriteUseCase
-import com.example.githubuser.domain.remote.RemoteUseCase
-import com.example.githubuser.injection.Injection
+import com.example.githubuser.core.domain.local.FavoriteUseCase
+import com.example.githubuser.core.domain.remote.RemoteUseCase
+import com.example.githubuser.core.injection.Injection
+import com.example.githubuser.di.AppScope
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
 import com.example.githubuser.presentation.fragment.follower.FollowerViewModel
 import com.example.githubuser.presentation.fragment.following.FollowingViewModel
 import com.example.githubuser.presentation.fragment.githubrepository.GithubRepositoryViewModel
 import com.example.githubuser.presentation.fragment.home.HomeViewModel
+import javax.inject.Inject
 
 
-@Suppress("UNCHECKED_CAST")
-class ViewModelFactory private constructor(
+
+@AppScope
+class ViewModelFactory @Inject constructor(
     private val favoriteUseCase : FavoriteUseCase,
     private val remoteUseCase: RemoteUseCase
 ):ViewModelProvider.NewInstanceFactory() {
-        companion object{
-            @Volatile
-            private var instance: ViewModelFactory? = null
-            fun getInstance(context: Context): ViewModelFactory {
-                if (instance == null){
-                    synchronized(ViewModelFactory::class.java){
-                        instance = ViewModelFactory(
-                            Injection.provideLocalUseCase(context),
-                            Injection.provideRemoteUseCase(context)
-                        )
-                    }
-                }
-                return instance as ViewModelFactory
-            }
-        }
+
+//        companion object{
+//            @Volatile
+//            private var instance: ViewModelFactory? = null
+//            fun getInstance(context: Context): ViewModelFactory {
+//                if (instance == null){
+//                    synchronized(ViewModelFactory::class.java){
+//                        instance = ViewModelFactory(
+//                            Injection.provideLocalUseCase(context),
+//                            Injection.provideRemoteUseCase(context)
+//                        )
+//                    }
+//                }
+//                return instance as ViewModelFactory
+//            }
+//        }
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)){

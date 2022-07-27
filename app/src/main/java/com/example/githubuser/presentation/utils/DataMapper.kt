@@ -1,9 +1,8 @@
 package com.example.githubuser.presentation.utils
 
-import android.util.Log
-import com.example.githubuser.data.local.entity.userlist.GithubListUser
-import com.example.githubuser.data.remote.apiresponse.ListUserResponse
-import com.example.githubuser.domain.model.ListUser
+import com.example.githubuser.core.data.local.entity.userlist.GithubListUser
+import com.example.githubuser.core.data.remote.apiresponse.ListUserResponse
+import com.example.githubuser.core.domain.model.ListUser
 
 object DataMapper {
 

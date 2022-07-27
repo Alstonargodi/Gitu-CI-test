@@ -1,5 +1,6 @@
 package com.example.githubuser.presentation.fragment.githubrepository
 
+import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
@@ -11,54 +12,61 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
-import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
-import com.example.githubuser.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
+import com.example.githubuser.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.githubuser.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
+import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.githubrepository.adapter.RepositoryRecyclerViewAdapter
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 
 
 class RepositoryFragment: Fragment() {
-    private lateinit var repoBinding: FragmentRepoBinding
+    @Inject
+    lateinit var factory : ViewModelFactory
 
+    private lateinit var binding: FragmentRepoBinding
     private lateinit var adapter : RepositoryRecyclerViewAdapter
 
-    private val repoViewModel : GithubRepositoryViewModel by viewModels{
-        ViewModelFactory.getInstance(requireContext())
+    private val repositoryViewModel : GithubRepositoryViewModel by viewModels{
+        factory
     }
 
-    private val favViewModel : FavoriteViewModel by viewModels{
-        ViewModelFactory.getInstance(requireContext())
+    private val favoriteViewModel : FavoriteViewModel by viewModels{
+        factory
     }
 
     private val utilViewModel by viewModels<UtilViewModel>()
-
-
-
     private var userName = ""
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        repoBinding = FragmentRepoBinding.inflate(layoutInflater)
-        repoViewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
+        binding = FragmentRepoBinding.inflate(layoutInflater)
+        repositoryViewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
         userName = arguments?.getString("value","").toString()
 
 
-        repoViewModel.apply {
+        repositoryViewModel.apply {
             getUserRepository(userName).observe(viewLifecycleOwner){ responData ->
                 showRepositoryList(responData)
             }
         }
-        return repoBinding.root
+        return binding.root
     }
 
     private fun showRepositoryList(list: List<RepositoryUserResponseItem>){
 
         adapter = RepositoryRecyclerViewAdapter(list)
-        val recView = repoBinding.Reporecview
+        val recView = binding.Reporecview
         recView.adapter = adapter
         recView.layoutManager = LinearLayoutManager(requireContext())
         utilViewModel.apply { if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false) }
@@ -85,8 +93,8 @@ class RepositoryFragment: Fragment() {
             true
         )
 
-        favViewModel.insertFavoriteRepo(favTemp)
-        Snackbar.make(repoBinding.root,"add ${data.name} as Favorite Repo",
+        favoriteViewModel.insertFavoriteRepo(favTemp)
+        Snackbar.make(binding.root,"add ${data.name} as Favorite Repo",
             Snackbar.LENGTH_LONG)
             .setTextColor(Color.WHITE)
             .setBackgroundTint(Color.rgb(0, 200, 151))
@@ -94,7 +102,7 @@ class RepositoryFragment: Fragment() {
     }
 
     private fun isLoading(isLoading:Boolean){
-        repoBinding.Repoprogress.apply {
+        binding.Repoprogress.apply {
             visibility = if (isLoading) {
                 View.VISIBLE
             } else {
@@ -104,7 +112,7 @@ class RepositoryFragment: Fragment() {
     }
 
     private fun emptyChecker(){
-        repoBinding.apply {
+        binding.apply {
             utilViewModel.isEmpty.observe(viewLifecycleOwner){ isDataNotExist ->
                 if (isDataNotExist == true){
                     emptyStatmentRepo.visibility = View.VISIBLE

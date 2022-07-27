@@ -1,5 +1,6 @@
 package com.example.githubuser.presentation.fragment.favorite
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,24 +12,35 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentFavoriteBinding
-import com.example.githubuser.data.local.entity.userlist.GithubListUser
-import com.example.githubuser.data.local.entity.favoriteproject.FavoriteProject
+import com.example.githubuser.core.data.local.entity.userlist.GithubListUser
+import com.example.githubuser.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.book.BookFragmentDirections
 import com.example.githubuser.presentation.fragment.favorite.adapter.FavoriteUserRecyclerViewAdapter
 import com.example.githubuser.presentation.fragment.favorite.adapter.FavoriteRepositoryRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 
 
 class FavoriteFragment : Fragment() {
+
+    @Inject
+    lateinit var factory : ViewModelFactory
+
     private lateinit var binding : FragmentFavoriteBinding
-    private lateinit var peopleRecviewAdapter : FavoriteUserRecyclerViewAdapter
-    private lateinit var repoRecviewAdapter : FavoriteRepositoryRecyclerViewAdapter
+
+    private lateinit var peopleRecyclerViewAdapter : FavoriteUserRecyclerViewAdapter
+    private lateinit var repositoryRecyclerViewAdapter : FavoriteRepositoryRecyclerViewAdapter
 
     private val favViewModel : FavoriteViewModel by viewModels{
-        ViewModelFactory.getInstance(requireContext())
+        factory
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,11 +71,11 @@ class FavoriteFragment : Fragment() {
             readFavoritePeople()
             responGithubListUser.observe(viewLifecycleOwner){ respon ->
                 if (respon.isNullOrEmpty()) true.isEmpty()
-                peopleRecviewAdapter = FavoriteUserRecyclerViewAdapter(respon)
-                binding.RecyclerVFavorite.adapter = peopleRecviewAdapter
+                peopleRecyclerViewAdapter = FavoriteUserRecyclerViewAdapter(respon)
+                binding.RecyclerVFavorite.adapter = peopleRecyclerViewAdapter
                 binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
 
-                peopleRecviewAdapter.apply {
+                peopleRecyclerViewAdapter.apply {
                     setOnItemCallBack(object : FavoriteUserRecyclerViewAdapter.OnItemClickDetail{
                         override fun onItemClick(data: GithubListUser) {
                             findNavController().navigate(
@@ -86,12 +98,12 @@ class FavoriteFragment : Fragment() {
             readFavoriteProject()
             responFavoriteRepo.observe(viewLifecycleOwner){respon ->
                 if (respon.isNullOrEmpty()) true.isEmpty()
-                repoRecviewAdapter = FavoriteRepositoryRecyclerViewAdapter(respon)
-                binding.RecyclerVFavorite.adapter = repoRecviewAdapter
+                repositoryRecyclerViewAdapter = FavoriteRepositoryRecyclerViewAdapter(respon)
+                binding.RecyclerVFavorite.adapter = repositoryRecyclerViewAdapter
                 binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
 
 
-                repoRecviewAdapter.setOnitemDelete(object : FavoriteRepositoryRecyclerViewAdapter.OnItemClickDelete{
+                repositoryRecyclerViewAdapter.setOnitemDelete(object : FavoriteRepositoryRecyclerViewAdapter.OnItemClickDelete{
                     override fun onItemClickDelete(data: FavoriteProject) {
                         deleteFavProject(data)
                     }

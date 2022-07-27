@@ -1,5 +1,6 @@
 package com.example.githubuser.presentation.fragment.book
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,20 +10,29 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentBookBinding
+import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.book.adapter.SectionFavoritePagerAdapter
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
-
+import javax.inject.Inject
 
 class BookFragment : Fragment() {
+    @Inject
+    lateinit var factory : ViewModelFactory
+
     private lateinit var binding : FragmentBookBinding
 
     private val viewModel : DetailViewModel by viewModels{
-        ViewModelFactory.getInstance(requireContext())
+        factory
     }
 
     private lateinit var pagerAdapter : SectionFavoritePagerAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

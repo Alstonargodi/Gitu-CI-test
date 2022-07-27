@@ -4,9 +4,9 @@ import android.util.Log
 
 import com.example.githubuser.ViewModelTest.ValidationResult.tag
 import com.example.githubuser.ViewModelTest.ValidationResult.validateData
-import com.example.githubuser.data.remote.apiresponse.ListUserResponseItem
-import com.example.githubuser.data.remote.apiresponse.ListUserResponse
-import com.example.githubuser.data.remote.apiservice.ApiService
+import com.example.githubuser.core.data.remote.apiresponse.ListUserResponseItem
+import com.example.githubuser.core.data.remote.apiresponse.ListUserResponse
+import com.example.githubuser.core.data.remote.apiservice.ApiService
 import com.example.githubuser.presentation.fragment.home.HomeViewModel
 import org.junit.Before
 import org.junit.Test

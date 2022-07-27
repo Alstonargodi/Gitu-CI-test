@@ -1,5 +1,6 @@
 package com.example.githubuser.presentation.fragment.follower
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,24 +12,34 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
-import com.example.githubuser.data.remote.apiresponse.follower.FollowerUserResponseItem
+import com.example.githubuser.core.data.remote.apiresponse.follower.FollowerUserResponseItem
+import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.detail.DetailFragmentDirections
 import com.example.githubuser.presentation.fragment.follower.adapter.FollowerRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
+import javax.inject.Inject
 
 
 class FollowerFragment: Fragment() {
+
+    @Inject
+    lateinit var factory : ViewModelFactory
 
     private lateinit var binding: FragmentFollowerBinding
     private lateinit var adapter : FollowerRecyclerViewAdapter
 
     private val followerViewModel : FollowerViewModel by viewModels{
-        ViewModelFactory.getInstance(requireContext())
+        factory
     }
+
     private val utilViewModel by viewModels<UtilViewModel>()
     private var userName = ""
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

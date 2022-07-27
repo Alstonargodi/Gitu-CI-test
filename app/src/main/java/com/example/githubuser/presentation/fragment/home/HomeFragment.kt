@@ -16,25 +16,33 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentHomeBinding
-import com.example.githubuser.data.remote.apiresponse.ListUserResponseItem
-import com.example.githubuser.data.remote.utils.Resource
-import com.example.githubuser.domain.model.ListUser
+import com.example.githubuser.core.data.remote.utils.Resource
+import com.example.githubuser.core.domain.model.ListUser
+import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.home.adapter.UserListRecAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
+import javax.inject.Inject
 
 
 class HomeFragment : Fragment() {
+
+    @Inject
+    lateinit var factory : ViewModelFactory
+
     private lateinit var adapter : UserListRecAdapter
     private lateinit var binding: FragmentHomeBinding
 
     private val viewModel : HomeViewModel by viewModels{
-        ViewModelFactory.getInstance(requireContext())
+        factory
     }
     private val utilViewModel by viewModels<UtilViewModel>()
-
     private var saveText = ""
-    private var searchText = ""
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,8 +63,7 @@ class HomeFragment : Fragment() {
                 saveText = text
             }
         }
-
-        setSearchResult(default_user)
+        setDefaultList()
         return binding.root
     }
 
