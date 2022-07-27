@@ -54,7 +54,6 @@ class HomeFragment : Fragment() {
 
         viewModel.apply {
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-
         }
 
         utilViewModel.apply {
@@ -142,7 +141,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showUserList(list: List<ListUser>){
-        adapter = UserListRecAdapter(list)
+        adapter = UserListRecAdapter(list.distinct())
         Log.d("testUserList",list[0].name)
         val recView = binding.RecviewUser
         recView.adapter = adapter

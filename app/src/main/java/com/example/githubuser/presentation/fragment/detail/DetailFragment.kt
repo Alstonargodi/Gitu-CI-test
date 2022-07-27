@@ -30,13 +30,15 @@ class DetailFragment : Fragment() {
 
     @Inject
     lateinit var factory : ViewModelFactory
-
     private val detailViewModel : DetailViewModel by viewModels{
         factory
     }
 
+    private val favoriteViewModel : FavoriteViewModel by viewModels{
+        factory
+    }
+
     private val utilViewModel by viewModels<UtilViewModel>()
-    private lateinit var favoriteViewModel : FavoriteViewModel
 
     private lateinit var pagerAdapter : SectionPagerAdapter
     private lateinit var binding: FragmentDetailBinding
@@ -143,6 +145,7 @@ class DetailFragment : Fragment() {
             respon?.apply {
                 login?.let {
                     val favTemp = GithubListUser(
+                        0,
                         login,
                         name,
                         avatarUrl,

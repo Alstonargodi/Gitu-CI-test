@@ -12,6 +12,6 @@ interface ListUserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertListUser(user: List<GithubListUser>)
 
-    @Query("select*from githublistuser order by name desc")
+    @Query("select*from githublistuser order by id asc")
     fun readListUser(): Flow<List<GithubListUser>>
 }

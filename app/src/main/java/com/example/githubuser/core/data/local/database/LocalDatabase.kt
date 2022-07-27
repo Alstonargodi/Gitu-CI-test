@@ -20,25 +20,4 @@ import com.example.githubuser.core.data.local.entity.favoriteproject.FavoritePro
 abstract class LocalDatabase : RoomDatabase() {
     abstract fun favoriteDao() : FavoriteDao
     abstract fun listUserDao() : ListUserDao
-
-//    companion object{
-//        @Volatile
-//        private var INSTANCE : LocalDatabase? = null
-//
-//        @JvmStatic
-//        fun setDatabase(context : Context): LocalDatabase {
-//            if (INSTANCE == null){
-//                synchronized(LocalDatabase::class.java){
-//                    INSTANCE = Room.databaseBuilder(
-//                        context.applicationContext,
-//                        LocalDatabase::class.java,
-//                        "LocalDB"
-//                    ).fallbackToDestructiveMigration().build()
-//                }
-//            }
-//            return INSTANCE as LocalDatabase
-//        }
-//    }
-
-
 }
