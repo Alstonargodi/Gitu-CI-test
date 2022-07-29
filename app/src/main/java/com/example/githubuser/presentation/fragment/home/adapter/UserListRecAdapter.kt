@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.githubuser.databinding.ItemcvUserlisthomeBinding
+import com.example.core.databinding.ItemcvUserlisthomeBinding
 import com.example.githubuser.core.domain.model.ListUser
 import com.example.githubuser.presentation.fragment.home.HomeFragmentDirections
 

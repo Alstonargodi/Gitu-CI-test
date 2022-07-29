@@ -8,6 +8,9 @@ data class ListUserResponse(
 )
 
 data class ListUserResponseItem(
+	@field:SerializedName("id")
+	val id: String,
+
 	@field:SerializedName("login")
 	val login: String,
 

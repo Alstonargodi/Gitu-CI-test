@@ -10,7 +10,7 @@ object DataMapper {
         val dataList = ArrayList<GithubListUser>()
         data.items.map { response ->
             val listUser = GithubListUser(
-                id = 0,
+                id = response.id.toInt(),
                 name = response.login,
                 username = null,
                 imageLink = response.avatarUrl,
@@ -25,7 +25,6 @@ object DataMapper {
 
     fun entitesToDomain(input : List<GithubListUser>): List<ListUser> =
         input.map { data ->
-
             ListUser(
                 name = data.name,
                 username = data.username,
