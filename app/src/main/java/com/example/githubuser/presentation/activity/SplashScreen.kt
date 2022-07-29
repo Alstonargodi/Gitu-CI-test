@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.R
-import com.example.githubuser.core.data.local.preference.SettingPreferences
-import com.example.githubuser.core.data.local.preference.datastore
+import com.example.core.data.local.preference.SettingPreferences
+import com.example.core.data.local.preference.datastore
 import com.example.githubuser.presentation.fragment.setting.SettingViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.SettingViewModelFactory
 

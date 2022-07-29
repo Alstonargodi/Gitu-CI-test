@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ItemcvRepositoryBinding
-import com.example.githubuser.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
+import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
 
 class RepositoryRecyclerViewAdapter(private var dataList : List<RepositoryUserResponseItem>):
     RecyclerView.Adapter<RepositoryRecyclerViewAdapter.ViewHolder>() {

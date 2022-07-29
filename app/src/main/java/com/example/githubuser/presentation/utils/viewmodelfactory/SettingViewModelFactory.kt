@@ -2,7 +2,7 @@ package com.example.githubuser.presentation.utils.viewmodelfactory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.core.data.local.preference.SettingPreferences
+import com.example.core.data.local.preference.SettingPreferences
 import com.example.githubuser.presentation.fragment.setting.SettingViewModel
 
 @Suppress("UNCHECKED_CAST")

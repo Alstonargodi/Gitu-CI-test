@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.core.data.remote.apiresponse.follower.FollowerUserResponseItem
+import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.detail.DetailFragmentDirections

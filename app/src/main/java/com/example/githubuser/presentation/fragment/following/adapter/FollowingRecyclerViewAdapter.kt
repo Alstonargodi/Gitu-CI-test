@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.githubuser.core.data.remote.apiresponse.follower.FollowerUserResponseItem
+import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
 import com.example.githubuser.databinding.ItemcvFollowerBinding
 
 class FollowingRecyclerViewAdapter(private var dataList : List<FollowerUserResponseItem>)

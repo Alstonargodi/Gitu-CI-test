@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentFavoriteBinding
-import com.example.githubuser.core.data.local.entity.userlist.GithubListUser
-import com.example.githubuser.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
 import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.book.BookFragmentDirections
 import com.example.githubuser.presentation.fragment.favorite.adapter.FavoriteUserRecyclerViewAdapter

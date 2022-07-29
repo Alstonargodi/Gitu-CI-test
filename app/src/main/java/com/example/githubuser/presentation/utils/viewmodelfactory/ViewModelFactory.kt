@@ -1,12 +1,10 @@
 package com.example.githubuser.presentation.utils.viewmodelfactory
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.core.domain.local.FavoriteUseCase
-import com.example.githubuser.core.domain.remote.RemoteUseCase
-import com.example.githubuser.core.injection.Injection
-import com.example.githubuser.di.AppScope
+import com.example.core.domain.local.FavoriteUseCase
+import com.example.core.domain.remote.RemoteUseCase
+import com.example.core.di.AppScope
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
 import com.example.githubuser.presentation.fragment.follower.FollowerViewModel

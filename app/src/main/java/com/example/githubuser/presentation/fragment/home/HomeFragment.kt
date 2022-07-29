@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentHomeBinding
-import com.example.githubuser.core.data.remote.utils.Resource
-import com.example.githubuser.core.domain.model.ListUser
+import com.example.core.data.remote.utils.Resource
+import com.example.core.domain.model.ListUser
 import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.home.adapter.UserListRecAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel

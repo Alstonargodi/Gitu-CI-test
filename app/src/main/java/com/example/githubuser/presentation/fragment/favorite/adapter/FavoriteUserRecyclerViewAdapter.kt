@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ItemcvFavoritepeopleBinding
-import com.example.githubuser.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.local.entity.userlist.GithubListUser
 
 class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubListUser>):
     RecyclerView.Adapter<FavoriteUserRecyclerViewAdapter.ViewHolder>(){

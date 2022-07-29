@@ -11,14 +11,10 @@ import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.R
-import com.example.githubuser.core.data.local.preference.SettingPreferences
+import com.example.core.data.local.preference.SettingPreferences
 import com.example.githubuser.databinding.FragmentSettingBinding
 import com.example.githubuser.myapplication.MyApplication
-import com.example.githubuser.presentation.fragment.detail.DetailViewModel
-import com.example.githubuser.presentation.utils.viewmodelfactory.SettingViewModelFactory
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import javax.inject.Inject
 

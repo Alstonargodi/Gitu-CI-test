@@ -1,8 +1,8 @@
 package com.example.githubuser.presentation.utils
 
-import com.example.githubuser.core.data.local.entity.userlist.GithubListUser
-import com.example.githubuser.core.data.remote.apiresponse.ListUserResponse
-import com.example.githubuser.core.domain.model.ListUser
+import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.remote.apiresponse.ListUserResponse
+import com.example.core.domain.model.ListUser
 
 object DataMapper {
 

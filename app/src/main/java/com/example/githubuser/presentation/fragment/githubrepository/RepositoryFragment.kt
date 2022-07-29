@@ -12,8 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
-import com.example.githubuser.core.data.local.entity.favoriteproject.FavoriteProject
-import com.example.githubuser.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
 import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.githubrepository.adapter.RepositoryRecyclerViewAdapter
 import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
