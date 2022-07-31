@@ -13,9 +13,7 @@ val Context.datastore : DataStore<Preferences> by preferencesDataStore("theme_se
 
 class SettingPreferences private constructor
     (private val dataStore: DataStore<Preferences>) {
-
     private val themeKey = booleanPreferencesKey("theme_setting")
-
     fun getThemesSetting(): Flow<Boolean>{
         return dataStore.data.map { prefrences ->
             prefrences[themeKey] ?: true
