@@ -6,7 +6,7 @@ import com.example.core.domain.local.FavoriteUseCase
 import com.example.core.domain.remote.RemoteUseCase
 import com.example.core.di.AppScope
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
-import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
+import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.example.githubuser.presentation.fragment.follower.FollowerViewModel
 import com.example.githubuser.presentation.fragment.following.FollowingViewModel
 import com.example.githubuser.presentation.fragment.githubrepository.GithubRepositoryViewModel

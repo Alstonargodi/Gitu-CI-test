@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
 import com.example.core.domain.remote.RemoteUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FollowerViewModel(
+@HiltViewModel
+class FollowerViewModel @Inject constructor(
     val repository: RemoteUseCase
 ): ViewModel() {
     companion object{

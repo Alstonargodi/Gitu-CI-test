@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
 import com.example.core.domain.remote.RemoteUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GithubRepositoryViewModel(
+@HiltViewModel
+class GithubRepositoryViewModel @Inject constructor(
     val repository: RemoteUseCase
 ) : ViewModel() {
 

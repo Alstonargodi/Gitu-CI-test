@@ -1,6 +1,5 @@
 package com.example.githubuser.presentation.fragment.favorite
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,36 +10,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
-import com.example.githubuser.databinding.FragmentFavoriteBinding
-import com.example.core.data.local.entity.userlist.GithubListUser
-import com.example.core.data.local.entity.favoriteproject.FavoriteProject
-import com.example.githubuser.myapplication.MyApplication
+import com.example.core.data.local.entity.userlist.GithubUserList
+import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
 import com.example.githubuser.presentation.fragment.book.BookFragmentDirections
 import com.example.githubuser.presentation.fragment.favorite.adapter.FavoriteUserRecyclerViewAdapter
 import com.example.githubuser.presentation.fragment.favorite.adapter.FavoriteRepositoryRecyclerViewAdapter
-import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
+import com.example.githubuser.databinding.FragmentFavoriteBinding
+import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.google.android.material.snackbar.Snackbar
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
-
-    @Inject
-    lateinit var factory : ViewModelFactory
-
     private lateinit var binding : FragmentFavoriteBinding
-
     private lateinit var peopleRecyclerViewAdapter : FavoriteUserRecyclerViewAdapter
     private lateinit var repositoryRecyclerViewAdapter : FavoriteRepositoryRecyclerViewAdapter
 
-    private val favViewModel : FavoriteViewModel by viewModels{
-        factory
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
-    }
+    private val favViewModel : FavoriteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +55,7 @@ class FavoriteFragment : Fragment() {
     private fun showFavPeople(){
         favViewModel.apply {
             readFavoritePeople()
-            responGithubListUser.observe(viewLifecycleOwner){ respon ->
+            responGithubUserList.observe(viewLifecycleOwner){ respon ->
                 if (respon.isNullOrEmpty()) true.isEmpty()
                 peopleRecyclerViewAdapter = FavoriteUserRecyclerViewAdapter(respon)
                 binding.RecyclerVFavorite.adapter = peopleRecyclerViewAdapter
@@ -77,14 +63,14 @@ class FavoriteFragment : Fragment() {
 
                 peopleRecyclerViewAdapter.apply {
                     setOnItemCallBack(object : FavoriteUserRecyclerViewAdapter.OnItemClickDetail{
-                        override fun onItemClick(data: GithubListUser) {
+                        override fun onItemClick(data: GithubUserList) {
                             findNavController().navigate(
                                 BookFragmentDirections.actionAuthorFragmentToDetailFragment(data.name)
                             )
                         }
                     })
                     setOnitemDelete(object : FavoriteUserRecyclerViewAdapter.OnItemDelete{
-                        override fun onItemClickDelete(data: GithubListUser) {
+                        override fun onItemClickDelete(data: GithubUserList) {
                             deleteFavPeople(data)
                         }
                     })
@@ -104,7 +90,7 @@ class FavoriteFragment : Fragment() {
 
 
                 repositoryRecyclerViewAdapter.setOnitemDelete(object : FavoriteRepositoryRecyclerViewAdapter.OnItemClickDelete{
-                    override fun onItemClickDelete(data: FavoriteProject) {
+                    override fun onItemClickDelete(data: GithubRepositoryList) {
                         deleteFavProject(data)
                     }
                 })
@@ -113,14 +99,14 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    private fun deleteFavPeople(githubListUser: GithubListUser){
-        showSnackbar(githubListUser.name)
-        favViewModel.deletePersonFavoritePeople(githubListUser.name)
+    private fun deleteFavPeople(githubUserList: GithubUserList){
+        showSnackbar(githubUserList.name)
+        favViewModel.deletePersonFavoritePeople(githubUserList.name)
     }
 
-    private fun deleteFavProject(favoriteProject: FavoriteProject){
-        showSnackbar(favoriteProject.name)
-        favViewModel.deleteFavoriteRepo(favoriteProject)
+    private fun deleteFavProject(githubRepositoryList: GithubRepositoryList){
+        showSnackbar(githubRepositoryList.name)
+        favViewModel.deleteFavoriteRepo(githubRepositoryList)
     }
 
     private fun showSnackbar(name : String){

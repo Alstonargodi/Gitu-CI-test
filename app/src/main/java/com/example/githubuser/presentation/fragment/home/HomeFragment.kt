@@ -22,27 +22,19 @@ import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.home.adapter.UserListRecAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
-
-    @Inject
-    lateinit var factory : ViewModelFactory
-
     private lateinit var adapter : UserListRecAdapter
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel : HomeViewModel by viewModels{
-        factory
-    }
+    private val viewModel : HomeViewModel by viewModels()
+
     private val utilViewModel by viewModels<UtilViewModel>()
     private var saveText = ""
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -120,7 +112,6 @@ class HomeFragment : Fragment() {
 
                     }
                     is Resource.Success ->{
-                        Log.d("remoteRepository home", it.data?.get(0)!!.name)
                         it.data?.let { it1 -> showUserList(it1) }
                     }
                     is Resource.Error ->{

@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ItemcvFavoritepeopleBinding
-import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.local.entity.userlist.GithubUserList
 
-class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubListUser>):
+class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubUserList>):
     RecyclerView.Adapter<FavoriteUserRecyclerViewAdapter.ViewHolder>(){
     private lateinit var onItemClickDetail : OnItemClickDetail
     private lateinit var onItemClickDelete : OnItemDelete
@@ -60,9 +60,9 @@ class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubListUser>
     override fun getItemCount(): Int = favList.size
 
     interface OnItemClickDetail{
-        fun onItemClick(data : GithubListUser)
+        fun onItemClick(data : GithubUserList)
     }
     interface OnItemDelete{
-        fun onItemClickDelete(data : GithubListUser)
+        fun onItemClickDelete(data : GithubUserList)
     }
 }

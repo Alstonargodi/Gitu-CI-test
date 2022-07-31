@@ -1,4 +1,4 @@
-package com.example.core.injection.module
+package com.example.core.di.module
 
 import android.content.Context
 import androidx.room.Room
@@ -7,14 +7,20 @@ import com.example.core.data.local.dao.ListUserDao
 import com.example.core.data.local.database.LocalDatabase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class DatabaseModule {
-
     @Singleton
     @Provides
-    fun provideDatabase(context: Context): LocalDatabase =
+    fun provideDatabase(
+        @ApplicationContext
+        context: Context
+    ): LocalDatabase =
         Room.databaseBuilder(
             context.applicationContext,
             LocalDatabase::class.java,

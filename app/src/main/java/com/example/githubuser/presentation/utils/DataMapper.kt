@@ -1,15 +1,15 @@
 package com.example.githubuser.presentation.utils
 
-import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.local.entity.userlist.GithubUserList
 import com.example.core.data.remote.apiresponse.ListUserResponse
 import com.example.core.domain.model.ListUser
 
 object DataMapper {
 
-    fun remoteResponseToLocalEntites(data : ListUserResponse): List<GithubListUser>{
-        val dataList = ArrayList<GithubListUser>()
+    fun remoteResponseToLocalEntites(data : ListUserResponse): List<GithubUserList>{
+        val dataList = ArrayList<GithubUserList>()
         data.items.map { response ->
-            val listUser = GithubListUser(
+            val listUser = GithubUserList(
                 id = response.id.toInt(),
                 name = response.login,
                 username = null,
@@ -23,7 +23,7 @@ object DataMapper {
         return dataList
     }
 
-    fun entitesToDomain(input : List<GithubListUser>): List<ListUser> =
+    fun entitesToDomain(input : List<GithubUserList>): List<ListUser> =
         input.map { data ->
             ListUser(
                 name = data.name,
@@ -35,7 +35,7 @@ object DataMapper {
             )
         }
 
-    fun domainToEntity(data : ListUser) = GithubListUser(
+    fun domainToEntity(data : ListUser) = GithubUserList(
         id = 0,
         name = data.name,
         username = data.username,

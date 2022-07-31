@@ -1,7 +1,6 @@
 package com.example.githubuser.presentation.fragment.detail
 
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -16,27 +15,18 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
-import com.example.core.data.local.entity.userlist.GithubListUser
-import com.example.githubuser.myapplication.MyApplication
+import com.example.core.data.local.entity.userlist.GithubUserList
 import com.example.githubuser.presentation.fragment.detail.tabadapter.SectionPagerAdapter
-import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
+import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
-import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
-
-    @Inject
-    lateinit var factory : ViewModelFactory
-    private val detailViewModel : DetailViewModel by viewModels{
-        factory
-    }
-
-    private val favoriteViewModel : FavoriteViewModel by viewModels{
-        factory
-    }
+    private val detailViewModel : DetailViewModel by viewModels()
+    private val favoriteViewModel : FavoriteViewModel by viewModels()
 
     private val utilViewModel by viewModels<UtilViewModel>()
 
@@ -44,53 +34,38 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private var saveText = ""
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailBinding.inflate(layoutInflater)
         saveText = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
-
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){
                 saveText = it
             }
         }
-
         favoriteChecker()
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.apply {
             btnBackhome.setOnClickListener {
                 findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
             }
-
             btnShare.setOnClickListener {
                 val share= Intent()
                 share.action = Intent.ACTION_SEND
                 share.type = "text/plain"
                 share.putExtra(Intent.EXTRA_TEXT,"Visit $saveText on github")
-
-
                 startActivity(Intent.createChooser(share,"Share to"))
             }
-
             btnFavorite.setOnClickListener {
                 setAsFavorite()
             }
         }
-
         setDetailUser()
         userChecker()
     }
@@ -110,7 +85,6 @@ class DetailFragment : Fragment() {
                         FollowingTvitem.text = following.toString()
                         RepositoryTvitem.text = publicRepos.toString()
                         webTvitem.text = blog
-
                         if(bio.isNullOrEmpty()) BioTvitem.visibility = View.GONE
                         if(company.isNullOrEmpty()) ComapnyTvitem.visibility = View.GONE
                         if(location.isNullOrEmpty()) locTvitem.visibility = View.GONE
@@ -121,8 +95,6 @@ class DetailFragment : Fragment() {
                             intent.data = Uri.parse(blog)
                             startActivity(intent)
                         }
-
-
                         Glide.with(requireContext())
                             .asDrawable()
                             .load(avatarUrl)
@@ -144,7 +116,7 @@ class DetailFragment : Fragment() {
         detailViewModel.detailUserResponse.observe(viewLifecycleOwner){ respon->
             respon?.apply {
                 login?.let {
-                    val favTemp = GithubListUser(
+                    val favTemp = GithubUserList(
                         0,
                         login,
                         name,
@@ -164,7 +136,6 @@ class DetailFragment : Fragment() {
         }
     }
 
-
     private fun removeFromFavorite(){
         favoriteViewModel.deletePersonFavoritePeople(saveText)
         Snackbar.make(binding.root,"Remove $saveText ",
@@ -179,7 +150,6 @@ class DetailFragment : Fragment() {
         val viewPager = binding.Followviewpager
         val tabs = binding.tabLayout
         viewPager.adapter = pagerAdapter
-
         TabLayoutMediator(tabs,viewPager){ tab, position ->
             tab.text = getString(tab_titles[position])
         }.attach()
@@ -192,7 +162,6 @@ class DetailFragment : Fragment() {
             }
         }
     }
-
 
     private fun favoriteChecker(){
         favoriteViewModel.searchFavoritePeople(saveText).observe(viewLifecycleOwner){

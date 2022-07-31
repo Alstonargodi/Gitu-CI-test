@@ -1,6 +1,5 @@
 package com.example.githubuser.presentation.fragment.githubrepository
 
-import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
@@ -12,39 +11,24 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
-import com.example.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
-import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.githubrepository.adapter.RepositoryRecyclerViewAdapter
-import com.example.githubuser.presentation.fragment.favorite.FavoriteViewModel
+import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
-import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RepositoryFragment: Fragment() {
-    @Inject
-    lateinit var factory : ViewModelFactory
-
     private lateinit var binding: FragmentRepoBinding
     private lateinit var adapter : RepositoryRecyclerViewAdapter
 
-    private val repositoryViewModel : GithubRepositoryViewModel by viewModels{
-        factory
-    }
-
-    private val favoriteViewModel : FavoriteViewModel by viewModels{
-        factory
-    }
+    private val repositoryViewModel : GithubRepositoryViewModel by viewModels()
+    private val favoriteViewModel : FavoriteViewModel by viewModels()
 
     private val utilViewModel by viewModels<UtilViewModel>()
     private var userName = ""
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +70,7 @@ class RepositoryFragment: Fragment() {
     }
 
     private fun setFavoriteRepo(data : RepositoryUserResponseItem){
-        val favTemp = FavoriteProject(
+        val favTemp = GithubRepositoryList(
             data.name,
             data.description,
             data.language,

@@ -1,4 +1,4 @@
-package com.example.core.data.local.entity.favoriteproject
+package com.example.core.data.local.entity.githubrepository
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity
 @Parcelize
-data class FavoriteProject(
+data class GithubRepositoryList(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "name")
     val name : String = "",

@@ -18,28 +18,20 @@ import com.example.githubuser.presentation.fragment.detail.DetailFragmentDirecti
 import com.example.githubuser.presentation.fragment.follower.adapter.FollowerRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class FollowerFragment: Fragment() {
-
-    @Inject
-    lateinit var factory : ViewModelFactory
 
     private lateinit var binding: FragmentFollowerBinding
     private lateinit var adapter : FollowerRecyclerViewAdapter
 
-    private val followerViewModel : FollowerViewModel by viewModels{
-        factory
-    }
+    private val followerViewModel : FollowerViewModel by viewModels()
 
     private val utilViewModel by viewModels<UtilViewModel>()
     private var userName = ""
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +44,6 @@ class FollowerFragment: Fragment() {
                 userName = it
             }
         }
-
         return binding.root
     }
 

@@ -15,31 +15,20 @@ import com.example.githubuser.presentation.fragment.book.adapter.SectionFavorite
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class BookFragment : Fragment() {
-    @Inject
-    lateinit var factory : ViewModelFactory
-
     private lateinit var binding : FragmentBookBinding
-
-    private val viewModel : DetailViewModel by viewModels{
-        factory
-    }
-
     private lateinit var pagerAdapter : SectionFavoritePagerAdapter
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBookBinding.inflate(layoutInflater)
-        viewModel.getUserDetail(author_name)
+
         setViewPager()
         return binding.root
     }

@@ -8,8 +8,11 @@ import com.example.core.data.remote.apiresponse.*
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.ListUser
 import com.example.core.domain.remote.RemoteUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     val repository: RemoteUseCase
 ) :ViewModel() {
     companion object{

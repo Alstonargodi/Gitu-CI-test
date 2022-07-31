@@ -11,29 +11,23 @@ import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.viewModels
 import com.example.githubuser.R
 import com.example.core.data.local.preference.SettingPreferences
 import com.example.githubuser.databinding.FragmentSettingBinding
 import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 
 private val Context.datastore : DataStore<Preferences> by preferencesDataStore("theme_setting")
 
+@AndroidEntryPoint
 class SettingFragment : AppCompatActivity() {
-    @Inject
-    lateinit var factory : ViewModelFactory
-
     private lateinit var binding: FragmentSettingBinding
-    private val settingViewModel : SettingViewModel by viewModels{
-        factory
-    }
+    private val settingViewModel : SettingViewModel by viewModels()
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        (application as MyApplication).appComponent.inject(this)
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentSettingBinding.inflate(layoutInflater)

@@ -2,31 +2,31 @@ package com.example.core.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.core.data.local.entity.userlist.GithubListUser
-import com.example.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.userlist.GithubUserList
+import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
 
 @Dao
 interface FavoriteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavoriteProject(favoriteProject: FavoriteProject)
+    fun insertFavoriteProject(githubRepositoryList: GithubRepositoryList)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavoritePeople(githubListUser: GithubListUser)
+    fun insertFavoritePeople(githubUserList: GithubUserList)
 
-    @Query("select*from favoriteproject")
-    fun readFavoriteProject(): LiveData<List<FavoriteProject>>
+    @Query("select*from githubrepositorylist")
+    fun readFavoriteProject(): LiveData<List<GithubRepositoryList>>
 
-    @Query("select*from githublistuser where isSaved = 1")
-    fun readFavoritePeople():LiveData<List<GithubListUser>>
+    @Query("select*from githubuserlist where isSaved = 1")
+    fun readFavoritePeople():LiveData<List<GithubUserList>>
 
-    @Query("select*from githublistuser where name like :name and isSaved = 1")
-    fun searchFavoritePeople(name : String):LiveData<List<GithubListUser>>
+    @Query("select*from githubuserlist where name like :name and isSaved = 1")
+    fun searchFavoritePeople(name : String):LiveData<List<GithubUserList>>
 
     @Delete
-    fun deleteFavoriteProject(favoriteProject: FavoriteProject)
+    fun deleteFavoriteProject(githubRepositoryList: GithubRepositoryList)
 
-    @Query("Delete from githublistuser where name like :name and isSaved = 1")
+    @Query("Delete from githubuserlist where name like :name and isSaved = 1")
     fun deletePersonFavoritePeople(name: String)
 
 

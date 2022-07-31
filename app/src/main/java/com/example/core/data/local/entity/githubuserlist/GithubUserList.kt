@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-data class GithubListUser(
+data class GithubUserList(
     @PrimaryKey(autoGenerate = true)
     val id : Int,
     @ColumnInfo(name = "name")

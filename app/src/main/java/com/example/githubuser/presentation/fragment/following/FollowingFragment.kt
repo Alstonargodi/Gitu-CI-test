@@ -19,27 +19,18 @@ import com.example.githubuser.presentation.fragment.detail.DetailFragmentDirecti
 import com.example.githubuser.presentation.fragment.following.adapter.FollowingRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class FollowingFragment : Fragment() {
-    @Inject
-    lateinit var factory : ViewModelFactory
-
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter : FollowingRecyclerViewAdapter
 
-    private val followingViewModel :FollowingViewModel by viewModels{
-        factory
-    }
+    private val followingViewModel :FollowingViewModel by viewModels()
     private val utilViewModel by viewModels<UtilViewModel>()
     private var userName = ""
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +38,6 @@ class FollowingFragment : Fragment() {
     ): View {
         _binding = FragmentFollowingBinding.inflate(layoutInflater)
         userName = arguments?.getString("value","").toString()
-
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){
                 userName = it

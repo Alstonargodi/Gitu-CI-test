@@ -1,9 +1,11 @@
-package com.example.core.injection.module
+package com.example.core.di.module
 
 import com.example.githubuser.BuildConfig
 import com.example.core.data.remote.apiservice.ApiService
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 @Module
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
     private val loggingInterceptor =
         if(BuildConfig.DEBUG) {

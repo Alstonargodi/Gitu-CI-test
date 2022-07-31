@@ -1,6 +1,6 @@
 package com.example.core.data.repository.remote
 
-import com.example.core.data.local.source.LocalDataSource
+import com.example.core.data.local.source.githubapi.LocalDataSource
 import com.example.core.data.remote.NetworkBoundResources
 import com.example.core.data.remote.apiresponse.ListUserResponse
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponse
