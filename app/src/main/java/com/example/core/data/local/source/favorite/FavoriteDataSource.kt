@@ -13,7 +13,6 @@ import javax.inject.Singleton
 class FavoriteDataSource @Inject constructor(
     private val favoriteDao : FavoriteDao
 ): IFavoriteDataSource {
-
     private val executorService : ExecutorService = Executors.newSingleThreadExecutor()
 
     override fun insertFavoriteProject(githubRepositoryList: GithubRepositoryList) {

@@ -13,7 +13,7 @@ import com.example.core.data.repository.remote.IRemoteRepository
 import com.example.core.domain.model.ListUser
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.fragment.following.FollowingViewModel
-import com.example.githubuser.presentation.fragment.githubrepository.GithubRepositoryViewModel
+import com.example.githubuser.presentation.fragment.repositoryuser.GithubRepositoryViewModel
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,4 +1,4 @@
-package com.example.githubuser.presentation.fragment.githubrepository
+package com.example.githubuser.presentation.fragment.repositoryuser
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

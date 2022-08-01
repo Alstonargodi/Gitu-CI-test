@@ -8,21 +8,14 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.R
-import com.example.core.data.local.preference.SettingPreferences
-import com.example.core.data.local.preference.datastore
-import com.example.githubuser.presentation.fragment.setting.SettingViewModel
-import com.example.githubuser.presentation.utils.viewmodelfactory.SettingViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SplashScreen : AppCompatActivity() {
-    private lateinit var setViewModel : SettingViewModel
-
     companion object{
         const val TIME = 3000L
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splashscreen)
@@ -33,18 +26,7 @@ class SplashScreen : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }, TIME)
 
-        val preferences = SettingPreferences.getInstance(datastore)
-        setViewModel = ViewModelProvider(this, SettingViewModelFactory(preferences))[SettingViewModel::class.java]
-
-        setViewModel.getThemeSetting().observe(this){ mode : Boolean ->
-            if (mode){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }else{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-        }
-
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.maincolor)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.maincolor)

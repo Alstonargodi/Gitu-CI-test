@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.githubuser.presentation.fragment.follower.FollowerFragment
 import com.example.githubuser.presentation.fragment.following.FollowingFragment
-import com.example.githubuser.presentation.fragment.githubrepository.RepositoryFragment
+import com.example.githubuser.presentation.fragment.repositoryuser.RepositoryFragment
 
 class SectionPagerAdapter(activity : FragmentActivity, private var value : String, private var tab : Int): FragmentStateAdapter(activity) {
     override fun getItemCount() = tab

@@ -12,11 +12,9 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-
     @Binds
     abstract fun provideRemoteRepository(repository: RemoteRepository):
             IRemoteRepository
-
     @Binds
     abstract fun provideFavoriteRepository(repository: FavoriteRepository):
             IFavoriteRepository

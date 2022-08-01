@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -64,6 +65,7 @@ class DetailFragment : Fragment() {
             }
             btnFavorite.setOnClickListener {
                 setAsFavorite()
+
             }
         }
         setDetailUser()
@@ -113,11 +115,11 @@ class DetailFragment : Fragment() {
     }
 
     private fun setAsFavorite(){
-        detailViewModel.detailUserResponse.observe(viewLifecycleOwner){ respon->
+        detailViewModel.getUserDetail(saveText).observe(viewLifecycleOwner){ respon->
             respon?.apply {
                 login?.let {
                     val favTemp = GithubUserList(
-                        0,
+                        respon.id!!,
                         login,
                         name,
                         avatarUrl,
@@ -131,6 +133,7 @@ class DetailFragment : Fragment() {
                         .setTextColor(Color.WHITE)
                         .setBackgroundTint(Color.rgb(0, 200, 151))
                         .show()
+                    Toast.makeText(requireContext(),"test",Toast.LENGTH_SHORT).show()
                 }
             }
         }

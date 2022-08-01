@@ -72,7 +72,7 @@
         tools:layout="@layout/fragment_following" />
     <fragment
         android:id="@+id/repositoryFragment"
-        android:name="com.example.githubuser.presentation.fragment.githubrepository.RepositoryFragment"
+        android:name="com.example.githubuser.presentation.fragment.repositoryuser.RepositoryFragment"
         android:label="fragment_repo"
         tools:layout="@layout/fragment_repo" />
     <activity

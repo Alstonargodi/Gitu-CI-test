@@ -15,16 +15,12 @@ class FavoriteInteractor @Inject constructor(
        repository.insertFavoritePeople(githubUserList)
     override fun readFavoriteProject(): LiveData<List<GithubRepositoryList>> =
         repository.readFavoriteProject()
-
     override fun readFavoritePeople(): LiveData<List<GithubUserList>> =
         repository.readFavoritePeople()
-
     override fun searchFavoritePeople(name: String): LiveData<List<GithubUserList>> =
         repository.searchFavoritePeople(name)
-
     override fun deleteFavoriteProject(githubRepositoryList: GithubRepositoryList) =
         repository.deleteFavoriteProject(githubRepositoryList)
-
     override fun deletePersonFavoritePeople(name: String) =
         repository.deletePersonFavoritePeople(name)
 

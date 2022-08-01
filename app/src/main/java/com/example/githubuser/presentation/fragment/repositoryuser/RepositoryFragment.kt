@@ -1,4 +1,4 @@
-package com.example.githubuser.presentation.fragment.githubrepository
+package com.example.githubuser.presentation.fragment.repositoryuser
 
 import android.content.res.Configuration
 import android.graphics.Color
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
 import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
-import com.example.githubuser.presentation.fragment.githubrepository.adapter.RepositoryRecyclerViewAdapter
+import com.example.githubuser.presentation.fragment.repositoryuser.adapter.RepositoryRecyclerViewAdapter
 import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.google.android.material.snackbar.Snackbar

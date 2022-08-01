@@ -9,34 +9,15 @@ import com.example.githubuser.presentation.fragment.detail.DetailViewModel
 import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.example.githubuser.presentation.fragment.follower.FollowerViewModel
 import com.example.githubuser.presentation.fragment.following.FollowingViewModel
-import com.example.githubuser.presentation.fragment.githubrepository.GithubRepositoryViewModel
+import com.example.githubuser.presentation.fragment.repositoryuser.GithubRepositoryViewModel
 import com.example.githubuser.presentation.fragment.home.HomeViewModel
 import javax.inject.Inject
-
-
 
 @AppScope
 class ViewModelFactory @Inject constructor(
     private val favoriteUseCase : FavoriteUseCase,
-    private val remoteUseCase: RemoteUseCase
+    private val remoteUseCase: RemoteUseCase,
 ):ViewModelProvider.NewInstanceFactory() {
-
-//        companion object{
-//            @Volatile
-//            private var instance: ViewModelFactory? = null
-//            fun getInstance(context: Context): ViewModelFactory {
-//                if (instance == null){
-//                    synchronized(ViewModelFactory::class.java){
-//                        instance = ViewModelFactory(
-//                            Injection.provideLocalUseCase(context),
-//                            Injection.provideRemoteUseCase(context)
-//                        )
-//                    }
-//                }
-//                return instance as ViewModelFactory
-//            }
-//        }
-
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)){
                 return FavoriteViewModel(favoriteUseCase) as T

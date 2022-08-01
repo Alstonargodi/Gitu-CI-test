@@ -1,4 +1,4 @@
-package com.example.githubuser.presentation.fragment.githubrepository.adapter
+package com.example.githubuser.presentation.fragment.repositoryuser.adapter
 
 
 import android.view.LayoutInflater

@@ -30,20 +30,14 @@ class RemoteRepository @Inject constructor(
                    DataMapper.entitesToDomain(it)
                }
             }
-
             override fun shouldFetch(data: List<ListUser>?): Boolean = true
-
             override suspend fun createCall(): Flow<FetchResults<ListUserResponse>> =
                 remoteDataSource.getListUser(userName)
-
-
             override suspend fun saveCallResult(data: ListUserResponse) {
                 val userList = DataMapper.remoteResponseToLocalEntites(data)
                 localDataSource.insertListUser(userList)
             }
-
         }.asFlow()
-
 
     override fun getUserDetail(name: String): Call<DetailUserResponse> =
         remoteDataSource.getUserDetail(name)
