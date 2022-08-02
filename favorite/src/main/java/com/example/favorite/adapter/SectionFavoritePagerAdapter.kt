@@ -1,10 +1,10 @@
-package com.example.githubuser.presentation.fragment.book.adapter
+package com.example.favorite.adapter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.githubuser.presentation.fragment.favorite.FavoriteFragment
+import com.example.favorite.FavoriteFragment
 
 class SectionFavoritePagerAdapter(activity : FragmentActivity,private var tab : Int): FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = tab

@@ -8,10 +8,10 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-apply from: 'C:\\Users\\alsto\\AndroidStudioProjects\\Modular\\Githubuser-v2-modular\\shared_dependencies.gradle'
+apply from: '../shared_dependencies.gradle'
 
 android {
-    compileSdk 32
+    compileSdk 31
     aaptOptions {
         cruncherEnabled = false
     }
@@ -49,4 +49,5 @@ android {
 
 dependencies {
     implementation project(":core")
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

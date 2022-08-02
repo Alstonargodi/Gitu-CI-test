@@ -22,11 +22,4 @@
         app:showAsAction="collapseActionView|ifRoom"
         />
 
-    <item
-        android:id="@+id/setting"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="@string/setting"
-        app:showAsAction="collapseActionView|ifRoom"
-    />
-
 </menu>

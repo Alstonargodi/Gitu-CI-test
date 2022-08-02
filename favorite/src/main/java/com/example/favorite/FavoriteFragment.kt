@@ -1,4 +1,4 @@
-package com.example.githubuser.presentation.fragment.favorite
+package com.example.favorite
 
 import android.graphics.Color
 import android.os.Bundle
@@ -12,29 +12,48 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.core.data.local.entity.userlist.GithubUserList
 import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
-import com.example.githubuser.presentation.fragment.book.BookFragmentDirections
-import com.example.githubuser.presentation.fragment.favorite.adapter.FavoriteUserRecyclerViewAdapter
-import com.example.githubuser.presentation.fragment.favorite.adapter.FavoriteRepositoryRecyclerViewAdapter
-import com.example.githubuser.databinding.FragmentFavoriteBinding
-import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
+import com.example.core.di.FavoriteModuleDependecies
+import com.example.favorite.adapter.FavoriteUserRecyclerViewAdapter
+import com.example.favorite.adapter.FavoriteRepositoryRecyclerViewAdapter
+import com.example.favorite.component.DaggerFavoriteComponent
+import com.example.favorite.component.FavoriteComponent
+import com.example.favorite.databinding.FragmentFavoriteBinding
+import com.example.favorite.viewmodel.FavoriteViewModel
+import com.example.favorite.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
+import javax.inject.Inject
 
-@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private lateinit var binding : FragmentFavoriteBinding
     private lateinit var peopleRecyclerViewAdapter : FavoriteUserRecyclerViewAdapter
     private lateinit var repositoryRecyclerViewAdapter : FavoriteRepositoryRecyclerViewAdapter
 
-    private val favViewModel : FavoriteViewModel by viewModels()
+    private val favoriteViewModel : FavoriteViewModel by viewModels{
+        viewModelFactory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavoriteBinding.inflate(layoutInflater)
+        DaggerFavoriteComponent.builder()
 
-        favViewModel.isLoading.observe(viewLifecycleOwner){ respon ->
+            .context(requireContext())
+            .appDepedencies(
+                EntryPointAccessors.fromApplication(
+                    requireContext(),
+                    FavoriteModuleDependecies::class.java
+                )
+            )
+            .build()
+            .inject(this)
+        binding = FragmentFavoriteBinding.inflate(layoutInflater)
+        favoriteViewModel.isLoading.observe(viewLifecycleOwner){ respon ->
             isLoading(respon)
         }
         return binding.root
@@ -53,7 +72,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showFavPeople(){
-        favViewModel.apply {
+        favoriteViewModel.apply {
             readFavoritePeople()
             responGithubUserList.observe(viewLifecycleOwner){ respon ->
                 if (respon.isNullOrEmpty()) true.isEmpty()
@@ -64,9 +83,7 @@ class FavoriteFragment : Fragment() {
                 peopleRecyclerViewAdapter.apply {
                     setOnItemCallBack(object : FavoriteUserRecyclerViewAdapter.OnItemClickDetail{
                         override fun onItemClick(data: GithubUserList) {
-                            findNavController().navigate(
-                                BookFragmentDirections.actionAuthorFragmentToDetailFragment(data.name)
-                            )
+
                         }
                     })
                     setOnitemDelete(object : FavoriteUserRecyclerViewAdapter.OnItemDelete{
@@ -80,7 +97,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showFavRepository(){
-        favViewModel.apply {
+        favoriteViewModel.apply {
             readFavoriteProject()
             responFavoriteRepo.observe(viewLifecycleOwner){respon ->
                 if (respon.isNullOrEmpty()) true.isEmpty()
@@ -101,12 +118,12 @@ class FavoriteFragment : Fragment() {
 
     private fun deleteFavPeople(githubUserList: GithubUserList){
         showSnackbar(githubUserList.name)
-        favViewModel.deletePersonFavoritePeople(githubUserList.name)
+        favoriteViewModel.deletePersonFavoritePeople(githubUserList.name)
     }
 
     private fun deleteFavProject(githubRepositoryList: GithubRepositoryList){
         showSnackbar(githubRepositoryList.name)
-        favViewModel.deleteFavoriteRepo(githubRepositoryList)
+        favoriteViewModel.deleteFavoriteRepo(githubRepositoryList)
     }
 
     private fun showSnackbar(name : String){
@@ -129,10 +146,7 @@ class FavoriteFragment : Fragment() {
 
     private fun Boolean.isEmpty() {
         if (this){
-            binding.emptyviewfav.apply {
-                layoutemptyview.visibility = View.VISIBLE
-                tvResultempty.text = getString(R.string.emptyviewfav)
-            }
+
         }
     }
 

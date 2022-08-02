@@ -85,4 +85,6 @@
     <string name="favoriterepobturron">favoriterepobturron</string>
     <string name="iconerror">iconerror</string>
     <string name="title_favorite">Module Title</string>
+    <string name="title_testfeature">Module Title</string>
+    <string name="title_dynamicfeature">Module Title</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.githubuser.presentation.fragment.detail
 
-
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -18,7 +17,6 @@ import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
 import com.example.core.data.local.entity.userlist.GithubUserList
 import com.example.githubuser.presentation.fragment.detail.tabadapter.SectionPagerAdapter
-import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -27,7 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
     private val detailViewModel : DetailViewModel by viewModels()
-    private val favoriteViewModel : FavoriteViewModel by viewModels()
 
     private val utilViewModel by viewModels<UtilViewModel>()
 
@@ -127,7 +124,7 @@ class DetailFragment : Fragment() {
                         company,
                         true
                     )
-                    favoriteViewModel.inserFavoritePeople(favTemp)
+                    detailViewModel.insertFavoritePeople(favTemp)
                     Snackbar.make(binding.root,"add $login as Favorite People",
                             Snackbar.LENGTH_LONG)
                         .setTextColor(Color.WHITE)
@@ -140,7 +137,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun removeFromFavorite(){
-        favoriteViewModel.deletePersonFavoritePeople(saveText)
+        detailViewModel.deletePersonFavoritePeople(saveText)
         Snackbar.make(binding.root,"Remove $saveText ",
             Snackbar.LENGTH_LONG)
             .setTextColor(Color.WHITE)
@@ -167,7 +164,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun favoriteChecker(){
-        favoriteViewModel.searchFavoritePeople(saveText).observe(viewLifecycleOwner){
+        detailViewModel.searchFavoritePeople(saveText).observe(viewLifecycleOwner){
             try {
                 if (saveText == it[0].name){
                     binding.btnFavorite.apply {

@@ -1,8 +1,9 @@
 package com.example.githubuser.presentation.fragment.home
 
-
+import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -14,16 +15,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.R
-import com.example.githubuser.databinding.FragmentHomeBinding
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.ListUser
-import com.example.githubuser.myapplication.MyApplication
+import com.example.githubuser.R
+import com.example.githubuser.databinding.FragmentHomeBinding
 import com.example.githubuser.presentation.fragment.home.adapter.UserListRecAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
-import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -31,8 +29,8 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 
     private val viewModel : HomeViewModel by viewModels()
-
     private val utilViewModel by viewModels<UtilViewModel>()
+
     private var saveText = ""
 
     override fun onCreateView(
@@ -50,7 +48,6 @@ class HomeFragment : Fragment() {
 
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){ text ->
-                "search result for $text".also { binding.CurrsearchTv.text = it }
                 saveText = text
             }
         }
@@ -66,23 +63,25 @@ class HomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.barmenu, menu)
-
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
         val authorView = menu.findItem(R.id.author)
-        val settingPage = menu.findItem(R.id.setting)
-
 
         authorView.apply {
             setOnMenuItemClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthorFragment())
-                true
-            }
-        }
+                try {
+                    val bookFragment =
+                        Class.forName("com.example.favorite.BookFragment").newInstance() as Fragment
 
-        settingPage.apply {
-            setOnMenuItemClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingFragment())
+                    requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainerView,bookFragment)
+                        .commit()
+                }catch (e : Exception){
+                    Log.d("HomeFragment",e.toString())
+                }
+
+                //todo main fragment direction to favorite
                 true
             }
         }
@@ -124,25 +123,20 @@ class HomeFragment : Fragment() {
             showEmptyView(false)
         }
         utilViewModel.saveText(search)
-        "search result for $search".also { binding.CurrsearchTv.text = it }
 
-        when(search){
-            default_user->binding.CurrsearchTv.text = getString(R.string.Topuser)
-        }
     }
 
     private fun showUserList(list: List<ListUser>){
         adapter = UserListRecAdapter(list.distinct())
-        Log.d("testUserList",list[0].name)
-        val recView = binding.RecviewUser
-        recView.adapter = adapter
+        val listRecyclerView = binding.RecviewUser
+        listRecyclerView.adapter = adapter
         utilViewModel.setEmptys(false)
-        recView.layoutManager = LinearLayoutManager(requireContext())
+        listRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            recView.layoutManager = GridLayoutManager(requireContext(),2)
+            listRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         }else{
-            recView.layoutManager = LinearLayoutManager(requireContext())
+            listRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
     }
 

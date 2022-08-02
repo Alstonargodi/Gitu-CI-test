@@ -1,4 +1,4 @@
-package com.example.githubuser.presentation.fragment.favorite.adapter
+package com.example.favorite.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
-import com.example.githubuser.databinding.ItemcvFavoritepeopleBinding
 import com.example.core.data.local.entity.userlist.GithubUserList
+import com.example.favorite.databinding.ItemcvFavoritepeopleBinding
 
 class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubUserList>):
     RecyclerView.Adapter<FavoriteUserRecyclerViewAdapter.ViewHolder>(){

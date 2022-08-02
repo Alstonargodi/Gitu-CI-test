@@ -6,7 +6,6 @@ import com.example.core.domain.local.FavoriteUseCase
 import com.example.core.domain.remote.RemoteUseCase
 import com.example.core.di.AppScope
 import com.example.githubuser.presentation.fragment.detail.DetailViewModel
-import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.example.githubuser.presentation.fragment.follower.FollowerViewModel
 import com.example.githubuser.presentation.fragment.following.FollowingViewModel
 import com.example.githubuser.presentation.fragment.repositoryuser.GithubRepositoryViewModel
@@ -19,18 +18,16 @@ class ViewModelFactory @Inject constructor(
     private val remoteUseCase: RemoteUseCase,
 ):ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)){
-                return FavoriteViewModel(favoriteUseCase) as T
-            }else if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
+            if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
                 return HomeViewModel(remoteUseCase) as T
             }else if(modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-                return DetailViewModel(remoteUseCase) as T
+                return DetailViewModel(remoteUseCase,favoriteUseCase) as T
             }else if(modelClass.isAssignableFrom(FollowerViewModel::class.java)) {
                 return FollowerViewModel(remoteUseCase) as T
             }else if(modelClass.isAssignableFrom(FollowingViewModel::class.java)) {
                 return FollowingViewModel(remoteUseCase) as T
             }else if(modelClass.isAssignableFrom(GithubRepositoryViewModel::class.java)) {
-                return GithubRepositoryViewModel(remoteUseCase) as T
+                return GithubRepositoryViewModel(remoteUseCase,favoriteUseCase) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

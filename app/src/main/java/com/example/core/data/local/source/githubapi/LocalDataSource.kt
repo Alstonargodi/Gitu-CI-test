@@ -25,11 +25,5 @@ class LocalDataSource @Inject constructor(
         return localDao.readListUser()
     }
 
-    companion object{
-        private val instance: LocalDataSource? = null
-        fun getInstance(userDao: ListUserDao): LocalDataSource =
-            instance ?: synchronized(this){
-                instance ?: LocalDataSource(userDao)
-            }
-    }
+
 }

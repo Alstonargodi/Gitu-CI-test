@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/bookfragment"
-    tools:context=".presentation.fragment.book.BookFragment">
+    tools:context="com.example.favorite.BookFragment">
 
 
     <androidx.appcompat.widget.Toolbar

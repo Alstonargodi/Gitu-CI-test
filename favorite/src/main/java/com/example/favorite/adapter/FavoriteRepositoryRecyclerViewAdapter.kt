@@ -1,4 +1,4 @@
-package com.example.githubuser.presentation.fragment.favorite.adapter
+package com.example.favorite.adapter
 
 import android.view.LayoutInflater
 import android.view.View

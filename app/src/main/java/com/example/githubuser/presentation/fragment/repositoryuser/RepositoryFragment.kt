@@ -14,7 +14,6 @@ import com.example.githubuser.databinding.FragmentRepoBinding
 import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
 import com.example.githubuser.presentation.fragment.repositoryuser.adapter.RepositoryRecyclerViewAdapter
-import com.example.githubuser.presentation.fragment.favorite.viewmodel.FavoriteViewModel
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +24,6 @@ class RepositoryFragment: Fragment() {
     private lateinit var adapter : RepositoryRecyclerViewAdapter
 
     private val repositoryViewModel : GithubRepositoryViewModel by viewModels()
-    private val favoriteViewModel : FavoriteViewModel by viewModels()
 
     private val utilViewModel by viewModels<UtilViewModel>()
     private var userName = ""
@@ -77,7 +75,7 @@ class RepositoryFragment: Fragment() {
             true
         )
 
-        favoriteViewModel.insertFavoriteRepo(favTemp)
+        repositoryViewModel.insertFavoriteRepo(favTemp)
         Snackbar.make(binding.root,"add ${data.name} as Favorite Repo",
             Snackbar.LENGTH_LONG)
             .setTextColor(Color.WHITE)

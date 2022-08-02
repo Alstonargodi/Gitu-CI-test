@@ -4,9 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
-        android:name=".myapplication.MyApplication"
+        android:name="com.example.githubuser.myapplication.MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,10 +16,6 @@
         <activity
             android:name=".presentation.activity.MainActivity"
             android:exported="false" />
-        <activity
-            android:name="com.example.githubuser.presentation.fragment.setting.SettingFragment">
-        </activity>
-
         <activity
             android:name=".presentation.activity.SplashScreen"
             android:exported="true">

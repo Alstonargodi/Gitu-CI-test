@@ -23,5 +23,4 @@ class FavoriteInteractor @Inject constructor(
         repository.deleteFavoriteProject(githubRepositoryList)
     override fun deletePersonFavoritePeople(name: String) =
         repository.deletePersonFavoritePeople(name)
-
 }

@@ -1,4 +1,4 @@
-package com.example.githubuser.presentation.fragment.favorite.viewmodel
+package com.example.favorite.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -37,12 +37,12 @@ class FavoriteViewModel @Inject constructor(
     }
 
     fun searchFavoritePeople(name : String) : LiveData<List<GithubUserList>> = favoriteUseCase.searchFavoritePeople(name)
-    fun inserFavoritePeople(githubUserList: GithubUserList){
+    fun insertFavoritePeople(githubUserList: GithubUserList){
         favoriteUseCase.insertFavoritePeople(githubUserList)
     }
+
     fun deletePersonFavoritePeople(name: String){
         favoriteUseCase.deletePersonFavoritePeople(name)
-
     }
 
 

@@ -17,3 +17,5 @@ rootProject.name = "Githubuser"
 include ':app'
 include ':core'
 include ':favorite'
+include ':testFeature'
+include ':dynamicfeature'
