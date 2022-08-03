@@ -28,7 +28,6 @@ import javax.inject.Inject
 class FavoriteFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private lateinit var binding : FragmentFavoriteBinding
     private lateinit var peopleRecyclerViewAdapter : FavoriteUserRecyclerViewAdapter
     private lateinit var repositoryRecyclerViewAdapter : FavoriteRepositoryRecyclerViewAdapter

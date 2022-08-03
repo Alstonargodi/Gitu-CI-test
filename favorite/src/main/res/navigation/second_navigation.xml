@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/second_navigation"
+    android:label="navigationTwo"
+    app:moduleName="navigationTwo"
+    app:startDestination="@id/bookFragment2">
+    <fragment
+        android:id="@+id/bookFragment2"
+        android:name="com.example.favorite.BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" />
+</navigation>

@@ -41,11 +41,9 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)
-
         viewModel.apply {
             isLoading.observe(viewLifecycleOwner){ isLoading(it) }
         }
-
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){ text ->
                 saveText = text
@@ -72,16 +70,14 @@ class HomeFragment : Fragment() {
                 try {
                     val bookFragment =
                         Class.forName("com.example.favorite.BookFragment").newInstance() as Fragment
-
                     requireActivity().supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.fragmentContainerView,bookFragment)
+                        .addToBackStack(null)
                         .commit()
                 }catch (e : Exception){
                     Log.d("HomeFragment",e.toString())
                 }
-
-                //todo main fragment direction to favorite
                 true
             }
         }
@@ -108,13 +104,16 @@ class HomeFragment : Fragment() {
             getListUser(search).observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Loading ->{
-
+                        binding.pgbarhome.visibility = View.VISIBLE
                     }
                     is Resource.Success ->{
-                        it.data?.let { it1 -> showUserList(it1) }
+                        it.data?.let {
+                                it1 -> showUserList(it1)
+                        }
                     }
                     is Resource.Error ->{
                         Log.d("remoteRepository home", it.message.toString())
+                        binding.pgbarhome.visibility = View.GONE
                     }
                     else -> {}
                 }
@@ -127,6 +126,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showUserList(list: List<ListUser>){
+        binding.pgbarhome.visibility = View.GONE
         adapter = UserListRecAdapter(list.distinct())
         val listRecyclerView = binding.RecviewUser
         listRecyclerView.adapter = adapter
