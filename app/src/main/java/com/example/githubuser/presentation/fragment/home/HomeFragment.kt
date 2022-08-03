@@ -88,7 +88,7 @@ class HomeFragment : Fragment() {
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    setSearchResult(query?:"")
+                    setSearchResult(query?:"",false)
                     return true
                 }
 
@@ -99,30 +99,30 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setSearchResult(search : String){
-        viewModel.apply {
-            getListUser(search).observe(viewLifecycleOwner){
-                when(it){
-                    is Resource.Loading ->{
-                        binding.pgbarhome.visibility = View.VISIBLE
-                    }
-                    is Resource.Success ->{
-                        it.data?.let {
-                                it1 -> showUserList(it1)
-                        }
-                    }
-                    is Resource.Error ->{
-                        Log.d("remoteRepository home", it.message.toString())
-                        binding.pgbarhome.visibility = View.GONE
-                    }
-                    else -> {}
-                }
-            }
-            binding.tvEmptyview.visibility = View.GONE
-            showEmptyView(false)
+    private fun setSearchResult(search : String,default : Boolean){
+        if(!default){
+            viewModel.deleteListUser()
+            utilViewModel.setEmptys(false)
         }
+        viewModel.getListUser(search).observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Loading ->{
+                    binding.pgbarhome.visibility = View.VISIBLE
+                }
+                is Resource.Success ->{
+                    it.data?.let {
+                      it1 -> showUserList(it1)
+                    }
+                }
+                is Resource.Error ->{
+                    Log.d("remoteRepository home", it.message.toString())
+                    binding.pgbarhome.visibility = View.GONE
+                }
+                else -> {}
+            }
+        }
+        binding.tvEmptyview.visibility = View.GONE
         utilViewModel.saveText(search)
-
     }
 
     private fun showUserList(list: List<ListUser>){
@@ -163,7 +163,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun showEmptyView(isEmpty : Boolean){
-
         binding.includeempty.apply {
             if (isEmpty){
                 layoutemptyview.visibility = View.VISIBLE
@@ -175,7 +174,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun isLoading(isLoading:Boolean){
         binding.Homeprogress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
     }
@@ -183,7 +181,7 @@ class HomeFragment : Fragment() {
     private fun setDefaultList(){
         utilViewModel.isEmpty.observe(viewLifecycleOwner){ isUserNotExist ->
             if (isUserNotExist == true){
-                setSearchResult(default_user)
+                setSearchResult(default_user,true)
                 binding.tvEmptyview.visibility = View.GONE
             }else if (isUserNotExist == false){
                 binding.tvEmptyview.visibility = View.GONE

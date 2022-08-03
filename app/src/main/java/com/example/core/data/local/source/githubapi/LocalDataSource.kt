@@ -25,5 +25,11 @@ class LocalDataSource @Inject constructor(
         return localDao.readListUser()
     }
 
+    override fun deleteListUser() {
+        executorService.execute {
+            localDao.deleteListUser()
+        }
+    }
+
 
 }

@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface ILocalDataSource {
     suspend fun insertListUser(user: List<GithubUserList>)
     fun readListUser(): Flow<List<GithubUserList>>
+    fun deleteListUser()
 }

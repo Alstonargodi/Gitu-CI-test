@@ -1,5 +1,6 @@
 package com.example.core.data.repository.remote
 
+import com.example.core.data.local.entity.userlist.GithubUserList
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponse
 import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponse
@@ -14,4 +15,5 @@ interface IRemoteRepository {
     fun getUserRepository(name : String): Call<RepositoryUserResponse>
     fun getUserFollowing(name: String): Call<FollowerUserResponse>
     fun getUserFollower(name: String): Call<FollowerUserResponse>
+    fun deleteListUser()
 }

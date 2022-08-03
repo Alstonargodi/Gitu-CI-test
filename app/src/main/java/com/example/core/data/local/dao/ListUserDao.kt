@@ -1,9 +1,6 @@
 package com.example.core.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.core.data.local.entity.userlist.GithubUserList
 import kotlinx.coroutines.flow.Flow
 
@@ -14,4 +11,7 @@ interface ListUserDao {
 
     @Query("select*from githubuserlist order by id asc")
     fun readListUser(): Flow<List<GithubUserList>>
+
+    @Query("delete from githubuserlist")
+    fun deleteListUser()
 }

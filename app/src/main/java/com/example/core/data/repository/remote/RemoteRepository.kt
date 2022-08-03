@@ -36,6 +36,7 @@ class RemoteRepository @Inject constructor(
             override suspend fun saveCallResult(data: ListUserResponse) {
                 val userList = DataMapper.remoteUserListToLocalUserList(data)
                 localDataSource.insertListUser(userList)
+
             }
         }.asFlow()
 
@@ -50,6 +51,10 @@ class RemoteRepository @Inject constructor(
 
     override fun getUserFollower(name: String): Call<FollowerUserResponse> =
         remoteDataSource.getUserFollower(name)
+
+    override fun deleteListUser() {
+        localDataSource.deleteListUser()
+    }
 
 
 }

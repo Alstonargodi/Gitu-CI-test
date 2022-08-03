@@ -14,4 +14,5 @@ interface RemoteUseCase {
     fun getUserRepository(name : String): LiveData<List<RepositoryUserResponseItem>>
     fun getUserFollowing(name: String): LiveData<List<FollowerUserResponseItem>>
     fun getUserFollower(name: String): LiveData<List<FollowerUserResponseItem>>
+    fun deleteListUser()
 }

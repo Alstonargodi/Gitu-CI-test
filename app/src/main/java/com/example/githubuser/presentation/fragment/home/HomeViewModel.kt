@@ -15,26 +15,18 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     val repository: RemoteUseCase
 ) :ViewModel() {
-    companion object{
-        const val TAG = "HomeViewModel"
-    }
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
-
 
     private val _errorResponse = MutableLiveData<String>()
     val errorResponse: LiveData<String> = _errorResponse
 
-    /*
-    main viewmodel
-    */
-    private val _listresponse = MutableLiveData<List<ListUserResponseItem>>()
-    val listresponse : LiveData<List<ListUserResponseItem>> = _listresponse
-
-
     fun getListUser(name : String): LiveData<Resource<List<ListUser>>> {
        return repository.getListUser(name).asLiveData()
+    }
+
+    fun deleteListUser(){
+        repository.deleteListUser()
     }
 
 
