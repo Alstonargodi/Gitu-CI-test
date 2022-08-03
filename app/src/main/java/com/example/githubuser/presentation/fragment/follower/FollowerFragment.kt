@@ -1,6 +1,5 @@
 package com.example.githubuser.presentation.fragment.follower
 
-import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,13 +12,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
-import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.detail.DetailFragmentDirections
 import com.example.githubuser.presentation.fragment.follower.adapter.FollowerRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
-import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FollowerFragment: Fragment() {
@@ -78,7 +74,7 @@ class FollowerFragment: Fragment() {
         val recyclerView = binding.followerrecview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        utilViewModel.apply { if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false) }
+        utilViewModel.apply { if (adapter.itemCount== 0) setEmptyView(true) else setEmptyView(false) }
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -131,7 +127,4 @@ class FollowerFragment: Fragment() {
             }
         }
     }
-
-
-
 }

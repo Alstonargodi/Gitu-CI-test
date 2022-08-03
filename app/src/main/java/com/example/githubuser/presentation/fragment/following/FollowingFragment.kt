@@ -1,6 +1,5 @@
 package com.example.githubuser.presentation.fragment.following
 
-import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -14,13 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
 import com.example.githubuser.databinding.FragmentFollowingBinding
-import com.example.githubuser.myapplication.MyApplication
 import com.example.githubuser.presentation.fragment.detail.DetailFragmentDirections
 import com.example.githubuser.presentation.fragment.following.adapter.FollowingRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
-import com.example.githubuser.presentation.utils.viewmodelfactory.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FollowingFragment : Fragment() {
@@ -78,7 +74,7 @@ class FollowingFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         utilViewModel.apply {
-            if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false)
+            if (adapter.itemCount== 0) setEmptyView(true) else setEmptyView(false)
         }
         emptyChecker()
 

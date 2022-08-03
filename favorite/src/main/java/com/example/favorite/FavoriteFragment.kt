@@ -7,21 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.R
 import com.example.core.data.local.entity.userlist.GithubUserList
 import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
 import com.example.core.di.FavoriteModuleDependecies
 import com.example.favorite.adapter.FavoriteUserRecyclerViewAdapter
 import com.example.favorite.adapter.FavoriteRepositoryRecyclerViewAdapter
 import com.example.favorite.component.DaggerFavoriteComponent
-import com.example.favorite.component.FavoriteComponent
 import com.example.favorite.databinding.FragmentFavoriteBinding
 import com.example.favorite.viewmodel.FavoriteViewModel
 import com.example.favorite.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
@@ -74,7 +70,6 @@ class FavoriteFragment : Fragment() {
         favoriteViewModel.apply {
             readFavoritePeople()
             responGithubUserList.observe(viewLifecycleOwner){ respon ->
-                if (respon.isNullOrEmpty()) true.isEmpty()
                 peopleRecyclerViewAdapter = FavoriteUserRecyclerViewAdapter(respon)
                 binding.RecyclerVFavorite.adapter = peopleRecyclerViewAdapter
                 binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
@@ -85,7 +80,7 @@ class FavoriteFragment : Fragment() {
 
                         }
                     })
-                    setOnitemDelete(object : FavoriteUserRecyclerViewAdapter.OnItemDelete{
+                    setOnItemDeleted(object : FavoriteUserRecyclerViewAdapter.OnItemDelete{
                         override fun onItemClickDelete(data: GithubUserList) {
                             deleteFavPeople(data)
                         }
@@ -99,13 +94,12 @@ class FavoriteFragment : Fragment() {
         favoriteViewModel.apply {
             readFavoriteProject()
             responFavoriteRepo.observe(viewLifecycleOwner){respon ->
-                if (respon.isNullOrEmpty()) true.isEmpty()
                 repositoryRecyclerViewAdapter = FavoriteRepositoryRecyclerViewAdapter(respon)
                 binding.RecyclerVFavorite.adapter = repositoryRecyclerViewAdapter
                 binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
 
 
-                repositoryRecyclerViewAdapter.setOnitemDelete(object : FavoriteRepositoryRecyclerViewAdapter.OnItemClickDelete{
+                repositoryRecyclerViewAdapter.setOnItemDeleted(object : FavoriteRepositoryRecyclerViewAdapter.OnItemClickDelete{
                     override fun onItemClickDelete(data: GithubRepositoryList) {
                         deleteFavProject(data)
                     }
@@ -142,11 +136,4 @@ class FavoriteFragment : Fragment() {
             }
         }
     }
-
-    private fun Boolean.isEmpty() {
-        if (this){
-
-        }
-    }
-
 }

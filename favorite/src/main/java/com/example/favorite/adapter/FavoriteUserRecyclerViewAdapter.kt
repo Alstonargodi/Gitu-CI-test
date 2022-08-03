@@ -20,7 +20,7 @@ class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubUserList>
         this.onItemClickDetail = onItemClickDetail
     }
 
-    fun setOnitemDelete(onItemDelete : OnItemDelete){
+    fun setOnItemDeleted(onItemDelete : OnItemDelete){
         this.onItemClickDelete = onItemDelete
     }
 

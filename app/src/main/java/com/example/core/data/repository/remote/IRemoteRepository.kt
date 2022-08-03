@@ -11,6 +11,7 @@ import retrofit2.Call
 
 interface IRemoteRepository {
     fun getListUser(userName : String): Flow<Resource<List<ListUser>>>
+    fun showHistoryListUser(): Flow<List<ListUser>>
     fun getUserDetail(name: String): Call<DetailUserResponse>
     fun getUserRepository(name : String): Call<RepositoryUserResponse>
     fun getUserFollowing(name: String): Call<FollowerUserResponse>

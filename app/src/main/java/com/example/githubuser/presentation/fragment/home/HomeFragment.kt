@@ -1,9 +1,7 @@
 package com.example.githubuser.presentation.fragment.home
 
-import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.data.remote.utils.Resource
@@ -30,7 +27,6 @@ class HomeFragment : Fragment() {
 
     private val viewModel : HomeViewModel by viewModels()
     private val utilViewModel by viewModels<UtilViewModel>()
-
     private var saveText = ""
 
     override fun onCreateView(
@@ -49,14 +45,15 @@ class HomeFragment : Fragment() {
                 saveText = text
             }
         }
-        setDefaultList()
-        return binding.root
-    }
+        viewModel.showHistoryListUser().observe(viewLifecycleOwner){
+            if (it.isEmpty()){
+                setDefaultList()
+            }else{
+                showUserList(it)
+            }
+        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        showErrorText()
-        setDefaultList()
+        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -89,10 +86,9 @@ class HomeFragment : Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     setSearchResult(query?:"",false)
-                    utilViewModel.setEmptys(false)
+                    utilViewModel.setEmptyView(false)
                     return true
                 }
-
                 override fun onQueryTextChange(newText: String?): Boolean {
                     return false
                 }
@@ -130,7 +126,7 @@ class HomeFragment : Fragment() {
         adapter = UserListRecAdapter(list.distinct())
         val listRecyclerView = binding.RecviewUser
         listRecyclerView.adapter = adapter
-        utilViewModel.setEmptys(false)
+        utilViewModel.setEmptyView(false)
         listRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -184,7 +180,6 @@ class HomeFragment : Fragment() {
                 setSearchResult(default_user,true)
                 binding.tvEmptyview.visibility = View.GONE
             }else if (isUserNotExist == false){
-
                 binding.tvEmptyview.visibility = View.GONE
             }
         }

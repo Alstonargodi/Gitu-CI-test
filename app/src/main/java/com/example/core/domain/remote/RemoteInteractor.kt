@@ -23,13 +23,15 @@ import javax.inject.Inject
 class RemoteInteractor @Inject constructor(
     private val remoteRepository: IRemoteRepository
 ): RemoteUseCase {
-
     override fun getListUser(userName: String): Flow<Resource<List<ListUser>>> =
         remoteRepository.getListUser(userName)
 
+    override fun showHistoryListUser(): Flow<List<ListUser>> =
+        remoteRepository.showHistoryListUser()
+
+
     override fun getUserDetail(name: String): LiveData<DetailUserResponse> {
         val detail = MutableLiveData<DetailUserResponse>()
-
         remoteRepository.getUserDetail(name).enqueue(object : Callback<DetailUserResponse>{
             override fun onResponse(
                 call: Call<DetailUserResponse>,
@@ -38,12 +40,12 @@ class RemoteInteractor @Inject constructor(
                 if (response.isSuccessful){
                     detail.postValue(response.body())
                 }else{
-                    Log.d(DetailViewModel.TAG, response.message().toString())
+                    Log.d(TAG, response.message().toString())
                 }
             }
 
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d(TAG,t.toString())
             }
         })
         return detail
@@ -52,18 +54,17 @@ class RemoteInteractor @Inject constructor(
     override fun getUserRepository(name: String): LiveData<List<RepositoryUserResponseItem>> {
         val githubRepo = MutableLiveData<List<RepositoryUserResponseItem>>()
         remoteRepository.getUserRepository(name).enqueue(object : Callback<RepositoryUserResponse>{
-            override fun onResponse(
-                call: Call<RepositoryUserResponse>,
+            override fun onResponse(call: Call<RepositoryUserResponse>,
                 response: Response<RepositoryUserResponse>
             ) {
                 if (response.isSuccessful){
                     githubRepo.value = response.body()
                 }else{
-                    Log.d(GithubRepositoryViewModel.TAG, response.message())
+                    Log.d(TAG, response.message())
                 }
             }
             override fun onFailure(call: Call<RepositoryUserResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d(TAG,t.toString())
             }
         })
         return githubRepo
@@ -83,7 +84,7 @@ class RemoteInteractor @Inject constructor(
                 }
             }
             override fun onFailure(call: Call<FollowerUserResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d(TAG,t.toString())
             }
 
         })
@@ -100,20 +101,23 @@ class RemoteInteractor @Inject constructor(
                 if (response.isSuccessful){
                     follower.value = response.body()
                 }else{
-                    Log.d(FollowingViewModel.TAG, response.message())
+                    Log.d(TAG, response.message())
                 }
             }
 
             override fun onFailure(call: Call<FollowerUserResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d(TAG,t.toString())
             }
-
         })
         return follower
     }
 
     override fun deleteListUser() {
         remoteRepository.deleteListUser()
+    }
+
+    companion object{
+        private const val TAG = "RemoteInteractor"
     }
 
 }

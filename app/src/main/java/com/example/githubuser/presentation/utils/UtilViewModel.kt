@@ -5,10 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class UtilViewModel: ViewModel() {
-
     private val _isEmpty = MutableLiveData(true)
     val isEmpty : LiveData<Boolean> = _isEmpty
-    fun setEmptys(status : Boolean){
+    fun setEmptyView(status : Boolean){
         _isEmpty.value = status
     }
 
@@ -17,7 +16,4 @@ class UtilViewModel: ViewModel() {
     fun saveText(text: String){
         _textQuery.value = text
     }
-
-
-
 }

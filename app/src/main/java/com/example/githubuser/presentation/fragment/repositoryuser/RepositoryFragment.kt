@@ -51,7 +51,7 @@ class RepositoryFragment: Fragment() {
         val recView = binding.Reporecview
         recView.adapter = adapter
         recView.layoutManager = LinearLayoutManager(requireContext())
-        utilViewModel.apply { if (adapter.itemCount== 0) setEmptys(true) else setEmptys(false) }
+        utilViewModel.apply { if (adapter.itemCount== 0) setEmptyView(true) else setEmptyView(false) }
         emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){

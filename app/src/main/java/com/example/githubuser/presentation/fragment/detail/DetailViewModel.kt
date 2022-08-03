@@ -15,9 +15,6 @@ class DetailViewModel @Inject constructor(
     private val remote: RemoteUseCase,
     private val favorite : FavoriteUseCase
 ): ViewModel() {
-    companion object{
-        const val TAG = "DetailViewModel"
-    }
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
 

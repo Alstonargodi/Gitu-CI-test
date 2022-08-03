@@ -18,7 +18,6 @@ class UserListRecAdapter(private var dataList : List<ListUser>): RecyclerView.Ad
         return ViewHolder(ItemcvUserlisthomeBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = dataList[position]
         holder.binding.apply {
@@ -31,7 +30,9 @@ class UserListRecAdapter(private var dataList : List<ListUser>): RecyclerView.Ad
                 .into(AvatarCvuser)
 
             holder.itemView.setOnClickListener {
-                holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(data.name))
+                holder.itemView.findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(data.name)
+                )
             }
         }
     }

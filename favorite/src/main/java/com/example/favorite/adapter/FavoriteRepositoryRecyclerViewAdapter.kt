@@ -15,7 +15,7 @@ class FavoriteRepositoryRecyclerViewAdapter(private val favList : List<GithubRep
 
     class ViewHolder(var binding : ItemcvRepositoryBinding): RecyclerView.ViewHolder(binding.root)
 
-    fun setOnitemDelete(onItemDelete : OnItemClickDelete){
+    fun setOnItemDeleted(onItemDelete : OnItemClickDelete){
         this.onItemClickDelete = onItemDelete
     }
 

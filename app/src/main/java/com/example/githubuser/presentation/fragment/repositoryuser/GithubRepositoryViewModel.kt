@@ -15,17 +15,8 @@ class GithubRepositoryViewModel @Inject constructor(
     val remote: RemoteUseCase,
     val favorite : FavoriteUseCase
 ) : ViewModel() {
-
-    companion object{
-        const val TAG = "RepositoryViewModel"
-    }
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
-
-    private val _errorResponse = MutableLiveData<String>()
-
-    private val _repoResponse = MutableLiveData<List<RepositoryUserResponseItem>>()
-    val repoResponse : LiveData<List<RepositoryUserResponseItem>> = _repoResponse
 
     fun getUserRepository(name: String): LiveData<List<RepositoryUserResponseItem>>{
         return remote.getUserRepository(name)

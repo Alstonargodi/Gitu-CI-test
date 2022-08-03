@@ -18,8 +18,6 @@ class FollowerViewModel @Inject constructor(
     private val _errorResponse = MutableLiveData<String>()
     val errorResponse: LiveData<String> = _errorResponse
 
-    private val _followersResponse = MutableLiveData<List<FollowerUserResponseItem>>()
-
     fun getListFollowers(name: String): LiveData<List<FollowerUserResponseItem>>{
         return repository.getUserFollower(name)
     }

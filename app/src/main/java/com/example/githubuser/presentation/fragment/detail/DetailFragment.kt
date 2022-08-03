@@ -105,7 +105,7 @@ class DetailFragment : Fragment() {
                 }
                 utilViewModel.apply {
                     saveText(saveText)
-                    setEmptys(false)
+                    setEmptyView(false)
                 }
             }
         }

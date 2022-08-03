@@ -39,6 +39,12 @@ class RemoteRepository @Inject constructor(
             }
         }.asFlow()
 
+    override fun showHistoryListUser(): Flow<List<ListUser>> {
+        return localDataSource.readListUser().map {
+            DataMapper.entitiesUserListToDomainUserList(it)
+        }
+    }
+
     override fun getUserDetail(name: String): Call<DetailUserResponse> =
         remoteDataSource.getUserDetail(name)
 

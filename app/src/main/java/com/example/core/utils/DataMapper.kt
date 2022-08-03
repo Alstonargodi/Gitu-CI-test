@@ -35,15 +35,4 @@ object DataMapper {
             )
         }
 
-    fun domainToEntity(data : ListUser) = GithubUserList(
-        id = 0,
-        name = data.name,
-        username = data.username,
-        imageLink = data.imageLink,
-        location = data.location,
-        company = data.company,
-        isSaved = data.isSaved
-    )
-
-
 }

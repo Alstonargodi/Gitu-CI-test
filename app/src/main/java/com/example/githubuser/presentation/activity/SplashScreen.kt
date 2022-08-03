@@ -26,9 +26,6 @@ class SplashScreen : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
-//            val bookFragment =
-//                Class.forName("com.example.favorite.activity.FavoritePeopleActivity").newInstance() as Activity
-//            startActivity(Intent(this,bookFragment::class.java))
         }, TIME)
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
