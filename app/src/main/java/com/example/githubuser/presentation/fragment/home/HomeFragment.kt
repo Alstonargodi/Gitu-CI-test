@@ -89,6 +89,7 @@ class HomeFragment : Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     setSearchResult(query?:"",false)
+                    utilViewModel.setEmptys(false)
                     return true
                 }
 
@@ -102,7 +103,6 @@ class HomeFragment : Fragment() {
     private fun setSearchResult(search : String,default : Boolean){
         if(!default){
             viewModel.deleteListUser()
-            utilViewModel.setEmptys(false)
         }
         viewModel.getListUser(search).observe(viewLifecycleOwner){
             when(it){
@@ -184,6 +184,7 @@ class HomeFragment : Fragment() {
                 setSearchResult(default_user,true)
                 binding.tvEmptyview.visibility = View.GONE
             }else if (isUserNotExist == false){
+
                 binding.tvEmptyview.visibility = View.GONE
             }
         }

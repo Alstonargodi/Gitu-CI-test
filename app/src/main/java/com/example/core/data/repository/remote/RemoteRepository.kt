@@ -36,7 +36,6 @@ class RemoteRepository @Inject constructor(
             override suspend fun saveCallResult(data: ListUserResponse) {
                 val userList = DataMapper.remoteUserListToLocalUserList(data)
                 localDataSource.insertListUser(userList)
-
             }
         }.asFlow()
 
