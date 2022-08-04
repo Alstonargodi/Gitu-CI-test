@@ -2,12 +2,15 @@ package com.example.core.utils
 
 import android.util.Log
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
+import com.example.core.data.local.entity.remote.following.GithubUserFollower
 import com.example.core.data.local.entity.userlist.GithubListUser
-import com.example.core.data.local.entity.userproject.GithubUserProject
+import com.example.core.data.local.entity.remote.userproject.GithubUserProject
 import com.example.core.data.remote.apiresponse.ListUserResponse
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponse
 import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
+import com.example.core.data.remote.apiresponse.follower.FollowerUserResponse
 import com.example.core.domain.model.ListUser
+import com.example.core.domain.model.UserFollower
 import com.example.core.domain.model.UserRepository
 
 object DataMapper {
@@ -55,22 +58,20 @@ object DataMapper {
         val repositoryList = ArrayList<GithubUserProject>()
 
         data.forEach {
-            val temp = GithubUserProject(
+            repositoryList.add(GithubUserProject(
                 id=it.id,
                 name = it.name,
                 description = it.description ?: "",
                 forksCount = it.forksCount,
                 language = it.language ?: "",
                 stargazersCount = it.stargazersCount,
-            )
-            repositoryList.add(temp)
+            ))
         }
         return repositoryList
     }
 
-    fun entitesUserRepositoryToDomainUserRepository(input : List<GithubUserProject>): List<UserRepository> =
+    fun entitiesUserRepositoryToDomainUserRepository(input : List<GithubUserProject>): List<UserRepository> =
         input.map {
-            Log.d("remote",it.toString())
             UserRepository(
                 name = it.name,
                 description = it.description ?: "",
@@ -80,6 +81,28 @@ object DataMapper {
             )
         }
 
+    fun remoteUserFollowerToLocalUserFollower(data : FollowerUserResponse): List<GithubUserFollower>{
+        val followerList = ArrayList<GithubUserFollower>()
+        data.forEach {
+            followerList.add(
+                    GithubUserFollower(
+                    id = it.id,
+                    username = it.login,
+                    avatarUrl = it.avatarUrl
+                )
+            )
+        }
+        return followerList
+    }
+
+    fun entitiesUserFollowerToDomainUserFollower(data : List<GithubUserFollower>): List<UserFollower> =
+        data.map {
+            UserFollower(
+                id = it.id,
+                username = it.username,
+                avatarUrl = it.avatarUrl
+            )
+        }
 
 
 }

@@ -1,4 +1,4 @@
-package com.example.core.data.local.entity.userproject
+package com.example.core.data.local.entity.remote.userproject
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

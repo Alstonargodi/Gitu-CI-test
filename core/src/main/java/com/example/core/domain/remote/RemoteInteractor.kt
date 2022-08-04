@@ -11,6 +11,7 @@ import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseIte
 import com.example.core.data.remote.utils.Resource
 import com.example.core.data.repository.remote.IRemoteRepository
 import com.example.core.domain.model.ListUser
+import com.example.core.domain.model.UserFollower
 import com.example.core.domain.model.UserRepository
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
@@ -74,29 +75,16 @@ class RemoteInteractor @Inject constructor(
         return following
     }
 
-    override fun getUserFollower(name: String): LiveData<List<FollowerUserResponseItem>> {
-        val follower = MutableLiveData<List<FollowerUserResponseItem>>()
-        remoteRepository.getUserFollower(name).enqueue(object : Callback<FollowerUserResponse>{
-            override fun onResponse(
-                call: Call<FollowerUserResponse>,
-                response: Response<FollowerUserResponse>
-            ) {
-                if (response.isSuccessful){
-                    follower.value = response.body()
-                }else{
-                    Log.d(TAG, response.message())
-                }
-            }
-
-            override fun onFailure(call: Call<FollowerUserResponse>, t: Throwable) {
-                Log.d(TAG,t.toString())
-            }
-        })
-        return follower
+    override fun getUserFollower(name: String): Flow<Resource<List<UserFollower>>> {
+        return remoteRepository.getUserFollower(name)
     }
 
     override fun deleteUserRepository() {
         remoteRepository.deleteUseRepository()
+    }
+
+    override fun deleteUserFollower() {
+        remoteRepository.deleteUserFollower()
     }
 
     companion object{

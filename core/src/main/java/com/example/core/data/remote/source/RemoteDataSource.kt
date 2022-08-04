@@ -18,9 +18,9 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDataSource @Inject constructor(
     private val apiService : ApiService
-){
+): IRemoteDataSource{
 
-    suspend fun getListUser(userName: String): Flow<FetchResults<ListUserResponse>> {
+    override suspend fun getListUser(userName: String): Flow<FetchResults<ListUserResponse>> {
        return flow {
             try {
                 val data = apiService.getUserList(userName)
@@ -32,11 +32,7 @@ class RemoteDataSource @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
-
-    fun getUserDetail(name: String): Call<DetailUserResponse> =
-        apiService.getUserDetail(name)
-
-    fun getUserRepository(name: String): Flow<FetchResults<RepositoryUserResponse>> {
+    override suspend fun getUserRepository(name: String): Flow<FetchResults<RepositoryUserResponse>> {
         return flow {
             try {
                 emit(FetchResults.Success(apiService.getUserRepo(name)))
@@ -47,11 +43,25 @@ class RemoteDataSource @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun getUserFollower(name: String): Flow<FetchResults<FollowerUserResponse>> {
+        return flow{
+            try {
+                emit(FetchResults.Success(apiService.getUserFollowers(name)))
+            }catch (e : Exception){
+                emit(FetchResults.Error(e.toString()))
+                Log.d("RemoteDataSource",e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 
-    fun getUserFollowing(name: String): Call<FollowerUserResponse> =
+
+
+    override fun getUserDetail(name: String): Call<DetailUserResponse> =
+        apiService.getUserDetail(name)
+
+
+    override fun getUserFollowing(name: String): Call<FollowerUserResponse> =
         apiService.getUserFollowing(name)
 
-    fun getUserFollower(name: String): Call<FollowerUserResponse> =
-        apiService.getUserFollowers(name)
 
 }

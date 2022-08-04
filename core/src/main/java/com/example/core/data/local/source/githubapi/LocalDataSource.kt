@@ -1,8 +1,9 @@
 package com.example.core.data.local.source.githubapi
 
 import com.example.core.data.local.dao.RemoteDao
+import com.example.core.data.local.entity.remote.following.GithubUserFollower
 import com.example.core.data.local.entity.userlist.GithubListUser
-import com.example.core.data.local.entity.userproject.GithubUserProject
+import com.example.core.data.local.entity.remote.userproject.GithubUserProject
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -32,7 +33,7 @@ class LocalDataSource @Inject constructor(
         }
     }
 
-    override fun insertUserRepository(data: List<GithubUserProject>) {
+    override suspend fun insertUserRepository(data: List<GithubUserProject>) {
         executorService.execute {
             localDao.insertUserRepository(data)
         }
@@ -46,6 +47,22 @@ class LocalDataSource @Inject constructor(
         executorService.execute {
             localDao.deleteUseRepository()
         }
+    }
+
+    override suspend fun insertUserFollower(data: List<GithubUserFollower>) {
+        executorService.execute {
+            localDao.insertUserFollower(data)
+        }
+    }
+
+    override fun readUserFollower(): Flow<List<GithubUserFollower>> {
+       return localDao.readUserFollower()
+    }
+
+    override fun deleteUserFollower() {
+      executorService.execute {
+          localDao.deleteUserFollower()
+      }
     }
 
 

@@ -12,7 +12,7 @@ import retrofit2.Call
 interface IRemoteDataSource {
     suspend fun getListUser(userName : String): Flow<FetchResults<ListUserResponse>>
     fun getUserDetail(name: String): Call<DetailUserResponse>
-    fun getUserRepository(name : String): Call<RepositoryUserResponse>
+    suspend fun getUserRepository(name : String): Flow<FetchResults<RepositoryUserResponse>>
     fun getUserFollowing(name: String): Call<FollowerUserResponse>
-    fun getUserFollower(name: String): Call<FollowerUserResponse>
+    suspend fun getUserFollower(name: String): Flow<FetchResults<FollowerUserResponse>>
 }

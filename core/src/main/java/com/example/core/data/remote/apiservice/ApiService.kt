@@ -1,6 +1,5 @@
 package com.example.core.data.remote.apiservice
 import com.example.core.BuildConfig
-import com.example.core.data.local.entity.userproject.GithubUserProject
 import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
 import com.example.core.data.remote.apiresponse.ListUserResponse
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponse
@@ -24,9 +23,9 @@ interface ApiService {
 
     @GET("users/{username}/followers")
     @Headers("Authorization:${BuildConfig.api_key}")
-    fun getUserFollowers(
+    suspend fun getUserFollowers(
         @Path("username") username : String,
-    ): Call<FollowerUserResponse>
+    ): FollowerUserResponse
 
     @GET("users/{username}/following")
     @Headers("Authorization:${BuildConfig.api_key}")

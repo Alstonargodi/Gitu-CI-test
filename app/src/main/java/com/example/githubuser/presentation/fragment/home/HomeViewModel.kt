@@ -17,9 +17,6 @@ class HomeViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
 
-    private val _errorResponse = MutableLiveData<String>()
-    val errorResponse: LiveData<String> = _errorResponse
-
     fun getListUser(name : String): LiveData<Resource<List<ListUser>>> {
        return remoteUseCase.getListUser(name).asLiveData()
     }
@@ -35,5 +32,7 @@ class HomeViewModel @Inject constructor(
         remoteUseCase.deleteUserRepository()
     }
 
-
+    fun deleteUserFollower(){
+        remoteUseCase.deleteUserFollower()
+    }
 }

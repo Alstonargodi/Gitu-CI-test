@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.ItemcvFollowerBinding
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
+import com.example.core.domain.model.UserFollower
 
-class FollowerRecyclerViewAdapter(private var dataList :List<FollowerUserResponseItem>)
+class FollowerRecyclerViewAdapter(private var dataList :List<UserFollower>)
     : RecyclerView.Adapter<FollowerRecyclerViewAdapter.ViewHolder>() {
 
     private lateinit var onItemClickDetail : OnItemCallDetail
@@ -24,7 +25,7 @@ class FollowerRecyclerViewAdapter(private var dataList :List<FollowerUserRespons
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
         holder.binding.apply {
-            NamefollowerTv.text = item.login
+            NamefollowerTv.text = item.username
 
             Glide.with(holder.itemView.context)
                 .asBitmap()
@@ -33,7 +34,7 @@ class FollowerRecyclerViewAdapter(private var dataList :List<FollowerUserRespons
                 .into(ImgFollower)
 
             ImgFollower.setOnClickListener {
-                onItemClickDetail.onItemCallDetail(item.login)
+                onItemClickDetail.onItemCallDetail(item.username)
             }
         }
     }
