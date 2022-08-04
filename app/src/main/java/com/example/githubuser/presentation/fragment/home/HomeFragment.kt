@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
                 showUserList(it)
             }
         }
-
+        viewModel.deleteUserRepository()
         return binding.root
     }
 
@@ -133,40 +133,6 @@ class HomeFragment : Fragment() {
             listRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         }else{
             listRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        }
-    }
-
-    private fun showErrorText(){
-        binding.apply {
-            viewModel.errorResponse.observe(viewLifecycleOwner){ errorResponse ->
-                if (errorResponse.isNotEmpty()){
-                        tvEmptyview.visibility = View.GONE
-                        RecviewUser.visibility = View.GONE
-                        includeerror.layoutError.visibility = View.VISIBLE
-                        includeerror.TvEmptyconnect.text = errorResponse.toString()
-                        includeerror.BtnTryEmptyconnect.setOnClickListener {
-                            viewModel.getListUser(saveText)
-                            "search result for $saveText".also { includeerror.TvEmptyconnect.text = it }
-
-                            includeerror.layoutError.visibility = View.GONE
-                            tvEmptyview.visibility = View.GONE
-                            RecviewUser.visibility = View.VISIBLE
-                            includeerror.layoutError.visibility = View.GONE
-                        }
-                    }
-                }
-            }
-    }
-
-    private fun showEmptyView(isEmpty : Boolean){
-        binding.includeempty.apply {
-            if (isEmpty){
-                layoutemptyview.visibility = View.VISIBLE
-                "No data for $saveText".also { tvResultempty.text = it }
-            }else{
-                layoutemptyview.visibility = View.GONE
-                "No data for $saveText".also { tvResultempty.text = it }
-            }
         }
     }
 

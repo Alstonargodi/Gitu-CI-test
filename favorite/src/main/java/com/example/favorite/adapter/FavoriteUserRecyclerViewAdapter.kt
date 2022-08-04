@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.core.data.local.entity.favoriteuser.FavoriteUser
+import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
 import com.example.githubuser.R
-import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.favorite.databinding.ItemcvFavoritepeopleBinding
 
 class FavoriteUserRecyclerViewAdapter(private val favList : List<FavoriteUser>):

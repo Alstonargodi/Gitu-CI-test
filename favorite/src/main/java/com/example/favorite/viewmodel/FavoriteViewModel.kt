@@ -4,9 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.core.data.local.entity.userlist.GithubListUser
-import com.example.core.data.local.entity.favoriteproject.FavoriteProject
-import com.example.core.data.local.entity.favoriteuser.FavoriteUser
+import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
 import com.example.core.domain.local.FavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

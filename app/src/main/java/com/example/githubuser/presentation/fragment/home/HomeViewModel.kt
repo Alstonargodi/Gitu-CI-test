@@ -28,7 +28,11 @@ class HomeViewModel @Inject constructor(
         remoteUseCase.showHistoryListUser().asLiveData()
 
     fun deleteListUser(){
-        remoteUseCase.deleteListUser()
+        remoteUseCase.deleteUserRepository()
+    }
+
+    fun deleteUserRepository(){
+        remoteUseCase.deleteUserRepository()
     }
 
 

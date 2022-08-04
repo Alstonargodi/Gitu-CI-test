@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ItemcvRepositoryBinding
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
+import com.example.core.domain.model.UserRepository
 
-class RepositoryRecyclerViewAdapter(private var dataList : List<RepositoryUserResponseItem>):
+class RepositoryRecyclerViewAdapter(private var dataList : List<UserRepository>):
     RecyclerView.Adapter<RepositoryRecyclerViewAdapter.ViewHolder>() {
     private lateinit var onItemClickFav : OnItemClickFavorite
 
@@ -49,7 +50,7 @@ class RepositoryRecyclerViewAdapter(private var dataList : List<RepositoryUserRe
     override fun getItemCount(): Int = dataList.size
 
     interface OnItemClickFavorite{
-        fun onItemClickFavorite(data : RepositoryUserResponseItem)
+        fun onItemClickFavorite(data : UserRepository)
     }
 
 

@@ -11,8 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
-import com.example.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
+import com.example.core.data.remote.utils.Resource
+import com.example.core.domain.model.UserRepository
 import com.example.githubuser.presentation.fragment.repositoryuser.adapter.RepositoryRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -36,16 +38,27 @@ class RepositoryFragment: Fragment() {
         repositoryViewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
         userName = arguments?.getString("value","").toString()
 
-
         repositoryViewModel.apply {
-            getUserRepository(userName).observe(viewLifecycleOwner){ responData ->
-                showRepositoryList(responData)
+            getUserRepository(userName).observe(viewLifecycleOwner){ response ->
+                when(response){
+                    is Resource.Loading ->{
+
+                    }
+                    is Resource.Success ->{
+                        response.data?.let {
+                            showRepositoryList(it)
+                        }
+                    }
+                    is Resource.Error ->{
+
+                    }
+                }
             }
         }
         return binding.root
     }
 
-    private fun showRepositoryList(list: List<RepositoryUserResponseItem>){
+    private fun showRepositoryList(list: List<UserRepository>){
 
         adapter = RepositoryRecyclerViewAdapter(list)
         val recView = binding.Reporecview
@@ -61,13 +74,13 @@ class RepositoryFragment: Fragment() {
         }
 
         adapter.onItemClickFav(object : RepositoryRecyclerViewAdapter.OnItemClickFavorite{
-            override fun onItemClickFavorite(data: RepositoryUserResponseItem) {
+            override fun onItemClickFavorite(data: UserRepository) {
                setFavoriteRepo(data)
             }
         })
     }
 
-    private fun setFavoriteRepo(data : RepositoryUserResponseItem){
+    private fun setFavoriteRepo(data : UserRepository){
         val favTemp = FavoriteProject(
             data.name,
             data.description,
@@ -103,5 +116,4 @@ class RepositoryFragment: Fragment() {
             }
         }
     }
-
 }

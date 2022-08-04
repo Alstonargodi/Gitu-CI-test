@@ -21,7 +21,6 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "api_key", '"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"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

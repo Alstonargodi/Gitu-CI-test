@@ -24,9 +24,6 @@
         <action
             android:id="@+id/action_homeFragment_to_bookFragment"
             app:destination="@id/bookFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_second_navigation2"
-            app:destination="@id/second_navigation" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -92,15 +89,6 @@
             android:id="@+id/action_authorFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
-
-    <include-dynamic
-            android:id="@+id/second_navigation"
-            app:moduleName="favorite"
-            app:graphResName="second_navigation"
-            app:graphPackage="com.example.favorite.second_navigation.xml"
-        >
-    </include-dynamic>
-
 
 
 </navigation>

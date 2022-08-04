@@ -8,9 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.core.data.local.entity.userlist.GithubListUser
-import com.example.core.data.local.entity.favoriteproject.FavoriteProject
-import com.example.core.data.local.entity.favoriteuser.FavoriteUser
+import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
 import com.example.core.di.FavoriteModuleDependecies
 import com.example.favorite.adapter.FavoriteUserRecyclerViewAdapter
 import com.example.favorite.adapter.FavoriteRepositoryRecyclerViewAdapter
