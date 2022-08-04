@@ -123,7 +123,6 @@ class DetailFragment : Fragment() {
                         .setTextColor(Color.WHITE)
                         .setBackgroundTint(Color.rgb(0, 200, 151))
                         .show()
-                    Toast.makeText(requireContext(),"test",Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -137,7 +136,6 @@ class DetailFragment : Fragment() {
             .setBackgroundTint(Color.rgb(137, 15, 13))
             .show()
     }
-
     private fun setViewPager(name : String){
         pagerAdapter = SectionPagerAdapter(requireActivity(),name,tab_titles.size)
         val viewPager = binding.Followviewpager
