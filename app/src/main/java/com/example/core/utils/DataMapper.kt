@@ -1,15 +1,17 @@
 package com.example.core.utils
 
-import com.example.core.data.local.entity.userlist.GithubUserList
+import com.example.core.data.local.entity.favoriteuser.FavoriteUser
+import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.core.data.remote.apiresponse.ListUserResponse
+import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
 import com.example.core.domain.model.ListUser
 
 object DataMapper {
 
-    fun remoteUserListToLocalUserList(data : ListUserResponse): List<GithubUserList>{
-        val dataList = ArrayList<GithubUserList>()
+    fun remoteUserListToLocalUserList(data : ListUserResponse): List<GithubListUser>{
+        val dataList = ArrayList<GithubListUser>()
         data.items.map { response ->
-            val listUser = GithubUserList(
+            val listUser = GithubListUser(
                 id = response.id.toInt(),
                 name = response.login,
                 username = null,
@@ -23,7 +25,7 @@ object DataMapper {
         return dataList
     }
 
-    fun entitiesUserListToDomainUserList(input : List<GithubUserList>): List<ListUser> =
+    fun entitiesUserListToDomainUserList(input : List<GithubListUser>): List<ListUser> =
         input.map { data ->
             ListUser(
                 name = data.name,
@@ -35,4 +37,13 @@ object DataMapper {
             )
         }
 
+    fun userSetFavoriteUser(data : DetailUserResponse): FavoriteUser =
+        FavoriteUser(
+            data.id!!.toInt(),
+            data.login.toString(),
+            data.name,
+            data.avatarUrl,
+            data.location,
+            data.company,
+        )
 }

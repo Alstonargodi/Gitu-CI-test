@@ -7,9 +7,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ItemcvRepositoryBinding
-import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
 
-class FavoriteRepositoryRecyclerViewAdapter(private val favList : List<GithubRepositoryList>):
+class FavoriteRepositoryRecyclerViewAdapter(private val favList : List<FavoriteProject>):
     RecyclerView.Adapter<FavoriteRepositoryRecyclerViewAdapter.ViewHolder>(){
     private lateinit var onItemClickDelete : OnItemClickDelete
 
@@ -55,6 +55,6 @@ class FavoriteRepositoryRecyclerViewAdapter(private val favList : List<GithubRep
 
 
     interface OnItemClickDelete{
-        fun onItemClickDelete(data : GithubRepositoryList)
+        fun onItemClickDelete(data : FavoriteProject)
     }
 }

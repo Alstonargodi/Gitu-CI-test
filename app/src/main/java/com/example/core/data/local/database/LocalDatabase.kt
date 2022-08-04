@@ -4,13 +4,15 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.core.data.local.dao.FavoriteDao
 import com.example.core.data.local.dao.ListUserDao
-import com.example.core.data.local.entity.userlist.GithubUserList
-import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
+import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.favoriteuser.FavoriteUser
 
 @Database(
     entities = [
-        GithubUserList::class,
-        GithubRepositoryList::class
+        GithubListUser::class,
+        FavoriteProject::class,
+        FavoriteUser::class
     ],
     version = 1,
     exportSchema = false

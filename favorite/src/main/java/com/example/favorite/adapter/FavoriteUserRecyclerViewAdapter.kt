@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.core.data.local.entity.favoriteuser.FavoriteUser
 import com.example.githubuser.R
-import com.example.core.data.local.entity.userlist.GithubUserList
+import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.favorite.databinding.ItemcvFavoritepeopleBinding
 
-class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubUserList>):
+class FavoriteUserRecyclerViewAdapter(private val favList : List<FavoriteUser>):
     RecyclerView.Adapter<FavoriteUserRecyclerViewAdapter.ViewHolder>(){
     private lateinit var onItemClickDetail : OnItemClickDetail
     private lateinit var onItemClickDelete : OnItemDelete
@@ -46,13 +47,11 @@ class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubUserList>
                 .circleCrop()
                 .into(imageView)
 
-            if (item.isSaved){
-                btnfav.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        btnfav.context,R.drawable.ic_baseline_favorite_full
-                    )
+            btnfav.setImageDrawable(
+                ContextCompat.getDrawable(
+                    btnfav.context,R.drawable.ic_baseline_favorite_full
                 )
-            }
+            )
         }
 
     }
@@ -60,9 +59,9 @@ class FavoriteUserRecyclerViewAdapter(private val favList : List<GithubUserList>
     override fun getItemCount(): Int = favList.size
 
     interface OnItemClickDetail{
-        fun onItemClick(data : GithubUserList)
+        fun onItemClick(data : FavoriteUser)
     }
     interface OnItemDelete{
-        fun onItemClickDelete(data : GithubUserList)
+        fun onItemClickDelete(data : FavoriteUser)
     }
 }

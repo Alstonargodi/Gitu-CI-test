@@ -3,7 +3,7 @@ package com.example.githubuser.presentation.fragment.repositoryuser
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
 import com.example.core.domain.local.FavoriteUseCase
 import com.example.core.domain.remote.RemoteUseCase
@@ -22,8 +22,8 @@ class GithubRepositoryViewModel @Inject constructor(
         return remote.getUserRepository(name)
     }
 
-    fun insertFavoriteRepo(githubRepositoryList: GithubRepositoryList){
-        favorite.insertFavoriteProject(githubRepositoryList)
+    fun insertFavoriteRepo(favoriteProject: FavoriteProject){
+        favorite.insertFavoriteProject(favoriteProject)
     }
 
 

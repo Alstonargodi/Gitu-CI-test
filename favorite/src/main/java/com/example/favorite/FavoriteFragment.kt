@@ -8,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.core.data.local.entity.userlist.GithubUserList
-import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
+import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.favoriteuser.FavoriteUser
 import com.example.core.di.FavoriteModuleDependecies
 import com.example.favorite.adapter.FavoriteUserRecyclerViewAdapter
 import com.example.favorite.adapter.FavoriteRepositoryRecyclerViewAdapter
@@ -37,7 +38,6 @@ class FavoriteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         DaggerFavoriteComponent.builder()
-
             .context(requireContext())
             .appDepedencies(
                 EntryPointAccessors.fromApplication(
@@ -69,19 +69,19 @@ class FavoriteFragment : Fragment() {
     private fun showFavPeople(){
         favoriteViewModel.apply {
             readFavoritePeople()
-            responGithubUserList.observe(viewLifecycleOwner){ respon ->
+            responGithubListUser.observe(viewLifecycleOwner){ respon ->
                 peopleRecyclerViewAdapter = FavoriteUserRecyclerViewAdapter(respon)
                 binding.RecyclerVFavorite.adapter = peopleRecyclerViewAdapter
                 binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
 
                 peopleRecyclerViewAdapter.apply {
                     setOnItemCallBack(object : FavoriteUserRecyclerViewAdapter.OnItemClickDetail{
-                        override fun onItemClick(data: GithubUserList) {
+                        override fun onItemClick(data: FavoriteUser) {
 
                         }
                     })
                     setOnItemDeleted(object : FavoriteUserRecyclerViewAdapter.OnItemDelete{
-                        override fun onItemClickDelete(data: GithubUserList) {
+                        override fun onItemClickDelete(data: FavoriteUser) {
                             deleteFavPeople(data)
                         }
                     })
@@ -100,7 +100,7 @@ class FavoriteFragment : Fragment() {
 
 
                 repositoryRecyclerViewAdapter.setOnItemDeleted(object : FavoriteRepositoryRecyclerViewAdapter.OnItemClickDelete{
-                    override fun onItemClickDelete(data: GithubRepositoryList) {
+                    override fun onItemClickDelete(data: FavoriteProject) {
                         deleteFavProject(data)
                     }
                 })
@@ -109,14 +109,14 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    private fun deleteFavPeople(githubUserList: GithubUserList){
-        showSnackbar(githubUserList.name)
-        favoriteViewModel.deletePersonFavoritePeople(githubUserList.name)
+    private fun deleteFavPeople(githubListUser: FavoriteUser){
+        showSnackbar(githubListUser.name)
+        favoriteViewModel.deletePersonFavoritePeople(githubListUser.name)
     }
 
-    private fun deleteFavProject(githubRepositoryList: GithubRepositoryList){
-        showSnackbar(githubRepositoryList.name)
-        favoriteViewModel.deleteFavoriteRepo(githubRepositoryList)
+    private fun deleteFavProject(favoriteProject: FavoriteProject){
+        showSnackbar(favoriteProject.name)
+        favoriteViewModel.deleteFavoriteRepo(favoriteProject)
     }
 
     private fun showSnackbar(name : String){

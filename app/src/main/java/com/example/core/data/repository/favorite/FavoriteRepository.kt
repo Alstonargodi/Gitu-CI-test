@@ -1,8 +1,9 @@
 package com.example.core.data.repository.favorite
 
 import androidx.lifecycle.LiveData
-import com.example.core.data.local.entity.userlist.GithubUserList
-import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
+import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.favoriteuser.FavoriteUser
 import com.example.core.data.local.source.favorite.FavoriteDataSource
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -11,25 +12,25 @@ import javax.inject.Singleton
 class FavoriteRepository @Inject constructor(
     private val dataSource: FavoriteDataSource
 ): IFavoriteRepository {
-    override fun insertFavoriteProject(githubRepositoryList: GithubRepositoryList) {
-        dataSource.insertFavoriteProject(githubRepositoryList)
+    override fun insertFavoriteProject(favoriteProject: FavoriteProject) {
+        dataSource.insertFavoriteProject(favoriteProject)
     }
 
-    override fun insertFavoritePeople(githubUserList: GithubUserList) {
-        dataSource.insertFavoritePeople(githubUserList)
+    override fun insertFavoritePeople(githubListUser: FavoriteUser) {
+        dataSource.insertFavoritePeople(githubListUser)
     }
 
-    override fun readFavoriteProject(): LiveData<List<GithubRepositoryList>> =
+    override fun readFavoriteProject(): LiveData<List<FavoriteProject>> =
         dataSource.readFavoriteProject()
 
-    override fun readFavoritePeople(): LiveData<List<GithubUserList>> =
+    override fun readFavoritePeople(): LiveData<List<FavoriteUser>> =
         dataSource.readFavoritePeople()
 
-    override fun searchFavoritePeople(name: String): LiveData<List<GithubUserList>> =
+    override fun searchFavoritePeople(name: String): LiveData<List<FavoriteUser>> =
         dataSource.searchFavoritePeople(name)
 
-    override fun deleteFavoriteProject(githubRepositoryList: GithubRepositoryList) {
-        dataSource.deleteFavoriteProject(githubRepositoryList)
+    override fun deleteFavoriteProject(favoriteProject: FavoriteProject) {
+        dataSource.deleteFavoriteProject(favoriteProject)
     }
 
     override fun deletePersonFavoritePeople(name: String) {

@@ -1,7 +1,7 @@
 package com.example.core.data.local.source.githubapi
 
 import com.example.core.data.local.dao.ListUserDao
-import com.example.core.data.local.entity.userlist.GithubUserList
+import com.example.core.data.local.entity.userlist.GithubListUser
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -15,13 +15,13 @@ class LocalDataSource @Inject constructor(
 
     private val executorService : ExecutorService = Executors.newSingleThreadExecutor()
 
-    override suspend fun insertListUser(user: List<GithubUserList>) {
+    override suspend fun insertListUser(user: List<GithubListUser>) {
         executorService.execute {
             localDao.insertListUser(user)
         }
     }
 
-    override fun readListUser(): Flow<List<GithubUserList>> {
+    override fun readListUser(): Flow<List<GithubListUser>> {
         return localDao.readListUser()
     }
 

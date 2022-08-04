@@ -1,4 +1,4 @@
-package com.example.core.data.local.entity.userlist
+package com.example.core.data.local.entity.favoriteuser
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-data class GithubUserList(
+data class FavoriteUser(
     @PrimaryKey(autoGenerate = true)
     val id : Int,
     @ColumnInfo(name = "name")
@@ -21,6 +21,4 @@ data class GithubUserList(
     val location: String? =null,
     @ColumnInfo(name = "company")
     val company: String? =null,
-    @ColumnInfo(name = "isSaved")
-    val isSaved : Boolean,
 ): Parcelable

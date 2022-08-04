@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentRepoBinding
-import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
 import com.example.githubuser.presentation.fragment.repositoryuser.adapter.RepositoryRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
@@ -68,7 +68,7 @@ class RepositoryFragment: Fragment() {
     }
 
     private fun setFavoriteRepo(data : RepositoryUserResponseItem){
-        val favTemp = GithubRepositoryList(
+        val favTemp = FavoriteProject(
             data.name,
             data.description,
             data.language,

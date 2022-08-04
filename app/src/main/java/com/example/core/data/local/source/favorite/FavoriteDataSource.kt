@@ -2,8 +2,9 @@ package com.example.core.data.local.source.favorite
 
 import androidx.lifecycle.LiveData
 import com.example.core.data.local.dao.FavoriteDao
-import com.example.core.data.local.entity.userlist.GithubUserList
-import com.example.core.data.local.entity.githubrepository.GithubRepositoryList
+import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.local.entity.favoriteproject.FavoriteProject
+import com.example.core.data.local.entity.favoriteuser.FavoriteUser
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.inject.Inject
@@ -15,25 +16,25 @@ class FavoriteDataSource @Inject constructor(
 ): IFavoriteDataSource {
     private val executorService : ExecutorService = Executors.newSingleThreadExecutor()
 
-    override fun insertFavoriteProject(githubRepositoryList: GithubRepositoryList) {
-        executorService.execute { favoriteDao.insertFavoriteProject(githubRepositoryList) }
+    override fun insertFavoriteProject(favoriteProject: FavoriteProject) {
+        executorService.execute { favoriteDao.insertFavoriteProject(favoriteProject) }
     }
 
-    override fun insertFavoritePeople(githubUserList: GithubUserList) {
-        executorService.execute { favoriteDao.insertFavoritePeople(githubUserList) }
+    override fun insertFavoritePeople(githubListUser: FavoriteUser) {
+        executorService.execute { favoriteDao.insertFavoritePeople(githubListUser) }
     }
 
-    override fun readFavoriteProject(): LiveData<List<GithubRepositoryList>> =
+    override fun readFavoriteProject(): LiveData<List<FavoriteProject>> =
         favoriteDao.readFavoriteProject()
 
-    override fun readFavoritePeople(): LiveData<List<GithubUserList>> =
+    override fun readFavoritePeople(): LiveData<List<FavoriteUser>> =
         favoriteDao.readFavoritePeople()
 
-    override fun searchFavoritePeople(name: String): LiveData<List<GithubUserList>> =
+    override fun searchFavoritePeople(name: String): LiveData<List<FavoriteUser>> =
         favoriteDao.searchFavoritePeople(name)
 
-    override fun deleteFavoriteProject(githubRepositoryList: GithubRepositoryList) {
-        favoriteDao.deleteFavoriteProject(githubRepositoryList)
+    override fun deleteFavoriteProject(favoriteProject: FavoriteProject) {
+        favoriteDao.deleteFavoriteProject(favoriteProject)
     }
 
     override fun deletePersonFavoritePeople(name: String) {

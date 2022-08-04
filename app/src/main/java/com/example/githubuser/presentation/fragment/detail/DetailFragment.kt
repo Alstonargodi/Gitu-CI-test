@@ -15,7 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
-import com.example.core.data.local.entity.userlist.GithubUserList
+import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.utils.DataMapper
 import com.example.githubuser.presentation.fragment.detail.tabadapter.SectionPagerAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -115,15 +116,7 @@ class DetailFragment : Fragment() {
         detailViewModel.getUserDetail(saveText).observe(viewLifecycleOwner){ respon->
             respon?.apply {
                 login?.let {
-                    val favTemp = GithubUserList(
-                        respon.id!!,
-                        login,
-                        name,
-                        avatarUrl,
-                        location,
-                        company,
-                        true
-                    )
+                    val favTemp = DataMapper.userSetFavoriteUser(respon)
                     detailViewModel.insertFavoritePeople(favTemp)
                     Snackbar.make(binding.root,"add $login as Favorite People",
                             Snackbar.LENGTH_LONG)
