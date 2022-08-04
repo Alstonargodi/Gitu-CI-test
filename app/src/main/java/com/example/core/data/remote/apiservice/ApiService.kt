@@ -15,7 +15,6 @@ interface ApiService {
         @Query("q") id : String
     ): ListUserResponse
 
-
     @GET("users/{username}")
     @Headers("Authorization:${BuildConfig.api_key}")
     fun getUserDetail(
