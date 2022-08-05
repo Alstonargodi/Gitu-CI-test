@@ -34,17 +34,14 @@
     <TextView
         android:id="@+id/Currsearch_tv"
         style="@style/TvTitleStyle"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
         android:fontFamily="@font/apexsans"
         android:text="List User"
         android:textSize="16sp"
         android:textStyle="normal|bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
@@ -58,17 +55,6 @@
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/RecviewUser"
-        app:layout_constraintEnd_toEndOf="@+id/RecviewUser"
-        app:layout_constraintStart_toStartOf="@+id/RecviewUser"
-        app:layout_constraintTop_toTopOf="@+id/RecviewUser" />
-
-    <ProgressBar
-        android:id="@+id/Homeprogress"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="98dp"
-        android:layout_height="96dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/RecviewUser"
         app:layout_constraintStart_toStartOf="@+id/RecviewUser"
         app:layout_constraintTop_toTopOf="@+id/RecviewUser" />
@@ -118,13 +104,14 @@
     <ProgressBar
         android:id="@+id/pgbarhome"
         style="?android:attr/progressBarStyle"
-        android:layout_width="125dp"
-        android:layout_height="66dp"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="20dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/Currsearch_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintStart_toEndOf="@+id/Currsearch_tv"
+        app:layout_constraintTop_toTopOf="@+id/Currsearch_tv"
         app:layout_constraintVertical_bias="0.186" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

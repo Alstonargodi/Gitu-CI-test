@@ -55,13 +55,14 @@ class FollowerFragment: Fragment() {
         followerViewModel.getListFollowers(userName).observe(viewLifecycleOwner){ response ->
             when(response){
                 is Resource.Loading->{
-
+                    binding.FollowerProgress.visibility = View.VISIBLE
                 }
                 is Resource.Success->{
                     response.data?.let { showFollowerList(it) }
+                    binding.FollowerProgress.visibility = View.GONE
                 }
                 is Resource.Error->{
-
+                    binding.FollowerProgress.visibility = View.GONE
                 }
             }
         }

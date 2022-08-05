@@ -155,7 +155,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun isLoading(isLoading:Boolean){
-        binding.Homeprogress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
+        binding.pgbarhome.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
     }
 
     private fun setDefaultList(){

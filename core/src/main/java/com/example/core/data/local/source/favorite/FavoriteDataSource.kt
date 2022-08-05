@@ -33,7 +33,9 @@ class FavoriteDataSource @Inject constructor(
         favoriteDao.searchFavoritePeople(name)
 
     override fun deleteFavoriteProject(favoriteProject: FavoriteProject) {
-        favoriteDao.deleteFavoriteProject(favoriteProject)
+        executorService.execute {
+            favoriteDao.deleteFavoriteProject(favoriteProject)
+        }
     }
 
     override fun deletePersonFavoritePeople(name: String) {

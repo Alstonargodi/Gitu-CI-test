@@ -62,9 +62,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            btnBackhome.setOnClickListener {
-                findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
-            }
             btnShare.setOnClickListener {
                 val share= Intent()
                 share.action = Intent.ACTION_SEND
@@ -80,13 +77,14 @@ class DetailFragment : Fragment() {
         detailViewModel.getUserDetail(saveText).observe(viewLifecycleOwner){ response ->
             when(response){
                 is Resource.Loading->{
-
+                    binding.DetailProgress.visibility = View.VISIBLE
                 }
                 is Resource.Success->{
                     response.data?.get(0)?.let { setDetailUser(it) }
+                    binding.DetailProgress.visibility = View.GONE
                 }
                 is Resource.Error->{
-
+                    binding.DetailProgress.visibility = View.GONE
                 }
             }
         }

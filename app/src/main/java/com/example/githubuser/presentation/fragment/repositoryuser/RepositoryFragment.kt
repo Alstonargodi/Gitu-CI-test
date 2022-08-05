@@ -42,15 +42,16 @@ class RepositoryFragment: Fragment() {
             getUserRepository(userName).observe(viewLifecycleOwner){ response ->
                 when(response){
                     is Resource.Loading ->{
-
+                        binding.Repoprogress.visibility = View.VISIBLE
                     }
                     is Resource.Success ->{
                         response.data?.let {
                             showRepositoryList(it)
                         }
+                        binding.Repoprogress.visibility = View.GONE
                     }
                     is Resource.Error ->{
-
+                        binding.Repoprogress.visibility = View.GONE
                     }
                 }
             }
