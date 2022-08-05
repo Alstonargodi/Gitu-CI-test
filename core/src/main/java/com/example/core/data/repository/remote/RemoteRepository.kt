@@ -1,5 +1,6 @@
 package com.example.core.data.repository.remote
 
+import android.util.Log
 import com.example.core.data.local.source.githubapi.LocalDataSource
 import com.example.core.data.remote.NetworkBoundResources
 import com.example.core.data.remote.apiresponse.ListUserResponse
@@ -9,9 +10,7 @@ import com.example.core.data.remote.apiresponse.follower.FollowerUserResponse
 import com.example.core.data.remote.source.RemoteDataSource
 import com.example.core.data.remote.utils.FetchResults
 import com.example.core.data.remote.utils.Resource
-import com.example.core.domain.model.ListUser
-import com.example.core.domain.model.UserFollower
-import com.example.core.domain.model.UserRepository
+import com.example.core.domain.model.*
 import com.example.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -70,20 +69,58 @@ class RemoteRepository @Inject constructor(
                     DataMapper.entitiesUserFollowerToDomainUserFollower(it)
                 }
             }
-
-            override fun shouldFetch(data: List<UserFollower>?): Boolean =
-                true
-
+            override fun shouldFetch(data: List<UserFollower>?): Boolean = true
             override suspend fun createCall(): Flow<FetchResults<FollowerUserResponse>> {
                return remoteDataSource.getUserFollower(name)
             }
-
             override suspend fun saveCallResult(data: FollowerUserResponse) {
                 localDataSource.insertUserFollower(
                     DataMapper.remoteUserFollowerToLocalUserFollower(data)
                 )
             }
+        }.asFlow()
 
+    override fun getUserFollowing(name: String): Flow<Resource<List<UserFollowing>>> =
+        object : NetworkBoundResources<List<UserFollowing>,FollowerUserResponse>(){
+            override fun loadFromDB(): Flow<List<UserFollowing>> {
+                return localDataSource.readUserFollowing().map {
+                    DataMapper.entitiesUserFollowingToDomainUserFollowing(it)
+                }
+            }
+            override fun shouldFetch(data: List<UserFollowing>?): Boolean =
+                true
+            override suspend fun createCall(): Flow<FetchResults<FollowerUserResponse>> {
+                return remoteDataSource.getUserFollowing(name)
+            }
+            override suspend fun saveCallResult(data: FollowerUserResponse) {
+                localDataSource.insertUserFollowing(
+                    DataMapper.remoteUserFollowingToLocalUserFollowing(data)
+                )
+            }
+        }.asFlow()
+
+    override fun getUserDetail(name: String): Flow<Resource<List<UserDetail>>> =
+        object : NetworkBoundResources<List<UserDetail>,DetailUserResponse>(){
+            override fun loadFromDB(): Flow<List<UserDetail>> {
+
+                Log.d("remote",localDataSource.readUserDetail().toString())
+
+                return localDataSource.readUserDetail().map {
+
+                    DataMapper.entitiesUserDetailToDomainUserDetail(it)
+                }
+            }
+            override fun shouldFetch(data: List<UserDetail>?): Boolean = true
+
+            override suspend fun createCall(): Flow<FetchResults<DetailUserResponse>> {
+                return remoteDataSource.getUserDetail(name)
+            }
+            override suspend fun saveCallResult(data: DetailUserResponse) {
+                Log.d("remote","${data.name}")
+                localDataSource.insetUserDetail(
+                    DataMapper.remoteUserDetailToLocalUserDetail(data)
+                )
+            }
         }.asFlow()
 
 
@@ -92,12 +129,6 @@ class RemoteRepository @Inject constructor(
             DataMapper.entitiesUserListToDomainUserList(it)
         }
     }
-
-    override fun getUserDetail(name: String): Call<DetailUserResponse> =
-        remoteDataSource.getUserDetail(name)
-
-    override fun getUserFollowing(name: String): Call<FollowerUserResponse> =
-        remoteDataSource.getUserFollowing(name)
 
     override fun deleteListUser() {
         localDataSource.deleteListUser()
@@ -109,6 +140,14 @@ class RemoteRepository @Inject constructor(
 
     override fun deleteUserFollower() {
         localDataSource.deleteUserFollower()
+    }
+
+    override fun deleteUserFollowing() {
+        localDataSource.deleteUserFollowing()
+    }
+
+    override fun deleteUserDetail() {
+        localDataSource.deleteUserDetail()
     }
 
 

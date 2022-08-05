@@ -7,14 +7,18 @@ import com.example.core.data.local.dao.RemoteDao
 import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
-import com.example.core.data.local.entity.remote.following.GithubUserFollower
+import com.example.core.data.local.entity.remote.userdetail.GithubUserDetail
+import com.example.core.data.local.entity.remote.userfollower.GithubUserFollower
+import com.example.core.data.local.entity.remote.userfollowing.GithubUserFollowing
 import com.example.core.data.local.entity.remote.userproject.GithubUserProject
 
 @Database(
     entities = [
         GithubListUser::class,
+        GithubUserDetail::class,
         GithubUserProject::class,
         GithubUserFollower::class,
+        GithubUserFollowing::class,
         FavoriteProject::class,
         FavoriteUser::class
     ],

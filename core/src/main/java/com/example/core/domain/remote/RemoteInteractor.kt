@@ -10,9 +10,7 @@ import com.example.core.data.remote.apiresponse.follower.FollowerUserResponse
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
 import com.example.core.data.remote.utils.Resource
 import com.example.core.data.repository.remote.IRemoteRepository
-import com.example.core.domain.model.ListUser
-import com.example.core.domain.model.UserFollower
-import com.example.core.domain.model.UserRepository
+import com.example.core.domain.model.*
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,51 +26,15 @@ class RemoteInteractor @Inject constructor(
     override fun showHistoryListUser(): Flow<List<ListUser>> =
         remoteRepository.showHistoryListUser()
 
-
-    override fun getUserDetail(name: String): LiveData<DetailUserResponse> {
-        val detail = MutableLiveData<DetailUserResponse>()
-        remoteRepository.getUserDetail(name).enqueue(object : Callback<DetailUserResponse>{
-            override fun onResponse(
-                call: Call<DetailUserResponse>,
-                response: Response<DetailUserResponse>
-            ) {
-                if (response.isSuccessful){
-                    detail.postValue(response.body())
-                }else{
-                    Log.d(TAG, response.message().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
-                Log.d(TAG,t.toString())
-            }
-        })
-        return detail
-    }
+    override fun getUserDetail(name: String): Flow<Resource<List<UserDetail>>> =
+        remoteRepository.getUserDetail(name)
 
     override fun getUserRepository(name: String): Flow<Resource<List<UserRepository>>> {
         return remoteRepository.getUserRepository(name)
     }
 
-    override fun getUserFollowing(name: String): LiveData<List<FollowerUserResponseItem>> {
-       val following = MutableLiveData<List<FollowerUserResponseItem>>()
-        remoteRepository.getUserFollowing(name).enqueue(object : Callback<FollowerUserResponse>{
-            override fun onResponse(
-                call: Call<FollowerUserResponse>,
-                response: Response<FollowerUserResponse>
-            ) {
-                if (response.isSuccessful){
-                    following.value = response.body()
-                }else{
-                    Log.d(TAG, response.message())
-                }
-            }
-            override fun onFailure(call: Call<FollowerUserResponse>, t: Throwable) {
-                Log.d(TAG,t.toString())
-            }
-
-        })
-        return following
+    override fun getUserFollowing(name: String): Flow<Resource<List<UserFollowing>>> {
+       return remoteRepository.getUserFollowing(name)
     }
 
     override fun getUserFollower(name: String): Flow<Resource<List<UserFollower>>> {
@@ -85,6 +47,14 @@ class RemoteInteractor @Inject constructor(
 
     override fun deleteUserFollower() {
         remoteRepository.deleteUserFollower()
+    }
+
+    override fun deleteUserFollowing() {
+        remoteRepository.deleteUserFollowing()
+    }
+
+    override fun deleteUserDetail() {
+        remoteRepository.deleteUserDetail()
     }
 
     companion object{

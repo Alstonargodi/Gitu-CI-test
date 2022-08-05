@@ -6,7 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DetailUserResponse(
-
 	@field:SerializedName("bio")
 	val bio: String? = null,
 

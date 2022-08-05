@@ -1,15 +1,14 @@
-package com.example.core.data.local.entity.remote.following
+package com.example.core.data.local.entity.remote.userfollowing
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-data class GithubUserFollower(
+data class GithubUserFollowing(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     @ColumnInfo(name = "username")

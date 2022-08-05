@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
 import com.example.core.data.local.entity.userlist.GithubListUser
+import com.example.core.data.remote.utils.Resource
+import com.example.core.domain.model.UserDetail
 import com.example.core.utils.DataMapper
 import com.example.githubuser.presentation.fragment.detail.tabadapter.SectionPagerAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
@@ -39,12 +41,22 @@ class DetailFragment : Fragment() {
     ): View {
         binding = FragmentDetailBinding.inflate(layoutInflater)
         saveText = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
-        utilViewModel.apply {
-            textQuery.observe(viewLifecycleOwner){
-                saveText = it
+
+        favoriteChecker()
+
+        detailViewModel.getUserDetail(saveText).observe(viewLifecycleOwner){ response ->
+            when(response){
+                is Resource.Loading->{
+
+                }
+                is Resource.Success->{
+                    response.data?.get(0)?.let { setDetailUser(it) }
+                }
+                is Resource.Error->{
+
+                }
             }
         }
-        favoriteChecker()
         return binding.root
     }
 
@@ -61,69 +73,61 @@ class DetailFragment : Fragment() {
                 share.putExtra(Intent.EXTRA_TEXT,"Visit $saveText on github")
                 startActivity(Intent.createChooser(share,"Share to"))
             }
-            btnFavorite.setOnClickListener {
-                setAsFavorite()
-
-            }
         }
-        setDetailUser()
+
         userChecker()
     }
 
-    private fun setDetailUser(){
-        detailViewModel.apply {
-            isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-            getUserDetail(saveText).observe(viewLifecycleOwner){ responData ->
-                binding.apply {
-                    responData.apply {
-                        UsernameTvdetailpage.text = login
-                        surnameDetailopage.text = name
-                        BioTvitem.text = bio
-                        ComapnyTvitem.text = company
-                        locTvitem.text = location
-                        FollowerTvitem.text = followers.toString()
-                        FollowingTvitem.text = following.toString()
-                        RepositoryTvitem.text = publicRepos.toString()
-                        webTvitem.text = blog
-                        if(bio.isNullOrEmpty()) BioTvitem.visibility = View.GONE
-                        if(company.isNullOrEmpty()) ComapnyTvitem.visibility = View.GONE
-                        if(location.isNullOrEmpty()) locTvitem.visibility = View.GONE
-                        if(blog.isNullOrEmpty()) webTvitem.visibility = View.GONE
+    private fun setDetailUser(responData : UserDetail){
+        binding.apply {
+            responData.apply {
+                UsernameTvdetailpage.text = nickName
+                surnameDetailopage.text = userName
+                BioTvitem.text = bio
+                ComapnyTvitem.text = company
+                locTvitem.text = location
+                FollowerTvitem.text = followers.toString()
+                FollowingTvitem.text = following.toString()
+                RepositoryTvitem.text = publicRepos.toString()
+                webTvitem.text = blog
+                if(bio.isNullOrEmpty()) BioTvitem.visibility = View.GONE
+                if(company.isNullOrEmpty()) ComapnyTvitem.visibility = View.GONE
+                if(location.isNullOrEmpty()) locTvitem.visibility = View.GONE
+                if(blog.isNullOrEmpty()) webTvitem.visibility = View.GONE
 
-                        webTvitem.setOnClickListener {
-                            val intent = Intent(Intent.ACTION_VIEW)
-                            intent.data = Uri.parse(blog)
-                            startActivity(intent)
-                        }
-                        Glide.with(requireContext())
-                            .asDrawable()
-                            .load(avatarUrl)
-                            .circleCrop()
-                            .into(binding.ImgTvdetail)
-
-                        setViewPager(login!!)
-                    }
+                webTvitem.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(blog)
+                    startActivity(intent)
                 }
-                utilViewModel.apply {
-                    saveText(saveText)
-                    setEmptyView(false)
-                }
+                Glide.with(requireContext())
+                    .asDrawable()
+                    .load(avatarUrl)
+                    .circleCrop()
+                    .into(binding.ImgTvdetail)
+                setViewPager(userName!!)
             }
+        }
+        utilViewModel.apply {
+            saveText(saveText)
+            setEmptyView(false)
+        }
+
+        binding.btnFavorite.setOnClickListener {
+            setAsFavorite(responData)
         }
     }
 
-    private fun setAsFavorite(){
-        detailViewModel.getUserDetail(saveText).observe(viewLifecycleOwner){ respon->
-            respon?.apply {
-                login?.let {
-                    val favTemp = DataMapper.userSetFavoriteUser(respon)
-                    detailViewModel.insertFavoritePeople(favTemp)
-                    Snackbar.make(binding.root,"add $login as Favorite People",
-                            Snackbar.LENGTH_LONG)
-                        .setTextColor(Color.WHITE)
-                        .setBackgroundTint(Color.rgb(0, 200, 151))
-                        .show()
-                }
+    private fun setAsFavorite(respon: UserDetail){
+        respon.apply {
+            nickName.let {
+                val favTemp = DataMapper.userSetFavoriteUser(respon)
+                detailViewModel.insertFavoritePeople(favTemp)
+                Snackbar.make(binding.root,"add $it as Favorite People",
+                    Snackbar.LENGTH_LONG)
+                    .setTextColor(Color.WHITE)
+                    .setBackgroundTint(Color.rgb(0, 200, 151))
+                    .show()
             }
         }
     }

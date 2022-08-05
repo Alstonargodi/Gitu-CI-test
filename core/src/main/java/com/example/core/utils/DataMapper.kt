@@ -1,17 +1,16 @@
 package com.example.core.utils
 
-import android.util.Log
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
-import com.example.core.data.local.entity.remote.following.GithubUserFollower
+import com.example.core.data.local.entity.remote.userdetail.GithubUserDetail
+import com.example.core.data.local.entity.remote.userfollower.GithubUserFollower
+import com.example.core.data.local.entity.remote.userfollowing.GithubUserFollowing
 import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.core.data.local.entity.remote.userproject.GithubUserProject
 import com.example.core.data.remote.apiresponse.ListUserResponse
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponse
 import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponse
-import com.example.core.domain.model.ListUser
-import com.example.core.domain.model.UserFollower
-import com.example.core.domain.model.UserRepository
+import com.example.core.domain.model.*
 
 object DataMapper {
 
@@ -44,11 +43,11 @@ object DataMapper {
             )
         }
 
-    fun userSetFavoriteUser(data : DetailUserResponse): FavoriteUser =
+    fun userSetFavoriteUser(data : UserDetail): FavoriteUser =
         FavoriteUser(
-            data.id!!.toInt(),
-            data.login.toString(),
-            data.name,
+            data.id.toInt(),
+            data.nickName.toString(),
+            data.userName,
             data.avatarUrl,
             data.location,
             data.company,
@@ -101,6 +100,69 @@ object DataMapper {
                 id = it.id,
                 username = it.username,
                 avatarUrl = it.avatarUrl
+            )
+        }
+
+    fun remoteUserFollowingToLocalUserFollowing(input : FollowerUserResponse): List<GithubUserFollowing>{
+        val followingList = ArrayList<GithubUserFollowing>()
+        input.map {
+            followingList.add(GithubUserFollowing(
+                    id = it.id,
+                    username = it.login,
+                    avatarUrl = it.avatarUrl
+                )
+            )
+        }
+        return followingList
+    }
+
+    fun entitiesUserFollowingToDomainUserFollowing(data : List<GithubUserFollowing>): List<UserFollowing> =
+        data.map {
+            UserFollowing(
+                id = it.id,
+                username = it.username,
+                avatarUrl = it.avatarUrl
+            )
+        }
+
+    fun remoteUserDetailToLocalUserDetail(input : DetailUserResponse): List<GithubUserDetail> {
+        val detail = ArrayList<GithubUserDetail>()
+        detail.add(GithubUserDetail(
+            id = 0,
+            userName = input.login ?: "",
+            nickName = input.name ?: "",
+            bio = input.bio ?: "",
+            type = input.type ?: "",
+            blog = input.blog ?: "",
+            company = input.company ?: "",
+            publicRepos = input.publicRepos ?: 0,
+            email = input.email ?: "",
+            followers = input.followers ?: 0,
+            avatarUrl = input.avatarUrl ?: "",
+            following = input.following ?: 0,
+            location = input.location ?: ""
+        ))
+        return detail
+    }
+
+
+
+    fun entitiesUserDetailToDomainUserDetail(input : List<GithubUserDetail>): List<UserDetail> =
+        input.map {
+            UserDetail(
+                id = it.id,
+                userName = it.userName,
+                nickName = it.nickName,
+                bio = it.bio,
+                type = it.type ,
+                blog = it.blog,
+                company = it.company,
+                publicRepos = it.publicRepos,
+                email = it.email,
+                followers = it.followers,
+                avatarUrl = it.avatarUrl,
+                following = it.following,
+                location = it.location
             )
         }
 

@@ -1,7 +1,9 @@
 package com.example.core.data.local.source.githubapi
 
 import com.example.core.data.local.dao.RemoteDao
-import com.example.core.data.local.entity.remote.following.GithubUserFollower
+import com.example.core.data.local.entity.remote.userdetail.GithubUserDetail
+import com.example.core.data.local.entity.remote.userfollower.GithubUserFollower
+import com.example.core.data.local.entity.remote.userfollowing.GithubUserFollowing
 import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.core.data.local.entity.remote.userproject.GithubUserProject
 import kotlinx.coroutines.flow.Flow
@@ -63,6 +65,38 @@ class LocalDataSource @Inject constructor(
       executorService.execute {
           localDao.deleteUserFollower()
       }
+    }
+
+    override suspend fun insertUserFollowing(data: List<GithubUserFollowing>) {
+        executorService.execute {
+            localDao.insertUserFollowing(data)
+        }
+    }
+
+    override fun readUserFollowing(): Flow<List<GithubUserFollowing>> {
+        return localDao.readUserFollowing()
+    }
+
+    override fun deleteUserFollowing() {
+        executorService.execute {
+            localDao.deleteUserFollowing()
+        }
+    }
+
+    override suspend fun insetUserDetail(data: List<GithubUserDetail>) {
+        executorService.execute {
+            localDao.insertUserDetail(data)
+        }
+    }
+
+    override fun readUserDetail(): Flow<List<GithubUserDetail>> {
+        return localDao.readUserDetail()
+    }
+
+    override fun deleteUserDetail() {
+        executorService.execute {
+            localDao.deleteUserDetail()
+        }
     }
 
 

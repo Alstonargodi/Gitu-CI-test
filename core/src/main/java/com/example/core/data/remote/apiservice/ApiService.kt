@@ -17,9 +17,9 @@ interface ApiService {
 
     @GET("users/{username}")
     @Headers("Authorization:${BuildConfig.api_key}")
-    fun getUserDetail(
+    suspend fun getUserDetail(
         @Path("username") username : String,
-    ): Call<DetailUserResponse>
+    ): DetailUserResponse
 
     @GET("users/{username}/followers")
     @Headers("Authorization:${BuildConfig.api_key}")
@@ -29,9 +29,9 @@ interface ApiService {
 
     @GET("users/{username}/following")
     @Headers("Authorization:${BuildConfig.api_key}")
-    fun getUserFollowing(
+    suspend fun getUserFollowing(
         @Path("username") username : String,
-    ): Call<FollowerUserResponse>
+    ): FollowerUserResponse
 
     @GET("users/{username}/repos")
     @Headers("Authorization:${BuildConfig.api_key}")

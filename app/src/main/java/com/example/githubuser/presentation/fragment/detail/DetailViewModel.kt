@@ -3,17 +3,19 @@ package com.example.githubuser.presentation.fragment.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
-import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
+import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.local.FavoriteUseCase
+import com.example.core.domain.model.UserDetail
 import com.example.core.domain.remote.RemoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val remote: RemoteUseCase,
-    private val favorite : FavoriteUseCase
+    private val remoteUseCase: RemoteUseCase,
+    private val favoriteUseCase : FavoriteUseCase
 ): ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
@@ -21,19 +23,19 @@ class DetailViewModel @Inject constructor(
     private val _errorResponse = MutableLiveData<String>()
     val errorResponse: LiveData<String> = _errorResponse
 
-    fun getUserDetail(name : String): LiveData<DetailUserResponse>{
-        return remote.getUserDetail(name)
+    fun getUserDetail(name : String): LiveData<Resource<List<UserDetail>>>{
+        return remoteUseCase.getUserDetail(name).asLiveData()
     }
 
     fun searchFavoritePeople(name : String) : LiveData<List<FavoriteUser>> =
-        favorite.searchFavoritePeople(name)
+        favoriteUseCase.searchFavoritePeople(name)
 
     fun insertFavoritePeople(data: FavoriteUser){
-        favorite.insertFavoritePeople(data)
+        favoriteUseCase.insertFavoritePeople(data)
     }
 
     fun deletePersonFavoritePeople(name: String){
-        favorite.deletePersonFavoritePeople(name)
+        favoriteUseCase.deletePersonFavoritePeople(name)
     }
 
 

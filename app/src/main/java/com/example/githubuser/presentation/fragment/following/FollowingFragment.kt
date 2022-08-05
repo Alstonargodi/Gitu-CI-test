@@ -11,7 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
+import com.example.core.data.remote.utils.Resource
+import com.example.core.domain.model.UserFollowing
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.presentation.fragment.detail.DetailFragmentDirections
 import com.example.githubuser.presentation.fragment.following.adapter.FollowingRecyclerViewAdapter
@@ -49,12 +50,16 @@ class FollowingFragment : Fragment() {
     }
 
     private fun setFollowingList(){
-        followingViewModel.apply {
-            getListFollowing(userName).observe(viewLifecycleOwner){ responData->
-                isLoading.observe(viewLifecycleOwner){ isLoading(it) }
-                showFollowingList(responData)
-                utilViewModel.apply {
-                    saveText(userName)
+        followingViewModel.getListFollowing(userName).observe(viewLifecycleOwner){response->
+            when(response){
+                is Resource.Loading->{
+
+                }
+                is Resource.Success->{
+                    response.data?.let { showFollowingList(it) }
+                }
+                is Resource.Error->{
+
                 }
             }
         }
@@ -68,7 +73,7 @@ class FollowingFragment : Fragment() {
         }
     }
 
-    private fun showFollowingList(list: List<FollowerUserResponseItem>){
+    private fun showFollowingList(list: List<UserFollowing>){
         adapter = FollowingRecyclerViewAdapter(list)
         val recyclerView = binding.followingRecview
         recyclerView.adapter = adapter
@@ -86,6 +91,7 @@ class FollowingFragment : Fragment() {
 
         adapter.onItemCLickDetail(object : FollowingRecyclerViewAdapter.OnItemClickDetil{
             override fun onItemClickDetail(userName: String) {
+                clearData()
                 findNavController().navigate(DetailFragmentDirections.actionDetailFragmentSelf(userName))
             }
         })
@@ -109,6 +115,13 @@ class FollowingFragment : Fragment() {
                     "$userName never follow someone".also { emptyStatmentFollowing.text = it }
                 }
             }
+        }
+    }
+
+    private fun clearData(){
+        followingViewModel.apply {
+            deleteUserFollowing()
+            deleteUserRepository()
         }
     }
 

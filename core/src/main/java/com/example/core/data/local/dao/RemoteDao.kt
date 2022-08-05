@@ -1,7 +1,9 @@
 package com.example.core.data.local.dao
 
 import androidx.room.*
-import com.example.core.data.local.entity.remote.following.GithubUserFollower
+import com.example.core.data.local.entity.remote.userdetail.GithubUserDetail
+import com.example.core.data.local.entity.remote.userfollower.GithubUserFollower
+import com.example.core.data.local.entity.remote.userfollowing.GithubUserFollowing
 import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.core.data.local.entity.remote.userproject.GithubUserProject
 import kotlinx.coroutines.flow.Flow
@@ -34,4 +36,24 @@ interface RemoteDao {
 
     @Query("delete from githubuserfollower")
     fun deleteUserFollower()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUserFollowing(data : List<GithubUserFollowing>)
+
+    @Query("select*from githubuserfollowing")
+    fun readUserFollowing(): Flow<List<GithubUserFollowing>>
+
+    @Query("delete from githubuserfollowing")
+    fun deleteUserFollowing()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUserDetail(data : List<GithubUserDetail>)
+
+    @Query("select*from githubuserdetail")
+    fun readUserDetail(): Flow<List<GithubUserDetail>>
+
+    @Query("delete from githubuserdetail")
+    fun deleteUserDetail()
+
+
 }

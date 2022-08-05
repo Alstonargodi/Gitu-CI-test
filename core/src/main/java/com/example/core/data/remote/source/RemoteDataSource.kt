@@ -54,14 +54,30 @@ class RemoteDataSource @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun getUserFollowing(name: String): Flow<FetchResults<FollowerUserResponse>> {
+        return flow {
+            try {
+                emit(FetchResults.Success(apiService.getUserFollowing(name)))
+            }catch (e : Exception){
+                emit(FetchResults.Error(e.toString()))
+                Log.d("RemoteDataSource",e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 
 
-    override fun getUserDetail(name: String): Call<DetailUserResponse> =
-        apiService.getUserDetail(name)
+    override suspend fun getUserDetail(name: String): Flow<FetchResults<DetailUserResponse>> {
+        return flow{
+            try {
+                Log.d("remote",apiService.getUserDetail(name).toString())
+                emit(FetchResults.Success(apiService.getUserDetail(name)))
+            }catch (e : Exception){
+                emit(FetchResults.Error(e.toString()))
+                Log.d("RemoteDataSource",e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 
-
-    override fun getUserFollowing(name: String): Call<FollowerUserResponse> =
-        apiService.getUserFollowing(name)
 
 
 }
