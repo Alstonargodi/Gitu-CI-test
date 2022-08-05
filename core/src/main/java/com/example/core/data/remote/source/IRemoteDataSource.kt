@@ -6,7 +6,6 @@ import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
 import com.example.core.data.remote.apiresponse.follower.FollowerUserResponse
 import com.example.core.data.remote.utils.FetchResults
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Call
 
 
 interface IRemoteDataSource {

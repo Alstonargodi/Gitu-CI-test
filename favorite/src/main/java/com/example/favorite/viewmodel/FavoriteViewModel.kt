@@ -36,12 +36,6 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
-    fun searchFavoritePeople(name : String) : LiveData<List<FavoriteUser>> =
-        favoriteUseCase.searchFavoritePeople(name)
-
-    fun insertFavoritePeople(githubListUser: FavoriteUser){
-        favoriteUseCase.insertFavoritePeople(githubListUser)
-    }
 
     fun deletePersonFavoritePeople(name: String){
         favoriteUseCase.deletePersonFavoritePeople(name)
@@ -58,9 +52,7 @@ class FavoriteViewModel @Inject constructor(
             Log.d(EXTRA_TAG,e.message.toString())
         }
     }
-    fun insertFavoriteRepo(favoriteProject: FavoriteProject){
-        favoriteUseCase.insertFavoriteProject(favoriteProject)
-    }
+
     fun deleteFavoriteRepo(favoriteProject: FavoriteProject){
         favoriteUseCase.deleteFavoriteProject(favoriteProject)
     }

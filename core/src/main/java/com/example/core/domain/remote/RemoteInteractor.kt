@@ -1,20 +1,9 @@
 package com.example.core.domain.remote
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponse
-import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
-import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
-import com.example.core.data.remote.apiresponse.follower.FollowerUserResponse
-import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
 import com.example.core.data.remote.utils.Resource
 import com.example.core.data.repository.remote.IRemoteRepository
 import com.example.core.domain.model.*
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteInteractor @Inject constructor(

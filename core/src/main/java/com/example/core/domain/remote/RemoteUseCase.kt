@@ -1,7 +1,5 @@
 package com.example.core.domain.remote
 
-import androidx.lifecycle.LiveData
-import com.example.core.data.remote.apiresponse.detail.DetailUserResponse
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.*
 import kotlinx.coroutines.flow.Flow

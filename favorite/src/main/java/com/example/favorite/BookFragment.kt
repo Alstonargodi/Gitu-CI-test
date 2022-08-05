@@ -1,16 +1,14 @@
 package com.example.favorite
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.example.favorite.adapter.SectionFavoritePagerAdapter
 import com.example.favorite.databinding.FragmentBookBinding
 import com.example.githubuser.R
 import com.google.android.material.tabs.TabLayoutMediator
-import dagger.hilt.android.AndroidEntryPoint
 
 
 class BookFragment : Fragment() {
