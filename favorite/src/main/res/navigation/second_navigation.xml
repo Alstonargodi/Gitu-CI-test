@@ -11,5 +11,25 @@
         android:id="@+id/bookFragment2"
         android:name="com.example.favorite.BookFragment"
         android:label="fragment_book"
-        tools:layout="@layout/fragment_book" />
+        tools:layout="@layout/fragment_book" >
+        <action
+            android:id="@+id/action_bookFragment2_to_detailFragment2"
+            app:destination="@id/detailFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment2"
+        android:name="com.example.githubuser.presentation.fragment.detail.DetailFragment"
+        android:label="DetailFragment" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailFragment2"
+            app:destination="@id/detailFragment2" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_appnavigation"
+            app:destination="@id/appnavigation" />
+    </fragment>
+    <include app:graph="@navigation/main_navgation" />
 </navigation>

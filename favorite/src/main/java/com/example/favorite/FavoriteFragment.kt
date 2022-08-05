@@ -17,6 +17,7 @@ import com.example.favorite.component.DaggerFavoriteComponent
 import com.example.favorite.databinding.FragmentFavoriteBinding
 import com.example.favorite.viewmodel.FavoriteViewModel
 import com.example.favorite.viewmodel.ViewModelFactory
+import com.example.githubuser.R
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
@@ -76,7 +77,18 @@ class FavoriteFragment : Fragment() {
                 peopleRecyclerViewAdapter.apply {
                     setOnItemCallBack(object : FavoriteUserRecyclerViewAdapter.OnItemClickDetail{
                         override fun onItemClick(data: FavoriteUser) {
-
+                            val detailFragment =
+                                Class
+                                    .forName("com.example.githubuser.presentation.fragment.detail.DetailFragment")
+                                    .newInstance() as Fragment
+                            val bundle = Bundle()
+                            bundle.putString("favorite",data.username)
+                            detailFragment.arguments = bundle
+                            requireActivity().supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainerView,detailFragment)
+                                .addToBackStack(null)
+                                .commit()
                         }
                     })
                     setOnItemDeleted(object : FavoriteUserRecyclerViewAdapter.OnItemDelete{

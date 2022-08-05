@@ -13,6 +13,7 @@ interface RemoteUseCase {
     fun getUserRepository(name : String): Flow<Resource<List<UserRepository>>>
     fun getUserFollowing(name: String): Flow<Resource<List<UserFollowing>>>
     fun getUserFollower(name: String): Flow<Resource<List<UserFollower>>>
+    fun deleteUserList()
     fun deleteUserRepository()
     fun deleteUserFollower()
     fun deleteUserFollowing()

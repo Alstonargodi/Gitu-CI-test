@@ -16,6 +16,7 @@ import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.ListUser
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentHomeBinding
+import com.example.githubuser.presentation.fragment.detail.DetailFragment
 import com.example.githubuser.presentation.fragment.home.adapter.UserListRecAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -137,6 +138,20 @@ class HomeFragment : Fragment() {
         }else{
             listRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
+
+        adapter.setOnItemClickDetail(object : UserListRecAdapter.OnItemClickDetail{
+            override fun onItemClickDetail(name: String) {
+                val detailFragment = DetailFragment()
+                val bundle = Bundle()
+                bundle.putString("favorite",name)
+                detailFragment.arguments = bundle
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainerView,detailFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        })
     }
 
     private fun isLoading(isLoading:Boolean){

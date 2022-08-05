@@ -41,6 +41,10 @@ class RemoteInteractor @Inject constructor(
         return remoteRepository.getUserFollower(name)
     }
 
+    override fun deleteUserList() {
+        remoteRepository.deleteListUser()
+    }
+
     override fun deleteUserRepository() {
         remoteRepository.deleteUseRepository()
     }

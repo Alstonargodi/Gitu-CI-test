@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
     private val detailViewModel : DetailViewModel by viewModels()
-
     private val utilViewModel by viewModels<UtilViewModel>()
 
     private lateinit var pagerAdapter : SectionPagerAdapter
@@ -40,23 +40,22 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailBinding.inflate(layoutInflater)
-        saveText = DetailFragmentArgs.fromBundle(arguments as Bundle).userName
+        try {
+            saveText = requireArguments().getString("favorite").toString()
+        }catch (e : Exception){
+            Log.d("detailFragment",e.toString())
+        }
+
 
         favoriteChecker()
 
-        detailViewModel.getUserDetail(saveText).observe(viewLifecycleOwner){ response ->
-            when(response){
-                is Resource.Loading->{
-
-                }
-                is Resource.Success->{
-                    response.data?.get(0)?.let { setDetailUser(it) }
-                }
-                is Resource.Error->{
-
-                }
+        utilViewModel.apply {
+            textQuery.observe(viewLifecycleOwner){
+                saveText = it
             }
         }
+
+        showDetailUser()
         return binding.root
     }
 
@@ -74,10 +73,24 @@ class DetailFragment : Fragment() {
                 startActivity(Intent.createChooser(share,"Share to"))
             }
         }
-
         userChecker()
     }
 
+    private fun showDetailUser(){
+        detailViewModel.getUserDetail(saveText).observe(viewLifecycleOwner){ response ->
+            when(response){
+                is Resource.Loading->{
+
+                }
+                is Resource.Success->{
+                    response.data?.get(0)?.let { setDetailUser(it) }
+                }
+                is Resource.Error->{
+
+                }
+            }
+        }
+    }
     private fun setDetailUser(responData : UserDetail){
         binding.apply {
             responData.apply {
