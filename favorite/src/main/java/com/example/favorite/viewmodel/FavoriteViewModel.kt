@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
 import com.example.core.domain.local.FavoriteUseCase
@@ -28,7 +29,7 @@ class FavoriteViewModel @Inject constructor(
     fun readFavoritePeople(){
         _isLoading.value = true
         try {
-            responGithubListUser = favoriteUseCase.readFavoritePeople()
+            responGithubListUser = favoriteUseCase.readFavoritePeople().asLiveData()
             _isLoading.value = false
         }catch (e : java.lang.Exception){
             _isLoading.value = false
@@ -45,7 +46,7 @@ class FavoriteViewModel @Inject constructor(
     fun readFavoriteProject(){
         _isLoading.value = true
         try {
-            responFavoriteRepo = favoriteUseCase.readFavoriteProject()
+            responFavoriteRepo = favoriteUseCase.readFavoriteProject().asLiveData()
             _isLoading.value = false
         }catch (e : java.lang.Exception){
             _isLoading.value = false

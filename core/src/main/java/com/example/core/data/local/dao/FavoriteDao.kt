@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDao {
@@ -15,13 +16,13 @@ interface FavoriteDao {
     fun insertFavoritePeople(favorite: FavoriteUser)
 
     @Query("select*from FavoriteProject")
-    fun readFavoriteProject(): LiveData<List<FavoriteProject>>
+    fun readFavoriteProject(): Flow<List<FavoriteProject>>
 
     @Query("select*from FavoriteUser")
-    fun readFavoritePeople():LiveData<List<FavoriteUser>>
+    fun readFavoritePeople():Flow<List<FavoriteUser>>
 
     @Query("select*from FavoriteUser where name like :name")
-    fun searchFavoritePeople(name : String):LiveData<List<FavoriteUser>>
+    fun searchFavoritePeople(name : String):Flow<List<FavoriteUser>>
 
     @Delete
     fun deleteFavoriteProject(favoriteProject: FavoriteProject)

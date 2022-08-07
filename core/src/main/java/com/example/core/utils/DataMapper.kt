@@ -45,7 +45,6 @@ object DataMapper {
 
     fun userSetFavoriteUser(data : UserDetail): FavoriteUser =
         FavoriteUser(
-            data.id,
             data.nickName.toString(),
             data.userName,
             data.avatarUrl,

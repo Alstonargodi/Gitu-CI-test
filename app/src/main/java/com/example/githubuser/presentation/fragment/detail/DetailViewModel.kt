@@ -28,7 +28,7 @@ class DetailViewModel @Inject constructor(
     }
 
     fun searchFavoritePeople(name : String) : LiveData<List<FavoriteUser>> =
-        favoriteUseCase.searchFavoritePeople(name)
+        favoriteUseCase.searchFavoritePeople(name).asLiveData()
 
     fun insertFavoritePeople(data: FavoriteUser){
         favoriteUseCase.insertFavoritePeople(data)

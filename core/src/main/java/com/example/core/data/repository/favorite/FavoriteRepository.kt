@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
 import com.example.core.data.local.source.favorite.FavoriteDataSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,13 +20,13 @@ class FavoriteRepository @Inject constructor(
         dataSource.insertFavoritePeople(githubListUser)
     }
 
-    override fun readFavoriteProject(): LiveData<List<FavoriteProject>> =
+    override fun readFavoriteProject(): Flow<List<FavoriteProject>> =
         dataSource.readFavoriteProject()
 
-    override fun readFavoritePeople(): LiveData<List<FavoriteUser>> =
+    override fun readFavoritePeople(): Flow<List<FavoriteUser>> =
         dataSource.readFavoritePeople()
 
-    override fun searchFavoritePeople(name: String): LiveData<List<FavoriteUser>> =
+    override fun searchFavoritePeople(name: String): Flow<List<FavoriteUser>> =
         dataSource.searchFavoritePeople(name)
 
     override fun deleteFavoriteProject(favoriteProject: FavoriteProject) {

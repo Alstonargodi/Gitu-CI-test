@@ -9,8 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class FavoriteUser(
-    @PrimaryKey(autoGenerate = true)
-    val id : Int,
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "name")
     val name : String = "",
     @ColumnInfo(name = "username")
