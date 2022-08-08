@@ -104,7 +104,7 @@ class FavoriteFragment : Fragment() {
     private fun showFavRepository(){
         favoriteViewModel.apply {
             readFavoriteProject()
-            responFavoriteRepo.observe(viewLifecycleOwner){respon ->
+            responFavoriteRepo.observe(viewLifecycleOwner){ respon ->
                 repositoryRecyclerViewAdapter = FavoriteRepositoryRecyclerViewAdapter(respon)
                 binding.RecyclerVFavorite.adapter = repositoryRecyclerViewAdapter
                 binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
@@ -121,8 +121,10 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun deleteFavPeople(githubListUser: FavoriteUser){
-        showSnackbar(githubListUser.name)
-        favoriteViewModel.deletePersonFavoritePeople(githubListUser.name)
+        githubListUser.username?.let {
+            showSnackbar(it)
+            favoriteViewModel.deletePersonFavoritePeople(it)
+        }
     }
 
     private fun deleteFavProject(favoriteProject: FavoriteProject){

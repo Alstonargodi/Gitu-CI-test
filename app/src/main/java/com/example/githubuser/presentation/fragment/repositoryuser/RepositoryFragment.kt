@@ -27,7 +27,6 @@ class RepositoryFragment: Fragment() {
 
     private val repositoryViewModel : GithubRepositoryViewModel by viewModels()
 
-    private val utilViewModel by viewModels<UtilViewModel>()
     private var userName = ""
 
     override fun onCreateView(
@@ -56,17 +55,15 @@ class RepositoryFragment: Fragment() {
                 }
             }
         }
+
         return binding.root
     }
 
     private fun showRepositoryList(list: List<UserRepository>){
-
         adapter = RepositoryRecyclerViewAdapter(list)
         val recView = binding.Reporecview
         recView.adapter = adapter
         recView.layoutManager = LinearLayoutManager(requireContext())
-        utilViewModel.apply { if (adapter.itemCount== 0) setEmptyView(true) else setEmptyView(false) }
-        emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recView.layoutManager = GridLayoutManager(requireContext(),2)
@@ -103,17 +100,6 @@ class RepositoryFragment: Fragment() {
                 View.VISIBLE
             } else {
                 View.GONE
-            }
-        }
-    }
-
-    private fun emptyChecker(){
-        binding.apply {
-            utilViewModel.isEmpty.observe(viewLifecycleOwner){ isDataNotExist ->
-                if (isDataNotExist == true){
-                    emptyStatmentRepo.visibility = View.VISIBLE
-                    "$userName never make a repo".also { emptyStatmentRepo.text = it }
-                }
             }
         }
     }

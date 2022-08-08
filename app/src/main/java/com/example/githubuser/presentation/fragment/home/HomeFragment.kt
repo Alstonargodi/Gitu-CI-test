@@ -53,10 +53,7 @@ class HomeFragment : Fragment() {
                 showUserList(it)
             }
         }
-        viewModel.apply {
-            deleteUserRepository()
-            deleteUserFollower()
-        }
+        viewModel.clearDetail()
         return binding.root
     }
 

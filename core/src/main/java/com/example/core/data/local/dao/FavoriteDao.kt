@@ -21,13 +21,13 @@ interface FavoriteDao {
     @Query("select*from FavoriteUser")
     fun readFavoritePeople():Flow<List<FavoriteUser>>
 
-    @Query("select*from FavoriteUser where name like :name")
+    @Query("select*from FavoriteUser where username like :name")
     fun searchFavoritePeople(name : String):Flow<List<FavoriteUser>>
 
     @Delete
     fun deleteFavoriteProject(favoriteProject: FavoriteProject)
 
-    @Query("Delete from FavoriteUser where name like :name")
+    @Query("Delete from FavoriteUser where username like :name")
     fun deletePersonFavoritePeople(name: String)
 
 

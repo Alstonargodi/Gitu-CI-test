@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val remoteUseCase: RemoteUseCase
+    private val remoteUseCase: RemoteUseCase
 ) :ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
@@ -29,11 +29,12 @@ class HomeViewModel @Inject constructor(
         remoteUseCase.deleteUserList()
     }
 
-    fun deleteUserRepository(){
-        remoteUseCase.deleteUserRepository()
-    }
-
-    fun deleteUserFollower(){
-        remoteUseCase.deleteUserFollower()
+    fun clearDetail(){
+        remoteUseCase.apply {
+            deleteUserFollower()
+            deleteUserDetail()
+            deleteUserFollowing()
+            deleteUserRepository()
+        }
     }
 }

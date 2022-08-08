@@ -8,18 +8,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.githubuser.R
-import com.example.githubuser.databinding.FragmentDetailBinding
-import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.UserDetail
 import com.example.core.utils.DataMapper
+import com.example.githubuser.R
+import com.example.githubuser.databinding.FragmentDetailBinding
 import com.example.githubuser.presentation.fragment.detail.tabadapter.SectionPagerAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -70,7 +67,6 @@ class DetailFragment : Fragment() {
                 startActivity(Intent.createChooser(share,"Share to"))
             }
         }
-        userChecker()
     }
 
     private fun showDetailUser(){
@@ -85,6 +81,8 @@ class DetailFragment : Fragment() {
                 }
                 is Resource.Error->{
                     binding.DetailProgress.visibility = View.GONE
+                    userChecker(response.message.toString())
+                    Log.d("DetailFragment",response.message.toString())
                 }
             }
         }
@@ -123,7 +121,7 @@ class DetailFragment : Fragment() {
             saveText(saveText)
             setEmptyView(false)
         }
-
+        favoriteChecker()
         binding.btnFavorite.setOnClickListener {
             setAsFavorite(responData)
         }
@@ -143,14 +141,6 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun removeFromFavorite(){
-        detailViewModel.deletePersonFavoritePeople(saveText)
-        Snackbar.make(binding.root,"Remove $saveText ",
-            Snackbar.LENGTH_LONG)
-            .setTextColor(Color.WHITE)
-            .setBackgroundTint(Color.rgb(137, 15, 13))
-            .show()
-    }
     private fun setViewPager(name : String){
         pagerAdapter = SectionPagerAdapter(requireActivity(),name,tab_titles.size)
         val viewPager = binding.Followviewpager
@@ -161,18 +151,18 @@ class DetailFragment : Fragment() {
         }.attach()
     }
 
-    private fun userChecker(){
+    private fun userChecker(title : String){
         utilViewModel.isEmpty.observe(viewLifecycleOwner) { isUserNotExist ->
             if (isUserNotExist == true) {
-                setErrorView()
+                setErrorView(title)
             }
         }
     }
 
     private fun favoriteChecker(){
         detailViewModel.searchFavoritePeople(saveText).observe(viewLifecycleOwner){
-            try {
-                if (saveText == it[0].name){
+            it.forEach {
+                if (saveText == it.username){
                     binding.btnFavorite.apply {
                         setImageDrawable(
                             ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_favorite_full)
@@ -182,35 +172,35 @@ class DetailFragment : Fragment() {
                         }
                     }
                 }
-            }catch (e : Exception){
-                binding.btnFavorite.setImageDrawable(
-                    ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_favorite_border_24)
-                )
             }
         }
+        binding.btnFavorite.setImageDrawable(
+            ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_favorite_border_24)
+        )
     }
 
-    private fun setErrorView(){
+    private fun removeFromFavorite(){
+        detailViewModel.deletePersonFavoritePeople(saveText)
+        Snackbar.make(binding.root,"Remove $saveText ",
+            Snackbar.LENGTH_LONG)
+            .setTextColor(Color.WHITE)
+            .setBackgroundTint(Color.rgb(137, 15, 13))
+            .show()
+        binding.btnFavorite.setImageDrawable(
+            ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_favorite_border_24)
+        )
+    }
+
+    private fun setErrorView(title : String){
         binding.apply {
-            detailViewModel.errorResponse.observe(viewLifecycleOwner){ response->
-                if (response.isNotEmpty()){
-                    ErrorresponseDetailTv.visibility = View.VISIBLE
-                    ("$response\n \n Try Again").also { ErrorresponseDetailTv.text = it }
-                    ErrorresponseDetailTv.setOnClickListener {
-                        detailViewModel.getUserDetail(saveText)
-                        ErrorresponseDetailTv.visibility = View.GONE
-                    }
-                }
+            ErrorresponseDetailTv.visibility = View.VISIBLE
+            ("$title\n \n Try Again").also { ErrorresponseDetailTv.text = it }
+            ErrorresponseDetailTv.setOnClickListener {
+                detailViewModel.getUserDetail(saveText)
+                ErrorresponseDetailTv.visibility = View.GONE
             }
         }
     }
-
-
-    private fun isLoading(isLoading:Boolean){
-        binding.DetailProgress.visibility = if (isLoading)  View.VISIBLE  else  View.GONE
-    }
-
-
     companion object{
         var tab_titles = intArrayOf(
             R.string.tabsatu,
