@@ -6,6 +6,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DetailUserResponse(
+	@field:SerializedName("id")
+	val id: Int? = null,
+
 	@field:SerializedName("bio")
 	val bio: String? = null,
 
@@ -20,9 +23,6 @@ data class DetailUserResponse(
 
 	@field:SerializedName("company")
 	val company: String? = null,
-
-	@field:SerializedName("id")
-	val id: Int? = null,
 
 	@field:SerializedName("public_repos")
 	val publicRepos: Int? = null,

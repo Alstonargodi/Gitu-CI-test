@@ -20,9 +20,9 @@ object DataMapper {
             val listUser = GithubListUser(
                 id = response.id.toInt(),
                 name = response.login,
-                username = null,
+                username = response.avatarUrl,
                 imageLink = response.avatarUrl,
-                location = null,
+                location = response.avatarUrl,
                 company = null,
                 isSaved = false
             )
@@ -34,6 +34,7 @@ object DataMapper {
     fun entitiesUserListToDomainUserList(input : List<GithubListUser>): List<ListUser> =
         input.map { data ->
             ListUser(
+                id = data.id,
                 name = data.name,
                 username = data.username,
                 imageLink = data.imageLink,
@@ -54,7 +55,6 @@ object DataMapper {
 
     fun remoteUserRepositoryToLocalUserRepository(data : RepositoryUserResponse): List<GithubUserProject>{
         val repositoryList = ArrayList<GithubUserProject>()
-
         data.forEach {
             repositoryList.add(GithubUserProject(
                 id=it.id,
@@ -127,7 +127,7 @@ object DataMapper {
     fun remoteUserDetailToLocalUserDetail(input : DetailUserResponse): List<GithubUserDetail> {
         val detail = ArrayList<GithubUserDetail>()
         detail.add(GithubUserDetail(
-            id = 0,
+            id = input.id ?: 0,
             userName = input.login ?: "",
             nickName = input.name ?: "",
             bio = input.bio ?: "",
@@ -165,5 +165,25 @@ object DataMapper {
             )
         }
 
+
+    fun mapDomainToEntity(input: ListUser) = GithubListUser(
+        id = input.id,
+        name = input.username ?: "",
+        username = input.username,
+        imageLink = input.imageLink,
+        location = input.location,
+        company = input.company,
+        isSaved = false
+    )
+
+    fun detailUserToListUser(data : UserDetail) = ListUser(
+        id = data.id,
+        name = data.userName ?: "",
+        username = data.userName ?: "",
+        imageLink = data.avatarUrl,
+        location = data.location,
+        company = data.company,
+        isSaved = false
+    )
 
 }

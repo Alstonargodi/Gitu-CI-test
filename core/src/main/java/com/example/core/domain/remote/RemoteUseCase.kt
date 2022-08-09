@@ -16,4 +16,5 @@ interface RemoteUseCase {
     fun deleteUserFollower()
     fun deleteUserFollowing()
     fun deleteUserDetail()
+    fun updateFavoriteUser(data : UserDetail, isSaved : Boolean)
 }

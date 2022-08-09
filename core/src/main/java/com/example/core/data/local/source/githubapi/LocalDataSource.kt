@@ -99,5 +99,12 @@ class LocalDataSource @Inject constructor(
         }
     }
 
+    override fun updateFavoriteUser(githubListUser: GithubListUser, isSaved : Boolean) {
+        executorService.execute {
+            githubListUser.isSaved = isSaved
+            localDao.updateUserFavorite(githubListUser)
+        }
+    }
+
 
 }

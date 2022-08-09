@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ListUser(
+    val id : Int = 0,
     val name : String = "",
     val username : String? = "",
     val imageLink : String? ="",

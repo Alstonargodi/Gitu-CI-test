@@ -7,6 +7,7 @@ import androidx.lifecycle.asLiveData
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.local.FavoriteUseCase
+import com.example.core.domain.model.ListUser
 import com.example.core.domain.model.UserDetail
 import com.example.core.domain.remote.RemoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,6 +32,10 @@ class DetailViewModel @Inject constructor(
 
     fun deletePersonFavoritePeople(name: String){
         favoriteUseCase.deletePersonFavoritePeople(name)
+    }
+
+    fun updateFavoriteUser(data : UserDetail,isSaved : Boolean){
+        remoteUseCase.updateFavoriteUser(data,isSaved)
     }
 
 

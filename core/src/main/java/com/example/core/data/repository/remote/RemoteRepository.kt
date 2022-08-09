@@ -154,5 +154,12 @@ class RemoteRepository @Inject constructor(
         localDataSource.deleteUserDetail()
     }
 
+    override fun updateFavoriteUser(data : UserDetail, isSaved: Boolean) {
+        val detailUser = DataMapper.detailUserToListUser(data)
+        val itemUser = DataMapper.mapDomainToEntity(detailUser)
+        itemUser.isSaved = isSaved
+        localDataSource.updateFavoriteUser(itemUser,isSaved)
+    }
+
 
 }

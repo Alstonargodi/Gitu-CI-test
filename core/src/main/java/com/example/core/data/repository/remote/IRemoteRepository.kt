@@ -1,5 +1,6 @@
 package com.example.core.data.repository.remote
 
+import com.example.core.data.local.entity.userlist.GithubListUser
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.*
 import kotlinx.coroutines.flow.Flow
@@ -17,4 +18,6 @@ interface IRemoteRepository {
     fun deleteUserFollower()
     fun deleteUserFollowing()
     fun deleteUserDetail()
+
+    fun updateFavoriteUser(githubListUser: UserDetail, isSaved : Boolean)
 }

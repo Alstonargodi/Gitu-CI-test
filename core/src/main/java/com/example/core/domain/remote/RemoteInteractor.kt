@@ -50,8 +50,9 @@ class RemoteInteractor @Inject constructor(
         remoteRepository.deleteUserDetail()
     }
 
-    companion object{
-        private const val TAG = "RemoteInteractor"
+    override fun updateFavoriteUser(data : UserDetail, isSaved: Boolean) {
+        remoteRepository.updateFavoriteUser(data, isSaved)
     }
+
 
 }

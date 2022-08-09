@@ -55,5 +55,7 @@ interface RemoteDao {
     @Query("delete from githubuserdetail")
     fun deleteUserDetail()
 
+    @Update
+    fun updateUserFavorite(githubListUser: GithubListUser)
 
 }

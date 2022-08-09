@@ -23,4 +23,5 @@ interface ILocalDataSource {
     suspend fun insetUserDetail(data : List<GithubUserDetail>)
     fun readUserDetail(): Flow<List<GithubUserDetail>>
     fun deleteUserDetail()
+    fun updateFavoriteUser(githubListUser: GithubListUser, isSaved : Boolean)
 }

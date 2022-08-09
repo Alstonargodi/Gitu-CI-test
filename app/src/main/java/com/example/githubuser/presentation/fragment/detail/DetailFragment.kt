@@ -131,6 +131,7 @@ class DetailFragment : Fragment() {
         detailUser.apply {
             val favTemp = DataMapper.userSetFavoriteUser(detailUser)
             detailViewModel.insertFavoritePeople(favTemp)
+            detailViewModel.updateFavoriteUser(detailUser,true)
             Snackbar.make(binding.root,"add $userName as Favorite People",
                 Snackbar.LENGTH_LONG)
                 .setTextColor(Color.WHITE)

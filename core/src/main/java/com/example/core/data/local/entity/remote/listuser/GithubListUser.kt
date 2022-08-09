@@ -22,5 +22,5 @@ data class GithubListUser(
     @ColumnInfo(name = "company")
     val company: String? =null,
     @ColumnInfo(name = "isSaved")
-    val isSaved : Boolean,
+    var isSaved : Boolean,
 ): Parcelable
