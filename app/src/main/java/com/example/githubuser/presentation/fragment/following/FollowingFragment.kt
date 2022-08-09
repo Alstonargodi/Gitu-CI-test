@@ -53,13 +53,16 @@ class FollowingFragment : Fragment() {
         followingViewModel.getListFollowing(userName).observe(viewLifecycleOwner){response->
             when(response){
                 is Resource.Loading->{
-
+                    binding.Followingprogress.visibility = View.VISIBLE
                 }
                 is Resource.Success->{
+                    binding.Followingprogress.visibility = View.GONE
+
                     response.data?.let { showFollowingList(it) }
                 }
                 is Resource.Error->{
-
+                    binding.Followingprogress.visibility = View.GONE
+                    Log.d("followingFragment",response.message.toString())
                 }
             }
         }
@@ -95,16 +98,6 @@ class FollowingFragment : Fragment() {
                 findNavController().navigate(DetailFragmentDirections.actionDetailFragmentSelf(userName))
             }
         })
-    }
-
-    private fun isLoading(isLoading:Boolean){
-        binding.Followingprogress.apply {
-            visibility = if (isLoading) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-        }
     }
 
     private fun emptyChecker(){

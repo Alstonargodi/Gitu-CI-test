@@ -31,6 +31,7 @@ class DetailFragment : Fragment() {
     private lateinit var pagerAdapter : SectionPagerAdapter
     private lateinit var binding: FragmentDetailBinding
     private var saveText = ""
+    private lateinit var detailUser : UserDetail
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,16 +44,12 @@ class DetailFragment : Fragment() {
             Log.d("detailFragment",e.toString())
         }
 
-
-        favoriteChecker()
-
         utilViewModel.apply {
             textQuery.observe(viewLifecycleOwner){
                 saveText = it
+                utilViewModel.setEmptyView(false)
             }
         }
-
-        showDetailUser()
         return binding.root
     }
 
@@ -67,6 +64,11 @@ class DetailFragment : Fragment() {
                 startActivity(Intent.createChooser(share,"Share to"))
             }
         }
+        binding.btnFavorite.setOnClickListener {
+            setAsFavorite()
+        }
+        favoriteChecker()
+        showDetailUser()
     }
 
     private fun showDetailUser(){
@@ -87,9 +89,10 @@ class DetailFragment : Fragment() {
             }
         }
     }
-    private fun setDetailUser(responData : UserDetail){
+    private fun setDetailUser(detail : UserDetail){
+        detailUser = detail
         binding.apply {
-            responData.apply {
+            detail.apply {
                 UsernameTvdetailpage.text = nickName
                 surnameDetailopage.text = userName
                 BioTvitem.text = bio
@@ -115,29 +118,24 @@ class DetailFragment : Fragment() {
                     .circleCrop()
                     .into(binding.ImgTvdetail)
                 setViewPager(userName!!)
+
+                utilViewModel.apply {
+                    saveText(saveText)
+                    setEmptyView(false)
+                }
             }
-        }
-        utilViewModel.apply {
-            saveText(saveText)
-            setEmptyView(false)
-        }
-        favoriteChecker()
-        binding.btnFavorite.setOnClickListener {
-            setAsFavorite(responData)
         }
     }
 
-    private fun setAsFavorite(respon: UserDetail){
-        respon.apply {
-            nickName.let {
-                val favTemp = DataMapper.userSetFavoriteUser(respon)
-                detailViewModel.insertFavoritePeople(favTemp)
-                Snackbar.make(binding.root,"add $it as Favorite People",
-                    Snackbar.LENGTH_LONG)
-                    .setTextColor(Color.WHITE)
-                    .setBackgroundTint(Color.rgb(0, 200, 151))
-                    .show()
-            }
+    private fun setAsFavorite(){
+        detailUser.apply {
+            val favTemp = DataMapper.userSetFavoriteUser(detailUser)
+            detailViewModel.insertFavoritePeople(favTemp)
+            Snackbar.make(binding.root,"add $userName as Favorite People",
+                Snackbar.LENGTH_LONG)
+                .setTextColor(Color.WHITE)
+                .setBackgroundTint(Color.rgb(0, 200, 151))
+                .show()
         }
     }
 
@@ -160,8 +158,8 @@ class DetailFragment : Fragment() {
     }
 
     private fun favoriteChecker(){
-        detailViewModel.searchFavoritePeople(saveText).observe(viewLifecycleOwner){
-            it.forEach {
+        detailViewModel.searchFavoritePeople(saveText).observe(viewLifecycleOwner){ list ->
+            list.forEach {
                 if (saveText == it.username){
                     binding.btnFavorite.apply {
                         setImageDrawable(
@@ -174,9 +172,6 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-        binding.btnFavorite.setImageDrawable(
-            ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_favorite_border_24)
-        )
     }
 
     private fun removeFromFavorite(){

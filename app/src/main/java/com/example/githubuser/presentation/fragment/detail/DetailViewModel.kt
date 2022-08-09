@@ -17,11 +17,6 @@ class DetailViewModel @Inject constructor(
     private val remoteUseCase: RemoteUseCase,
     private val favoriteUseCase : FavoriteUseCase
 ): ViewModel() {
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean> = _isLoading
-
-    private val _errorResponse = MutableLiveData<String>()
-    val errorResponse: LiveData<String> = _errorResponse
 
     fun getUserDetail(name : String): LiveData<Resource<List<UserDetail>>>{
         return remoteUseCase.getUserDetail(name).asLiveData()

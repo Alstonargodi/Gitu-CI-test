@@ -30,7 +30,10 @@ class RemoteRepository @Inject constructor(
                    DataMapper.entitiesUserListToDomainUserList(it)
                }
             }
-            override fun shouldFetch(data: List<ListUser>?): Boolean = true
+
+            override fun shouldFetch(data: List<ListUser>?): Boolean =
+                data == null || data.isEmpty()
+
             override suspend fun createCall(): Flow<FetchResults<ListUserResponse>> =
                 remoteDataSource.getListUser(userName)
             override suspend fun saveCallResult(data: ListUserResponse) {
@@ -48,7 +51,8 @@ class RemoteRepository @Inject constructor(
                }
             }
 
-            override fun shouldFetch(data: List<UserRepository>?): Boolean = true
+            override fun shouldFetch(data: List<UserRepository>?): Boolean =
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<FetchResults<RepositoryUserResponse>> {
                return remoteDataSource.getUserRepository(name)
@@ -68,7 +72,9 @@ class RemoteRepository @Inject constructor(
                     DataMapper.entitiesUserFollowerToDomainUserFollower(it)
                 }
             }
-            override fun shouldFetch(data: List<UserFollower>?): Boolean = true
+            override fun shouldFetch(data: List<UserFollower>?): Boolean =
+                data == null || data.isEmpty()
+
             override suspend fun createCall(): Flow<FetchResults<FollowerUserResponse>> {
                return remoteDataSource.getUserFollower(name)
             }
@@ -87,7 +93,8 @@ class RemoteRepository @Inject constructor(
                 }
             }
             override fun shouldFetch(data: List<UserFollowing>?): Boolean =
-                true
+                data == null || data.isEmpty()
+
             override suspend fun createCall(): Flow<FetchResults<FollowerUserResponse>> {
                 return remoteDataSource.getUserFollowing(name)
             }
@@ -101,15 +108,13 @@ class RemoteRepository @Inject constructor(
     override fun getUserDetail(name: String): Flow<Resource<List<UserDetail>>> =
         object : NetworkBoundResources<List<UserDetail>,DetailUserResponse>(){
             override fun loadFromDB(): Flow<List<UserDetail>> {
-
-                Log.d("remote",localDataSource.readUserDetail().toString())
-
                 return localDataSource.readUserDetail().map {
 
                     DataMapper.entitiesUserDetailToDomainUserDetail(it)
                 }
             }
-            override fun shouldFetch(data: List<UserDetail>?): Boolean = true
+            override fun shouldFetch(data: List<UserDetail>?): Boolean =
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<FetchResults<DetailUserResponse>> {
                 return remoteDataSource.getUserDetail(name)
