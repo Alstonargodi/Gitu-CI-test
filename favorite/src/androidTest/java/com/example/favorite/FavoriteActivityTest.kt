@@ -7,6 +7,7 @@ import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.example.githubuser.presentation.activity.MainActivity
 import org.junit.Before
@@ -15,6 +16,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4ClassRunner::class)
+@LargeTest
 class FavoriteActivityTest {
     @Before
     fun setup(){
@@ -22,7 +24,6 @@ class FavoriteActivityTest {
     }
 
     @Test
-
     fun favoritePagetoAuthorDetail(){
         onView(withId(R.id.bookfragment))
             .check(matches(isDisplayed()))

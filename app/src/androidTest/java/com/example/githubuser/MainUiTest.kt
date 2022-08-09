@@ -12,10 +12,12 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.filters.LargeTest
 import com.example.githubuser.presentation.activity.MainActivity
 import com.example.githubuser.presentation.fragment.home.adapter.UserListRecAdapter
 
 @RunWith(AndroidJUnit4ClassRunner::class)
+@LargeTest
 class MainUiTest {
     private val dummyUser = "budi"
 
