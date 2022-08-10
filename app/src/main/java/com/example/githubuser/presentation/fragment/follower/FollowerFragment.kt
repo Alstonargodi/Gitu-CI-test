@@ -11,9 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
-import com.example.core.data.remote.apiresponse.follower.FollowerUserResponseItem
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.UserFollower
+import com.example.githubuser.databinding.FragmentRepoBinding
 import com.example.githubuser.presentation.fragment.detail.DetailFragmentDirections
 import com.example.githubuser.presentation.fragment.follower.adapter.FollowerRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
@@ -21,8 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FollowerFragment: Fragment() {
+    private var _binding: FragmentFollowerBinding? = null
+    private val binding get() = _binding!!
 
-    private lateinit var binding: FragmentFollowerBinding
     private lateinit var adapter : FollowerRecyclerViewAdapter
 
     private val followerViewModel : FollowerViewModel by viewModels()
@@ -34,7 +35,7 @@ class FollowerFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowerBinding.inflate(layoutInflater)
+        _binding = FragmentFollowerBinding.inflate(layoutInflater)
         userName = arguments?.getString("value","").toString()
 
         utilViewModel.apply {
@@ -42,15 +43,13 @@ class FollowerFragment: Fragment() {
                 userName = it
             }
         }
+        showUserFollowers()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setFollowersList()
-    }
 
-    private fun setFollowersList(){
+
+    private fun showUserFollowers(){
         followerViewModel.getListFollowers(userName).observe(viewLifecycleOwner){ response ->
             when(response){
                 is Resource.Loading->{
@@ -124,5 +123,10 @@ class FollowerFragment: Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

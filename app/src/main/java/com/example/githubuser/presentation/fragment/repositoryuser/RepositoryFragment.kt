@@ -15,6 +15,7 @@ import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProje
 import com.example.core.data.remote.apiresponse.coderepository.RepositoryUserResponseItem
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.UserRepository
+import com.example.githubuser.databinding.FragmentHomeBinding
 import com.example.githubuser.presentation.fragment.repositoryuser.adapter.RepositoryRecyclerViewAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -22,7 +23,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RepositoryFragment: Fragment() {
-    private lateinit var binding: FragmentRepoBinding
+    private var _binding: FragmentRepoBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var adapter : RepositoryRecyclerViewAdapter
 
     private val repositoryViewModel : GithubRepositoryViewModel by viewModels()
@@ -33,7 +36,7 @@ class RepositoryFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRepoBinding.inflate(layoutInflater)
+        _binding = FragmentRepoBinding.inflate(layoutInflater)
         repositoryViewModel.isLoading.observe(viewLifecycleOwner){ isLoading(it) }
         userName = arguments?.getString("value","").toString()
 
@@ -102,5 +105,10 @@ class RepositoryFragment: Fragment() {
                 View.GONE
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

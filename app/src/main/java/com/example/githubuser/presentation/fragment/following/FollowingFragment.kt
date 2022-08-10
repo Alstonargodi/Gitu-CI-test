@@ -21,8 +21,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FollowingFragment : Fragment() {
+
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var adapter : FollowingRecyclerViewAdapter
 
     private val followingViewModel :FollowingViewModel by viewModels()

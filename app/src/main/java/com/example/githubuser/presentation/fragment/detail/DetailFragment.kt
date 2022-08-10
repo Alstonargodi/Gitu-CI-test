@@ -17,6 +17,7 @@ import com.example.core.domain.model.UserDetail
 import com.example.core.utils.DataMapper
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentDetailBinding
+import com.example.githubuser.databinding.FragmentHomeBinding
 import com.example.githubuser.presentation.fragment.detail.tabadapter.SectionPagerAdapter
 import com.example.githubuser.presentation.utils.UtilViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -29,7 +30,10 @@ class DetailFragment : Fragment() {
     private val utilViewModel by viewModels<UtilViewModel>()
 
     private lateinit var pagerAdapter : SectionPagerAdapter
-    private lateinit var binding: FragmentDetailBinding
+
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
+
     private var saveText = ""
     private lateinit var detailUser : UserDetail
 
@@ -37,7 +41,7 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDetailBinding.inflate(layoutInflater)
+        _binding = FragmentDetailBinding.inflate(layoutInflater,container,false)
         try {
             saveText = requireArguments().getString("favorite").toString()
         }catch (e : Exception){
@@ -117,7 +121,7 @@ class DetailFragment : Fragment() {
                     .load(avatarUrl)
                     .circleCrop()
                     .into(binding.ImgTvdetail)
-                setViewPager(userName!!)
+                showUserPager(userName!!)
 
                 utilViewModel.apply {
                     saveText(saveText)
@@ -140,7 +144,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun setViewPager(name : String){
+    private fun showUserPager(name : String){
         pagerAdapter = SectionPagerAdapter(requireActivity(),name,tab_titles.size)
         val viewPager = binding.Followviewpager
         val tabs = binding.tabLayout
@@ -203,6 +207,11 @@ class DetailFragment : Fragment() {
             R.string.tabdua,
             R.string.tabtiga
         )
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
 }

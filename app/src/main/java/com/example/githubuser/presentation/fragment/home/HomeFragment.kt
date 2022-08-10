@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -24,17 +25,22 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var adapter : UserListRecAdapter
-    private lateinit var binding: FragmentHomeBinding
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
 
     private val viewModel : HomeViewModel by viewModels()
     private val utilViewModel by viewModels<UtilViewModel>()
     private var saveText = ""
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        _binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
+
         setHasOptionsMenu(true)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)
@@ -168,5 +174,11 @@ class HomeFragment : Fragment() {
 
     companion object{
         private const val default_user = "followers:>1000"
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        Toast.makeText(requireContext(),"pn destroy view",Toast.LENGTH_SHORT).show()
+        super.onDestroyView()
     }
 }

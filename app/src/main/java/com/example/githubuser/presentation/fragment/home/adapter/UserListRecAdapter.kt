@@ -45,4 +45,6 @@ class UserListRecAdapter(private var dataList : List<ListUser>): RecyclerView.Ad
     interface OnItemClickDetail{
         fun onItemClickDetail(name : String)
     }
+
+
 }
