@@ -20,8 +20,12 @@ class BookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBookBinding.inflate(layoutInflater)
-        setViewPager()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setViewPager()
     }
 
     private fun setViewPager(){
@@ -43,6 +47,11 @@ class BookFragment : Fragment() {
             R.string.tabfavsatu,
             R.string.tabfavdua
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        requireActivity().finishAffinity()
     }
 
 

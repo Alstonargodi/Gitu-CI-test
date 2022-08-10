@@ -48,7 +48,6 @@ class FollowerFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFollowersList()
-        userChecker()
     }
 
     private fun setFollowersList(){
@@ -63,18 +62,13 @@ class FollowerFragment: Fragment() {
                 }
                 is Resource.Error->{
                     binding.FollowerProgress.visibility = View.GONE
+                    setErrorView()
                 }
             }
         }
     }
 
-    private fun userChecker(){
-        utilViewModel.isEmpty.observe(viewLifecycleOwner) { isDataNotExist ->
-            if (isDataNotExist == true) {
-                setErrorView()
-            }
-        }
-    }
+
 
     private fun showFollowerList(list: List<UserFollower>){
         adapter = FollowerRecyclerViewAdapter(list)
@@ -82,7 +76,6 @@ class FollowerFragment: Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         utilViewModel.apply { if (adapter.itemCount== 0) setEmptyView(true) else setEmptyView(false) }
-        emptyChecker()
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
@@ -99,15 +92,6 @@ class FollowerFragment: Fragment() {
 
     }
 
-    private fun isLoading(isLoading:Boolean){
-        binding.FollowerProgress.apply {
-            visibility = if (isLoading) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-        }
-    }
 
     private fun clearData(){
         followerViewModel.apply {

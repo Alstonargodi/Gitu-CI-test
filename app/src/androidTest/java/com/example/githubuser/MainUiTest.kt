@@ -16,8 +16,8 @@ import androidx.test.filters.LargeTest
 import com.example.githubuser.presentation.activity.MainActivity
 import com.example.githubuser.presentation.fragment.home.adapter.UserListRecAdapter
 
-@RunWith(AndroidJUnit4ClassRunner::class)
 @LargeTest
+@RunWith(AndroidJUnit4ClassRunner::class)
 class MainUiTest {
     private val dummyUser = "budi"
 
