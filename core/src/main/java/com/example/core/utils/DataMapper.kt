@@ -127,7 +127,7 @@ object DataMapper {
     fun remoteUserDetailToLocalUserDetail(input : DetailUserResponse): List<GithubUserDetail> {
         val detail = ArrayList<GithubUserDetail>()
         detail.add(GithubUserDetail(
-            id = input.id ?: 0,
+            id = 0,
             userName = input.login ?: "",
             nickName = input.name ?: "",
             bio = input.bio ?: "",

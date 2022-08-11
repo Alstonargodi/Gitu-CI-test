@@ -54,6 +54,8 @@ class DetailFragment : Fragment() {
                 utilViewModel.setEmptyView(false)
             }
         }
+
+        showDetailUser()
         return binding.root
     }
 
@@ -72,7 +74,6 @@ class DetailFragment : Fragment() {
             setAsFavorite()
         }
         favoriteChecker()
-        showDetailUser()
     }
 
     private fun showDetailUser(){
@@ -82,13 +83,21 @@ class DetailFragment : Fragment() {
                     binding.DetailProgress.visibility = View.VISIBLE
                 }
                 is Resource.Success->{
-                    response.data?.get(0)?.let { setDetailUser(it) }
-                    binding.DetailProgress.visibility = View.GONE
+                    if (response.data.isNullOrEmpty()){
+                        binding.DetailProgress.visibility = View.VISIBLE
+                    }else{
+                        try {
+                            binding.DetailProgress.visibility = View.GONE
+                            response.data?.get(0)?.let { setDetailUser(it) }
+                        }catch (e: Exception){
+                            Log.d("detail response",e.toString())
+                        }
+                    }
                 }
                 is Resource.Error->{
                     binding.DetailProgress.visibility = View.GONE
                     userChecker(response.message.toString())
-                    Log.d("DetailFragment",response.message.toString())
+                    Log.d("detailFragment",response.message.toString())
                 }
             }
         }
@@ -209,9 +218,5 @@ class DetailFragment : Fragment() {
         )
     }
 
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
-    }
 
 }

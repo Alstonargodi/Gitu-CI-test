@@ -91,7 +91,6 @@ class FollowerFragment: Fragment() {
 
     }
 
-
     private fun clearData(){
         followerViewModel.apply {
             deleteUserFollower()
@@ -99,16 +98,6 @@ class FollowerFragment: Fragment() {
         }
     }
 
-    private fun emptyChecker(){
-        binding.apply {
-            utilViewModel.isEmpty.observe(viewLifecycleOwner){ isDataNotExist ->
-                if (isDataNotExist == true){
-                    EmptyStatment.visibility = View.VISIBLE
-                    "$userName doesn't have any followers yet".also { EmptyStatment.text = it }
-                }
-            }
-        }
-    }
 
     private fun setErrorView(){
         binding.apply {

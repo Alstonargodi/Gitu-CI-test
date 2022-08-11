@@ -49,10 +49,6 @@ class BookFragment : Fragment() {
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        requireActivity().finishAffinity()
-    }
 
 
 }

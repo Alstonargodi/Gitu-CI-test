@@ -107,18 +107,26 @@ class HomeFragment : Fragment() {
         if(!default){
             viewModel.deleteListUser()
         }
-        viewModel.getListUser(search).observe(viewLifecycleOwner){
-            when(it){
+        viewModel.getListUser(search).observe(viewLifecycleOwner){ response ->
+            when(response){
                 is Resource.Loading ->{
                     binding.pgbarhome.visibility = View.VISIBLE
                 }
                 is Resource.Success ->{
-                    it.data?.let {
-                      it1 -> showUserList(it1)
+                    if (response.data.isNullOrEmpty()){
+                        binding.pgbarhome.visibility = View.VISIBLE
+                        Log.d("userlistresponse",response.data.toString())
+                    }else{
+                        try {
+                            response.data?.let { it -> showUserList(it) }
+                            Log.d("userlistresponse",response.data.toString())
+                        }catch (e : Exception){
+                            Log.d("userlistresponse",e.toString())
+                        }
                     }
                 }
                 is Resource.Error ->{
-                    Log.d("remoteRepository home", it.message.toString())
+                    Log.d("remoteRepository home", response.message.toString())
                     binding.pgbarhome.visibility = View.GONE
                 }
                 else -> {}
@@ -176,9 +184,4 @@ class HomeFragment : Fragment() {
         private const val default_user = "followers:>1000"
     }
 
-    override fun onDestroyView() {
-        _binding = null
-        Toast.makeText(requireContext(),"pn destroy view",Toast.LENGTH_SHORT).show()
-        super.onDestroyView()
-    }
 }
