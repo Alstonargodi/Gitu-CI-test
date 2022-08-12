@@ -66,6 +66,26 @@
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/menu/menusetting.xml" value="0.29270833333333335" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1465" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Githubuser/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1465" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_back.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_bookmarks_24.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_business_24.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_baseline_star_full.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_daylight.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_empty.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_errorstatment.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_githublogo.xml" value="0.3005" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_moondark.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_subttasks_alt_light.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_user_add_alt_light.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/drawable/ic_user_cicrle_light.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/activity_splashscreen.xml" value="0.22" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/fragment_book.xml" value="0.264945652173913" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/fragment_detail.xml" value="0.3047232097511427" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/fragment_favorite.xml" value="0.3079710144927536" />
@@ -74,6 +94,10 @@
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/fragment_home.xml" value="0.5" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/fragment_repo.xml" value="0.3125" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/itemcv_follower.xml" value="0.8111658456486043" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/viewempty_errorconnection.xml" value="0.2586050724637681" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/layout/viewempty_nodata.xml" value="0.2586050724637681" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/core/src/main/res/layout/itemcv_userlisthome.xml" value="0.5" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/favorite/src/main/res/layout/activity_favorite_people.xml" value="0.3125" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Modular/Githubuser-v2-modular/favorite/src/main/res/layout/fragment_book.xml" value="0.33" />

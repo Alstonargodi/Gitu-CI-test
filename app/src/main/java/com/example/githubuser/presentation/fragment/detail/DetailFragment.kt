@@ -126,7 +126,7 @@ class DetailFragment : Fragment() {
                     startActivity(intent)
                 }
                 Glide.with(requireContext())
-                    .asDrawable()
+                    .asBitmap()
                     .load(avatarUrl)
                     .circleCrop()
                     .into(binding.ImgTvdetail)

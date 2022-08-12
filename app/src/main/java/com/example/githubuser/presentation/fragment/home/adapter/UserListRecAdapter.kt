@@ -28,7 +28,7 @@ class UserListRecAdapter(private var dataList : List<ListUser>): RecyclerView.Ad
             NamaTvcard.text = data.name
 
             Glide.with(holder.itemView.context)
-                .asDrawable()
+                .asBitmap()
                 .load(data.imageLink)
                 .circleCrop()
                 .into(AvatarCvuser)

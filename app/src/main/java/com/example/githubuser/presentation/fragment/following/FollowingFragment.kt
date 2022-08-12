@@ -59,7 +59,6 @@ class FollowingFragment : Fragment() {
                 }
                 is Resource.Success->{
                     binding.Followingprogress.visibility = View.GONE
-
                     response.data?.let { showFollowingList(it) }
                 }
                 is Resource.Error->{
@@ -86,7 +85,7 @@ class FollowingFragment : Fragment() {
         utilViewModel.apply {
             if (adapter.itemCount== 0) setEmptyView(true) else setEmptyView(false)
         }
-        emptyChecker()
+
 
         if (context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
             recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
@@ -102,16 +101,6 @@ class FollowingFragment : Fragment() {
         })
     }
 
-    private fun emptyChecker(){
-        binding.apply {
-            utilViewModel.isEmpty.observe(viewLifecycleOwner){ isUserNotExist ->
-                if (isUserNotExist == true){
-                    emptyStatmentFollowing.visibility = View.VISIBLE
-                    "$userName never follow someone".also { emptyStatmentFollowing.text = it }
-                }
-            }
-        }
-    }
 
     private fun clearData(){
         followingViewModel.apply {

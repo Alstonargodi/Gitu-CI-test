@@ -14,12 +14,12 @@
         android:layout_marginTop="180dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="300dp"
+        android:contentDescription="@string/octocat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/octocat"
-        android:contentDescription="@string/octocat" />
+        app:srcCompat="@drawable/ic_githublogo" />
 
     <TextView
         android:id="@+id/textView5"
@@ -31,7 +31,7 @@
         android:fontFamily="@font/apexsans"
         android:text="@string/github"
         android:textAlignment="center"
-        android:textColor="#FFFEFE"
+        android:textColor="#FFFFFF"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,7 @@
         android:fontFamily="@font/poplight"
         android:gravity="center"
         android:text="@string/user"
-        android:textColor="#EBE8E8"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
