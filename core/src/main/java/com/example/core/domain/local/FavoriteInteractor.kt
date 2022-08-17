@@ -24,4 +24,20 @@ class FavoriteInteractor @Inject constructor(
         repository.deleteFavoriteProject(favoriteProject)
     override fun deletePersonFavoritePeople(name: String) =
         repository.deletePersonFavoritePeople(name)
+
+    override fun deleteUseRepository() {
+        repository.deleteUseRepository()
+    }
+
+    override fun deleteUserFollower() {
+        repository.deleteUserFollower()
+    }
+
+    override fun deleteUserFollowing() {
+        repository.deleteUserFollowing()
+    }
+
+    override fun deleteUserDetail() {
+        repository.deleteUserDetail()
+    }
 }

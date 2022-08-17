@@ -67,6 +67,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showFavPeople(){
+        favoriteViewModel.clearDetail()
         favoriteViewModel.apply {
             readFavoritePeople()
             responGithubListUser.observe(viewLifecycleOwner){ respon ->
@@ -77,10 +78,10 @@ class FavoriteFragment : Fragment() {
                 peopleRecyclerViewAdapter.apply {
                     setOnItemCallBack(object : FavoriteUserRecyclerViewAdapter.OnItemClickDetail{
                         override fun onItemClick(data: FavoriteUser) {
-                            val detailFragment =
-                                Class
+                            val detailFragment = Class
                                     .forName("com.example.githubuser.presentation.fragment.detail.DetailFragment")
                                     .newInstance() as Fragment
+
                             val bundle = Bundle()
                             bundle.putString("favorite",data.username)
                             detailFragment.arguments = bundle
@@ -108,7 +109,6 @@ class FavoriteFragment : Fragment() {
                 repositoryRecyclerViewAdapter = FavoriteRepositoryRecyclerViewAdapter(respon)
                 binding.RecyclerVFavorite.adapter = repositoryRecyclerViewAdapter
                 binding.RecyclerVFavorite.layoutManager = LinearLayoutManager(requireContext())
-
 
                 repositoryRecyclerViewAdapter.setOnItemDeleted(object : FavoriteRepositoryRecyclerViewAdapter.OnItemClickDelete{
                     override fun onItemClickDelete(data: FavoriteProject) {

@@ -22,7 +22,7 @@
         <item name="android:textColorPrimary">@android:color/white</item>
         <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
         <item name="android:textColorSecondary">@android:color/white</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_githublogo</item>
+
 
 
     </style>

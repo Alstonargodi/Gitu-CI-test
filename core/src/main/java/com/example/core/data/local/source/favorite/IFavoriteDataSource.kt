@@ -13,4 +13,8 @@ interface IFavoriteDataSource {
     fun searchFavoritePeople(name : String):Flow<List<FavoriteUser>>
     fun deleteFavoriteProject(favoriteProject: FavoriteProject)
     fun deletePersonFavoritePeople(name: String)
+    fun deleteUseRepository()
+    fun deleteUserFollower()
+    fun deleteUserFollowing()
+    fun deleteUserDetail()
 }

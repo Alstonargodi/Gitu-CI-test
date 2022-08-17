@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.core.data.remote.utils.Resource
 import com.example.core.domain.model.ListUser
 import com.example.githubuser.R
@@ -24,10 +26,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var adapter : UserListRecAdapter
+    private lateinit var listRecyclerView : RecyclerView
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
 
     private val viewModel : HomeViewModel by viewModels()
     private val utilViewModel by viewModels<UtilViewModel>()
@@ -38,8 +40,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
-
+        _binding = FragmentHomeBinding.inflate(layoutInflater)
+        listRecyclerView = binding.RecviewUser
         setHasOptionsMenu(true)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar2)
         binding.toolbar2.inflateMenu(R.menu.barmenu)
@@ -67,6 +69,7 @@ class HomeFragment : Fragment() {
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
         val authorView = menu.findItem(R.id.author)
+        val settingPage = menu.findItem(R.id.setting)
 
         authorView.apply {
             setOnMenuItemClickListener {
@@ -99,6 +102,15 @@ class HomeFragment : Fragment() {
                     return false
                 }
             })
+        }
+
+        settingPage.apply {
+            setOnMenuItemClickListener {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToSettingFragment3()
+                )
+                true
+            }
         }
     }
 
@@ -138,7 +150,6 @@ class HomeFragment : Fragment() {
     private fun showUserList(list: List<ListUser>){
         binding.pgbarhome.visibility = View.GONE
         adapter = UserListRecAdapter(list.distinct())
-        val listRecyclerView = binding.RecviewUser
         listRecyclerView.adapter = adapter
         utilViewModel.setEmptyView(false)
         listRecyclerView.layoutManager = LinearLayoutManager(requireContext())

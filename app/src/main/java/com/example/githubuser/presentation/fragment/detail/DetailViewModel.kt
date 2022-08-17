@@ -38,5 +38,13 @@ class DetailViewModel @Inject constructor(
         remoteUseCase.updateFavoriteUser(data,isSaved)
     }
 
+    fun clearDetail(){
+        remoteUseCase.apply {
+            deleteUserFollower()
+            deleteUserDetail()
+            deleteUserFollowing()
+            deleteUserRepository()
+        }
+    }
 
 }

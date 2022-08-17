@@ -2,6 +2,7 @@ package com.example.core.data.local.source.favorite
 
 import androidx.lifecycle.LiveData
 import com.example.core.data.local.dao.FavoriteDao
+import com.example.core.data.local.dao.RemoteDao
 import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,8 @@ import javax.inject.Singleton
 
 @Singleton
 class FavoriteDataSource @Inject constructor(
-    private val favoriteDao : FavoriteDao
+    private val favoriteDao : FavoriteDao,
+    private val remoteDao : RemoteDao
 ): IFavoriteDataSource {
     private val executorService : ExecutorService = Executors.newSingleThreadExecutor()
 
@@ -42,5 +44,30 @@ class FavoriteDataSource @Inject constructor(
     override fun deletePersonFavoritePeople(name: String) {
        executorService.execute { favoriteDao.deletePersonFavoritePeople(name) }
     }
+
+    override fun deleteUseRepository() {
+        executorService.execute {
+            remoteDao.deleteUseRepository()
+        }
+    }
+
+    override fun deleteUserFollower() {
+        executorService.execute {
+            remoteDao.deleteUserFollower()
+        }
+    }
+
+    override fun deleteUserFollowing() {
+        executorService.execute {
+            remoteDao.deleteUserFollowing()
+        }
+    }
+
+    override fun deleteUserDetail() {
+        executorService.execute {
+            remoteDao.deleteUserDetail()
+        }
+    }
+
 
 }

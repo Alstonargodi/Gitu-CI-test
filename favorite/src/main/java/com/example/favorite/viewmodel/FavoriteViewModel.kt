@@ -58,6 +58,14 @@ class FavoriteViewModel @Inject constructor(
         favoriteUseCase.deleteFavoriteProject(favoriteProject)
     }
 
+    fun clearDetail(){
+        favoriteUseCase.apply {
+            deleteUserFollower()
+            deleteUserDetail()
+            deleteUserFollowing()
+            deleteUseRepository()
+        }
+    }
 
     companion object{
         const val EXTRA_TAG = "favoriteviewmodel"

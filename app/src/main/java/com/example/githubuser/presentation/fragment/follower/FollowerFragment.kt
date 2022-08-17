@@ -84,7 +84,6 @@ class FollowerFragment: Fragment() {
 
         adapter.onItemClickDetail(object : FollowerRecyclerViewAdapter.OnItemCallDetail{
             override fun onItemCallDetail(username: String) {
-                clearData()
                 findNavController().navigate(DetailFragmentDirections.actionDetailFragmentSelf(username))
             }
         })
@@ -114,8 +113,5 @@ class FollowerFragment: Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

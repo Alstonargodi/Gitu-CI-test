@@ -14,7 +14,7 @@ android {
     defaultConfig {
         minSdk 26
         targetSdk 32
-        buildConfigField "String", "api_key", '"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"'
+        buildConfigField "String", "api_key", '"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"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }

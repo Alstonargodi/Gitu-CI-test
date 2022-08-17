@@ -1,6 +1,5 @@
 package com.example.core.data.local.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.core.data.local.entity.favorite.favoriteproject.FavoriteProject
 import com.example.core.data.local.entity.favorite.favoriteuser.FavoriteUser
@@ -29,6 +28,4 @@ interface FavoriteDao {
 
     @Query("Delete from FavoriteUser where username like :name")
     fun deletePersonFavoritePeople(name: String)
-
-
 }

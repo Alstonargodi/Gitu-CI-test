@@ -16,9 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        finishAffinity()
-    }
+
 }
 
